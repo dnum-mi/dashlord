@@ -9,6 +9,7 @@ Exemples :
  - https://socialgouv.github.io/dashlord-fabrique
  - https://mtes-mct.github.io/dashlord
  - https://socialgouv.github.io/dnum-dashboard
+ - https://dnum-mi.github.io/dashlord
  
 ## Usage
 
