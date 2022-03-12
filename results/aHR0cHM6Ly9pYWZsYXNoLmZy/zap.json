@@ -1,6 +1,6 @@
 {
 	"@version": "2.11.1",
-	"@generated": "Sun, 6 Mar 2022 01:00:45",
+	"@generated": "Sat, 12 Mar 2022 09:56:11",
 	"site":[ 
 		{
 			"@name": "https://iaflash.fr",
@@ -153,7 +153,7 @@
 				},
 				{
 					"pluginid": "10020",
-					"alertRef": "10020",
+					"alertRef": "10020-1",
 					"alert": "Missing Anti-clickjacking Header",
 					"name": "Missing Anti-clickjacking Header",
 					"riskcode": "2",
@@ -302,54 +302,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "28"
-				},
-				{
-					"pluginid": "10015",
-					"alertRef": "10015",
-					"alert": "Incomplete or No Cache-control Header Set",
-					"name": "Incomplete or No Cache-control Header Set",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content.</p>",
-					"instances":[ 
-						{
-							"uri": "https://iaflash.fr",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=600"
-						},
-						{
-							"uri": "https://iaflash.fr/",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=600"
-						},
-						{
-							"uri": "https://iaflash.fr/robots.txt",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=600"
-						},
-						{
-							"uri": "https://iaflash.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=600"
-						}
-					],
-					"count": "4",
-					"solution": "<p>Whenever possible ensure the cache-control HTTP header is set with no-cache, no-store, must-revalidate.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p>",
-					"cweid": "525",
-					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "29"
 				},
 				{
 					"pluginid": "10063",
@@ -554,11 +507,18 @@
 							"evidence": "154340064"
 						},
 						{
-							"uri": "https://iaflash.fr/robots.txt",
+							"uri": "https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "62240774"
+							"evidence": "62425156"
+						},
+						{
+							"uri": "https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "94906265"
 						},
 						{
 							"uri": "https://iaflash.fr/styles.40521e344f0f3435690f.css",
@@ -568,18 +528,11 @@
 							"evidence": "23000091"
 						},
 						{
-							"uri": "https://iaflash.fr/styles.40521e344f0f3435690f.css",
+							"uri": "https://iaflash.fr/testapi/matchvec",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "33333333"
-						},
-						{
-							"uri": "https://iaflash.fr/styles.40521e344f0f3435690f.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "66666667"
+							"evidence": "154340064"
 						}
 					],
 					"count": "6",
@@ -792,7 +745,7 @@
 					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "23"
+					"sourceid": "24"
 				},
 				{
 					"pluginid": "10109",
@@ -846,6 +799,53 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10015",
+					"alertRef": "10015",
+					"alert": "Re-examine Cache-control Directives",
+					"name": "Re-examine Cache-control Directives",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+					"instances":[ 
+						{
+							"uri": "https://iaflash.fr",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=600"
+						},
+						{
+							"uri": "https://iaflash.fr/",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=600"
+						},
+						{
+							"uri": "https://iaflash.fr/robots.txt",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=600"
+						},
+						{
+							"uri": "https://iaflash.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=600"
+						}
+					],
+					"count": "4",
+					"solution": "<p>Whenever possible ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p>",
+					"cweid": "525",
+					"wascid": "13",
 					"sourceid": "1"
 				},
 				{
