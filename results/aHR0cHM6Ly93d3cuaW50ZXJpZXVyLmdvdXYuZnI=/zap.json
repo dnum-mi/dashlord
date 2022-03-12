@@ -1,6 +1,6 @@
 {
 	"@version": "2.11.1",
-	"@generated": "Sun, 6 Mar 2022 00:41:30",
+	"@generated": "Sat, 12 Mar 2022 09:24:57",
 	"site":[ 
 		{
 			"@name": "https://www.interieur.gouv.fr",
@@ -8,6 +8,102 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/search/node\" method=\"get\" id=\"search-block-form\" accept-charset=\"UTF-8\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.gif",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.js$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/content/search\" method=\"get\">"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form method=\"post\" action=\"/user/login\" name=\"loginform\">"
+						}
+					],
+					"count": "11",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"edit-keys\" ].</p>",
+					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1"
+				},
 				{
 					"pluginid": "10038",
 					"alertRef": "10038",
@@ -82,7 +178,7 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
+							"uri": "https://www.interieur.gouv.fr/core/*.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -205,11 +301,11 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10020",
-					"alertRef": "10020",
+					"alertRef": "10020-1",
 					"alert": "Missing Anti-clickjacking Header",
 					"name": "Missing Anti-clickjacking Header",
 					"riskcode": "2",
@@ -246,21 +342,21 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/fr/Menu-accessibilite/Nous-contacter",
+							"method": "GET",
+							"param": "X-Frame-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/fr/Menu-accessibilite/Nous-suivre",
+							"method": "GET",
+							"param": "X-Frame-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/Menu-accessibilite/Nous-contacter",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/Menu-accessibilite/Nous-suivre",
 							"method": "GET",
 							"param": "X-Frame-Options",
 							"attack": "",
@@ -308,7 +404,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
-					"sourceid": "519"
+					"sourceid": "541"
 				},
 				{
 					"pluginid": "90003",
@@ -416,103 +512,7 @@
 					"reference": "<p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "2066"
-				},
-				{
-					"pluginid": "10202",
-					"alertRef": "10202",
-					"alert": "Absence of Anti-CSRF Tokens",
-					"name": "Absence of Anti-CSRF Tokens",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.interieur.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/search/node\" method=\"get\" id=\"search-block-form\" accept-charset=\"UTF-8\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form method=\"post\" action=\"/user/login\" name=\"loginform\">"
-						}
-					],
-					"count": "11",
-					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"edit-keys\" ].</p>",
-					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
-					"cweid": "352",
-					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "2019"
 				},
 				{
 					"pluginid": "10044",
@@ -552,7 +552,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "364"
+					"sourceid": "404"
 				},
 				{
 					"pluginid": "10010",
@@ -574,9 +574,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_374_651915",
+							"param": "incap_ses_1184_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_374_651915"
+							"evidence": "Set-Cookie: incap_ses_1184_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -588,9 +588,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_375_651915",
+							"param": "incap_ses_802_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_375_651915"
+							"evidence": "Set-Cookie: incap_ses_802_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -609,9 +609,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
-							"param": "incap_ses_1372_651915",
+							"param": "incap_ses_9153_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1372_651915"
+							"evidence": "Set-Cookie: incap_ses_9153_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
@@ -623,9 +623,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_872_651915",
+							"param": "incap_ses_867_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_872_651915"
+							"evidence": "Set-Cookie: incap_ses_867_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -637,9 +637,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_1183_651915",
+							"param": "incap_ses_1579_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915"
+							"evidence": "Set-Cookie: incap_ses_1579_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -655,7 +655,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10011",
@@ -677,9 +677,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_374_651915",
+							"param": "incap_ses_1184_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_374_651915"
+							"evidence": "Set-Cookie: incap_ses_1184_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -691,9 +691,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_375_651915",
+							"param": "incap_ses_802_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_375_651915"
+							"evidence": "Set-Cookie: incap_ses_802_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -719,9 +719,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_872_651915",
+							"param": "incap_ses_867_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_872_651915"
+							"evidence": "Set-Cookie: incap_ses_867_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -733,9 +733,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_1183_651915",
+							"param": "incap_ses_1579_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915"
+							"evidence": "Set-Cookie: incap_ses_1579_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -758,7 +758,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10054",
@@ -780,9 +780,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_374_651915",
+							"param": "incap_ses_1184_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_374_651915"
+							"evidence": "Set-Cookie: incap_ses_1184_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -794,9 +794,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_375_651915",
+							"param": "incap_ses_802_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_375_651915"
+							"evidence": "Set-Cookie: incap_ses_802_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -822,9 +822,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_872_651915",
+							"param": "incap_ses_867_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_872_651915"
+							"evidence": "Set-Cookie: incap_ses_867_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -836,9 +836,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_1183_651915",
+							"param": "incap_ses_1579_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915"
+							"evidence": "Set-Cookie: incap_ses_1579_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -861,7 +861,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10017",
@@ -956,42 +956,49 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1157383773&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1039276272&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1378512228&ns=1",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=127159978&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1387761760&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1351337904&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1507413562&ns=1",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1468173477&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=792364523&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1485967924&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=873386932&ns=1",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1531458711&ns=1",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=819457676&ns=2",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1026,13 +1033,6 @@
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/4b16ea1b321de0a4b63326ceee74f99f.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval"
-						},
-						{
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/7c90d87f9428a2056bc8cda2ebfdfd53.js",
 							"method": "GET",
 							"param": "",
@@ -1046,103 +1046,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "2108"
-				},
-				{
-					"pluginid": "10015",
-					"alertRef": "10015",
-					"alert": "Incomplete or No Cache-control Header Set",
-					"name": "Incomplete or No Cache-control Header Set",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.interieur.gouv.fr",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Ma-securite",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers/situation-en-ukraine/accord-historique-des-ministres-de-linterieur-de-lunion",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministere",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministre/gerald-darmanin",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministre/marlene-schiappa",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=3600, public"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/Publications",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": ""
-						}
-					],
-					"count": "11",
-					"solution": "<p>Whenever possible ensure the cache-control HTTP header is set with no-cache, no-store, must-revalidate.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p>",
-					"cweid": "525",
-					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "2068"
 				},
 				{
 					"pluginid": "10063",
@@ -1245,7 +1149,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10040",
@@ -1278,7 +1182,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html</p>",
 					"cweid": "311",
 					"wascid": "4",
-					"sourceid": "1745"
+					"sourceid": "1689"
 				},
 				{
 					"pluginid": "10037",
@@ -1381,7 +1285,7 @@
 					"reference": "<p>http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx</p><p>http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10036",
@@ -1590,14 +1494,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "36471656"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "36583994"
+							"evidence": "1468173477"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr",
@@ -1607,58 +1504,37 @@
 							"evidence": "62747302"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/robots.txt",
+							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "63153599"
+							"evidence": "99294467"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "99856246"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "63289994"
+							"evidence": "107432507"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
+							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1507413562"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "15315471"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "15485081"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734857574"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "62747302"
+							"evidence": "107561892"
 						}
 					],
-					"count": "10",
+					"count": "6",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>36471656, which evaluates to: 1971-02-27 03:00:56</p>",
+					"otherinfo": "<p>1468173477, which evaluates to: 2016-07-10 17:57:57</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
@@ -1765,7 +1641,7 @@
 					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "744"
+					"sourceid": "691"
 				},
 				{
 					"pluginid": "10094",
@@ -1789,49 +1665,49 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "9ji2dM00AAXCJbh4l7cwBeQCJGIAAAAAsBB8zAqPlbjO0BrT/Mw7Gw=="
+							"evidence": "a5yiAHDNiHu/NIx/ZmpuEJBmLGIAAAAAkranOZCnW+WCU93qWetaBQ=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "RSjmH7MlN2u2Rzn3WaZYiwAAAADu/EVYw9sYjQbJw7lEWOXD"
+							"evidence": "4gK+Og7O0nAfZ/bUWaZYiwAAAABlhT2Ojz2K/JuPaRmcqpZo"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "BlDgBqJIN0QQmxIoGyotBeUCJGIAAAAAr5qKGSKb7oMM+3+5jsXKog=="
+							"evidence": "h+1AGkPiJXKKvQW++PcZDJFmLGIAAAAA/obGRCybDrxmz4SQG6vzOA=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "GWcuhUaZRPHbcBn0dopH5YG2n2X33TT90nHfsX799CA"
+							"evidence": "Gbp1TolXiChwOFo51dxqEJFmLGIAAAAAqm5yTaV56rMq3qVbXYn2ew=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "So/XKcUW/wEj9I624DMMcuQCJGIAAAAAQxBxwstm9UYFyu9cQhxCOA=="
+							"evidence": "xJ25Wkft5V+KvQW++PcZDJFmLGIAAAAA0hpY1f7ncrkjk+IOTpANHg=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Z3FIOrFTexbfyZMoUFMKE+UCJGIAAAAAIRqHK2GToqhP8/c6ELBMVA=="
+							"evidence": "QlphI5hr4V/itrXzZ/0Ff5FmLGIAAAAAeNlSzToMROpQOsUuEqvDnA=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "RnSvCHLPQEbPRtur+PcZDOUCJGIAAAAAp/wGCF51KxPuXBNMsP7Ahg=="
+							"evidence": "z5EDOUU9JE8LTCB9jTQIDJFmLGIAAAAAN1rGZvBclWb/hrE+BvnwaQ=="
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.png",
@@ -1841,18 +1717,18 @@
 							"evidence": "GWcuhUaZRPHbcBn0dopH5YG2n2X33TT90nHfsX799CA"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
+							"uri": "https://www.interieur.gouv.fr/core/*.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "LYnFPlLfmD7JI0TwoWYbBeYCJGIAAAAAOoa6+4hkbukCDNoHM7iwsw=="
+							"evidence": "GWcuhUaZRPHbcBn0dopH5YG2n2X33TT90nHfsX799CA"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "vBVeSpqmU2bdr45NWaZYiwAAAACVJIG/xjOzZ014i1e5XkX5"
+							"evidence": "B/wSA87d2wIwa2VAWaZYiwAAAADj/bIYb4nntVMCEacjQSEY"
 						}
 					],
 					"count": "11",
@@ -1991,6 +1867,13 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -2012,13 +1895,6 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/*.svg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
@@ -2026,7 +1902,7 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2056,11 +1932,11 @@
 					],
 					"count": "12",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.interieur.gouv.fr</p><p>incap_ses_374_651915=9ji2dM00AAXCJbh4l7cwBeQCJGIAAAAAsBB8zAqPlbjO0BrT/Mw7Gw==</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.interieur.gouv.fr</p><p>incap_ses_1184_651915=a5yiAHDNiHu/NIx/ZmpuEJBmLGIAAAAAkranOZCnW+WCU93qWetaBQ==</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10109",
@@ -2190,6 +2066,102 @@
 					"cweid": "524",
 					"wascid": "13",
 					"sourceid": "6"
+				},
+				{
+					"pluginid": "10015",
+					"alertRef": "10015",
+					"alert": "Re-examine Cache-control Directives",
+					"name": "Re-examine Cache-control Directives",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.interieur.gouv.fr",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/A-votre-service/Ma-securite",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/communiques",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministere",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministre/gerald-darmanin",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=3600, public"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/Publications",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Whenever possible ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p>",
+					"cweid": "525",
+					"wascid": "13",
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10050",
@@ -2386,7 +2358,7 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "284"
+					"sourceid": "267"
 				},
 				{
 					"pluginid": "10031",
@@ -2475,7 +2447,7 @@
 					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "2144"
+					"sourceid": "2061"
 				}
 			]
 		}
