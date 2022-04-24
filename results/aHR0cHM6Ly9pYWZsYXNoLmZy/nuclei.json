@@ -1,38 +1,28 @@
 [
   {
-    "template": "dns/nameserver-fingerprint.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/nameserver-fingerprint.yaml",
-    "template-id": "nameserver-fingerprint",
+    "template": "ssl/ssl-dns-names.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/ssl-dns-names.yaml",
+    "template-id": "ssl-dns-names",
     "info": {
-      "name": "NS Record Detection",
+      "name": "SSL DNS Names",
       "author": [
         "pdteam"
       ],
       "tags": [
-        "dns",
-        "ns"
+        "ssl"
       ],
-      "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
       "reference": null,
-      "severity": "info",
-      "classification": {
-        "cve-id": null,
-        "cwe-id": [
-          "cwe-200"
-        ],
-        "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
-      }
+      "severity": "info"
     },
-    "type": "dns",
+    "type": "ssl",
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr",
     "extracted-results": [
-      "dns104.ovh.net.",
-      "ns104.ovh.net."
+      "www.iaflash.fr",
+      "iaflash.fr"
     ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 55050\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 55050\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tNS\tns104.ovh.net.\niaflash.fr.\t3600\tIN\tNS\tdns104.ovh.net.\n",
-    "timestamp": "2022-04-24T01:33:15.728318724Z",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:13.947834238Z",
     "matcher-status": true,
     "matched-line": null
   },
@@ -69,145 +59,9 @@
       "\"v=spf1 include:mx.ovh.com ~all\"",
       "\"1|www.iaflash.fr\""
     ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 34669\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 34669\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\niaflash.fr.\t600\tIN\tTXT\t\"v=spf1 include:mx.ovh.com ~all\"\niaflash.fr.\t600\tIN\tTXT\t\"1|www.iaflash.fr\"\n",
-    "timestamp": "2022-04-24T01:34:07.276863114Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641207268Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641303969Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641335669Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.64136447Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "request": ";; opcode: QUERY, status: NOERROR, id: 22395\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 22395\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\niaflash.fr.\t600\tIN\tTXT\t\"v=spf1 include:mx.ovh.com ~all\"\niaflash.fr.\t600\tIN\tTXT\t\"1|www.iaflash.fr\"\n",
+    "timestamp": "2022-04-24T11:04:26.688269644Z",
     "matcher-status": true,
     "matched-line": null
   },
@@ -238,9 +92,9 @@
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr",
     "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.64139117Z",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.809430641Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -272,247 +126,9 @@
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr",
     "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.64141597Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641446971Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641471371Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-content-type-options",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641499071Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "referrer-policy",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.641525672Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "strict-transport-security",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.642119779Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "content-security-policy",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.644580408Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.644649109Z",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.80951944Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -544,9 +160,349 @@
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr",
     "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.644693009Z",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.80955634Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "referrer-policy",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810127534Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-expose-headers",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810161934Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-max-age",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810188734Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "strict-transport-security",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810217033Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-content-type-options",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810247533Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-opener-policy",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810276033Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-methods",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810304933Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-credentials",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.810330932Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "content-security-policy",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.812368613Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-permitted-cross-domain-policies",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.812412913Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -578,10 +534,147 @@
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr",
     "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 559\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 01:34:18 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 01:33:13 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: b28f713921e41558da869ea737c36065c74a2017\r\nX-Github-Request-Id: 9C3C:4F1B:257736:3085F8:6264A680\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-bur-kbur8200176-BUR\r\nX-Timer: S1650764059.635715,VS0,VE1\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:18.64472041Z",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.812445913Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-resource-policy",
+    "type": "http",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 498\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 24 Apr 2022 11:04:31 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 24 Apr 2022 11:04:25 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: a186e845bd34c8f4f50c5b0ac90462aabefc00be\r\nX-Github-Request-Id: 4C14:62A8:1848E9:31905E:62652C61\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-dfw18682-DFW\r\nX-Timer: S1650798272.797276,VS0,VE0\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:31.812473012Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "dns/nameserver-fingerprint.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/nameserver-fingerprint.yaml",
+    "template-id": "nameserver-fingerprint",
+    "info": {
+      "name": "NS Record Detection",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "dns",
+        "ns"
+      ],
+      "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
+      "reference": null,
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ],
+        "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+      }
+    },
+    "type": "dns",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "extracted-results": [
+      "dns104.ovh.net.",
+      "ns104.ovh.net."
+    ],
+    "request": ";; opcode: QUERY, status: NOERROR, id: 61619\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 61619\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tNS\tdns104.ovh.net.\niaflash.fr.\t3600\tIN\tNS\tns104.ovh.net.\n",
+    "timestamp": "2022-04-24T11:04:50.996882422Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "ssl/tls-version.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
+    "template-id": "tls-version",
+    "info": {
+      "name": "TLS Version",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "ssl"
+      ],
+      "reference": null,
+      "severity": "info"
+    },
+    "type": "ssl",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "extracted-results": [
+      "TLS13"
+    ],
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:04:51.014095662Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "dns/mx-fingerprint.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/mx-fingerprint.yaml",
+    "template-id": "mx-fingerprint",
+    "info": {
+      "name": "MX Record Detection",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "dns",
+        "mx"
+      ],
+      "description": "An MX record was detected. MX records direct emails to a mail exchange server.",
+      "reference": [
+        "https://www.cloudflare.com/learning/dns/dns-records/dns-mx-record/",
+        "https://mxtoolbox.com/"
+      ],
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ],
+        "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+      }
+    },
+    "type": "dns",
+    "host": "https://iaflash.fr",
+    "matched-at": "https://iaflash.fr",
+    "extracted-results": [
+      "1 mx4.mail.ovh.net.",
+      "10 mx3.mail.ovh.net."
+    ],
+    "request": ";; opcode: QUERY, status: NOERROR, id: 43495\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 43495\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tMX\t1 mx4.mail.ovh.net.\niaflash.fr.\t3600\tIN\tMX\t10 mx3.mail.ovh.net.\n",
+    "timestamp": "2022-04-24T11:04:51.443067772Z",
     "matcher-status": true,
     "matched-line": null
   },
@@ -618,103 +711,10 @@
     "host": "https://iaflash.fr",
     "matched-at": "https://iaflash.fr/",
     "request": "POST / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 405 Method Not Allowed\r\nConnection: close\r\nContent-Length: 131\r\nAccept-Ranges: bytes\r\nDate: Sun, 24 Apr 2022 01:34:20 GMT\r\nRetry-After: 0\r\nServer: Varnish\r\nVia: 1.1 varnish\r\nX-Cache: MISS\r\nX-Cache-Hits: 0\r\nX-Fastly-Request-Id: 943a4d1b7530d63774cf5db4d8b0ce03bddee858\r\nX-Served-By: cache-bur-kbur8200115-BUR\r\nX-Timer: S1650764061.651575,VS0,VE0\r\n\r\n<html>\n<head><title>405 Not Allowed</title></head>\n<body bgcolor=\"white\">\n<center><h1>405 Not Allowed</h1></center>\n</body>\n</html>",
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:20.659378979Z",
+    "response": "HTTP/1.1 405 Method Not Allowed\r\nConnection: close\r\nContent-Length: 131\r\nAccept-Ranges: bytes\r\nDate: Sun, 24 Apr 2022 11:05:00 GMT\r\nRetry-After: 0\r\nServer: Varnish\r\nVia: 1.1 varnish\r\nX-Cache: MISS\r\nX-Cache-Hits: 0\r\nX-Fastly-Request-Id: d516ee0f80150ef64ded76bcbfd48058b1343b01\r\nX-Served-By: cache-dfw18669-DFW\r\nX-Timer: S1650798301.759579,VS0,VE0\r\n\r\n<html>\n<head><title>405 Not Allowed</title></head>\n<body bgcolor=\"white\">\n<center><h1>405 Not Allowed</h1></center>\n</body>\n</html>",
+    "ip": "185.199.109.153",
+    "timestamp": "2022-04-24T11:05:00.773989489Z",
     "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: iaflash.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr/'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "ssl/ssl-dns-names.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/ssl-dns-names.yaml",
-    "template-id": "ssl-dns-names",
-    "info": {
-      "name": "SSL DNS Names",
-      "author": [
-        "pdteam"
-      ],
-      "tags": [
-        "ssl"
-      ],
-      "reference": null,
-      "severity": "info"
-    },
-    "type": "ssl",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "extracted-results": [
-      "iaflash.fr",
-      "www.iaflash.fr"
-    ],
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:34:35.905303047Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "ssl/tls-version.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
-    "template-id": "tls-version",
-    "info": {
-      "name": "TLS Version",
-      "author": [
-        "pdteam"
-      ],
-      "tags": [
-        "ssl"
-      ],
-      "reference": null,
-      "severity": "info"
-    },
-    "type": "ssl",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "extracted-results": [
-      "TLS13"
-    ],
-    "ip": "185.199.108.153",
-    "timestamp": "2022-04-24T01:35:04.504064565Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "dns/mx-fingerprint.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/mx-fingerprint.yaml",
-    "template-id": "mx-fingerprint",
-    "info": {
-      "name": "MX Record Detection",
-      "author": [
-        "pdteam"
-      ],
-      "tags": [
-        "dns",
-        "mx"
-      ],
-      "description": "An MX record was detected. MX records direct emails to a mail exchange server.",
-      "reference": [
-        "https://www.cloudflare.com/learning/dns/dns-records/dns-mx-record/",
-        "https://mxtoolbox.com/"
-      ],
-      "severity": "info",
-      "classification": {
-        "cve-id": null,
-        "cwe-id": [
-          "cwe-200"
-        ],
-        "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
-      }
-    },
-    "type": "dns",
-    "host": "https://iaflash.fr",
-    "matched-at": "https://iaflash.fr",
-    "extracted-results": [
-      "10 mx3.mail.ovh.net.",
-      "1 mx4.mail.ovh.net."
-    ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 33136\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 33136\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tMX\t10 mx3.mail.ovh.net.\niaflash.fr.\t3600\tIN\tMX\t1 mx4.mail.ovh.net.\n",
-    "timestamp": "2022-04-24T01:35:13.846075007Z",
     "matcher-status": true,
     "matched-line": null
   }
