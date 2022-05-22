@@ -1,27 +1,36 @@
 [
   {
-    "template": "ssl/tls-version.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
-    "template-id": "tls-version",
+    "template": "misconfiguration/xss-deprecated-header.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/xss-deprecated-header.yaml",
+    "template-id": "xss-deprecated-header-detect",
     "info": {
-      "name": "TLS Version",
+      "name": "Detect Deprecated XSS Protection Header",
       "author": [
-        "pdteam"
+        "joshlarsen"
       ],
       "tags": [
-        "ssl"
+        "xss",
+        "misconfig",
+        "generic"
       ],
-      "reference": null,
+      "description": "Setting the XSS-Protection header is deprecated by most browsers. Setting the header to anything other than `0` can actually introduce an XSS vulnerability.",
+      "reference": [
+        "https://developer.mozilla.org/en-us/docs/web/http/headers/x-xss-protection",
+        "https://owasp.org/www-project-secure-headers/#x-xss-protection"
+      ],
       "severity": "info"
     },
-    "type": "ssl",
+    "type": "http",
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib",
     "extracted-results": [
-      "TLS12"
+      "1; mode=block"
     ],
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:37 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:37 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:51:23.429870106Z",
+    "timestamp": "2022-05-22T01:20:37.575296888Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
     "matcher-status": true,
     "matched-line": null
   },
@@ -51,9 +60,9 @@
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib/auth/login",
     "request": "GET /candilib/auth/login HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:51:25 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:51:25 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:40 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:39 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:51:25.604071712Z",
+    "timestamp": "2022-05-22T01:20:40.067617411Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib/auth/login'",
     "matcher-status": true,
     "matched-line": null
@@ -70,245 +79,8 @@
         "g4l1t0",
         "convisoappsec",
         "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.387768652Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.387882258Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.387928461Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.387962863Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.387994165Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.388025267Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://beta.interieur.gouv.fr/candilib",
-    "matched-at": "https://beta.interieur.gouv.fr/candilib",
-    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
-    "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.388055768Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
         "misconfig",
@@ -323,9 +95,9 @@
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib",
     "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.388093271Z",
+    "timestamp": "2022-05-22T01:20:42.996502692Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
     "matcher-status": true,
     "matched-line": null
@@ -342,7 +114,8 @@
         "g4l1t0",
         "convisoappsec",
         "kurohost",
-        "dawid-czarnecki"
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
         "misconfig",
@@ -357,9 +130,9 @@
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib",
     "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.388123472Z",
+    "timestamp": "2022-05-22T01:20:42.996607093Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
     "matcher-status": true,
     "matched-line": null
@@ -376,7 +149,8 @@
         "g4l1t0",
         "convisoappsec",
         "kurohost",
-        "dawid-czarnecki"
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
         "misconfig",
@@ -391,9 +165,9 @@
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib",
     "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.388153174Z",
+    "timestamp": "2022-05-22T01:20:42.996640594Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
     "matcher-status": true,
     "matched-line": null
@@ -410,7 +184,8 @@
         "g4l1t0",
         "convisoappsec",
         "kurohost",
-        "dawid-czarnecki"
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
         "misconfig",
@@ -425,10 +200,329 @@
     "host": "https://beta.interieur.gouv.fr/candilib",
     "matched-at": "https://beta.interieur.gouv.fr/candilib",
     "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 15 May 2022 01:52:14 GMT\r\nEtag: W/\"6270f8bf-79b\"\r\nExpires: Mon, 16 May 2022 01:52:14 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 03 May 2022 09:41:19 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.e0f23b88.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.20d7e09d.js\"></script><link href=\"/candilib/css/chunk-vendors.e87fc663.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.9d6a02e9.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.da037744.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.e3598dc0.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
     "ip": "143.196.253.97",
-    "timestamp": "2022-05-15T01:52:14.391264053Z",
+    "timestamp": "2022-05-22T01:20:42.999900933Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-expose-headers",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.000278938Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-max-age",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.000581641Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-permitted-cross-domain-policies",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.000881845Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "clear-site-data",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.001174148Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-methods",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.001456352Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-headers",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.001746355Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "permission-policy",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.002023559Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-origin",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib",
+    "request": "GET /candilib HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=86400\r\nContent-Security-Policy: default-src https: 'self' 'unsafe-inline' 'unsafe-eval' data: ; base-uri 'self'; img-src 'self' blob: data:;\r\nContent-Type: text/html\r\nDate: Sun, 22 May 2022 01:20:42 GMT\r\nEtag: W/\"6283a7e1-79b\"\r\nExpires: Mon, 23 May 2022 01:20:42 GMT\r\nFeature-Policy: geolocation none;midi none;notifications none;push none;sync-xhr none;microphone none;camera none;magnetometer none;gyroscope self;speaker self;vibrate none;fullscreen self;payment none;\r\nLast-Modified: Tue, 17 May 2022 13:49:21 GMT\r\nReferrer-Policy: same-origin\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"description\" content=\"Réservez vous-même votre place d'examen pour l'épreuve pratique du permis de conduire !\"><!--[if IE]><link rel=\"icon\" href=\"/candilib/favicon.ico\"><![endif]--><title>Candilib, Réserver ma place pour l'épreuve pratique du permis de conduire</title><script defer=\"defer\" type=\"module\" src=\"/candilib/js/chunk-vendors.0323f8e6.js\"></script><script defer=\"defer\" type=\"module\" src=\"/candilib/js/app.57ff22c2.js\"></script><link href=\"/candilib/css/chunk-vendors.1212bab7.css\" rel=\"stylesheet\"><link href=\"/candilib/css/app.d4ee62f6.css\" rel=\"stylesheet\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/candilib/img/icons/favicon.svg\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/candilib/img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/candilib/img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"/candilib/manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"back-office\"><link rel=\"apple-touch-icon\" href=\"/candilib/img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"/candilib/img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"/candilib/img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"><script defer=\"defer\" src=\"/candilib/js/chunk-vendors-legacy.85e33624.js\" nomodule></script><script defer=\"defer\" src=\"/candilib/js/app-legacy.a07a9b10.js\" nomodule></script></head><body><div id=\"app\"></div><noscript><strong>We're sorry but candilib doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript></body></html>",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:43.002309562Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "technologies/waf-detect.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/technologies/waf-detect.yaml",
+    "template-id": "waf-detect",
+    "info": {
+      "name": "WAF Detection",
+      "author": [
+        "dwisiswant0",
+        "lu4nx"
+      ],
+      "tags": [
+        "waf",
+        "tech",
+        "misc"
+      ],
+      "description": "A web application firewall was detected.",
+      "reference": [
+        "https://github.com/ekultek/whatwaf"
+      ],
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ]
+      }
+    },
+    "matcher-name": "apachegeneric",
+    "type": "http",
+    "host": "https://beta.interieur.gouv.fr/candilib",
+    "matched-at": "https://beta.interieur.gouv.fr/candilib/",
+    "request": "POST /candilib/ HTTP/1.1\r\nHost: beta.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+    "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 199\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Sun, 22 May 2022 01:20:47 GMT\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n</body></html>\n",
+    "ip": "143.196.253.97",
+    "timestamp": "2022-05-22T01:20:47.977213779Z",
+    "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: beta.interieur.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://beta.interieur.gouv.fr/candilib/'",
     "matcher-status": true,
     "matched-line": null
   }
