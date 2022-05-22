@@ -1,2279 +1,5 @@
 [
   {
-    "template": "dns/spoofable-spf-records-ptr.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/spoofable-spf-records-ptr.yaml",
-    "template-id": "spoofable-spf-records-ptr",
-    "info": {
-      "name": "Spoofable SPF Records with PTR Mechanism",
-      "author": [
-        "binaryfigments"
-      ],
-      "tags": [
-        "dns",
-        "spf"
-      ],
-      "description": "SPF records in DNS containing a PTR mechanism are spoofable.",
-      "reference": [
-        "https://www.digitalocean.com/community/tutorials/how-to-use-an-spf-record-to-prevent-spoofing-improve-e-mail-reliability"
-      ],
-      "severity": "info",
-      "classification": {
-        "cve-id": null,
-        "cwe-id": [
-          "cwe-200"
-        ]
-      }
-    },
-    "type": "dns",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": ";; opcode: QUERY, status: NOERROR, id: 29882\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 29882\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tTXT\t\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\"\nants.gouv.fr.\t3600\tIN\tTXT\t\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\"\n",
-    "timestamp": "2022-05-08T00:57:16.047547464Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "dns/txt-fingerprint.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/txt-fingerprint.yaml",
-    "template-id": "txt-fingerprint",
-    "info": {
-      "name": "DNS TXT Record Detected",
-      "author": [
-        "pdteam"
-      ],
-      "tags": [
-        "dns",
-        "txt"
-      ],
-      "description": "A DNS TXT record was detected. The TXT record lets a domain admin leave notes on a DNS server.",
-      "reference": [
-        "https://www.netspi.com/blog/technical/network-penetration-testing/analyzing-dns-txt-records-to-fingerprint-service-providers/"
-      ],
-      "severity": "info",
-      "classification": {
-        "cve-id": null,
-        "cwe-id": [
-          "cwe-200"
-        ]
-      }
-    },
-    "type": "dns",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "extracted-results": [
-      "\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\"",
-      "\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\""
-    ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 54136\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 54136\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tTXT\t\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\"\nants.gouv.fr.\t3600\tIN\tTXT\t\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\"\n",
-    "timestamp": "2022-05-08T00:57:18.636175693Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "referrer-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.342242887Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.342969795Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343008395Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343023495Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343051996Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "strict-transport-security",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343065796Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343082796Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-frame-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343098696Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-content-type-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343133897Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "content-security-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343150997Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343165297Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343182397Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-embedder-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343292998Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343306598Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343325099Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383097888342\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343339099Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343697203Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-content-type-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343723103Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "referrer-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343747403Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343763304Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343777004Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343791504Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "content-security-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343817604Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343925805Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343944606Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "strict-transport-security",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343970206Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-frame-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.343985206Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-embedder-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344001106Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344015106Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344028307Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344054307Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344067207Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.34433441Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-embedder-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.34436081Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-frame-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.34437661Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-content-type-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.344393411Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "referrer-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.345774326Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.346025329Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.346538734Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.346827038Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.347094841Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "content-security-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.347352644Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.347589246Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.347830949Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.348069551Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.348305154Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "strict-transport-security",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.34886646Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Type: text/html; charset=utf-8\r\nLocation: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906\r\nContent-Length: 0\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.349154164Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "content-security-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.34976367Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-expose-headers",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.350046774Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-frame-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.350304376Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "referrer-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.350567679Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.350834682Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.351155586Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.351415389Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-max-age",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.351783193Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-methods",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.352116397Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "strict-transport-security",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.352623602Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-content-type-options",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.352940106Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "x-permitted-cross-domain-policies",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.353220709Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-embedder-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.353479312Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.353736115Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.354017318Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075164848\r\n\r\n",
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:35.354278721Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=147451383088635906' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=147451383092146512'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "ssl/tls-version.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
-    "template-id": "tls-version",
-    "info": {
-      "name": "TLS Version",
-      "author": [
-        "pdteam"
-      ],
-      "tags": [
-        "ssl"
-      ],
-      "reference": null,
-      "severity": "info"
-    },
-    "type": "ssl",
-    "host": "https://ants.gouv.fr",
-    "matched-at": "https://ants.gouv.fr",
-    "extracted-results": [
-      "TLS13"
-    ],
-    "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:43.946880584Z",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
     "template": "ssl/ssl-dns-names.yaml",
     "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/ssl-dns-names.yaml",
     "template-id": "ssl-dns-names",
@@ -2293,29 +19,65 @@
     "matched-at": "https://ants.gouv.fr",
     "extracted-results": [
       "ants.gouv.fr",
-      "immatriculation.ants.gouv.fr",
-      "www.permisdeconduire.ants.gouv.fr",
-      "www.autoecole.ants.gouv.fr",
-      "www.mairie.ants.gouv.fr",
-      "bo.ants.gouv.fr",
-      "www.immatriculation.ants.gouv.fr",
-      "cni-passeport.ants.gouv.fr",
+      "permisdeconduire.ants.gouv.fr",
       "www.pha.ants.gouv.fr",
       "mairie.ants.gouv.fr",
-      "www.img.ants.gouv.fr",
-      "idp.ants.gouv.fr",
-      "www.ants.gouv.fr",
+      "immatriculation.ants.gouv.fr",
+      "www.passeport.ants.gouv.fr",
       "www.cni-passeport.ants.gouv.fr",
       "pha.ants.gouv.fr",
-      "img.ants.gouv.fr",
+      "bo.ants.gouv.fr",
       "osm.ants.gouv.fr",
-      "permisdeconduire.ants.gouv.fr",
+      "www.ants.gouv.fr",
+      "www.immatriculation.ants.gouv.fr",
+      "www.permisdeconduire.ants.gouv.fr",
       "passeport.ants.gouv.fr",
-      "www.passeport.ants.gouv.fr",
-      "autoecole.ants.gouv.fr"
+      "www.autoecole.ants.gouv.fr",
+      "www.mairie.ants.gouv.fr",
+      "www.img.ants.gouv.fr",
+      "cni-passeport.ants.gouv.fr",
+      "autoecole.ants.gouv.fr",
+      "img.ants.gouv.fr",
+      "idp.ants.gouv.fr"
     ],
     "ip": "66.22.33.160",
-    "timestamp": "2022-05-08T00:57:45.50414679Z",
+    "timestamp": "2022-05-22T00:58:10.231584796Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "dns/nameserver-fingerprint.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/nameserver-fingerprint.yaml",
+    "template-id": "nameserver-fingerprint",
+    "info": {
+      "name": "NS Record Detection",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "dns",
+        "ns"
+      ],
+      "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
+      "reference": null,
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ]
+      }
+    },
+    "type": "dns",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "extracted-results": [
+      "ns6.oleane.net.",
+      "ns7.oleane.net."
+    ],
+    "request": ";; opcode: QUERY, status: NOERROR, id: 18505\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t NS\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 18505\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t NS\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tNS\tns7.oleane.net.\nants.gouv.fr.\t3600\tIN\tNS\tns6.oleane.net.\n",
+    "timestamp": "2022-05-22T00:58:10.864028439Z",
     "matcher-status": true,
     "matched-line": null
   },
@@ -2349,30 +111,627 @@
     "host": "https://ants.gouv.fr",
     "matched-at": "https://ants.gouv.fr",
     "extracted-results": [
-      "5 mx1.ants.gouv.fr.",
-      "20 mx2.ants.gouv.fr."
+      "20 mx2.ants.gouv.fr.",
+      "5 mx1.ants.gouv.fr."
     ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 42612\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t MX\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 42612\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t MX\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tMX\t5 mx1.ants.gouv.fr.\nants.gouv.fr.\t3600\tIN\tMX\t20 mx2.ants.gouv.fr.\n",
-    "timestamp": "2022-05-08T00:57:45.873479144Z",
+    "request": ";; opcode: QUERY, status: NOERROR, id: 43279\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t MX\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 43279\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t MX\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tMX\t5 mx1.ants.gouv.fr.\nants.gouv.fr.\t3600\tIN\tMX\t20 mx2.ants.gouv.fr.\n",
+    "timestamp": "2022-05-22T00:58:21.081693529Z",
     "matcher-status": true,
     "matched-line": null
   },
   {
-    "template": "dns/nameserver-fingerprint.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/nameserver-fingerprint.yaml",
-    "template-id": "nameserver-fingerprint",
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
     "info": {
-      "name": "NS Record Detection",
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-frame-options",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967435526Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-content-type-options",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967840731Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-embedder-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967870331Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-opener-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967894431Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-headers",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967914631Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "strict-transport-security",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967930232Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "permission-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967953132Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-credentials",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967969032Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-expose-headers",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.967990232Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "x-permitted-cross-domain-policies",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968005733Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "clear-site-data",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968022333Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-max-age",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968040833Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "content-security-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968058433Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "referrer-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968078133Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-resource-policy",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968095434Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-origin",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968111334Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "It searches for missing security headers, but obviously, could be so less generic and could be useless for Bug Bounty.",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-methods",
+    "type": "http",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 303 Found\r\nConnection: close\r\nContent-Length: 650\r\nCache-Control: no-cache, private, no-store, must-revalidate\r\nContent-Type: text/html\r\nLocation: https://csirt.docapost.fr/index.php/Information_de_s%C3%A9curit%C3%A9_ANTS?_event_transid=1075218992\r\n\r\n",
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:58:28.968131934Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'Referer: https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773360407777' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://csirt.docapost.fr/index.php/Private_zone?ID=17093744773367322036'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "dns/txt-fingerprint.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/txt-fingerprint.yaml",
+    "template-id": "txt-fingerprint",
+    "info": {
+      "name": "DNS TXT Record Detected",
       "author": [
         "pdteam"
       ],
       "tags": [
         "dns",
-        "ns"
+        "txt"
       ],
-      "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
-      "reference": null,
+      "description": "A DNS TXT record was detected. The TXT record lets a domain admin leave notes on a DNS server.",
+      "reference": [
+        "https://www.netspi.com/blog/technical/network-penetration-testing/analyzing-dns-txt-records-to-fingerprint-service-providers/"
+      ],
       "severity": "info",
       "classification": {
         "cve-id": null,
@@ -2385,12 +744,72 @@
     "host": "https://ants.gouv.fr",
     "matched-at": "https://ants.gouv.fr",
     "extracted-results": [
-      "ns7.oleane.net.",
-      "ns6.oleane.net."
+      "\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\"",
+      "\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\""
     ],
-    "request": ";; opcode: QUERY, status: NOERROR, id: 48631\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t NS\n",
-    "response": ";; opcode: QUERY, status: NOERROR, id: 48631\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t NS\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tNS\tns7.oleane.net.\nants.gouv.fr.\t3600\tIN\tNS\tns6.oleane.net.\n",
-    "timestamp": "2022-05-08T00:58:15.424208555Z",
+    "request": ";; opcode: QUERY, status: NOERROR, id: 35567\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 35567\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 1232\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tTXT\t\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\"\nants.gouv.fr.\t3600\tIN\tTXT\t\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\"\n",
+    "timestamp": "2022-05-22T00:58:37.84966501Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "dns/spoofable-spf-records-ptr.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/dns/spoofable-spf-records-ptr.yaml",
+    "template-id": "spoofable-spf-records-ptr",
+    "info": {
+      "name": "Spoofable SPF Records with PTR Mechanism",
+      "author": [
+        "binaryfigments"
+      ],
+      "tags": [
+        "dns",
+        "spf"
+      ],
+      "description": "SPF records in DNS containing a PTR mechanism are spoofable.",
+      "reference": [
+        "https://www.digitalocean.com/community/tutorials/how-to-use-an-spf-record-to-prevent-spoofing-improve-e-mail-reliability"
+      ],
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ]
+      }
+    },
+    "type": "dns",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "request": ";; opcode: QUERY, status: NOERROR, id: 61526\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 4096\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n",
+    "response": ";; opcode: QUERY, status: NOERROR, id: 61526\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags: ; udp: 512\n\n;; QUESTION SECTION:\n;ants.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nants.gouv.fr.\t3600\tIN\tTXT\t\"globalsign-domain-verification=XFixJjABQCa8I_qjv-wCpcrbx9DPYN4nVzULqSmhov\"\nants.gouv.fr.\t3600\tIN\tTXT\t\"v=spf1 mx a ptr ip4:82.97.16.240/28 ip4:82.97.22.0/28 ip4:217.108.240.82 ip4:217.108.80.226 ip4:217.174.195.0/27 include:ppb.worldline.com ~all\"\n",
+    "timestamp": "2022-05-22T00:59:07.104275093Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "ssl/tls-version.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
+    "template-id": "tls-version",
+    "info": {
+      "name": "TLS Version",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "ssl"
+      ],
+      "reference": null,
+      "severity": "info"
+    },
+    "type": "ssl",
+    "host": "https://ants.gouv.fr",
+    "matched-at": "https://ants.gouv.fr",
+    "extracted-results": [
+      "TLS13"
+    ],
+    "ip": "66.22.33.160",
+    "timestamp": "2022-05-22T00:59:23.97883185Z",
     "matcher-status": true,
     "matched-line": null
   }
