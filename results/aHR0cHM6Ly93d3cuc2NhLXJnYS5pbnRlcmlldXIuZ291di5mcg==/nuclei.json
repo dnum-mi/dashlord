@@ -1,5 +1,105 @@
 [
   {
+    "template": "misconfiguration/xss-deprecated-header.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/xss-deprecated-header.yaml",
+    "template-id": "xss-deprecated-header-detect",
+    "info": {
+      "name": "Detect Deprecated XSS Protection Header",
+      "author": [
+        "joshlarsen"
+      ],
+      "tags": [
+        "xss",
+        "misconfig",
+        "generic"
+      ],
+      "description": "Setting the XSS-Protection header is deprecated by most browsers. Setting the header to anything other than `0` can actually introduce an XSS vulnerability.",
+      "reference": [
+        "https://developer.mozilla.org/en-us/docs/web/http/headers/x-xss-protection",
+        "https://owasp.org/www-project-secure-headers/#x-xss-protection"
+      ],
+      "severity": "info"
+    },
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "extracted-results": [
+      "1; mode=block"
+    ],
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:11 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 05-Jun-2022 03:29:11 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:11.539088873Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "miscellaneous/options-method.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/miscellaneous/options-method.yaml",
+    "template-id": "options-method",
+    "info": {
+      "name": "Allowed Options Method",
+      "author": [
+        "pdteam"
+      ],
+      "tags": [
+        "misc",
+        "generic"
+      ],
+      "reference": null,
+      "severity": "info"
+    },
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "extracted-results": [
+      "GET,HEAD,POST,OPTIONS,HEAD,HEAD"
+    ],
+    "request": "OPTIONS / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: GET,HEAD,POST,OPTIONS,HEAD,HEAD\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:19 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 05-Jun-2022 03:29:19 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\nContent-Length: 0\r\n\r\n",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:19.383207626Z",
+    "curl-command": "curl -X 'OPTIONS' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-credentials",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995141074Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
     "template": "misconfiguration/http-missing-security-headers.yaml",
     "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
     "template-id": "http-missing-security-headers",
@@ -27,9 +127,9 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.02144868Z",
+    "timestamp": "2022-06-05T01:29:32.995275475Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -62,254 +162,9 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.023448606Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-headers",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.024549476Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "clear-site-data",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.02509551Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-resource-policy",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.025624143Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-credentials",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.026162977Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-embedder-policy",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.026454396Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "cross-origin-opener-policy",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.026920725Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "access-control-allow-origin",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.027210143Z",
+    "timestamp": "2022-06-05T01:29:32.995311575Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -342,44 +197,9 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.027492261Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "misconfiguration/http-missing-security-headers.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
-    "template-id": "http-missing-security-headers",
-    "info": {
-      "name": "HTTP Missing Security Headers",
-      "author": [
-        "socketz",
-        "geeknik",
-        "g4l1t0",
-        "convisoappsec",
-        "kurohost",
-        "dawid-czarnecki",
-        "forgedhallpass"
-      ],
-      "tags": [
-        "misconfig",
-        "generic"
-      ],
-      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-      "reference": null,
-      "severity": "info"
-    },
-    "matcher-name": "permission-policy",
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.027768978Z",
+    "timestamp": "2022-06-05T01:29:32.995339375Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -412,9 +232,184 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.028046196Z",
+    "timestamp": "2022-06-05T01:29:32.995471275Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-embedder-policy",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995505276Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-opener-policy",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995534876Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "cross-origin-resource-policy",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995561176Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "access-control-allow-headers",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995595676Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
+    "info": {
+      "name": "HTTP Missing Security Headers",
+      "author": [
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
+      ],
+      "tags": [
+        "misconfig",
+        "generic"
+      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
+      "severity": "info"
+    },
+    "matcher-name": "permission-policy",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:32.995623676Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
@@ -447,109 +442,89 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:20 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:20 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.028326514Z",
+    "timestamp": "2022-06-05T01:29:32.995651576Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
   },
   {
-    "template": "misconfiguration/xss-deprecated-header.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/xss-deprecated-header.yaml",
-    "template-id": "xss-deprecated-header-detect",
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
     "info": {
-      "name": "Detect Deprecated XSS Protection Header",
+      "name": "HTTP Missing Security Headers",
       "author": [
-        "joshlarsen"
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
-        "xss",
         "misconfig",
         "generic"
       ],
-      "description": "Setting the XSS-Protection header is deprecated by most browsers. Setting the header to anything other than `0` can actually introduce an XSS vulnerability.",
-      "reference": [
-        "https://developer.mozilla.org/en-us/docs/web/http/headers/x-xss-protection",
-        "https://owasp.org/www-project-secure-headers/#x-xss-protection"
-      ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+      "reference": null,
       "severity": "info"
     },
+    "matcher-name": "clear-site-data",
     "type": "http",
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "extracted-results": [
-      "1; mode=block"
-    ],
     "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:21 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 29-May-2022 03:27:21 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.170022737Z",
+    "timestamp": "2022-06-05T01:29:32.995677176Z",
     "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
   },
   {
-    "template": "miscellaneous/robots-txt-endpoint.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/miscellaneous/robots-txt-endpoint.yaml",
-    "template-id": "robots-txt-endpoint",
+    "template": "misconfiguration/http-missing-security-headers.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/misconfiguration/http-missing-security-headers.yaml",
+    "template-id": "http-missing-security-headers",
     "info": {
-      "name": "robots.txt endpoint prober",
+      "name": "HTTP Missing Security Headers",
       "author": [
-        "caspergn",
-        "pdteam"
-      ],
-      "tags": null,
-      "reference": null,
-      "severity": "info"
-    },
-    "type": "http",
-    "host": "https://www.sca-rga.interieur.gouv.fr",
-    "matched-at": "https://www.sca-rga.interieur.gouv.fr/robots.txt",
-    "request": "GET /robots.txt HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:21 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 29-May-2022 03:27:21 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
-    "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:21.22199731Z",
-    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr/robots.txt'",
-    "matcher-status": true,
-    "matched-line": null
-  },
-  {
-    "template": "miscellaneous/options-method.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/miscellaneous/options-method.yaml",
-    "template-id": "options-method",
-    "info": {
-      "name": "Allowed Options Method",
-      "author": [
-        "pdteam"
+        "socketz",
+        "geeknik",
+        "g4l1t0",
+        "convisoappsec",
+        "kurohost",
+        "dawid-czarnecki",
+        "forgedhallpass"
       ],
       "tags": [
-        "misc",
+        "misconfig",
         "generic"
       ],
+      "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
       "reference": null,
       "severity": "info"
     },
+    "matcher-name": "access-control-allow-origin",
     "type": "http",
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
-    "extracted-results": [
-      "OPTIONS,HEAD,HEAD,GET,HEAD,POST"
-    ],
-    "request": "OPTIONS / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: OPTIONS,HEAD,HEAD,GET,HEAD,POST\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 29 May 2022 01:27:22 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1cXPKgwSD3ub; Expires=Sun, 29-May-2022 03:27:22 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\nContent-Length: 0\r\n\r\n",
+    "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 05 Jun 2022 01:29:32 GMT\r\nEtag: \"457-5d99e2b1e00c0-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nLast-Modified: Mon, 07 Mar 2022 10:17:15 GMT\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1bnPKgwSDF09; Expires=Sun, 05-Jun-2022 03:29:32 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fit=no\"><meta name=\"theme-color\" content=\"#000000\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/><link rel=\"manifest\" href=\"/manifest.json\"><link rel=\"shortcut icon\" href=\"/favicon.ico\"><title>Accueil | Référentiel Général des Armes</title><link href=\"/index.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/css/Material_Icons/Material_Icons.css\"><link rel=\"stylesheet\" href=\"/css/Roboto/Roboto_300,400,500.css\"><link href=\"/static/css/main.256ce6e2.css\" rel=\"stylesheet\"></head><body><!--[if lte IE 9]>\r\n        <p class=\"browserupgrade\">\r\n            Vous utilisez un navigateur <strong>obsolète</strong>.\r\n            Veuillez <a href=\"http://browsehappy.com/\">le mettre à jour</a> pour améliorer votre expérience.\r\n        </p>\r\n        <![endif]--><noscript><h1>Vous devez activer le JavaScript pour utiliser cette application.</h1></noscript><div id=\"root\"></div><script type=\"text/javascript\" src=\"/static/js/main.9c4ce368.js\"></script></body></html>",
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:22.48123321Z",
-    "curl-command": "curl -X 'OPTIONS' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+    "timestamp": "2022-06-05T01:29:32.995708776Z",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
     "matcher-status": true,
     "matched-line": null
   },
   {
-    "template": "ssl/tls-version.yaml",
-    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/tls-version.yaml",
-    "template-id": "tls-version",
+    "template": "ssl/ssl-dns-names.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/ssl/ssl-dns-names.yaml",
+    "template-id": "ssl-dns-names",
     "info": {
-      "name": "TLS Version",
+      "name": "SSL DNS Names",
       "author": [
         "pdteam"
       ],
@@ -563,10 +538,50 @@
     "host": "https://www.sca-rga.interieur.gouv.fr",
     "matched-at": "https://www.sca-rga.interieur.gouv.fr",
     "extracted-results": [
-      "TLS12"
+      "sca-rga.interieur.gouv.fr",
+      "www.sca-rga.interieur.gouv.fr"
     ],
     "ip": "143.196.253.130",
-    "timestamp": "2022-05-29T01:27:44.287354358Z",
+    "timestamp": "2022-06-05T01:29:36.390716036Z",
+    "matcher-status": true,
+    "matched-line": null
+  },
+  {
+    "template": "technologies/waf-detect.yaml",
+    "template-url": "https://github.com/projectdiscovery/nuclei-templates/blob/master/technologies/waf-detect.yaml",
+    "template-id": "waf-detect",
+    "info": {
+      "name": "WAF Detection",
+      "author": [
+        "dwisiswant0",
+        "lu4nx"
+      ],
+      "tags": [
+        "waf",
+        "tech",
+        "misc"
+      ],
+      "description": "A web application firewall was detected.",
+      "reference": [
+        "https://github.com/ekultek/whatwaf"
+      ],
+      "severity": "info",
+      "classification": {
+        "cve-id": null,
+        "cwe-id": [
+          "cwe-200"
+        ]
+      }
+    },
+    "matcher-name": "apachegeneric",
+    "type": "http",
+    "host": "https://www.sca-rga.interieur.gouv.fr",
+    "matched-at": "https://www.sca-rga.interieur.gouv.fr/",
+    "request": "POST / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+    "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 199\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Sun, 05 Jun 2022 01:29:41 GMT\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n</body></html>\n",
+    "ip": "143.196.253.130",
+    "timestamp": "2022-06-05T01:29:41.296132972Z",
+    "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: www.sca-rga.interieur.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr/'",
     "matcher-status": true,
     "matched-line": null
   }
