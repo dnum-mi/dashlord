@@ -1,6 +1,6 @@
 {
 	"@version": "2.11.1",
-	"@generated": "Sun, 25 Sep 2022 01:20:44",
+	"@generated": "Sun, 2 Oct 2022 01:32:21",
 	"site":[ 
 		{
 			"@name": "https://tele7.interieur.gouv.fr",
@@ -48,13 +48,20 @@
 						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"form-horizontal\" role=\"form\" id=\"form-code-telepoint\" name=\"formulaireCodeDTO\" onsubmit=\"valider.disabled = true; return true;\" method=\"POST\" action=\"/tlp/validation-formulaire\">"
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
 							"method": "POST",
 							"param": "",
 							"attack": "",
 							"evidence": "<form class=\"form-horizontal\" role=\"form\" id=\"form-code-telepoint\" name=\"formulaireCodeDTO\" onsubmit=\"valider.disabled = true; return true;\" method=\"POST\" action=\"/tlp/validation-formulaire\">"
 						}
 					],
-					"count": "5",
+					"count": "6",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"input_captcha\" \"input_numero_confidentiel\" \"input_numero_permis_1\" \"input_numero_permis_2\" \"input_numero_permis_3\" \"valider\" ].</p>",
 					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
@@ -81,6 +88,20 @@
 						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/accessibilite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/confirmation-code",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -123,13 +144,20 @@
 						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
 							"method": "POST",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						}
 					],
-					"count": "8",
+					"count": "11",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header, to achieve optimal browser support: \"Content-Security-Policy\" for Chrome 25+, Firefox 23+ and Safari 7+, \"X-Content-Security-Policy\" for Firefox 4.0+ and Internet Explorer 10+, and \"X-WebKit-CSP\" for Chrome 14+ and Safari 6+.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
@@ -145,15 +173,8 @@
 					"riskcode": "2",
 					"confidence": "2",
 					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The identified library bootstrap, version 3.3.6 is vulnerable.</p>",
+					"desc": "<p>The identified library jquery, version 1.11.3 is vulnerable.</p>",
 					"instances":[ 
-						{
-							"uri": "https://tele7.interieur.gouv.fr/tlp/static/tlp/js/libs/bootstrap.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "* Bootstrap v3.3.6"
-						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/static/tlp/js/libs/jquery-1.11.3.min.js",
 							"method": "GET",
@@ -169,13 +190,39 @@
 							"evidence": "/*! jQuery UI - v1.11.4"
 						}
 					],
-					"count": "3",
-					"solution": "<p>Please upgrade to the latest version of bootstrap.</p>",
-					"otherinfo": "<p>CVE-2019-8331</p><p>CVE-2018-14041</p><p>CVE-2018-14040</p><p>CVE-2018-14042</p><p> CVE-2016-10735</p><p></p>",
-					"reference": "<p>https://github.com/twbs/bootstrap/issues/28236</p><p>https://github.com/twbs/bootstrap/issues/20184</p><p>https://github.com/advisories/GHSA-4p24-vmcr-4gqj</p><p></p>",
+					"count": "2",
+					"solution": "<p>Please upgrade to the latest version of jquery.</p>",
+					"otherinfo": "<p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>CVE-2015-9251</p><p>CVE-2019-11358</p><p></p>",
+					"reference": "<p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "66"
+					"sourceid": "71"
+				},
+				{
+					"pluginid": "90022",
+					"alertRef": "90022",
+					"alert": "Application Error Disclosure",
+					"name": "Application Error Disclosure",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</p>",
+					"instances":[ 
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/confirmation-code",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Erreur Interne de Servlet"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "93"
 				},
 				{
 					"pluginid": "10011",
@@ -282,6 +329,13 @@
 							"evidence": "http://logc20.xiti.com/hit.xiti?s=260307&s2=17&p=telepoints-Connexion&di=&"
 						},
 						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/confirmation-code",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "http://logc20.xiti.com/hit.xiti?s=260307&s2=17&p=telepoints-erreur&di=&"
+						},
+						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/identification",
 							"method": "GET",
 							"param": "",
@@ -289,7 +343,7 @@
 							"evidence": "http://logc20.xiti.com/hit.xiti?s=260307&s2=17&p=telepoints-Connexion&di=&"
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>A page that is available over SSL/TLS must be comprised completely of content which is transmitted over SSL/TLS.</p><p>The page must not contain any content that is transmitted over unencrypted HTTP.</p><p> This includes content from third party sites.</p>",
 					"otherinfo": "<p>tag=img src=http://logc20.xiti.com/hit.xiti?s=260307&s2=17&p=telepoints-Connexion&di=&</p><p></p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html</p>",
@@ -433,7 +487,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "70"
+					"sourceid": "78"
 				},
 				{
 					"pluginid": "90011",
@@ -454,6 +508,20 @@
 						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/accessibilite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/confirmation-code",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -496,13 +564,20 @@
 						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/validation-formulaire",
 							"method": "POST",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						}
 					],
-					"count": "8",
+					"count": "11",
 					"solution": "<p>Force UTF-8 for all text content in both the HTTP header and meta tags in HTML or encoding declarations in XML.</p>",
 					"otherinfo": "<p>There was a charset mismatch between the HTTP Header and the META charset encoding declaration: [ISO-8859-1] and [UTF-8] do not match.</p>",
 					"reference": "<p>http://code.google.com/p/browsersec/wiki/Part2#Character_set_handling_and_detection</p>",
@@ -520,6 +595,13 @@
 					"riskdesc": "Informational (Low)",
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
 					"instances":[ 
+						{
+							"uri": "https://tele7.interieur.gouv.fr/tlp/static/tlp/js/libs/bootstrap.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select"
+						},
 						{
 							"uri": "https://tele7.interieur.gouv.fr/tlp/static/tlp/js/libs/jquery-1.11.3.min.js",
 							"method": "GET",
@@ -542,13 +624,13 @@
 							"evidence": "select"
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
-					"otherinfo": "<p>The following pattern was used: \\bDB\\b and was detected in the element starting with: \"return new Za.prototype.init(a,b,c,d,e)}m.Tween=Za,Za.prototype={constructor:Za,init:function(a,b,c,d,e,f){this.elem=a,this.prop\", see evidence field for the suspicious comment/snippet.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"!function(t,e){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=e(require(\"@popperjs/core\")):\"function\"==type\", see evidence field for the suspicious comment/snippet.</p>",
 					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "62"
+					"sourceid": "75"
 				}
 			]
 		}
