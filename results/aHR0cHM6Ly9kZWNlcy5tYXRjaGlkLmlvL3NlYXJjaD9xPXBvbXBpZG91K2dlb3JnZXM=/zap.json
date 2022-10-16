@@ -1,6 +1,6 @@
 {
 	"@version": "2.11.1",
-	"@generated": "Sun, 2 Oct 2022 02:02:34",
+	"@generated": "Sun, 16 Oct 2022 01:48:27",
 	"site":[ 
 		{
 			"@name": "https://deces.matchid.io",
@@ -108,6 +108,32 @@
 					"sourceid": "3"
 				},
 				{
+					"pluginid": "90003",
+					"alertRef": "90003",
+					"alert": "Sub Resource Integrity Attribute Missing",
+					"name": "Sub Resource Integrity Attribute Missing",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content. </p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/js/dsfr.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"'+i[s]+'\">"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en/docs/Web/Security/Subresource_Integrity</p>",
+					"cweid": "345",
+					"wascid": "15",
+					"sourceid": "33"
+				},
+				{
 					"pluginid": "10020",
 					"alertRef": "10020-4",
 					"alert": "X-Frame-Options Setting Malformed",
@@ -148,6 +174,182 @@
 					"sourceid": "3"
 				},
 				{
+					"pluginid": "10063",
+					"alertRef": "10063-2",
+					"alert": "Deprecated Feature Policy Header Set",
+					"name": "Deprecated Feature Policy Header Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The header has now been renamed to Permissions-Policy. </p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy"
+						},
+						{
+							"uri": "https://deces.matchid.io/js/dsfr.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy"
+						},
+						{
+							"uri": "https://deces.matchid.io/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy"
+						}
+					],
+					"count": "4",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header instead of the Feature-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/</p>",
+					"cweid": "16",
+					"wascid": "15",
+					"sourceid": "3"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "35"
+				},
+				{
+					"pluginid": "10094",
+					"alertRef": "10094",
+					"alert": "Base64 Disclosure",
+					"name": "Base64 Disclosure",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2BREgYWmuJ34W4bjPOAgLJWgzyE3BLaltWOu44pzWSZdOUx84WBTHUxwQ1YXI8wWdDSi0Bglc9VDU7qe5WpYYmGFw63y"
+						},
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "8sc1htGoUOKYNjKCHeCMPr8pSSpvpBeJNry6af8jZK"
+						},
+						{
+							"uri": "https://deces.matchid.io/build/module/bundle.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "pryCsBkT8KEAR5ZSVwc90uPQmFlMZpyeNijiFkiYuhCFvhPOCBctEl4VClp"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/dsfr.min.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2BTr0LGhrOgFWjmNEv4KD80lStH3y6scmm0jOslCeK9OC2aAdxAc2PCFZ8VS9FDhDt5AiR"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/global.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2FHXKQ9A91NeMl2mmanpymdPftgEA3ZBsTq"
+						},
+						{
+							"uri": "https://deces.matchid.io/favicon-apple.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2B3yC2YevswhDua5a3lGaeom6mmZrLU6Z8W"
+						},
+						{
+							"uri": "https://deces.matchid.io/favicon.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2FmnDhyHfNZUHpk16wZRIs1DiM7eoHT0CVhExgzNOdukrKg"
+						},
+						{
+							"uri": "https://deces.matchid.io/manifest.json",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2BGVcjofZUwMYApbx18IZjCHdLFDtnzDt63Y"
+						},
+						{
+							"uri": "https://deces.matchid.io/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "oL7OBhHsZzUANdcclB8kOjMVNvwDj1VhBJEDjTydMyIf2lfDtNJS7KG7E6L6"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2BYax4If1QHDQ3hBulRC606hJIwgRTCW"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2Fib58Y9XfDVJrAe4JJgt3Pu55mwOOFPFZUQDr"
+						},
+						{
+							"uri": "https://deces.matchid.io/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "yQVtXS2ESOCEk7JHpDJDFZtF7pL5oVzPdwl"
+						}
+					],
+					"count": "12",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>\uFFFD\\x0014D\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[\uFFFD\uFFFD<\uFFFD ,\uFFFD\uFFFD\uFFFD!7\\x0004\uFFFD\uFFFD\uFFFDc\uFFFD\uFFFDsY&]9L|\uFFFD`S\\x001dLpCV\\x0017#\uFFFD\\x0016t4\uFFFD\uFFFD\\x0018%s\uFFFDCS\uFFFD\uFFFD\uFFFDjXba\uFFFD\u00ED\uFFFD</p>",
+					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "3"
+				},
+				{
 					"pluginid": "10027",
 					"alertRef": "10027",
 					"alert": "Information Disclosure - Suspicious Comments",
@@ -172,6 +374,67 @@
 					"cweid": "200",
 					"wascid": "13",
 					"sourceid": "35"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "Modern Web Application",
+					"name": "Modern Web Application",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src='/js/dsfr.min.js' type=\"128418e4f3e7328a5e050a37-text/javascript\"></script>"
+						},
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src='/js/dsfr.min.js' type=\"b03d1c1eb10028992adbfe6b-text/javascript\"></script>"
+						},
+						{
+							"uri": "https://deces.matchid.io/js/dsfr.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"'+i[s]+'\">"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src='/js/dsfr.min.js' type=\"925c9b17a212bc7e665358e0-text/javascript\"></script>"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src='/js/dsfr.min.js' type=\"b771c4f85de82eccde9c6269-text/javascript\"></script>"
+						},
+						{
+							"uri": "https://deces.matchid.io/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src='/js/dsfr.min.js' type=\"a6a927edb0f514ff4b7b3f97-text/javascript\"></script>"
+						}
+					],
+					"count": "6",
+					"solution": "<p>This is an informational alert and so no changes are required.</p>",
+					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "3"
 				},
 				{
 					"pluginid": "10015",
@@ -224,6 +487,149 @@
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
+					"wascid": "13",
+					"sourceid": "3"
+				},
+				{
+					"pluginid": "10050",
+					"alertRef": "10050",
+					"alert": "Retrieved from Cache",
+					"name": "Retrieved from Cache",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance. </p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/build/module/bundle.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 96"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/dsfr.min.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 96"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/global.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 96"
+						},
+						{
+							"uri": "https://deces.matchid.io/favicon.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 94"
+						},
+						{
+							"uri": "https://deces.matchid.io/js/dsfr.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 96"
+						}
+					],
+					"count": "5",
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
+					"otherinfo": "<p>The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use.</p>",
+					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "28"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049",
+					"alert": "Storable and Cacheable Content",
+					"name": "Storable and Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users.  If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
+					"instances":[ 
+						{
+							"uri": "https://deces.matchid.io/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://deces.matchid.io/build/module/bundle.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/dsfr.min.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/css/global.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/favicon-apple.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/favicon.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/manifest.json",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://deces.matchid.io/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
+							"uri": "https://deces.matchid.io/search?q=pompidou+georges",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://deces.matchid.io/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						}
+					],
+					"count": "10",
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request. </p>",
+					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
+					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
+					"cweid": "524",
 					"wascid": "13",
 					"sourceid": "3"
 				}
