@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
 	"@version": "2.12.0",
-	"@generated": "Sun, 8 Jan 2023 00:51:31",
+	"@generated": "Sun, 8 Jan 2023 10:23:38",
 	"site":[ 
 		{
 			"@name": "https://www.service-public.fr",
@@ -209,6 +209,109 @@
 					"sourceid": "1"
 				},
 				{
+					"pluginid": "10098",
+					"alertRef": "10098",
+					"alert": "Cross-Domain Misconfiguration",
+					"name": "Cross-Domain Misconfiguration",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/dsfr/dsfr/dsfr.module.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/dsfr/favicon/apple-touch-icon.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/dsfr/favicon/favicon.ico",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/dsfr/favicon/favicon.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-114.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-120.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-144.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-152.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-57.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon-72.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/img/favicon/favicon.ico",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/js/modernizr.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *"
+						}
+					],
+					"count": "12",
+					"solution": "<p>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</p><p>Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>",
+					"otherinfo": "<p>The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.</p>",
+					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
+					"cweid": "264",
+					"wascid": "14",
+					"sourceid": "7025"
+				},
+				{
 					"pluginid": "10003",
 					"alertRef": "10003",
 					"alert": "Vulnerable JS Library",
@@ -232,7 +335,7 @@
 					"reference": "<p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "6238"
+					"sourceid": "5880"
 				},
 				{
 					"pluginid": "10054",
@@ -264,9 +367,30 @@
 							"param": "TS01ef6ea8",
 							"attack": "",
 							"evidence": "Set-Cookie: TS01ef6ea8"
+						},
+						{
+							"uri": "https://www.service-public.fr/sitemap.xml",
+							"method": "GET",
+							"param": "SP_SESSION",
+							"attack": "",
+							"evidence": "Set-Cookie: SP_SESSION"
+						},
+						{
+							"uri": "https://www.service-public.fr/sitemap.xml",
+							"method": "GET",
+							"param": "TS0100aab3",
+							"attack": "",
+							"evidence": "Set-Cookie: TS0100aab3"
+						},
+						{
+							"uri": "https://www.service-public.fr/sitemap.xml",
+							"method": "GET",
+							"param": "TS01ef6ea8",
+							"attack": "",
+							"evidence": "Set-Cookie: TS01ef6ea8"
 						}
 					],
-					"count": "3",
+					"count": "6",
 					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
@@ -381,6 +505,20 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/js/common.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Eval"
+						},
+						{
+							"uri": "https://www.service-public.fr/resources/v-c71126036f/assets/js/require.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval"
+						},
+						{
 							"uri": "https://www.service-public.fr/static-error/js/jquery/jquery-1.11.2.min.js",
 							"method": "GET",
 							"param": "",
@@ -388,13 +526,13 @@
 							"evidence": "eval"
 						}
 					],
-					"count": "1",
+					"count": "3",
 					"solution": "<p>See the references for security advice on the use of these functions.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "6238"
+					"sourceid": "7030"
 				},
 				{
 					"pluginid": "10063",
@@ -497,7 +635,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "206"
+					"sourceid": "162"
 				},
 				{
 					"pluginid": "10035",
@@ -552,13 +690,6 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/static-error/css/dsfr.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
 							"uri": "https://www.service-public.fr/static-error/css/sp-dsfr.css",
 							"method": "GET",
 							"param": "",
@@ -587,6 +718,13 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/static-error/js/ie/respond.min.js",
 							"method": "GET",
 							"param": "",
@@ -600,7 +738,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "206"
+					"sourceid": "162"
 				},
 				{
 					"pluginid": "10096",
@@ -626,7 +764,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "7028"
+					"sourceid": "7000"
 				},
 				{
 					"pluginid": "10021",
@@ -777,6 +915,13 @@
 							"evidence": "com/script/12082/webReader/webReader"
 						},
 						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "com/script/12082/webReader/webReader"
+						},
+						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
 							"method": "GET",
 							"param": "",
@@ -819,7 +964,7 @@
 							"evidence": "fr/particuliers/vosdroits/F12647"
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
 					"otherinfo": "<p>\\x00127\u06DA01V\uFFFD\uFFFD\uFFFDL\uFFFD\\x0017\uFFFD\\x0013zf_\uFFFDO\uFFFDE\uFFFDk\uFFFD)m\uFFFD\uFFFD\\x0015\uFFFDK</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
@@ -852,7 +997,7 @@
 							"evidence": "select"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F33307",
+							"uri": "https://www.service-public.fr/particuliers/actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -946,15 +1091,22 @@
 							"param": "",
 							"attack": "",
 							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=2281de33-2d4d-421f-9f99-42cf7bf806c4</p><p>TS01ef6ea8=012a7f58e077631d601344620e275ef5a370cb92ba0661fafe8fe04ff36cc0e845f2278d4b8695a6522138e4a6eb7d24fa84c1b6369167a8b9f4b634c65cc0f7eba5b120c2</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=2facd5d8-0c07-4b50-92b6-e69c7cae6998</p><p>TS01ef6ea8=012a7f58e053262349d65f1f1e73c7862d385768170f247ba10a6be7851ba7bc147f5d2ec9c9c2683b58b1188f5ebc65ce32c41b604ac7d1704dc864048307809243e3853d</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "48"
 				},
 				{
 					"pluginid": "10109",
@@ -1163,14 +1315,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5149"
-						},
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 5151"
+							"evidence": "Age: 10670"
 						},
 						{
 							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
@@ -1184,7 +1329,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 10906"
+							"evidence": "Age: 8136"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-1.xml",
@@ -1198,21 +1343,21 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 18021"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-3.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 25080"
+							"evidence": "Age: 9109"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-4.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5746"
+							"evidence": "Age: 9109"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-5.xml",
@@ -1226,24 +1371,24 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5750"
+							"evidence": "Age: 0"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-7.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5752"
+							"evidence": "Age: 0"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-8.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5757"
+							"evidence": "Age: 9099"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use.</p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
@@ -1267,6 +1412,13 @@
 							"param": "",
 							"attack": "",
 							"evidence": "s-maxage=28800"
+						},
+						{
+							"uri": "https://www.service-public.fr/*/partager-par-courriel",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
 						},
 						{
 							"uri": "https://www.service-public.fr/*/recherche",
@@ -1323,13 +1475,6 @@
 							"param": "",
 							"attack": "",
 							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "s-maxage=28800"
 						},
 						{
 							"uri": "https://www.service-public.fr/robots.txt",
@@ -1399,7 +1544,7 @@
 					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "6342"
+					"sourceid": "6340"
 				}
 			]
 		}
