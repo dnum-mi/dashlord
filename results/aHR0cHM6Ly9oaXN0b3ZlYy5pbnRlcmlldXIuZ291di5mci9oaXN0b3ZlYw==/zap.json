@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
 	"@version": "2.12.0",
-	"@generated": "Sun, 29 Jan 2023 01:17:52",
+	"@generated": "Sun, 5 Feb 2023 01:16:15",
 	"site":[ 
 		{
 			"@name": "https://histovec.interieur.gouv.fr",
@@ -32,15 +32,22 @@
 							"param": "Content-Security-Policy",
 							"attack": "",
 							"evidence": "default-src https: 'self' 'unsafe-inline' 'unsafe-eval';"
+						},
+						{
+							"uri": "https://histovec.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src https: 'self' 'unsafe-inline' 'unsafe-eval';"
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: </p><p>script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, prefetch-src, form-action</p><p></p><p>The directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything.</p>",
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "3"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10055",
@@ -146,7 +153,7 @@
 					"reference": "<p>https://github.com/moment/moment/security/advisories/GHSA-wc69-rhjr-hc9g</p><p>https://security.snyk.io/vuln/SNYK-JS-MOMENT-2944238</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "86"
+					"sourceid": "83"
 				},
 				{
 					"pluginid": "10063",
@@ -241,9 +248,16 @@
 							"param": "",
 							"attack": "",
 							"evidence": "Feature-Policy"
+						},
+						{
+							"uri": "https://histovec.interieur.gouv.fr/histovec/js/chunk-2d228e22.25c9f3ff.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy"
 						}
 					],
-					"count": "12",
+					"count": "13",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header instead of the Feature-Policy header.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/</p>",
@@ -332,7 +346,7 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://histovec.interieur.gouv.fr/histovec/js/chunk-2d0c8219.aef24b1e.js",
+							"uri": "https://histovec.interieur.gouv.fr/histovec/js/chunk-2d0c230d.1273c4a9.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -378,7 +392,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "79"
+					"sourceid": "76"
 				},
 				{
 					"pluginid": "10094",
@@ -446,7 +460,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "85"
+					"sourceid": "82"
 				},
 				{
 					"pluginid": "10027",
@@ -570,7 +584,7 @@
 					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "85"
+					"sourceid": "82"
 				},
 				{
 					"pluginid": "10109",
@@ -686,6 +700,13 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
+							"uri": "https://histovec.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=86400"
+						},
+						{
 							"uri": "https://histovec.interieur.gouv.fr/histovec",
 							"method": "GET",
 							"param": "Cache-Control",
@@ -721,13 +742,13 @@
 							"evidence": "max-age=86400"
 						}
 					],
-					"count": "5",
+					"count": "6",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "3"
 				},
 				{
 					"pluginid": "10049",
