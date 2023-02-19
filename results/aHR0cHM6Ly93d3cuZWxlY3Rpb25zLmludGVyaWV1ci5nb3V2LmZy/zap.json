@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
 	"@version": "2.12.0",
-	"@generated": "Sun, 12 Feb 2023 01:03:59",
+	"@generated": "Sun, 19 Feb 2023 01:01:14",
 	"site":[ 
 		{
 			"@name": "https://www.elections.interieur.gouv.fr",
@@ -90,6 +90,13 @@
 							"evidence": "<form class=\"header-searchbar\" data-drupal-selector=\"header-searchbar\" action=\"/recherche\" method=\"GET\" id=\"header-searchbar\" accept-charset=\"UTF-8\" data-drupal-form-fields=\"edit-search,edit-valider\">"
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"header-searchbar\" data-drupal-selector=\"header-searchbar\" action=\"/recherche\" method=\"GET\" id=\"header-searchbar\" accept-charset=\"UTF-8\" data-drupal-form-fields=\"edit-search,edit-valider\">"
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
 							"method": "GET",
 							"param": "",
@@ -97,13 +104,13 @@
 							"evidence": "<form class=\"header-searchbar\" data-drupal-selector=\"header-searchbar\" action=\"/recherche\" method=\"GET\" id=\"header-searchbar\" accept-charset=\"UTF-8\" data-drupal-form-fields=\"edit-search,edit-valider\">"
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"edit-keys\" ].</p>",
 					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10038",
@@ -186,6 +193,13 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
 							"method": "GET",
 							"param": "",
@@ -193,7 +207,7 @@
 							"evidence": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header, to achieve optimal browser support: \"Content-Security-Policy\" for Chrome 25+, Firefox 23+ and Safari 7+, \"X-Content-Security-Policy\" for Firefox 4.0+ and Internet Explorer 10+, and \"X-WebKit-CSP\" for Chrome 14+ and Safari 6+.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
@@ -212,7 +226,7 @@
 					"desc": "<p>The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?CWUDNSAI=23&cinfo=03000000&cip=138.91.175.192&edet=15&incident_id=9196000090175630683-639624869833343564&mth=GET&rpinfo=0&xinfo=12-140198342-0%200NNN%20RT%281676163792245%204%29%20q%280%20-1%20-1%200%29%20r%280%20-1%29%20B15%283%2c306018%2c0%29%20U5",
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?CWUDNSAI=23&cinfo=03000000&cip=20.168.158.209&edet=15&incident_id=9196000090291521308-1305380693755036237&mth=GET&rpinfo=0&xinfo=13-292162286-0%200NNN%20RT%281676768431893%203%29%20q%280%20-1%20-1%200%29%20r%281%20-1%29%20B15%283%2c306018%2c0%29%20U5",
 							"method": "GET",
 							"param": "X-Frame-Options",
 							"attack": "",
@@ -225,7 +239,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
-					"sourceid": "1050"
+					"sourceid": "1054"
 				},
 				{
 					"pluginid": "90003",
@@ -238,7 +252,7 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content. </p>",
 					"instances":[ 
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?CWUDNSAI=23&cinfo=03000000&cip=138.91.175.192&edet=15&incident_id=9196000090175630683-639624869833343564&mth=GET&rpinfo=0&xinfo=12-140198342-0%200NNN%20RT%281676163792245%204%29%20q%280%20-1%20-1%200%29%20r%280%20-1%29%20B15%283%2c306018%2c0%29%20U5",
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?CWUDNSAI=23&cinfo=03000000&cip=20.168.158.209&edet=15&incident_id=9196000090291521308-1305380693755036237&mth=GET&rpinfo=0&xinfo=13-292162286-0%200NNN%20RT%281676768431893%203%29%20q%280%20-1%20-1%200%29%20r%281%20-1%29%20B15%283%2c306018%2c0%29%20U5",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -251,7 +265,7 @@
 					"reference": "<p>https://developer.mozilla.org/en/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "1050"
+					"sourceid": "1054"
 				},
 				{
 					"pluginid": "10044",
@@ -298,7 +312,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "810"
+					"sourceid": "814"
 				},
 				{
 					"pluginid": "10010",
@@ -325,13 +339,6 @@
 							"evidence": "Set-Cookie: incap_ses_198_2715299"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
-							"method": "GET",
-							"param": "incap_ses_1582_2715299",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1582_2715299"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-sont-encadrees-campagnes-electorales",
 							"method": "GET",
 							"param": "incap_ses_868_2715299",
@@ -367,6 +374,13 @@
 							"evidence": "Set-Cookie: incap_ses_452_2715299"
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"method": "GET",
+							"param": "incap_ses_1581_2715299",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1581_2715299"
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/scrutins",
 							"method": "GET",
 							"param": "incap_ses_151_2715299",
@@ -374,11 +388,11 @@
 							"evidence": "Set-Cookie: incap_ses_151_2715299"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/scrutins/lelection-presidentielle",
+							"uri": "https://www.elections.interieur.gouv.fr/scrutins/elections-legislatives",
 							"method": "GET",
-							"param": "incap_ses_7227_2715299",
+							"param": "incap_ses_802_2715299",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_7227_2715299"
+							"evidence": "Set-Cookie: incap_ses_802_2715299"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/sitemap.xml",
@@ -401,7 +415,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "279"
+					"sourceid": "278"
 				},
 				{
 					"pluginid": "10011",
@@ -428,13 +442,6 @@
 							"evidence": "Set-Cookie: incap_ses_198_2715299"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
-							"method": "GET",
-							"param": "incap_ses_1582_2715299",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1582_2715299"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-sont-encadrees-campagnes-electorales",
 							"method": "GET",
 							"param": "incap_ses_868_2715299",
@@ -468,6 +475,13 @@
 							"param": "incap_ses_452_2715299",
 							"attack": "",
 							"evidence": "Set-Cookie: incap_ses_452_2715299"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"method": "GET",
+							"param": "incap_ses_1581_2715299",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1581_2715299"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/scrutins",
@@ -504,7 +518,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "279"
+					"sourceid": "278"
 				},
 				{
 					"pluginid": "10054",
@@ -529,13 +543,6 @@
 							"param": "incap_ses_198_2715299",
 							"attack": "",
 							"evidence": "Set-Cookie: incap_ses_198_2715299"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
-							"method": "GET",
-							"param": "incap_ses_1582_2715299",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1582_2715299"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-sont-encadrees-campagnes-electorales",
@@ -573,6 +580,13 @@
 							"evidence": "Set-Cookie: incap_ses_452_2715299"
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"method": "GET",
+							"param": "incap_ses_1581_2715299",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1581_2715299"
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/scrutins",
 							"method": "GET",
 							"param": "incap_ses_151_2715299",
@@ -607,7 +621,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "279"
+					"sourceid": "278"
 				},
 				{
 					"pluginid": "10110",
@@ -627,7 +641,21 @@
 							"evidence": "eval"
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1246091610&ns=1",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval"
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1380530956&ns=1",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1705984906&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -641,35 +669,21 @@
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1871153014&ns=1",
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1778719265&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1965195060&ns=1",
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=207663964&ns=2",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "eval"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=224127443&ns=1",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=718534872&ns=2",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=816734438&ns=1",
+							"uri": "https://www.elections.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=2135741164&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -710,7 +724,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "917"
+					"sourceid": "913"
 				},
 				{
 					"pluginid": "10063",
@@ -731,6 +745,13 @@
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/comment-voter",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -800,13 +821,13 @@
 							"evidence": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10036",
@@ -833,11 +854,11 @@
 							"evidence": "ECAcc (lhd/3586)"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/pourquoi-je-vote/droit-de-vote-et-son-importance",
+							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (lhd/35A1)"
+							"evidence": "ECAcc (lhd/370D)"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?rpge6y",
@@ -868,13 +889,6 @@
 							"evidence": "ECAcc (lhd/3586)"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?rpge6y",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "ECAcc (lhd/35CA)"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-donne-procuration",
 							"method": "GET",
 							"param": "",
@@ -882,11 +896,11 @@
 							"evidence": "ECAcc (lhd/35A9)"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"uri": "https://www.elections.interieur.gouv.fr/resultats/resultats-de-toutes-elections",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (lhd/35A5)"
+							"evidence": "ECAcc (lhd/3708)"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/robots.txt",
@@ -903,7 +917,7 @@
 							"evidence": "ECAcc (lhd/35F6)"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to suppress the \"Server\" header or provide generic details.</p>",
 					"otherinfo": "",
 					"reference": "<p>http://httpd.apache.org/docs/current/mod/core.html#servertokens</p><p>http://msdn.microsoft.com/en-us/library/ff648552.aspx#ht_urlscan_007</p><p>http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx</p><p>http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</p>",
@@ -930,6 +944,13 @@
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/comment-voter",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -972,13 +993,6 @@
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/qui-organise-elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1018,18 +1032,25 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server - Unix</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.elections.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1705984906"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1705984906"
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "1871153014"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-sont-encadrees-campagnes-electorales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1965195060"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/pourquoi-je-vote",
@@ -1039,25 +1060,11 @@
 							"evidence": "1380530956"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/core/*.css",
+							"uri": "https://www.elections.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1979154087"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1908890995"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1946686098"
+							"evidence": "1870791931"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
@@ -1078,14 +1085,14 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1702258733"
+							"evidence": "1476905744"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/resultats/resultats-de-toutes-elections",
+							"uri": "https://www.elections.interieur.gouv.fr/scrutins/consultations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1607657487"
+							"evidence": "1558381557"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/scrutins/consultations/referendum-dinitiative-partage-rip",
@@ -1102,13 +1109,13 @@
 							"evidence": "1402752733"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1871153014, which evaluates to: 2029-04-17 20:43:34</p>",
+					"otherinfo": "<p>1705984906, which evaluates to: 2024-01-23 04:41:46</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "231"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10021",
@@ -1198,6 +1205,13 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/core/modules/system/css/components/item-list.module.css?rpge6y",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "X-Content-Type-Options",
@@ -1212,7 +1226,7 @@
 							"evidence": ""
 						}
 					],
-					"count": "13",
+					"count": "14",
 					"solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
 					"otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
 					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
@@ -1249,49 +1263,49 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Eqx4YRKeQj7Ig3xmUNxqELg66GMAAAAAbKCqJazfSVRwSFv+EOVzmA=="
+							"evidence": "qSLMepzUSiTFXwpsUNxqEJh08WMAAAAA0+NNOWd7z+2xgcx/P+SftQ=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "XITvYNWHt2oizn8BN3C/Arc66GMAAAAAb4TSXZ/29Y+5HrVFl4CvYQ=="
+							"evidence": "zHfnBgXHPzdq9KgLN3C/ApZ08WMAAAAAbqpDQNdFu+PCwcrF93KJVg=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "asnrFKvSVkD7sSTO4WT0Fbc66GMAAAAAn9HBePQXGBtc4hvX5T7Q1A=="
+							"evidence": "/sites/elections/files/languages/fr_rQdxyUjFv6h6dfq3DWD6lcviYDtRpfd3BbJPxdQfvuY"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-sont-encadrees-campagnes-electorales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "3zq7GPojSX1uLlRgcsELDLc66GMAAAAAlybAEojpwuNfq2hfwPwI+g=="
+							"evidence": "nMcVPCG7sVzzXhirdMELDJd08WMAAAAABj/4cTG94/Z2jje6D79jbg=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/pour-qui-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ymCqenqJXiw1bV0+wE8PDLg66GMAAAAAHW0aNiNch1tyPnhkTNoghA=="
+							"evidence": "ZIDyWt2HontseupJwE8PDJd08WMAAAAAz/SSQ8TulE5FWGbADnKCVw=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/pourquoi-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "0ymzNvoVUhPOopGujgpUBrc66GMAAAAARC2a2I7yQmfQEcUsB22fBg=="
+							"evidence": "O3mhEvlX2XD0Dgj5kApUBpZ08WMAAAAAY91VBbKz5l+0kMy+dpIj1w=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/qui-organise-elections",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "IA8EcFJrXnd0OwYMSX7Qf7c66GMAAAAAyQV9jo8WeRuJ2hSxben2aA=="
+							"evidence": "ZK89PEGQjhH7aSkTSX7Qf5d08WMAAAAAFZmbVBqop1cvjsPG/Ptr5w=="
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches",
@@ -1301,7 +1315,7 @@
 							"evidence": "/sites/elections/files/medias/images/Icone_site-Elections_14"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1312,7 +1326,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "GH1vOXJKQH2mR7uezfyYJgAAAADSdNGBuvFNQFr/Wqwqebk4"
+							"evidence": "EzCtE1ZQ50viMzYrzfyYJgAAAADMp9RFVelyIim+sIBFsf0x"
 						}
 					],
 					"count": "12",
@@ -1321,7 +1335,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10027",
@@ -1404,13 +1418,6 @@
 							"evidence": "user"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-donne-procuration",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
 							"method": "GET",
 							"param": "",
@@ -1425,7 +1432,7 @@
 							"evidence": "user"
 						}
 					],
-					"count": "13",
+					"count": "12",
 					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
 					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"scriptPath\":null,\"pathPrefi\", see evidence field for the suspicious comment/snippet.</p>",
 					"reference": "",
@@ -1452,13 +1459,6 @@
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1500,6 +1500,13 @@
 							"evidence": ""
 						},
 						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.elections.interieur.gouv.fr/scrutins",
 							"method": "GET",
 							"param": "",
@@ -1514,7 +1521,7 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/scrutins/lelection-presidentielle",
+							"uri": "https://www.elections.interieur.gouv.fr/scrutins/elections-senatoriales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1530,11 +1537,11 @@
 					],
 					"count": "12",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.elections.interieur.gouv.fr</p><p>incap_ses_1183_2715299=Eqx4YRKeQj7Ig3xmUNxqELg66GMAAAAAbKCqJazfSVRwSFv+EOVzmA==</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.elections.interieur.gouv.fr</p><p>incap_ses_1183_2715299=qSLMepzUSiTFXwpsUNxqEJh08WMAAAAA0+NNOWd7z+2xgcx/P+SftQ==</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
-					"sourceid": "279"
+					"sourceid": "278"
 				},
 				{
 					"pluginid": "10109",
@@ -1617,11 +1624,11 @@
 							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Mes d\u00E9marches</a>"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-trouve-mon-bureau-de-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Je v\u00E9rifie ma situation \u00E9lectorale</a>"
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Je trouve mon bureau de vote</a>"
 						}
 					],
 					"count": "11",
@@ -1630,7 +1637,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -1642,6 +1649,13 @@
 					"riskdesc": "Informational (Medium)",
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/comment-voter",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store"
+						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections",
 							"method": "GET",
@@ -1685,13 +1699,6 @@
 							"evidence": "no-store"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1705,7 +1712,7 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "234"
+					"sourceid": "278"
 				},
 				{
 					"pluginid": "10015",
@@ -1732,7 +1739,28 @@
 							"evidence": "max-age=60, public"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mentions-legales",
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-donne-procuration",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=60, public"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-minscris-sur-listes-electorales",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=60, public"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/procuration-je-trouve-mon-numero-national-delecteur",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=60, public"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=0&search&sort_by=search_api_relevance",
 							"method": "GET",
 							"param": "Cache-Control",
 							"attack": "",
@@ -1746,21 +1774,14 @@
 							"evidence": "max-age=60, public"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=2&search&sort_by=search_api_relevance",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=60, public"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=3&search&sort_by=search_api_relevance",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=60, public"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/recherche?search",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=60, public"
+						},
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/resultats/resultats-en-direct",
 							"method": "GET",
 							"param": "Cache-Control",
 							"attack": "",
@@ -1772,20 +1793,6 @@
 							"param": "Cache-Control",
 							"attack": "",
 							"evidence": ""
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/scrutins/elections-departementales/je-suis-electeur",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=60, public"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/scrutins/elections-senatoriales/je-suis-electeur",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": "max-age=60, public"
 						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/sitemap.xml",
@@ -1801,7 +1808,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10050",
@@ -1828,7 +1835,7 @@
 							"evidence": "HIT"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/pourquoi-je-vote/droit-de-vote-et-son-importance",
+							"uri": "https://www.elections.interieur.gouv.fr/comprendre-elections/comment-je-vote",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1863,20 +1870,6 @@
 							"evidence": "HIT"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/core/modules/system/css/components/align.module.css?rpge6y",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "HIT"
-						},
-						{
-							"uri": "https://www.elections.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?rpge6y",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "HIT"
-						},
-						{
 							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-donne-procuration",
 							"method": "GET",
 							"param": "",
@@ -1884,7 +1877,7 @@
 							"evidence": "HIT"
 						},
 						{
-							"uri": "https://www.elections.interieur.gouv.fr/mes-demarches/je-verifie-ma-situation-electorale",
+							"uri": "https://www.elections.interieur.gouv.fr/resultats/resultats-de-toutes-elections",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1905,7 +1898,7 @@
 							"evidence": "HIT"
 						}
 					],
-					"count": "13",
+					"count": "11",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
@@ -1951,7 +1944,7 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10031",
@@ -1963,6 +1956,13 @@
 					"riskdesc": "Informational (Low)",
 					"desc": "<p>This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.</p>",
 					"instances":[ 
+						{
+							"uri": "https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=0&search&sort_by=search_api_relevance",
+							"method": "GET",
+							"param": "sort_by",
+							"attack": "",
+							"evidence": ""
+						},
 						{
 							"uri": "https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=1&search&sort_by=search_api_relevance",
 							"method": "GET",
@@ -1999,13 +1999,13 @@
 							"evidence": ""
 						}
 					],
-					"count": "5",
+					"count": "6",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
-					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=1&search&sort_by=search_api_relevance</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [option] tag [value] attribute </p><p></p><p>The user input found was:</p><p>sort_by=search_api_relevance</p><p></p><p>The user-controlled value was:</p><p>search_api_relevance</p>",
+					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.elections.interieur.gouv.fr/recherche?created%5Bmax%5D&created%5Bmin%5D=2013-01-01%2000%3A00%3A00&page=0&search&sort_by=search_api_relevance</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [option] tag [value] attribute </p><p></p><p>The user input found was:</p><p>sort_by=search_api_relevance</p><p></p><p>The user-controlled value was:</p><p>search_api_relevance</p>",
 					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "995"
+					"sourceid": "993"
 				}
 			]
 		}
