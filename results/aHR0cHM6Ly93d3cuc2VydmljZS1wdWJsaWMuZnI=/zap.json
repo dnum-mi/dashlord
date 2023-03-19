@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
 	"@version": "2.12.0",
-	"@generated": "Sun, 12 Mar 2023 00:54:52",
+	"@generated": "Sun, 19 Mar 2023 00:55:24",
 	"site":[ 
 		{
 			"@name": "https://www.service-public.fr",
@@ -20,20 +20,27 @@
 					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F14128",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/F16862",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "5878757917022187896"
+							"evidence": "569678888610246160"
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/F16922",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "5060076761399699854"
 						}
 					],
-					"count": "1",
+					"count": "2",
 					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
-					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 587875</p><p>Brand: MAESTRO</p><p>Category: STANDARD</p><p>Issuer: </p>",
+					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 569678</p><p>Brand: MAESTRO</p><p>Category: </p><p>Issuer: </p>",
 					"reference": "",
 					"cweid": "359",
 					"wascid": "13",
-					"sourceid": "6430"
+					"sourceid": "8420"
 				},
 				{
 					"pluginid": "10202",
@@ -81,27 +88,6 @@
 							"evidence": "<form action=\"https://www.service-public.fr/demarches-silence-vaut-accord/recherche\" method=\"get\" class=\"form-panel\" id=\"sva-filter-form-id\" >"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\">"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\">"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"#\" class=\"form-select-language\" method=\"get\" >"
-						},
-						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
 							"method": "GET",
 							"param": "",
@@ -124,13 +110,27 @@
 						},
 						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"#\" class=\"form-select-language\" method=\"get\" >"
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19811",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\">"
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19811",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "<form action=\"#\" class=\"form-select-language\" method=\"get\" >"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ].</p>",
 					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
@@ -212,14 +212,14 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -245,84 +245,84 @@
 					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/apple-touch-icon.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/dsfr/favicon/apple-touch-icon.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/favicon.ico",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/dsfr/favicon/favicon.ico",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/favicon.svg",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/dsfr/favicon/favicon.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-114.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-114.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-120.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-120.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-144.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-144.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-152.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-152.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-57.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-57.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-72.png",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon-72.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon.ico",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/img/favicon/favicon.ico",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/modernizr.js",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/js/modernizr.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Access-Control-Allow-Origin: *"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/require.js",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/js/require.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -335,232 +335,7 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "7050"
-				},
-				{
-					"pluginid": "10020",
-					"alertRef": "10020-1",
-					"alert": "Missing Anti-clickjacking Header",
-					"name": "Missing Anti-clickjacking Header",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr/P10017",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F16225",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F17904",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19803",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19804",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19806",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19809",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19812",
-							"method": "GET",
-							"param": "X-Frame-Options",
-							"attack": "",
-							"evidence": ""
-						}
-					],
-					"count": "12",
-					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
-					"cweid": "1021",
-					"wascid": "15",
-					"sourceid": "6423"
-				},
-				{
-					"pluginid": "10010",
-					"alertRef": "10010",
-					"alert": "Cookie No HttpOnly Flag",
-					"name": "Cookie No HttpOnly Flag",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-1.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-2.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-3.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						}
-					],
-					"count": "6",
-					"solution": "<p>Ensure that the HttpOnly flag is set for all cookies.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
-					"cweid": "1004",
-					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10011",
-					"alertRef": "10011",
-					"alert": "Cookie Without Secure Flag",
-					"name": "Cookie Without Secure Flag",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-1.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-2.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-3.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						}
-					],
-					"count": "6",
-					"solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
-					"cweid": "614",
-					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6833"
 				},
 				{
 					"pluginid": "10054",
@@ -572,13 +347,6 @@
 					"riskdesc": "Low (Medium)",
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
 						{
 							"uri": "https://www.service-public.fr",
 							"method": "GET",
@@ -599,6 +367,27 @@
 							"param": "TS01425d24",
 							"attack": "",
 							"evidence": "Set-Cookie: TS01425d24"
+						},
+						{
+							"uri": "https://www.service-public.fr/accueil/",
+							"method": "GET",
+							"param": "TS012e9d3d",
+							"attack": "",
+							"evidence": "Set-Cookie: TS012e9d3d"
+						},
+						{
+							"uri": "https://www.service-public.fr/actualites/lettresp/archives/L",
+							"method": "GET",
+							"param": "TS012e9d3d",
+							"attack": "",
+							"evidence": "Set-Cookie: TS012e9d3d"
+						},
+						{
+							"uri": "https://www.service-public.fr/allo-sp/",
+							"method": "GET",
+							"param": "TS012e9d3d",
+							"attack": "",
+							"evidence": "Set-Cookie: TS012e9d3d"
 						},
 						{
 							"uri": "https://www.service-public.fr/compte/",
@@ -624,13 +413,6 @@
 						{
 							"uri": "https://www.service-public.fr/sitemap.xml",
 							"method": "GET",
-							"param": "dtCookie",
-							"attack": "",
-							"evidence": "Set-Cookie: dtCookie"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
 							"evidence": "Set-Cookie: SP_SESSION"
@@ -650,7 +432,7 @@
 							"evidence": "Set-Cookie: TS01425d24"
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
@@ -690,14 +472,7 @@
 							"evidence": "<script src=\"//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1\" type=\"text/javascript\" id=\"readspeaker_script\"></script>"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
-							"method": "GET",
-							"param": "//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1",
-							"attack": "",
-							"evidence": "<script src=\"//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1\" type=\"text/javascript\" id=\"readspeaker_script\"></script>"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19803",
 							"method": "GET",
 							"param": "//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1",
 							"attack": "",
@@ -712,6 +487,13 @@
 						},
 						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19806",
+							"method": "GET",
+							"param": "//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1",
+							"attack": "",
+							"evidence": "<script src=\"//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1\" type=\"text/javascript\" id=\"readspeaker_script\"></script>"
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19807",
 							"method": "GET",
 							"param": "//cdn1.readspeaker.com/script/12082/webReader/webReader.js?pids=wr&notools=1",
 							"attack": "",
@@ -765,14 +547,14 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/common.js",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/js/common.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "Eval"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/require.js",
+							"uri": "https://www.service-public.fr/resources/v-f5d6453760/assets/js/require.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -792,7 +574,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "7079"
+					"sourceid": "7278"
 				},
 				{
 					"pluginid": "10063",
@@ -847,35 +629,7 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/dsfr/dsfr.module.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/configRgpdPart.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/coperia.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/modernizr.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/require.js",
+							"uri": "https://www.service-public.fr/allo-sp",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -883,6 +637,34 @@
 						},
 						{
 							"uri": "https://www.service-public.fr/static-error/img/favicon/manifest.webmanifest",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/respond.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/orejime/configRgpd.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/xiti/smarttag.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -895,7 +677,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "2789"
+					"sourceid": "164"
 				},
 				{
 					"pluginid": "10035",
@@ -950,42 +732,42 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/apple-touch-icon.png",
+							"uri": "https://www.service-public.fr/allo-sp",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/favicon.ico",
+							"uri": "https://www.service-public.fr/static-error/img/favicon/apple-touch-icon.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/favicon/favicon.svg",
+							"uri": "https://www.service-public.fr/static-error/img/favicon/favicon.ico",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-114.png",
+							"uri": "https://www.service-public.fr/static-error/img/favicon/manifest.webmanifest",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-120.png",
+							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/img/favicon/favicon-144.png",
+							"uri": "https://www.service-public.fr/static-error/js/ie/respond.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -998,7 +780,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "2789"
+					"sourceid": "164"
 				},
 				{
 					"pluginid": "10096",
@@ -1011,83 +793,20 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server - Unix</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/compte",
+							"uri": "https://www.service-public.fr/P10050",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1790656546"
-						},
-						{
-							"uri": "https://www.service-public.fr/compte/se-connecter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1516814259"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1518977880"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1638014288"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19803",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1807916609"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1438757551"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-1.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1709879868"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-12.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1414890969"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-16.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1503132939"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-9.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1611963853"
+							"evidence": "1717735209"
 						}
 					],
-					"count": "10",
+					"count": "1",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1790656546, which evaluates to: 2026-09-29 04:35:46</p>",
+					"otherinfo": "<p>1717735209, which evaluates to: 2024-06-07 04:40:09</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "3194"
+					"sourceid": "6599"
 				},
 				{
 					"pluginid": "10021",
@@ -1100,84 +819,84 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/P10017",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F16225",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19803",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19804",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19806",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19809",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19812",
-							"method": "GET",
-							"param": "X-Content-Type-Options",
-							"attack": "",
-							"evidence": ""
-						},
-						{
 							"uri": "https://www.service-public.fr/robots.txt",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/favicon/apple-touch-icon.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/favicon/favicon.ico",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/logo-rf-bottom.svg",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/logo-rf-top.svg",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/logo-VP.svg",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/img/logo-your-europe.svg",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/respond.min.js",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/jquery/jquery-3.6.0.min.js",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/orejime/configRgpd.js",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/xiti/smarttag.js",
 							"method": "GET",
 							"param": "X-Content-Type-Options",
 							"attack": "",
@@ -1190,7 +909,7 @@
 					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6423"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10094",
@@ -1266,18 +985,18 @@
 							"evidence": "com/script/12082/webReader/webReader"
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-16.xml",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/particuliers/download-echeance-actu-ics-calendar/A14480"
+							"evidence": "com/script/12082/webReader/webReader"
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-17.xml",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/particuliers/vosdroits/R33775"
+							"evidence": "com/script/12082/webReader/webReader"
 						}
 					],
 					"count": "11",
@@ -1313,32 +1032,18 @@
 							"evidence": "select"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/dsfr/dsfr/dsfr.module.min.js",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/F17904",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "DB"
+							"evidence": "from"
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/common.js",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19806",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "select"
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/common.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username"
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b449009a21/assets/js/configRgpdPart.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "User"
+							"evidence": "from"
 						},
 						{
 							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
@@ -1390,7 +1095,7 @@
 							"evidence": "select"
 						}
 					],
-					"count": "13",
+					"count": "11",
 					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
 					"otherinfo": "<p>The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script></p><p>    requirejs(['entreprendre/autocomplete-a11y','domReady', 'jquery'], function (autocompleteA11y, domReady, $) {</p><p>     \", see evidence field for the suspicious comment/snippet.</p>",
 					"reference": "",
@@ -1428,74 +1133,11 @@
 							"param": "",
 							"attack": "",
 							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-1.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-10.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-2.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-3.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-4.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-6.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-7.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-8.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
 						}
 					],
-					"count": "12",
+					"count": "3",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>dtCookie=v_4_srv_2_sn_2DC29655FD9A33FF750C7687D575356D_perc_100000_ol_0_mul_1_app-3A868af7c6b5cd311a_1</p><p>SP_SESSION=50800bb6-ceae-4673-bbd6-17dc522967d5</p><p>TS01425d24=012a7f58e0bbb87f895e96c1e07a3314c7cd1e886d712713ef04de54c5c6f6f2190e05bd6b61e6d03a84b4b34432f1616fa09b477702dfb9d7bf202d72a3e5e07558e800a7</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=862286d6-c0b0-47c6-98ef-14bf982f469f</p><p>TS01425d24=012a7f58e009a19559db0b913e3bc594c029a9f5ee682c8a85fb9c0851430cc25710d2d5bdfc9c95a93692bd688232cdaa31f53e2d1df8be6d70f95a6aa6418a78f2a7a889</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
@@ -1575,14 +1217,14 @@
 							"evidence": "<a class=\"fr-footer__top-link\"\n     rel=\"noopener noreferrer\"\n     target=\"_self\"\n     href=\"https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&amp;rubricTypeFilter=teleservice\"\n     title=\"D\u00E9marches en ligne - www.service-public.fr - Nouvelle fen\u00EAtre\" data-xiti-name=\"Particuliers::Footer::Demarches_en_ligne_-_www.service-public.fr_-_Nouvelle_fen\u00EAtre::null\" data-xiti-type=\"navigation\">D\u00E9marches en ligne</a>"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/actualites",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "<a class=\"fr-footer__top-link\"\n     rel=\"noopener noreferrer\"\n     target=\"_self\"\n     href=\"https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&amp;rubricTypeFilter=teleservice\"\n     title=\"D\u00E9marches en ligne - www.service-public.fr - Nouvelle fen\u00EAtre\" data-xiti-name=\"Particuliers::Footer::Demarches_en_ligne_-_www.service-public.fr_-_Nouvelle_fen\u00EAtre::null\" data-xiti-type=\"navigation\">D\u00E9marches en ligne</a>"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/comment-faire-si",
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1609,6 +1251,13 @@
 					"instances":[ 
 						{
 							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=0, s-maxage=28800, public"
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
 							"method": "GET",
 							"param": "Cache-Control",
 							"attack": "",
@@ -1671,13 +1320,6 @@
 							"evidence": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-7.xml",
-							"method": "GET",
-							"param": "Cache-Control",
-							"attack": "",
-							"evidence": ""
-						},
-						{
 							"uri": "https://www.service-public.fr/urlset-8.xml",
 							"method": "GET",
 							"param": "Cache-Control",
@@ -1708,42 +1350,42 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 4954"
+							"evidence": "Age: 5120"
 						},
 						{
 							"uri": "https://www.service-public.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5082"
+							"evidence": "Age: 5123"
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0"
 						},
 						{
 							"uri": "https://www.service-public.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 4836"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-1.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-10.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 5748"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-2.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 4836"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-3.xml",
@@ -1757,7 +1399,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 4834"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-5.xml",
@@ -1771,17 +1413,17 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0"
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-7.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0"
+							"evidence": "Age: 5755"
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-8.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 4830"
+						},
+						{
+							"uri": "https://www.service-public.fr/urlset-9.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1812,6 +1454,41 @@
 							"param": "",
 							"attack": "",
 							"evidence": "s-maxage=28800"
+						},
+						{
+							"uri": "https://www.service-public.fr/*/partager-par-courriel",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/*/recherche",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/*/recherche-guidee/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/*?xtor",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/accueil/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ""
 						},
 						{
 							"uri": "https://www.service-public.fr/actualites/lettresp/archives/L",
@@ -1854,37 +1531,9 @@
 							"param": "",
 							"attack": "",
 							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-1.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-2.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-3.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request. </p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
@@ -1903,6 +1552,48 @@
 					"desc": "<p>This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif",
+							"method": "GET",
+							"param": "_codesSva",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif",
+							"method": "GET",
+							"param": "_perimetres",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif",
+							"method": "GET",
+							"param": "codesSva",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif",
+							"method": "GET",
+							"param": "ministeres",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif",
+							"method": "GET",
+							"param": "perimetres",
+							"attack": "",
+							"evidence": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page=50",
+							"method": "GET",
+							"param": "page",
+							"attack": "",
+							"evidence": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&rubricTypeFilter=formulaire",
 							"method": "GET",
 							"param": "rubricTypeFilter",
@@ -1931,13 +1622,13 @@
 							"evidence": ""
 						}
 					],
-					"count": "4",
+					"count": "10",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
-					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&rubricTypeFilter=formulaire</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [a] tag [title] attribute </p><p></p><p>The user input found was:</p><p>rubricTypeFilter=formulaire</p><p></p><p>The user-controlled value was:</p><p>formulaires administratifs (cerfas) - www.service-public.fr - nouvelle fen\u00EAtre</p>",
+					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+Service+public+administratif</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [meta] tag [content] attribute </p><p></p><p>The user input found was:</p><p>_codesSva=1</p><p></p><p>The user-controlled value was:</p><p>width=device-width, initial-scale=1, shrink-to-fit=no</p>",
 					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "6413"
+					"sourceid": "7459"
 				}
 			]
 		}
