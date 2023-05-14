@@ -1,0 +1,1457 @@
+{
+	"@programName": "OWASP ZAP",
+	"@version": "2.12.0",
+	"@generated": "Sun, 14 May 2023 00:49:51",
+	"site":[ 
+		{
+			"@name": "https://www.elysee.fr",
+			"@host": "www.elysee.fr",
+			"@port": "443",
+			"@ssl": "true",
+			"alerts": [ 
+				{
+					"pluginid": "10062",
+					"alertRef": "10062",
+					"alert": "PII Disclosure",
+					"name": "PII Disclosure",
+					"riskcode": "3",
+					"confidence": "3",
+					"riskdesc": "High (High)",
+					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "674306389737",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 674306\nBrand: MAESTRO\nCategory: STANDARD\nIssuer: VINCENTO PAYMENT SOLUTIONS, LTD."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "674306389737",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 674306\nBrand: MAESTRO\nCategory: STANDARD\nIssuer: VINCENTO PAYMENT SOLUTIONS, LTD."
+						},
+						{
+							"uri": "https://www.elysee.fr/en/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "674306389737",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 674306\nBrand: MAESTRO\nCategory: STANDARD\nIssuer: VINCENTO PAYMENT SOLUTIONS, LTD."
+						}
+					],
+					"count": "3",
+					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
+					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 674306</p><p>Brand: MAESTRO</p><p>Category: STANDARD</p><p>Issuer: VINCENTO PAYMENT SOLUTIONS, LTD.</p>",
+					"reference": "",
+					"cweid": "359",
+					"wascid": "13",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/lettre-information",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form name=\"citizen\" method=\"post\" action=\"/lettre-information\" class=\"formNL check border--outline\" data-matomo-name=\"cloud_login\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"citizen__token\" \"citizen_birthdayDate\" \"citizen_firstName\" \"citizen_gender_0\" \"citizen_gender_1\" \"citizen_lastName\" \"citizen_rawEmail_email\" \"citizen_rawEmail_emailRepeated\" \"citizen_topics_1\" \"citizen_topics_10\" \"citizen_topics_11\" \"citizen_topics_12\" \"citizen_topics_13\" \"citizen_topics_14\" \"citizen_topics_15\" \"citizen_topics_16\" \"citizen_topics_17\" \"citizen_topics_18\" \"citizen_topics_19\" \"citizen_topics_2\" \"citizen_topics_3\" \"citizen_topics_4\" \"citizen_topics_5\" \"citizen_topics_7\" \"citizen_zipCode\" ]."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"citizen__token\" \"citizen_birthdayDate\" \"citizen_firstName\" \"citizen_gender_0\" \"citizen_gender_1\" \"citizen_lastName\" \"citizen_rawEmail_email\" \"citizen_rawEmail_emailRepeated\" \"citizen_topics_1\" \"citizen_topics_10\" \"citizen_topics_11\" \"citizen_topics_12\" \"citizen_topics_13\" \"citizen_topics_14\" \"citizen_topics_15\" \"citizen_topics_16\" \"citizen_topics_17\" \"citizen_topics_18\" \"citizen_topics_19\" \"citizen_topics_2\" \"citizen_topics_3\" \"citizen_topics_4\" \"citizen_topics_5\" \"citizen_topics_7\" \"citizen_zipCode\" ].</p>",
+					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "722"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-4",
+					"alert": "CSP: Wildcard Directive",
+					"name": "CSP: Wildcard Directive",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, prefetch-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, prefetch-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: </p><p>script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, prefetch-src, form-action</p><p></p><p>The directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything.</p>",
+					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-5",
+					"alert": "CSP: script-src unsafe-inline",
+					"name": "CSP: script-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "script-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "script-src includes unsafe-inline."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>script-src includes unsafe-inline.</p>",
+					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-6",
+					"alert": "CSP: style-src unsafe-inline",
+					"name": "CSP: style-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "style-src includes unsafe-inline."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
+					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "90003",
+					"alertRef": "90003",
+					"alert": "Sub Resource Integrity Attribute Missing",
+					"name": "Sub Resource Integrity Attribute Missing",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content. </p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/04/19/deplacement-mathis-muttersholtz-alsace",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/05/communique-conjoint-entre-la-france-et-linde",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/08/78eme-anniversaire-de-la-victoire-du-8-mai-1945",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en/docs/Web/Security/Subresource_Integrity</p>",
+					"cweid": "345",
+					"wascid": "15",
+					"sourceid": "1485"
+				},
+				{
+					"pluginid": "10003",
+					"alertRef": "10003",
+					"alert": "Vulnerable JS Library",
+					"name": "Vulnerable JS Library",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>The identified library jquery, version 3.3.1 is vulnerable.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/front/js/actuality.3b6b600b.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "* jQuery JavaScript Library v3.3.1",
+							"otherinfo": "CVE-2020-11023\nCVE-2020-11022\nCVE-2019-11358\n"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/app.aca2dd5c.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "* jQuery JavaScript Library v3.3.1",
+							"otherinfo": "CVE-2020-11023\nCVE-2020-11022\nCVE-2019-11358\n"
+						}
+					],
+					"count": "2",
+					"solution": "<p>Please upgrade to the latest version of jquery.</p>",
+					"otherinfo": "<p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>CVE-2019-11358</p><p></p>",
+					"reference": "<p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
+					"cweid": "829",
+					"wascid": "-1",
+					"sourceid": "1759"
+				},
+				{
+					"pluginid": "10044",
+					"alertRef": "10044",
+					"alert": "Big Redirect Detected (Potential Sensitive Information Leak)",
+					"name": "Big Redirect Detected (Potential Sensitive Information Leak)",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/la-presidence/visite-palais-de-l-elysee-et-son-histoire",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 43 [https://www.elysee.fr/exposition/evreux-300].\nPredicted response size: 343.\nResponse Body Length: 524."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
+					"otherinfo": "<p>Location header URI length: 43 [https://www.elysee.fr/exposition/evreux-300].</p><p>Predicted response size: 343.</p><p>Response Body Length: 524.</p>",
+					"reference": "",
+					"cweid": "201",
+					"wascid": "13",
+					"sourceid": "1077"
+				},
+				{
+					"pluginid": "10017",
+					"alertRef": "10017",
+					"alert": "Cross-Domain JavaScript Source File Inclusion",
+					"name": "Cross-Domain JavaScript Source File Inclusion",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/03/01/les-photos-du-mois-de-fevrier-2023",
+							"method": "GET",
+							"param": "//embedr.flickr.com/assets/client-code.js",
+							"attack": "",
+							"evidence": "<script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/04/19/deplacement-mathis-muttersholtz-alsace",
+							"method": "GET",
+							"param": "https://platform.twitter.com/widgets.js",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/01/les-photos-du-mois-davril-2023",
+							"method": "GET",
+							"param": "//embedr.flickr.com/assets/client-code.js",
+							"attack": "",
+							"evidence": "<script async src=\"//embedr.flickr.com/assets/client-code.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/05/communique-conjoint-entre-la-france-et-linde",
+							"method": "GET",
+							"param": "https://platform.twitter.com/widgets.js",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/08/78eme-anniversaire-de-la-victoire-du-8-mai-1945",
+							"method": "GET",
+							"param": "https://platform.twitter.com/widgets.js",
+							"attack": "",
+							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "829",
+					"wascid": "15",
+					"sourceid": "2654"
+				},
+				{
+					"pluginid": "10110",
+					"alertRef": "10110",
+					"alert": "Dangerous JS Functions",
+					"name": "Dangerous JS Functions",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/front/js/actuality.3b6b600b.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Eval",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/app.aca2dd5c.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Eval",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>See the references for security advice on the use of these functions.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://angular.io/guide/security</p>",
+					"cweid": "749",
+					"wascid": "-1",
+					"sourceid": "1759"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/agenda",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/brigitte-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/les-instances-de-gouvernance",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</p><p>https://developers.google.com/web/updates/2018/06/feature-policy</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "Timestamp Disclosure - Unix",
+					"name": "Timestamp Disclosure - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A timestamp was disclosed by the application/web server - Unix</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-114x114.72e0a762.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-120x120.0f61001b.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-144x144.a7ce02ab.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-57x57.3d97d7b5.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-60x60.7ee1f17a.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-72x72.cf49cea6.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-76x76.f87e41c6.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540369087",
+							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.services.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1544617177",
+							"otherinfo": "1544617177, which evaluates to: 2018-12-12 12:19:37"
+						}
+					],
+					"count": "8",
+					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+					"otherinfo": "<p>1540369087, which evaluates to: 2018-10-24 08:18:07</p>",
+					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "1117"
+				},
+				{
+					"pluginid": "10021",
+					"alertRef": "10021",
+					"alert": "X-Content-Type-Options Header Missing",
+					"name": "X-Content-Type-Options Header Missing",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/front/images/android-icon-192x192.f7720d6c.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-114x114.72e0a762.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-152x152.55189bb1.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-180x180.5b254294.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-57x57.3d97d7b5.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-60x60.7ee1f17a.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-72x72.cf49cea6.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-76x76.f87e41c6.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-32x32.9d32b752.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-96x96.891a4487.png",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/robots.txt",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "X-Content-Type-Options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						}
+					],
+					"count": "12",
+					"solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
+					"otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
+					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1120"
+				},
+				{
+					"pluginid": "10094",
+					"alertRef": "10094-3",
+					"alert": "Base64 Disclosure",
+					"name": "Base64 Disclosure",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "M37ssL5KernI4jQ2s5vNPGsrsBSkwiDVm9djnsy7xQM",
+							"otherinfo": "3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003"
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "M37ssL5KernI4jQ2s5vNPGsrsBSkwiDVm9djnsy7xQM",
+							"otherinfo": "3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003"
+						},
+						{
+							"uri": "https://www.elysee.fr/agenda",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/brigitte-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/les-instances-de-gouvernance",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
+							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
+						}
+					],
+					"count": "11",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003</p>",
+					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-1",
+					"alert": "CSP: X-Content-Security-Policy",
+					"name": "CSP: X-Content-Security-Policy",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "X-Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "X-Content-Security-Policy",
+							"attack": "",
+							"evidence": "upgrade-insecure-requests",
+							"otherinfo": "The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses.</p>",
+					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10038",
+					"alertRef": "10038-3",
+					"alert": "Content Security Policy (CSP) Report-Only Header Found",
+					"name": "Content Security Policy (CSP) Report-Only Header Found",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>The response contained a Content-Security-Policy-Report-Only header, this may indicate a work-in-progress implementation, or an oversight in promoting pre-Prod to Prod, etc.</p><p></p><p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://www.w3.org/TR/CSP2/</p><p>https://w3c.github.io/webappsec-csp/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/en/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-cookies-main-title=\"The Elys\u00E9e respects your privacy\" type=\"text/javascript\">\n        /*global tarteaucitronForceLa\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/en/search",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-cookies-main-title=\"The Elys\u00E9e respects your privacy\" type=\"text/javascript\">\n        /*global tarteaucitronForceLa\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/app.aca2dd5c.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "bug",
+							"otherinfo": "The following pattern was used: \\bBUG\\b and was detected in the element starting with: \"!function(s,a){r=[n(\"XPUD\"),n(\"SdC7\")],i=a,void 0!==(o=\"function\"==typeof i?i.apply(e,r):i)&&(t.exports=o)}(window,function(t,e)\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/app.aca2dd5c.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "from",
+							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected 2 times, the first in the element starting with: \"!function(e,n){\"use strict\";\"object\"==typeof t&&\"object\"==typeof t.exports?t.exports=e.document?n(e,!0):function(t){if(!t.docume\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/app.aca2dd5c.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected 3 times, the first in the element starting with: \"!function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return t[i].call(r.exports,r,r.exports,e\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "from",
+							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"                //var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected 3 times, the first in the element starting with: \"                // get the real window width for media query\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "TODO",
+							"otherinfo": "The following pattern was used: \\bTODO\\b and was detected 2 times, the first in the element starting with: \"                // css for the middle bar TODO: add it on the css file\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected 2 times, the first in the element starting with: \"    \"user\": {},\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.services.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "from",
+							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected 2 times, the first in the element starting with: \"            // Allow to embed from API results (playable_type + playable_id)\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.services.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected 4 times, the first in the element starting with: \"                    query: element.getAttribute(\"query\") || \"\",\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.services.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected 281 times, the first in the element starting with: \"        if (tarteaucitron.user.myfeelbackId === undefined) {\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/translations?locales=fr&version=v2.2.0",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"t.add(\"button.action.filter.select\", \"S\\u00e9lectionnez vos filtres\", \"messages\", \"fr\");\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "13",
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-cookies-main-title=\"The Elys\u00E9e respects your privacy\" type=\"text/javascript\"></p><p>        /*global tarteaucitronForceLa\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "719"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "Modern Web Application",
+					"name": "Modern Web Application",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr/la-presidence/visite-palais-de-l-elysee-et-son-histoire",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816\" integrity=\"sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==\" data-cf-beacon='{\"rayId\":\"7c6f2288fcf73172\",\"version\":\"2023.4.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "https://www.elysee.fr/linvestiture-demmanuel-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a href=\"https://www.elysee.fr/la-presidence/la-salle-des-fetes\" target=\"_self\">salle des f&ecirc;tes</a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						}
+					],
+					"count": "2",
+					"solution": "<p>This is an informational alert and so no changes are required.</p>",
+					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1077"
+				},
+				{
+					"pluginid": "10038",
+					"alertRef": "10038-2",
+					"alert": "Obsolete Content Security Policy (CSP) Header Found",
+					"name": "Obsolete Content Security Policy (CSP) Header Found",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>The \"X-Content-Security-Policy\" and \"X-WebKit-CSP\" headers are no longer recommended.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10015",
+					"alertRef": "10015",
+					"alert": "Re-examine Cache-control Directives",
+					"name": "Re-examine Cache-control Directives",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/agenda",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/brigitte-macron",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/robots.txt",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "Cache-Control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
+							"otherinfo": ""
+						}
+					],
+					"count": "12",
+					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
+					"cweid": "525",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10050",
+					"alertRef": "10050",
+					"alert": "Retrieved from Cache",
+					"name": "Retrieved from Cache",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance. </p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 144",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 716",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/bundles/bazingajstranslation/js/translator.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 4957174",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/android-icon-192x192.f7720d6c.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 394227",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-152x152.55189bb1.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 47579",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-180x180.5b254294.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 47579",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-16x16.b7bd2287.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 2413",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-32x32.9d32b752.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 437158",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-96x96.891a4487.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 128458",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/css/tarteaucitron.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 4946867",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 4951926",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/translations?locales=fr&version=v2.2.0",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 383910",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						}
+					],
+					"count": "12",
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
+					"otherinfo": "<p>The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use.</p>",
+					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049",
+					"alert": "Storable and Cacheable Content",
+					"name": "Storable and Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users.  If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.elysee.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/agenda",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/brigitte-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/10/deces-de-georges-kiejman",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/11/accelerer-notre-reindustrialisation-le-president-presente-sa-strategie",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/05/12/deplacement-du-president-emmanuel-macron-au-musee-national-picasso-a-paris",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
+							"otherinfo": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request. </p>",
+					"otherinfo": "",
+					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "1"
+				}
+			]
+		}
+	]
+}
