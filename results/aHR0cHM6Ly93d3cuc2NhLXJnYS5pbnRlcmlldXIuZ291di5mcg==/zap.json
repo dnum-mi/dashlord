@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
-	"@version": "2.12.0",
-	"@generated": "Sun, 9 Jul 2023 01:23:04",
+	"@version": "2.13.0",
+	"@generated": "Sun, 16 Jul 2023 01:27:43",
 	"site":[ 
 		{
 			"@name": "https://www.sca-rga.interieur.gouv.fr",
@@ -50,7 +50,7 @@
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10055",
@@ -93,7 +93,7 @@
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10003",
@@ -219,7 +219,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10011",
@@ -318,7 +318,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10054",
@@ -417,7 +417,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10110",
@@ -699,7 +699,7 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10015",
@@ -714,7 +714,15 @@
 						{
 							"uri": "https://www.sca-rga.interieur.gouv.fr",
 							"method": "GET",
-							"param": "Cache-Control",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "private, no-cache, no-store, max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"method": "GET",
+							"param": "cache-control",
 							"attack": "",
 							"evidence": "private, no-cache, no-store, max-age=0",
 							"otherinfo": ""
@@ -722,18 +730,109 @@
 						{
 							"uri": "https://www.sca-rga.interieur.gouv.fr/robots.txt",
 							"method": "GET",
-							"param": "Cache-Control",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "private, no-cache, no-store, max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "cache-control",
 							"attack": "",
 							"evidence": "private, no-cache, no-store, max-age=0",
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "4",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10112",
+					"alertRef": "10112",
+					"alert": "Session Management Response Identified",
+					"name": "Session Management Response Identified",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/favicon.ico",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/index.css",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/static/css/main.256ce6e2.css",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/static/js/main.d40d1d91.js",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1cXPKgwSD3ub",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						}
+					],
+					"count": "8",
+					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
+					"otherinfo": "<p></p><p>cookie:YOMe1h3tgHKNQxhV6V7n5g__</p>",
+					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
+					"cweid": "-1",
+					"wascid": "-1",
 					"sourceid": "6"
 				}
 			]
