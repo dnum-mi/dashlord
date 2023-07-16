@@ -1,7 +1,7 @@
 {
 	"@programName": "OWASP ZAP",
-	"@version": "2.12.0",
-	"@generated": "Sun, 9 Jul 2023 01:23:03",
+	"@version": "2.13.0",
+	"@generated": "Sun, 16 Jul 2023 01:26:56",
 	"site":[ 
 		{
 			"@name": "https://sia.detenteurs.interieur.gouv.fr",
@@ -272,7 +272,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10054",
@@ -379,7 +379,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10063",
@@ -572,7 +572,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "26"
+					"sourceid": "31"
 				},
 				{
 					"pluginid": "10027",
@@ -708,7 +708,7 @@
 						{
 							"uri": "https://sia.detenteurs.interieur.gouv.fr/robots.txt",
 							"method": "GET",
-							"param": "Cache-Control",
+							"param": "cache-control",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
@@ -716,7 +716,7 @@
 						{
 							"uri": "https://sia.detenteurs.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "Cache-Control",
+							"param": "cache-control",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
@@ -729,6 +729,81 @@
 					"cweid": "525",
 					"wascid": "13",
 					"sourceid": "9"
+				},
+				{
+					"pluginid": "10112",
+					"alertRef": "10112",
+					"alert": "Session Management Response Identified",
+					"name": "Session Management Response Identified",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
+					"instances":[ 
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/apple-touch-icon.png",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/espace-detenteurs",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/favicon.svg",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://sia.detenteurs.interieur.gouv.fr/static/css/main.397b3965.css",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1+nbKgwSD6-w",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						}
+					],
+					"count": "7",
+					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
+					"otherinfo": "<p></p><p>cookie:YOMe1h3tgHKNQxhV6V7n5g__</p>",
+					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10049",
