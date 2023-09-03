@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.13.0",
-	"@generated": "Sun, 27 Aug 2023 00:45:01",
+	"@generated": "Sun, 3 Sep 2023 00:45:45",
 	"site":[ 
 		{
 			"@name": "https://www.elysee.fr",
@@ -58,17 +58,9 @@
 							"attack": "",
 							"evidence": "674306389737",
 							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 674306\nBrand: MAESTRO\nCategory: STANDARD\nIssuer: VINCENTO PAYMENT SOLUTIONS, LTD."
-						},
-						{
-							"uri": "https://www.elysee.fr/es/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "674306389737",
-							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 674306\nBrand: MAESTRO\nCategory: STANDARD\nIssuer: VINCENTO PAYMENT SOLUTIONS, LTD."
 						}
 					],
-					"count": "6",
+					"count": "5",
 					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
 					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 674306</p><p>Brand: MAESTRO</p><p>Category: STANDARD</p><p>Issuer: VINCENTO PAYMENT SOLUTIONS, LTD.</p>",
 					"reference": "",
@@ -87,14 +79,6 @@
 					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.elysee.fr/front/js/page-search.962d0f3c.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"search-mobile-filters filters-wrapper search-form-modal\" action=\"#update-filter\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"\" ]."
-						},
-						{
 							"uri": "https://www.elysee.fr/lettre-information",
 							"method": "GET",
 							"param": "",
@@ -103,13 +87,13 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"citizen__token\" \"citizen_birthdayDate\" \"citizen_firstName\" \"citizen_gender_0\" \"citizen_gender_1\" \"citizen_lastName\" \"citizen_rawEmail_email\" \"citizen_rawEmail_emailRepeated\" \"citizen_topics_1\" \"citizen_topics_10\" \"citizen_topics_11\" \"citizen_topics_12\" \"citizen_topics_13\" \"citizen_topics_14\" \"citizen_topics_15\" \"citizen_topics_16\" \"citizen_topics_17\" \"citizen_topics_18\" \"citizen_topics_19\" \"citizen_topics_2\" \"citizen_topics_3\" \"citizen_topics_4\" \"citizen_topics_5\" \"citizen_topics_7\" \"citizen_zipCode\" ]."
 						}
 					],
-					"count": "2",
+					"count": "1",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"\" ].</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"citizen__token\" \"citizen_birthdayDate\" \"citizen_firstName\" \"citizen_gender_0\" \"citizen_gender_1\" \"citizen_lastName\" \"citizen_rawEmail_email\" \"citizen_rawEmail_emailRepeated\" \"citizen_topics_1\" \"citizen_topics_10\" \"citizen_topics_11\" \"citizen_topics_12\" \"citizen_topics_13\" \"citizen_topics_14\" \"citizen_topics_15\" \"citizen_topics_16\" \"citizen_topics_17\" \"citizen_topics_18\" \"citizen_topics_19\" \"citizen_topics_2\" \"citizen_topics_3\" \"citizen_topics_4\" \"citizen_topics_5\" \"citizen_topics_7\" \"citizen_zipCode\" ].</p>",
 					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>http://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1724"
+					"sourceid": "676"
 				},
 				{
 					"pluginid": "10055",
@@ -130,7 +114,7 @@
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, prefetch-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -165,7 +149,7 @@
 							"otherinfo": "script-src includes unsafe-inline."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -200,7 +184,7 @@
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -227,39 +211,7 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content. </p>",
 					"instances":[ 
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/02/25/deplacement-du-president-de-la-republique-a-loccasion-de-linauguration-et-de-la-visite-du-salon-international-de-lagriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/06/26/marseille-en-grand-renforcer-la-securite-et-la-tranquilite-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/27/deplacement-au-vanuatu",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/28/deplacement-en-papouasie-nouvelle-guinee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/31/deplacement-au-sri-lanka",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/06/27/marseille-en-grand-ameliorer-la-vie-quotidienne",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -281,23 +233,15 @@
 							"attack": "",
 							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
 							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/en/emmanuel-macron/2023/06/01/globsec-summit-in-bratislava",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
 						}
 					],
-					"count": "8",
+					"count": "3",
 					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "1732"
+					"sourceid": "1523"
 				},
 				{
 					"pluginid": "10003",
@@ -324,23 +268,15 @@
 							"attack": "",
 							"evidence": "* jQuery JavaScript Library v3.3.1",
 							"otherinfo": "CVE-2020-11023\nCVE-2020-11022\nCVE-2019-11358\nCVE-2020-23064\n"
-						},
-						{
-							"uri": "https://www.elysee.fr/front/js/page-search.962d0f3c.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "* jQuery JavaScript Library v3.3.1",
-							"otherinfo": "CVE-2020-11023\nCVE-2020-11022\nCVE-2019-11358\nCVE-2020-23064\n"
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Please upgrade to the latest version of jquery.</p>",
 					"otherinfo": "<p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>CVE-2019-11358</p><p>CVE-2020-23064</p><p></p>",
 					"reference": "<p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "2522"
+					"sourceid": "1960"
 				},
 				{
 					"pluginid": "10044",
@@ -367,7 +303,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "1162"
+					"sourceid": "1123"
 				},
 				{
 					"pluginid": "10017",
@@ -380,47 +316,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/02/25/deplacement-du-president-de-la-republique-a-loccasion-de-linauguration-et-de-la-visite-du-salon-international-de-lagriculture",
-							"method": "GET",
-							"param": "https://platform.twitter.com/widgets.js",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/02/28/papillomavirus-sensibiliser-et-proteger-nos-enfants",
-							"method": "GET",
-							"param": "//www.instagram.com/embed.js",
-							"attack": "",
-							"evidence": "<script async src=\"//www.instagram.com/embed.js\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/06/26/marseille-en-grand-renforcer-la-securite-et-la-tranquilite-publique",
-							"method": "GET",
-							"param": "https://platform.twitter.com/widgets.js",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/27/deplacement-au-vanuatu",
-							"method": "GET",
-							"param": "https://platform.twitter.com/widgets.js",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/28/deplacement-en-papouasie-nouvelle-guinee",
-							"method": "GET",
-							"param": "https://platform.twitter.com/widgets.js",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/07/31/deplacement-au-sri-lanka",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/06/27/marseille-en-grand-ameliorer-la-vie-quotidienne",
 							"method": "GET",
 							"param": "https://platform.twitter.com/widgets.js",
 							"attack": "",
@@ -442,23 +338,15 @@
 							"attack": "",
 							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
 							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/en/emmanuel-macron/2023/06/01/globsec-summit-in-bratislava",
-							"method": "GET",
-							"param": "https://platform.twitter.com/widgets.js",
-							"attack": "",
-							"evidence": "<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-							"otherinfo": ""
 						}
 					],
-					"count": "9",
+					"count": "3",
 					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
 					"otherinfo": "",
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "1732"
+					"sourceid": "1523"
 				},
 				{
 					"pluginid": "10110",
@@ -487,14 +375,6 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/front/js/page-search.962d0f3c.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Eval",
-							"otherinfo": ""
-						},
-						{
 							"uri": "https://www.elysee.fr/front/js/tarteaucitronjs/tarteaucitron.js",
 							"method": "GET",
 							"param": "",
@@ -503,13 +383,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>See the references for security advice on the use of these functions.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "2522"
+					"sourceid": "1960"
 				},
 				{
 					"pluginid": "10063",
@@ -546,7 +426,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/de/suche",
+							"uri": "https://www.elysee.fr/brigitte-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -554,7 +434,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/21/deces-adjudant-nicolas-latourte",
+							"uri": "https://www.elysee.fr/emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -562,7 +442,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/23/sommet-de-la-plateforme-crimee-le-message-du-president-emmanuel-macron",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -570,7 +450,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/25/hommage-national-au-general-jean-louis-georgelin",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -578,7 +458,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -586,7 +466,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -594,7 +474,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/la-presidence/les-instances-de-gouvernance",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -661,14 +541,6 @@
 							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
 						},
 						{
-							"uri": "https://www.elysee.fr/front/images/apple-icon-180x180.5b254294.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1540369087",
-							"otherinfo": "1540369087, which evaluates to: 2018-10-24 08:18:07"
-						},
-						{
 							"uri": "https://www.elysee.fr/front/images/apple-icon-57x57.3d97d7b5.png",
 							"method": "GET",
 							"param": "",
@@ -709,13 +581,13 @@
 							"otherinfo": "1544617177, which evaluates to: 2018-12-12 12:19:37"
 						}
 					],
-					"count": "10",
+					"count": "9",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
 					"otherinfo": "<p>1540369087, which evaluates to: 2018-10-24 08:18:07</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "1188"
+					"sourceid": "1163"
 				},
 				{
 					"pluginid": "10021",
@@ -744,15 +616,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.elysee.fr/front/images/apple-icon-120x120.0f61001b.png",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"uri": "https://www.elysee.fr/front/images/apple-icon-144x144.a7ce02ab.png",
+							"uri": "https://www.elysee.fr/front/images/apple-icon-180x180.5b254294.png",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -785,6 +649,14 @@
 						},
 						{
 							"uri": "https://www.elysee.fr/front/images/apple-icon-76x76.f87e41c6.png",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/favicon-16x16.b7bd2287.png",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -830,7 +702,7 @@
 					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1190"
+					"sourceid": "1165"
 				},
 				{
 					"pluginid": "10094",
@@ -847,16 +719,16 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "3B0/images/default/0001/03/74c420eaa4da27b496d03f305aca10044eb70634",
-							"otherinfo": "\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFD\uFFFD\uFFFD6\uFFFD\uFFFD\uFFFD\u05B6\uFFFD=\uFFFD\uFFFD7}9i\u01B5\uFFFDN8y\uFFFD\uFFFD\uFFFD~"
+							"evidence": "M37ssL5KernI4jQ2s5vNPGsrsBSkwiDVm9djnsy7xQM",
+							"otherinfo": "3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003"
 						},
 						{
 							"uri": "https://www.elysee.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "3B0/images/default/0001/03/74c420eaa4da27b496d03f305aca10044eb70634",
-							"otherinfo": "\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFD\uFFFD\uFFFD6\uFFFD\uFFFD\uFFFD\u05B6\uFFFD=\uFFFD\uFFFD7}9i\u01B5\uFFFDN8y\uFFFD\uFFFD\uFFFD~"
+							"evidence": "M37ssL5KernI4jQ2s5vNPGsrsBSkwiDVm9djnsy7xQM",
+							"otherinfo": "3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003"
 						},
 						{
 							"uri": "https://www.elysee.fr/agenda",
@@ -867,7 +739,23 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"uri": "https://www.elysee.fr/de/suche",
+							"uri": "https://www.elysee.fr/brigitte-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "3B0/images/default/0001/03/6cf0e901154d4ca8db368f099669ae787e40fa59",
+							"otherinfo": "\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFDq\uFFFD\\x001e\uFFFDMu\uFFFDxq\uFFFD\\x001do~\uFFFDO}\uFFFDZ{\uFFFD;{\uFFFD\\x001fk\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "3B0/images/default/0001/10/c94ca5cbc994a3a0d4994354c9a4ac3407d6ad84",
+							"otherinfo": "\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\uFFFDO\uFFFD\uFFFD\uFFFD\\x001a\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001a\u076D\\x001d\uFFFD\uFFFDx\u07DE\\x001c\uFFFD\uFFFD\\x001as~4\uFFFD\u079Aw\uFFFD"
+						},
+						{
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -875,15 +763,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/21/deces-adjudant-nicolas-latourte",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "3B0/images/default/0001/15/6df98bcc058e79134a0e8a84091dde13adec1917",
-							"otherinfo": "\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\u05DF\uFFFDu\uFFFD|m\uFFFD4\uFFFD\u01FB\uFFFD]\uFFFDkG\uFFFDk\uFFFD4\uFFFDW]{]\uFFFDu\uFFFD5\uFFFD^"
-						},
-						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/23/sommet-de-la-plateforme-crimee-le-message-du-president-emmanuel-macron",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -891,7 +771,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/25/hommage-national-au-general-jean-louis-georgelin",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -899,7 +779,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -907,15 +787,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "6Lfw_1YdAAAAAEOaXXOh7Fy-G2RmdlbSRMQ_uY6f",
-							"otherinfo": "\uFFFD\uFFFD\uFFFDV\\x001d\\x0000\\x0000\\x0000\\x0000C\uFFFD]s\uFFFD\uFFFD\\\uFFFD\\x001bdfvV\uFFFDD\uFFFD?\uFFFD\uFFFD\uFFFD"
-						},
-						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/la-presidence/les-instances-de-gouvernance",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -933,11 +805,11 @@
 					],
 					"count": "11",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>\uFFFD\\x001d?\uFFFDf\uFFFDz\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFD\uFFFD\uFFFD6\uFFFD\uFFFD\uFFFD\u05B6\uFFFD=\uFFFD\uFFFD7}9i\u01B5\uFFFDN8y\uFFFD\uFFFD\uFFFD~</p>",
+					"otherinfo": "<p>3~\uCC3EJz\uFFFD\uFFFD\uFFFD46\uFFFD\uFFFD\uFFFD<k+\uFFFD\\x0014\uFFFD\uFFFD \u055B\uFFFDc\uFFFD\u033B\uFFFD\\x0003</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10055",
@@ -958,7 +830,7 @@
 							"otherinfo": "The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "X-Content-Security-Policy",
 							"attack": "",
@@ -972,7 +844,7 @@
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10038",
@@ -1001,7 +873,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1009,7 +881,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1017,7 +889,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1031,7 +903,7 @@
 					"reference": "<p>https://www.w3.org/TR/CSP2/</p><p>https://w3c.github.io/webappsec-csp/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10027",
@@ -1060,7 +932,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/de/suche",
+							"uri": "https://www.elysee.fr/agenda",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1068,7 +940,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/21/deces-adjudant-nicolas-latourte",
+							"uri": "https://www.elysee.fr/brigitte-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1076,7 +948,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/23/sommet-de-la-plateforme-crimee-le-message-du-president-emmanuel-macron",
+							"uri": "https://www.elysee.fr/emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1084,7 +956,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/25/hommage-national-au-general-jean-louis-georgelin",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1092,7 +964,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1100,15 +972,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-cookies-main-title=\"The Elys\u00E9e respects your privacy\" type=\"text/javascript\">\n        /*global tarteaucitronForceLa\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.elysee.fr/es/busqueda",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1116,7 +980,15 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "from",
+							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script type=\"text/javascript\" defer>\n                (function(e,a){\n                    var i=e.length,y=5381,k='script',s=win\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.elysee.fr/la-presidence/les-instances-de-gouvernance",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1138,7 +1010,7 @@
 					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10109",
@@ -1155,7 +1027,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"7fd0472dd934396d\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>",
+							"evidence": "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"8009f61adfee315a\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
@@ -1163,7 +1035,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"7fd046380e3605ec\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>",
+							"evidence": "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"8009f54e68cb315a\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
@@ -1181,7 +1053,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "3712"
+					"sourceid": "2980"
 				},
 				{
 					"pluginid": "10038",
@@ -1210,7 +1082,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1218,7 +1090,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1226,7 +1098,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1240,7 +1112,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10015",
@@ -1269,7 +1141,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/de/suche",
+							"uri": "https://www.elysee.fr/agenda",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1277,7 +1149,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/21/deces-adjudant-nicolas-latourte",
+							"uri": "https://www.elysee.fr/emmanuel-macron",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1285,7 +1157,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/23/sommet-de-la-plateforme-crimee-le-message-du-president-emmanuel-macron",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1293,7 +1165,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/25/hommage-national-au-general-jean-louis-georgelin",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1301,7 +1173,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1309,15 +1181,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1338,6 +1202,14 @@
 							"param": "cache-control",
 							"attack": "",
 							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "public, max-age=900, must-revalidate, s-maxage=900, stale-while-revalidate=600",
 							"otherinfo": ""
 						}
 					],
@@ -1364,23 +1236,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 101",
-							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"uri": "https://www.elysee.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 560",
-							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"uri": "https://www.elysee.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 170",
+							"evidence": "Age: 423",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1388,7 +1244,15 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 2610037",
+							"evidence": "Age: 3227399",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/css/app.eac4da09.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 820682",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1396,7 +1260,15 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 19030",
+							"evidence": "Age: 394735",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"uri": "https://www.elysee.fr/front/images/apple-icon-180x180.5b254294.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 394735",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1404,7 +1276,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 392606",
+							"evidence": "Age: 187687",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1412,7 +1284,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 204747",
+							"evidence": "Age: 1407337",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1420,7 +1292,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 139124",
+							"evidence": "Age: 187687",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1428,7 +1300,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 1453937",
+							"evidence": "Age: 2212001",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1436,7 +1308,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 2610042",
+							"evidence": "Age: 3227806",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1444,15 +1316,15 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 129577",
+							"evidence": "Age: 3227806",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"uri": "https://www.elysee.fr/robots.txt",
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 2239",
+							"evidence": "Age: 637",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
@@ -1462,7 +1334,7 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -1489,15 +1361,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -1524,15 +1404,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -1559,15 +1447,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -1594,15 +1490,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10112",
@@ -1619,7 +1523,7 @@
 							"method": "GET",
 							"param": "elysee",
 							"attack": "",
-							"evidence": "u4aba8cpesce68cnk8o9kkk8ph",
+							"evidence": "j66escscl2dh0m54d2bv30edct",
 							"otherinfo": "\ncookie:elysee"
 						}
 					],
@@ -1629,7 +1533,7 @@
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "791"
+					"sourceid": "676"
 				},
 				{
 					"pluginid": "10049",
@@ -1658,7 +1562,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/de/suche",
+							"uri": "https://www.elysee.fr/agenda",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1666,7 +1570,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/21/deces-adjudant-nicolas-latourte",
+							"uri": "https://www.elysee.fr/emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1674,7 +1578,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/23/sommet-de-la-plateforme-crimee-le-message-du-president-emmanuel-macron",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/28/rencontre-des-entrepreneurs-de-france-le-message-du-president-emmanuel-macron",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1682,7 +1586,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/25/hommage-national-au-general-jean-louis-georgelin",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/08/29/mort-du-sergent-nicolas-mazier-au-combat-dans-laccomplissement-de-sa-mission-en-irak",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1690,7 +1594,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/en/search",
+							"uri": "https://www.elysee.fr/emmanuel-macron/2023/09/01/deplacement-du-president-au-lycee-professionnel-de-largensol-dorange-pour-la-pre-rentree",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1698,15 +1602,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.elysee.fr/es/busqueda",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "s-maxage=900",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.elysee.fr/recherche",
+							"uri": "https://www.elysee.fr/la-presidence/cabinet-du-president-de-la-republique-et-services-de-l-elysee",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1727,6 +1623,14 @@
 							"param": "",
 							"attack": "",
 							"evidence": "max-age=300",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.elysee.fr/toutes-les-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=900",
 							"otherinfo": ""
 						}
 					],
