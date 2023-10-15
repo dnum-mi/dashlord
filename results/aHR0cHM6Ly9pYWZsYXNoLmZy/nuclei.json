@@ -1,0 +1,1222 @@
+[
+  [
+    {
+      "template": "dns/txt-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/txt-fingerprint",
+      "template-id": "txt-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/txt-fingerprint.yaml",
+      "info": {
+        "name": "DNS TXT Record Detected",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "txt"
+        ],
+        "description": "A DNS TXT record was detected. The TXT record lets a domain admin leave notes on a DNS server.",
+        "reference": [
+          "https://www.netspi.com/blog/technical/network-penetration-testing/analyzing-dns-txt-records-to-fingerprint-service-providers/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "iaflash.fr.",
+      "matched-at": "iaflash.fr",
+      "extracted-results": [
+        "\"v=spf1 include:mx.ovh.com ~all\"",
+        "\"1|www.iaflash.fr\""
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 14590\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 14590\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\niaflash.fr.\t600\tIN\tTXT\t\"v=spf1 include:mx.ovh.com ~all\"\niaflash.fr.\t600\tIN\tTXT\t\"1|www.iaflash.fr\"\n",
+      "timestamp": "2023-10-15T01:50:43.497859573Z",
+      "matcher-status": true
+    },
+    {
+      "template": "dns/mx-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/mx-fingerprint",
+      "template-id": "mx-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/mx-fingerprint.yaml",
+      "info": {
+        "name": "MX Record Detection",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "mx"
+        ],
+        "description": "An MX record was detected. MX records direct emails to a mail exchange server.",
+        "reference": [
+          "https://www.cloudflare.com/learning/dns/dns-records/dns-mx-record/",
+          "https://mxtoolbox.com/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "iaflash.fr.",
+      "matched-at": "iaflash.fr",
+      "extracted-results": [
+        "10 mx3.mail.ovh.net.",
+        "1 mx4.mail.ovh.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 35108\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 35108\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t MX\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tMX\t1 mx4.mail.ovh.net.\niaflash.fr.\t3600\tIN\tMX\t10 mx3.mail.ovh.net.\n",
+      "timestamp": "2023-10-15T01:50:43.501749805Z",
+      "matcher-status": true
+    },
+    {
+      "template": "dns/nameserver-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/nameserver-fingerprint",
+      "template-id": "nameserver-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/nameserver-fingerprint.yaml",
+      "info": {
+        "name": "NS Record Detection",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "ns"
+        ],
+        "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "iaflash.fr.",
+      "matched-at": "iaflash.fr",
+      "extracted-results": [
+        "ns104.ovh.net.",
+        "dns104.ovh.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 25143\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 25143\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n; EDE: 18 (Prohibited): ()\n\n;; QUESTION SECTION:\n;iaflash.fr.\tIN\t NS\n\n;; ANSWER SECTION:\niaflash.fr.\t3600\tIN\tNS\tns104.ovh.net.\niaflash.fr.\t3600\tIN\tNS\tdns104.ovh.net.\n",
+      "timestamp": "2023-10-15T01:50:43.622619556Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "content-security-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.773603569Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-frame-options",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.77370117Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-content-type-options",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.77371957Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "clear-site-data",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.775458284Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-opener-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.775494585Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "strict-transport-security",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.77615439Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.776662794Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "referrer-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.777156898Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-embedder-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.777191298Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-resource-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.778021105Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "permissions-policy",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr",
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 151\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 32b3ee1e107ebc06da183b4fa4387382ab3796ec\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770025-PAO\r\nX-Timer: S1697334682.770279,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.778468909Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/robots-txt-endpoint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/robots-txt-endpoint",
+      "template-id": "robots-txt-endpoint",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/robots-txt-endpoint.yaml",
+      "info": {
+        "name": "robots.txt endpoint prober",
+        "author": [
+          "caspergn",
+          "pdteam"
+        ],
+        "tags": [
+          "misc",
+          "generic"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 2
+        }
+      },
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr/robots.txt",
+      "request": "GET /robots.txt HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 64\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 0\r\nCache-Control: max-age=600\r\nContent-Type: text/plain; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:21 GMT\r\nEtag: \"60c11a37-40\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nX-Fastly-Request-Id: 15589344a3b6dc45f7341a2ec0083541de9087bc\r\nX-Github-Request-Id: FDA2:287E:7169FA:84F245:652B4300\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770078-PAO\r\nX-Timer: S1697334682.775677,VS0,VE91\r\n\r\nUser-agent: *\nDisallow:\nSitemap: https://iaflash.fr/sitemap.xml\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:21.86949424Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr/robots.txt'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "lastChangeDate",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "2023-06-30T22:03:00.07535Z"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122143905Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "registrantCountry",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        ""
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122215505Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "nameServers",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "dns104.ovh.net",
+        "ns104.ovh.net"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122229006Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "status",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "active"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122246606Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "registrationDate",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "2019-05-29T10:27:54Z"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122259106Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "registrantOrg",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        ""
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122269806Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "secureDNS",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "false"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122285406Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "expirationDate",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "2024-05-29T10:27:54Z"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122297206Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/rdap-whois.yaml",
+      "template-url": "https://templates.nuclei.sh/public/rdap-whois",
+      "template-id": "rdap-whois",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/rdap-whois.yaml",
+      "info": {
+        "name": "RDAP WHOIS",
+        "author": [
+          "ricardomaia",
+          "sttlr"
+        ],
+        "tags": [
+          "whois",
+          "rdap",
+          "osint",
+          "misc"
+        ],
+        "description": "RDAP (Registration Data Access Protocol) is a standard defined by the IETF to replace the whois protocol\nin queries for information about Internet resource records such as domain names, IP addresses, and ASNs.\n",
+        "reference": [
+          "https://about.rdap.org/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "extractor-name": "registrantName",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://rdap.nic.fr/domain/iaflash.fr",
+      "extracted-results": [
+        "Ano Nymous"
+      ],
+      "request": "GET /domain/iaflash.fr HTTP/1.1\r\nHost: www.rdap.net\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 \r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: no-cache, no-store, max-age=0, must-revalidate\r\nContent-Disposition: inline;filename=f.txt\r\nContent-Type: application/rdap+json\r\nDate: Sun, 15 Oct 2023 01:51:23 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=17280000;includeSubDomains;preload\r\nVary: Origin\r\nVary: Access-Control-Request-Method\r\nVary: Access-Control-Request-Headers\r\nX-Content-Type-Options: nosniff\r\nX-Content-Type-Options: : nosniff\r\nX-Frame-Options: DENY\r\nX-Xss-Protection: 1; mode=block\r\nX-Xss-Protection: : 1;mode=block\r\n\r\n{\"rdapConformance\":[\"rdap_level_0\",\"icann_rdap_technical_implementation_guide_0\",\"icann_rdap_response_profile_0\"],\"objectClassName\":\"domain\",\"handle\":\"DOM000011197339-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:52Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"registrant\"]},{\"objectClassName\":\"entity\",\"handle\":\"RAR202-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-10-18T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-01T11:40:48.761912Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR202-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH\"],[\"tel\",{},\"text\",\"+33.899701761\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.320200958\"],[\"email\",{},\"text\",\"support@ovh.net\"],[\"url\",{},\"uri\",\"http://www.ovh.com\"],[\"adr\",{},\"text\",[\"\",\"\",\"2 Rue Kellermann\",\"ROUBAIX\",\"\",\"59100\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"433\"}]},{\"objectClassName\":\"entity\",\"handle\":\"ANO00-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"YES\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"PERSON\"]},{\"type\":\"contact remark privacy\",\"description\":[\"-------------- WARNING --------------\",\"While the registrar knows him/her,\",\"this person chose to restrict access\",\"to his/her personal data. So PLEASE,\",\"don't send emails to Ano Nymous. This\",\"address is bogus and there is no hope\",\"of a reply.\",\"-------------- WARNING --------------\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-12-10T14:59:43Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/ANO00-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Ano Nymous\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]]],\"roles\":[\"administrative\"]},{\"objectClassName\":\"entity\",\"handle\":\"OVH5-FRNIC\",\"remarks\":[{\"type\":\"contact restricted publication\",\"description\":[\"NO\"]},{\"type\":\"contact obsolete\",\"description\":[\"NO\"]},{\"type\":\"contact type\",\"description\":[\"ORGANIZATION\"]},{\"type\":\"reachable\",\"description\":[\"NO\"]},{\"type\":\"eligibility status\",\"description\":[\"NotIdentified\"]},{\"type\":\"registrar name\",\"description\":[\"OVH\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"1999-12-22T00:00:00Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-10-15T01:14:06.50348Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/OVH5-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"OVH NET\"],[\"org\",{},\"text\",\"\"],[\"adr\",{},\"text\",[\"\",\"\",[\"OVH\",\"140, quai du Sartel\"],\"Roubaix\",\"\",\"59100\",\"FR\"]],[\"email\",{},\"text\",\"tech@ovh.net\"],[\"tel\",{},\"text\",\"+33.899701761\"]]],\"roles\":[\"technical\"]}],\"status\":[\"active\"],\"port43\":\"whois.ovh.com\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2019-05-29T10:27:54Z\"},{\"eventAction\":\"expiration\",\"eventDate\":\"2024-05-29T10:27:54Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2023-06-30T22:03:00.07535Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"value\":\"https://rdap.nic.fr/domain/iaflash.fr\",\"rel\":\"self\"}],\"ldhName\":\"iaflash.fr\",\"whoisStatus\":\"ACTIVE\",\"nameservers\":[{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54126-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/dns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"dns104.ovh.net\",\"ipAddresses\":{}},{\"objectClassName\":\"nameserver\",\"handle\":\"HOST54127-FRNIC\",\"entities\":[{\"objectClassName\":\"entity\",\"handle\":\"RAR939-FRNIC\",\"remarks\":[{\"type\":\"registrar restricted publication\",\"description\":[\"No\"]}],\"status\":[\"active\"],\"port43\":\"whois.nic.fr\",\"events\":[{\"eventAction\":\"registration\",\"eventDate\":\"2014-07-29T15:35:33Z\"},{\"eventAction\":\"last changed\",\"eventDate\":\"2022-10-12T18:54:01.785057Z\"}],\"links\":[{\"href\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"value\":\"https://rdap.nic.fr/entity/RAR939-FRNIC\",\"rel\":\"self\"}],\"vcardArray\":[\"vcard\",[[\"version\",{},\"text\",\"4.0\"],[\"fn\",{},\"text\",\"Registry Operations\"],[\"tel\",{},\"text\",\"+33.139308300\"],[\"tel\",{\"type\":\"fax\"},\"text\",\"+33.139308301\"],[\"email\",{},\"text\",\"support@afnic.fr\"],[\"url\",{},\"uri\",\"https://www.afnic.fr\"],[\"adr\",{},\"text\",[\"\",\"\",[\"AFNIC\",\"immeuble le Stephenson\",\"1, rue Stephenson\"],\"Montigny-Le-Bretonneux\",\"\",\"78180\",\"FR\"]]]],\"roles\":[\"registrar\",\"sponsor\"],\"publicIds\":[{\"type\":\"IANA Registrar ID\",\"identifier\":\"9999\"}]}],\"remarks\":[{\"title\":\"result set truncated due to authorization\",\"description\":[\"The list of results does not contain all results due to lack of authorization.\",\"This may indicate to some clients that proper authorization will yield a longer result set.\"]}],\"status\":[\"associated\",\"active\"],\"port43\":\"whois.nic.fr\",\"links\":[{\"href\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"value\":\"https://rdap.nic.fr/nameserver/ns104.ovh.net\",\"rel\":\"self\"}],\"ldhName\":\"ns104.ovh.net\",\"ipAddresses\":{}}]}",
+      "ip": "45.77.228.254",
+      "timestamp": "2023-10-15T01:51:23.122308806Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.rdap.net/domain/iaflash.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/missing-sri.yaml",
+      "template-url": "https://templates.nuclei.sh/public/missing-sri",
+      "template-id": "missing-sri",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/missing-sri.yaml",
+      "info": {
+        "name": "Missing Subresource Integrity",
+        "author": [
+          "lucky0x0d",
+          "pulsesecurity.co.nz"
+        ],
+        "tags": [
+          "compliance",
+          "js",
+          "sri",
+          "misconfig"
+        ],
+        "description": "Checks if script tags within the HTML response have Subresource Integrity implemented via the integrity attribute\n",
+        "reference": [
+          "https://cheatsheetseries.owasp.org/cheatsheets/third_party_javascript_management_cheat_sheet.html#subresource-integrity"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr/",
+      "extracted-results": [
+        "https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js",
+        "https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js",
+        "https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js",
+        "https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js",
+        "https://iaflash.fr/main.c0f2743c9e4a2888435d.js",
+        "https://www.googletagmanager.com/gtag/js?id=UA-154340064-1"
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nAccess-Control-Allow-Origin: *\r\nAge: 155\r\nCache-Control: max-age=600\r\nContent-Type: text/html; charset=utf-8\r\nDate: Sun, 15 Oct 2023 01:51:25 GMT\r\nEtag: W/\"60c11a37-cc6\"\r\nExpires: Sun, 15 Oct 2023 01:50:16 GMT\r\nLast-Modified: Wed, 09 Jun 2021 19:44:55 GMT\r\nServer: GitHub.com\r\nVary: Accept-Encoding\r\nVia: 1.1 varnish\r\nX-Cache: HIT\r\nX-Cache-Hits: 4\r\nX-Fastly-Request-Id: 86df88ad36e437e4e625f73912e2bd717ad17ebc\r\nX-Github-Request-Id: 5BC0:0695:6C2F66:7F4021:652B42FF\r\nX-Origin-Cache: HIT\r\nX-Proxy-Cache: MISS\r\nX-Served-By: cache-pao-kpao1770067-PAO\r\nX-Timer: S1697334685.446550,VS0,VE2\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <!-- Global site tag (gtag.js) - Google Analytics -->\n  <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-154340064-1\"></script>\n  <script>\n    window.dataLayer = window.dataLayer || [];\n    function gtag(){dataLayer.push(arguments);}\n    gtag('js', new Date());\n  </script>\n    <!-- gtag('config', 'UA-154340064-1'); -->\n\n  <meta charset=\"utf-8\">\n  <title>IA Flash</title>\n  <meta property=\"og:title\" content=\"IA Flash\" />\n  <meta property=\"og:locale\" content=\"fr_FR\" />\n  <meta name=\"description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <meta property=\"og:description\" content=\"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\" />\n  <link rel=\"canonical\" href=\"https://iaflash.fr/\" />\n  <meta property=\"og:url\" content=\"https://iaflash.fr/\" />\n  <meta property=\"og:site_name\" content=\"IA Flash\" />\n  <meta property=\"og:image\" content=\"https://iaflash.fr/assets/logo-ia-flash.png\" />\n  <meta property=\"og:image:height\" content=\"500\" />\n  <meta property=\"og:image:width\" content=\"500\" />\n  <meta name=\"google-site-verification\" content=\"Y7xCILEcgb3FtccS7Nm8_QjbBYPcbLo965jFS-yc-MA\" />\n  <script type='application/ld+json'>{\"@context\": \"http://www.schema.org\",\"@type\": \"Organization\",\"name\": \"IA Flash\",\"url\": \"https://iaflash.fr\",\"logo\": \"https://iaflash.fr/assets/logo-ia-flash.png\",\"image\": \"https://iaflash.fr/assets/iaflash.jpg\",\"description\": \"Fiabiliser la constatation des contraventions à partir de la reconnaissance d’images. Nous avons conçu une brique d'intelligence artificielle pour détecter la marque et modèle de véhicules dans une photo.\",\"address\": { \"@type\": \"PostalAddress\",\"addressLocality\": \"Paris\",\"addressCountry\": \"France\"}}</script>\n\n  <!-- Chrome, Firefox OS and Opera -->\n  <meta name=\"theme-color\" content=\"#253e7c\">\n  <!-- Windows Phone -->\n  <meta name=\"msapplication-navbutton-color\" content=\"#253e7c\">\n  <meta name=msapplication-TileColor content=#253e7c>\n  <!-- iOS Safari -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n  <base href=\"https://iaflash.fr/\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"https://iaflash.fr/styles.40521e344f0f3435690f.css\"></head>\n<body>\n  <app-root></app-root>\n<script type=\"text/javascript\" src=\"https://iaflash.fr/runtime.f9d2ac1d1588c5d65933.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/es2015-polyfills.f0dde84cf7a460c8b133.js\" nomodule></script><script type=\"text/javascript\" src=\"https://iaflash.fr/polyfills.7ff3fc35f9bdbaf81d86.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/scripts.73509b93f6b06f91c6e0.js\"></script><script type=\"text/javascript\" src=\"https://iaflash.fr/main.c0f2743c9e4a2888435d.js\"></script></body>\n</html>\n",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:25.448783628Z",
+      "curl-command": "curl -X 'GET' -d '' -H 'Host: iaflash.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/waf-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/waf-detect",
+      "template-id": "waf-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/waf-detect.yaml",
+      "info": {
+        "name": "WAF Detection",
+        "author": [
+          "dwisiswant0",
+          "lu4nx"
+        ],
+        "tags": [
+          "waf",
+          "tech",
+          "misc"
+        ],
+        "description": "A web application firewall was detected.",
+        "reference": [
+          "https://github.com/ekultek/whatwaf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "matcher-name": "varnish",
+      "type": "http",
+      "host": "https://iaflash.fr",
+      "matched-at": "https://iaflash.fr/",
+      "request": "POST / HTTP/1.1\r\nHost: iaflash.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+      "response": "HTTP/1.1 405 Method Not Allowed\r\nConnection: close\r\nContent-Length: 131\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Oct 2023 01:51:30 GMT\r\nRetry-After: 0\r\nServer: Varnish\r\nVia: 1.1 varnish\r\nX-Cache: MISS\r\nX-Cache-Hits: 0\r\nX-Fastly-Request-Id: cb40abb11feb49eb09b3fbc5d7ac3f7e9ab70bdf\r\nX-Served-By: cache-sjc1000135-SJC\r\nX-Timer: S1697334690.470760,VS0,VE1\r\n\r\n<html>\n<head><title>405 Not Allowed</title></head>\n<body bgcolor=\"white\">\n<center><h1>405 Not Allowed</h1></center>\n</body>\n</html>",
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:51:30.478782484Z",
+      "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: iaflash.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://iaflash.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "iaflash.fr",
+      "matched-at": "iaflash.fr:443",
+      "extracted-results": [
+        "Let's Encrypt"
+      ],
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:55:45.066149938Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "iaflash.fr",
+      "matched-at": "iaflash.fr:443",
+      "extracted-results": [
+        "iaflash.fr",
+        "www.iaflash.fr"
+      ],
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:55:45.066637441Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "iaflash.fr",
+      "matched-at": "iaflash.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:55:45.410501818Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "iaflash.fr",
+      "matched-at": "iaflash.fr:443",
+      "extracted-results": [
+        "tls13"
+      ],
+      "ip": "185.199.111.153",
+      "timestamp": "2023-10-15T01:55:45.434872087Z",
+      "matcher-status": true
+    }
+  ]
+]
