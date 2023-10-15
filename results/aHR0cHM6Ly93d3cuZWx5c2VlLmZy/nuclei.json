@@ -1,0 +1,534 @@
+[
+  [
+    {
+      "template": "dns/dns-saas-service-detection.yaml",
+      "template-url": "https://templates.nuclei.sh/public/dns-saas-service-detection",
+      "template-id": "dns-saas-service-detection",
+      "template-path": "/home/runner/nuclei-templates/dns/dns-saas-service-detection.yaml",
+      "info": {
+        "name": "DNS SaaS Service Detection",
+        "author": [
+          "noah @thesubtlety",
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "service"
+        ],
+        "description": "A CNAME DNS record was discovered",
+        "reference": [
+          "https://ns1.com/resources/cname",
+          "https://www.theregister.com/2021/02/24/dns_cname_tracking/",
+          "https://www.ionos.com/digitalguide/hosting/technical-matters/cname-record/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cloudflare-cdn",
+      "type": "dns",
+      "host": "www.elysee.fr.",
+      "matched-at": "www.elysee.fr",
+      "extracted-results": [
+        "www.elysee.fr.cdn.cloudflare.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 23829\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.elysee.fr.\tIN\t CNAME\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 23829\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.elysee.fr.\tIN\t CNAME\n\n;; ANSWER SECTION:\nwww.elysee.fr.\t3600\tIN\tCNAME\twww.elysee.fr.cdn.cloudflare.net.\n",
+      "timestamp": "2023-10-15T00:50:30.229749173Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/exposures/tokens/generic/general-tokens.yaml",
+      "template-url": "https://templates.nuclei.sh/public/generic-tokens",
+      "template-id": "generic-tokens",
+      "template-path": "/home/runner/nuclei-templates/http/exposures/tokens/generic/general-tokens.yaml",
+      "info": {
+        "name": "Generic Tokens",
+        "author": [
+          "nadino",
+          "geeknik"
+        ],
+        "tags": [
+          "exposure",
+          "token",
+          "generic"
+        ],
+        "severity": "unknown",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "extracted-results": [
+        "token\":\"6f6e93e192a64a69a4bef29b135e078d\""
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 816411beff9c7bd3-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:50:41 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '64347',cRay: '816411beff9c7bd3',cHash: 'f0dd85d7a265294',cUPMDTk: \"\\/?__cf_chl_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\",md: \"Jf2uWJjps5RmwdEi24AYP3DcamIviUVqe.ERnSrRF7M-1697331041-0-AXtn2WPHOtGk3zqj0jU1g17zQPfveQdONyl9eDu97X9RAQL4Z8EslVgMAq1sikk_lMTb2ErwuhwMX2J03CxfooV6ZWu7-iKCPQfHbFRIrhEI0WPBx3YqXisAh61X1GZK5OLM-wg1PuqLoymlfjbSX3wAK3JagN76RD83oRjNgER0s07rPc4WJWEY5E4RQ3o13uHt6toRffRK2lNd02h31pVbZuZ45AGISZVTbSAplBhl5_ixBjHbR8tMi2HwNIFMw8fhrHDEYRfRFpL-pn5lNdvxYPYUgRZ1vt2Kajo5LRCzT2u6IhnGpFNO9ULHPZJ9nXepT4-JTA00gRWMgQN_Vt9RzuzNgn2UzNTiNmUDk1yu4VYUv-acivG7ngJldj4PorB0yzdq4HnsUH0-SOGJs1XTOFVP7ml_EGXITNYAE6ikHjmrbEOi3pbuS8xjCRm9yClRPRFhDmVhNbYgIRsMTsJ71D_g9iZ4xeBaWohA8cc3AWHqQ3CMFD7VVV-w0Oa7KnvRXRxskoBs9_MazYZKzhfBw7HH3bg34mTgy1sRPy0Uuw9CPXluMtjv8ZM3agSwNuPp_zdTIh4vJW1e4cCFkeczdd9LSkzu35JveeQOe_htRLOlXlwCThWkrXI5m1Ru3a_JWTBGNStTKenTnD1bicUTbbGy9IMjHz8ora1CMrJBh5e_cQWCkTgGOzFNIKmWDLyPVDc8qZpnVagxtHFdI7FH-71XxWBtMYqQTSr8sVXhdm0kjVqPl6-V-NKhweulLJxfRyNOJ8cC8BlvaOw_qv6hAYBQGjbkik67Ywt_lszwskG5VKLeUqZld7G6i2VfS8TgRH_fheAlFLW87Cx8cNS1rhw3gqnz8FXcRJKxA86FlND0_MCw2_mCgvaY9oOgHLAfyU7KpHUJBZ277GtgLJzDSC8RePDHIvyj5eE-EOH-rhrri3LNjLyDwEkkKQ_j23kvuRyR2vaw6X42Gni6oy4S9MiGxwePy5MeRy1XS0zbU8HJCAaVUUPRUj4_RLBYRMqe0nTxpYA6p89JuoVENRvw5tQHV54W5d0Qa7TQT6eBRL8TRQyqW8qJYnEn-0FhHP5g_AXGlZiaxl_JnWqlHUktmJHDRWaaSdKnPGuHWdQS3Jv___jbcQDoYW7h8I2AvnzfZ0l9gWPwjPrFyXSyPO66dkTJL80ocNIvXj1iA_34OvjKEab_hsRfB6Zyhdgjc-d9w2Wy-uC5S85YlH6IvizcsVhe13x6QPxPe5owabLuI24VONetGKto5_9TT0EZ5m9ElQ6wNk46xsdlpTBqiYMQY78BukR2ZJ8wXVEeGblRHtLsgiqSt4tiMd_3YCbbWIBgqZt2o6oOr2PbgyV9qrVO2Op1w_flAVQjw0r4ELIyPt371mEoEheQu7mP9i0KR-TDYyEz9YuohEGxHfopcB0HNDv0JNHO63hFjB32LjckeJ88ZtyYjpnGrGGeYRe3erPONBhLsPNjYlZnBM7nDVolFCQ7MkqzbhiYZZB7xDg4U7F2FQUqOwJgXrSomYStNIS7eMJvygotRReC3Lp4SeNHD_hx5Ny76GyZvlITDcQnkpuLZqK7ovAo4QVMCkDYMEVc4huiLROAwXQeDHmaphvJfeufJcSTRXbaKbOowCagtm1TxqhdSnhcXgv2_AslfR4FQD_qSOzLrTjYacx7r40rYqDRfu9EtYgTVwbu9zps3P2q_6njGv1MDo8GnUeTfKxCxfZKf0ae-3JNPEX8qsKhTQN8hfLxP0d_Umg14VFMhLLcyk2zGqfbJtRLbuCzZQjzwdXylNCd3FicJX9gRrwepuYe4u1i0FpO90KtRzGVkFeyu92XYDo919xh98bp5t5t8XU38TcScxUdyR2tdShskb5PrJ585legUuQvU_lFwQZ6i6mSlJuB03ZjwBkQavAcNSG4pg5lP753SGkDdL847KZOLC4gQoP2MnVpq3CbEf9YR0uGq_Y6WBPSR3KdJzUl58DihN0Mkgv4mzH8cyZsAlNqIGB7nrJJs6gIHnHBKDTn6-V3hvPe3w_Mqk6Td10ZG23uidlIzLLB7Xa8roCzO6I6umugfCYp1jmrsdMmU6ZzqeVxcs0U6ZTyZJG4kFZ-D2k2dvk2bzsXuGy6unmVepoqX7z31_6jZ2bzUSlugvsf07yKpUNZuq8R_K0TugJR59LKfa82EHUk3UB1LwSZhCnJZIRNADmaPBGxwMTZT-tRQcZLVqIMBlTMrDlUEyvyDnFpTR_jxOYzkBepAGvA3Wn96vIeqYbiFbkm-0KMcm8zOF4rnd300L0bMyUJfzB9lZ1HxyVDMeenvgXE_RghVAMch04Ix9s8kGfFUOhs5PUn1zRs6y3v1cgbyOIWpQhs_vdICQNKZ1DFbpCzb_C9QHtY1wFPP3aN0bj8ObVCF2q7mHBva0LZ7wxj1K1tPa-Ensus4TL3XZ0SpYiMrvZCZgX2_4NtznSiObflBNe9\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'TfLmGsEIpkmoZuomTOk6L8CSIvoqTwra1FaVcUEK6NZTHX/R7DIJH7DCbQDmLxumWPcV4mJ0ajuEyY+udTvo9yTpWy8nTqcJ5fpDy3RllUZBuA/kKnvtOGWadtDpzBtQAgZDPGbScft+vqspR4POWr4tnD3W0Qr1MyU28EE8MKUZuzMo32VldsAyzjKCNz51r2LzFQVUbdmsBHtRf2tm5JOlDVP6rAAbgYifJqWvF2dxgjUvBddbiEgSk1h0pSh9npl0X+1bZjM3Te1gKmyc2N2vCR0HOvLGs6bhhMpP/EZCM7H3tZKkNyS3FG77To0Y6+aeeNcY5M8YNGI+v51RVXIO7KI516u/cS1pmeRyDMjixMwTa+edDbGoVLigSjqDO7PIl7m2wKPnrUc1PLGhapyDSU42zPQxKOMG9BY/QnH+YDTufcsrlvnH90OxNoBjfR0AYFXPAL39USkQDnM+zlsOeA0Vl0osTTzfPxwhDPWSSPqazAg5ERhkviMFWtYSirwfj0/U1rNQDrwgPfRg4vAJbKEj42PdvoxUyN/88sY2cgHIv+6iGXmMbIHQIRKz',t: 'MTY5NzMzMTA0MS4xMjEwMDA=',cT: Math.floor(Date.now() / 1000),m: '1Fd8pl1ez6N9tqs0jno300kNpeMmJtpGIuDMrN1Cw34=',i1: 'EJbrSUb6J4F5pls0CgFI9g==',i2: 'J9CbNBHCtkDKkBRKmieXvg==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=816411beff9c7bd3';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"816411beff9c7bd3\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:50:41.155867609Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/google-floc-disabled.yaml",
+      "template-url": "https://templates.nuclei.sh/public/google-floc-disabled",
+      "template-id": "google-floc-disabled",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/google-floc-disabled.yaml",
+      "info": {
+        "name": "Google FLoC Disabled",
+        "author": [
+          "geeknik"
+        ],
+        "tags": [
+          "google",
+          "floc",
+          "misc"
+        ],
+        "description": "The detected website has decided to explicitly exclude itself from Google FLoC tracking.",
+        "reference": [
+          "https://www.bleepingcomputer.com/news/security/github-disables-google-floc-user-tracking-on-its-website/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 816411beff9c7bd3-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:50:41 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '64347',cRay: '816411beff9c7bd3',cHash: 'f0dd85d7a265294',cUPMDTk: \"\\/?__cf_chl_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\",md: \"Jf2uWJjps5RmwdEi24AYP3DcamIviUVqe.ERnSrRF7M-1697331041-0-AXtn2WPHOtGk3zqj0jU1g17zQPfveQdONyl9eDu97X9RAQL4Z8EslVgMAq1sikk_lMTb2ErwuhwMX2J03CxfooV6ZWu7-iKCPQfHbFRIrhEI0WPBx3YqXisAh61X1GZK5OLM-wg1PuqLoymlfjbSX3wAK3JagN76RD83oRjNgER0s07rPc4WJWEY5E4RQ3o13uHt6toRffRK2lNd02h31pVbZuZ45AGISZVTbSAplBhl5_ixBjHbR8tMi2HwNIFMw8fhrHDEYRfRFpL-pn5lNdvxYPYUgRZ1vt2Kajo5LRCzT2u6IhnGpFNO9ULHPZJ9nXepT4-JTA00gRWMgQN_Vt9RzuzNgn2UzNTiNmUDk1yu4VYUv-acivG7ngJldj4PorB0yzdq4HnsUH0-SOGJs1XTOFVP7ml_EGXITNYAE6ikHjmrbEOi3pbuS8xjCRm9yClRPRFhDmVhNbYgIRsMTsJ71D_g9iZ4xeBaWohA8cc3AWHqQ3CMFD7VVV-w0Oa7KnvRXRxskoBs9_MazYZKzhfBw7HH3bg34mTgy1sRPy0Uuw9CPXluMtjv8ZM3agSwNuPp_zdTIh4vJW1e4cCFkeczdd9LSkzu35JveeQOe_htRLOlXlwCThWkrXI5m1Ru3a_JWTBGNStTKenTnD1bicUTbbGy9IMjHz8ora1CMrJBh5e_cQWCkTgGOzFNIKmWDLyPVDc8qZpnVagxtHFdI7FH-71XxWBtMYqQTSr8sVXhdm0kjVqPl6-V-NKhweulLJxfRyNOJ8cC8BlvaOw_qv6hAYBQGjbkik67Ywt_lszwskG5VKLeUqZld7G6i2VfS8TgRH_fheAlFLW87Cx8cNS1rhw3gqnz8FXcRJKxA86FlND0_MCw2_mCgvaY9oOgHLAfyU7KpHUJBZ277GtgLJzDSC8RePDHIvyj5eE-EOH-rhrri3LNjLyDwEkkKQ_j23kvuRyR2vaw6X42Gni6oy4S9MiGxwePy5MeRy1XS0zbU8HJCAaVUUPRUj4_RLBYRMqe0nTxpYA6p89JuoVENRvw5tQHV54W5d0Qa7TQT6eBRL8TRQyqW8qJYnEn-0FhHP5g_AXGlZiaxl_JnWqlHUktmJHDRWaaSdKnPGuHWdQS3Jv___jbcQDoYW7h8I2AvnzfZ0l9gWPwjPrFyXSyPO66dkTJL80ocNIvXj1iA_34OvjKEab_hsRfB6Zyhdgjc-d9w2Wy-uC5S85YlH6IvizcsVhe13x6QPxPe5owabLuI24VONetGKto5_9TT0EZ5m9ElQ6wNk46xsdlpTBqiYMQY78BukR2ZJ8wXVEeGblRHtLsgiqSt4tiMd_3YCbbWIBgqZt2o6oOr2PbgyV9qrVO2Op1w_flAVQjw0r4ELIyPt371mEoEheQu7mP9i0KR-TDYyEz9YuohEGxHfopcB0HNDv0JNHO63hFjB32LjckeJ88ZtyYjpnGrGGeYRe3erPONBhLsPNjYlZnBM7nDVolFCQ7MkqzbhiYZZB7xDg4U7F2FQUqOwJgXrSomYStNIS7eMJvygotRReC3Lp4SeNHD_hx5Ny76GyZvlITDcQnkpuLZqK7ovAo4QVMCkDYMEVc4huiLROAwXQeDHmaphvJfeufJcSTRXbaKbOowCagtm1TxqhdSnhcXgv2_AslfR4FQD_qSOzLrTjYacx7r40rYqDRfu9EtYgTVwbu9zps3P2q_6njGv1MDo8GnUeTfKxCxfZKf0ae-3JNPEX8qsKhTQN8hfLxP0d_Umg14VFMhLLcyk2zGqfbJtRLbuCzZQjzwdXylNCd3FicJX9gRrwepuYe4u1i0FpO90KtRzGVkFeyu92XYDo919xh98bp5t5t8XU38TcScxUdyR2tdShskb5PrJ585legUuQvU_lFwQZ6i6mSlJuB03ZjwBkQavAcNSG4pg5lP753SGkDdL847KZOLC4gQoP2MnVpq3CbEf9YR0uGq_Y6WBPSR3KdJzUl58DihN0Mkgv4mzH8cyZsAlNqIGB7nrJJs6gIHnHBKDTn6-V3hvPe3w_Mqk6Td10ZG23uidlIzLLB7Xa8roCzO6I6umugfCYp1jmrsdMmU6ZzqeVxcs0U6ZTyZJG4kFZ-D2k2dvk2bzsXuGy6unmVepoqX7z31_6jZ2bzUSlugvsf07yKpUNZuq8R_K0TugJR59LKfa82EHUk3UB1LwSZhCnJZIRNADmaPBGxwMTZT-tRQcZLVqIMBlTMrDlUEyvyDnFpTR_jxOYzkBepAGvA3Wn96vIeqYbiFbkm-0KMcm8zOF4rnd300L0bMyUJfzB9lZ1HxyVDMeenvgXE_RghVAMch04Ix9s8kGfFUOhs5PUn1zRs6y3v1cgbyOIWpQhs_vdICQNKZ1DFbpCzb_C9QHtY1wFPP3aN0bj8ObVCF2q7mHBva0LZ7wxj1K1tPa-Ensus4TL3XZ0SpYiMrvZCZgX2_4NtznSiObflBNe9\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'TfLmGsEIpkmoZuomTOk6L8CSIvoqTwra1FaVcUEK6NZTHX/R7DIJH7DCbQDmLxumWPcV4mJ0ajuEyY+udTvo9yTpWy8nTqcJ5fpDy3RllUZBuA/kKnvtOGWadtDpzBtQAgZDPGbScft+vqspR4POWr4tnD3W0Qr1MyU28EE8MKUZuzMo32VldsAyzjKCNz51r2LzFQVUbdmsBHtRf2tm5JOlDVP6rAAbgYifJqWvF2dxgjUvBddbiEgSk1h0pSh9npl0X+1bZjM3Te1gKmyc2N2vCR0HOvLGs6bhhMpP/EZCM7H3tZKkNyS3FG77To0Y6+aeeNcY5M8YNGI+v51RVXIO7KI516u/cS1pmeRyDMjixMwTa+edDbGoVLigSjqDO7PIl7m2wKPnrUc1PLGhapyDSU42zPQxKOMG9BY/QnH+YDTufcsrlvnH90OxNoBjfR0AYFXPAL39USkQDnM+zlsOeA0Vl0osTTzfPxwhDPWSSPqazAg5ERhkviMFWtYSirwfj0/U1rNQDrwgPfRg4vAJbKEj42PdvoxUyN/88sY2cgHIv+6iGXmMbIHQIRKz',t: 'MTY5NzMzMTA0MS4xMjEwMDA=',cT: Math.floor(Date.now() / 1000),m: '1Fd8pl1ez6N9tqs0jno300kNpeMmJtpGIuDMrN1Cw34=',i1: 'EJbrSUb6J4F5pls0CgFI9g==',i2: 'J9CbNBHCtkDKkBRKmieXvg==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=816411beff9c7bd3';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=0zVxwTx4pKgkNUYc.yqTSHlNOw5_o035WsoIxSoCbK8-1697331041-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"816411beff9c7bd3\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:50:41.168968108Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/tech-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tech-detect",
+      "template-id": "tech-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/tech-detect.yaml",
+      "info": {
+        "name": "Wappalyzer Technology Detection",
+        "author": [
+          "hakluke"
+        ],
+        "tags": [
+          "tech"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cloudflare",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641221faa57c80-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:50:56 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '72043',cRay: '81641221faa57c80',cHash: 'c30a90dbd13b535',cUPMDTk: \"\\/?__cf_chl_tk=CiZBJq93I3wnxunxvMJHVcvou639wLna8FWtjseS_z4-1697331056-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=CiZBJq93I3wnxunxvMJHVcvou639wLna8FWtjseS_z4-1697331056-0-gaNycGzNCeU\",md: \"Tlg3oin4mvRvPFs9EVUHDw_Y6OF_CdB1NqaNPy_rHWk-1697331056-0-AW0fOmSu5u01jjQGFFdevN7F-HkbaKsb-JPaDSiK2k8P-MB2e_NbLW0nGC2oiKVX9K87dEloZyARidita506hcD9Lf0vlvkqPtg23ofKUVfl9ohHwk9Q69GH0tqRwXIqD2tgKq2F4pjSbJE9x7UnHTzrKQbxXPvDwntuLHBbm6O_cPoVuuuLLAds6nGWASrAXE0DEu_vkz8bim5j74YUXT0oNeLFPXBxHLpwJ1QQu7nVLJ8g_erON3GzDBZem9YidUCP4azYoFhQmAukSc0KWghVqf_kkYnrmBJueh56h-sNf74Z0GgWWG3kt4IcEEqlLL7Oex9LD4yG2Am2mskrTiyawx4Ng-IfogxudHk4upE1SOkJtQkFhCJPIIT7CRZRP10Y67KgCTROA8HGNWfOzz-aOsYF8NIDMulBjUTRsBNa6qYLji0ML4HlcGgWUQil72Vmi9DqbDTeOX4tLq_lSRIRMODtlRLVy6Ya6vIF8LIwzlW2DflBgJ3Fly8wTNOs_mOLoqOyE-prdF5B70dkqVsLCddGdfP-9Ekmz4OOdlvnPZP77kNg5GzXptRhYs8fHTYf1DEivo_aPezEP2va_qBXeWwNCdoyiZK8pufLlwUkNEDcEjxJymXp16bhpV1oFRApDBzVF-gad0HFagUBSTmLEUsJXVg11YknpdOr7ZBAP8-4c__OGABR3LTDhqPkrBoMS68UtzXVNk_s9jZ2Y-068ojEs6m25F9H2WHmqJar44tQ4-27k9o63db6QXicu_ZPZBSRjUIFo_UhgAa5i6YKejRlKfOOX2OLcnpo1J5gKsrDKADwglA-GB-mMar8WwxLzJJkN7j31o43TlBtI_Yw_O5R1_XSunve3aToODVyKDMM-82V9_46unI5PJi9icvvEwVrsHFMcPrjNPP2SL_aKvLbkjN8mkbFlVL7_7U2DVckxKmMlsT7Ninww1FH55Sp_lRHqIvAODfn0GI290M5uYWUYOX38L5OoYgtlzz9ibpjs7a7HlfMe8IFRifDHUEzmRO1xygWP49vgQW2q6EHm3fNiYs0lXwsbOZByIpWvetYyz1vBeUz9iF-PJDzMmkLrF4wBZeFAkh95PFlv9ydgjd78YglGb88S6uWYI-5ygIczdHsi_5limaMygRtFiw3BiIjj9tTd0_H6vTMfvG9zRGz26vH8CJkgmGQFR1MoR5yMKJ6BgwEvLlD1kwKixYShsJPkxtQmrXmY7vnE4HVGYdYnkokxLLGeIkVT0ixcUrXWvcWU_FoMU6_OjIZ4x8KgoLg1Wol2h5nTSYSvt9wBS3TOEm6RBKADuad0SSQq6lvqU7v4mk1VK0j4r0xTCf_CwlyYGF7taByYDTb5wfkaKm2eeLKeG3eXLGSnJwBFO7heaGg_GS7q94AYPf7EL9YohbqHz2od6_hglo47WuO0Zfrkp8kvBfm9_zFXIg7UjYzwfJaBFrNHbIwu67v1G2dnBD0VzNZh6y4dd54o3ZAiI_oruyjZ_a0cxX39Rn6p0rnGVQ-1cBczDcAkhNbRcPOLjSLhuqSIB0jzh60VPHjsz6K1K449g1m4KsCWLDSWcawBkNBp_N-ipu8ZGCJL1gB20ZVfPt8dl6BNyqZvcEyZ_4Oz348Fnao1fqaKqHp7Ew8E-bZyWcA5o_UNieRwchtBZnQZggG1bJFaoMCDu8WyHtsQPlCAXg3n_WPgfnNKqA6xdETMD3B3HeRjj2nLlcTLdDVNbtx5Wu53zFOqoVKebjjeEzflEVlZhifrG9BViN30h-DxKqUxU1bQitOhG9Nf_mhRSUnJ3miPItIKqFsKHPSWiDC0p84QpbTBRSvjMTF91NARXrnciOoLgVKLrjoHO2WNIn32XaZqr3GWoGo06fAqGLClQd-yACzJmCeiqxWCFM3_Lo_G6jFZu0cGq7zwL7EdmEI_alaEjI9r204Um8an0IJEKThAj0G-K1zzt9gdyTdCGVvWXBuJrow-fLE3jOZrfG3m0KMgS-VWBauXDjplejm99ZqMt9dPB4OT2q3cKGQZasg9YwNjOPkNZKal3wjMOSoCfff5v8N5IbzmRSlyx9RaN-bmIOXHYS4RzRt2rG1rafeZDieuFyHXXWeFMMVnq-Ed1lAxZHH9LhrfB9ENFKJt0wb0d_vsznBsqsMfaKoB31yiKlEGWTDUngZhKYQtyHnB_yxiWfhGkFkQa-AW_p2j1ZmwoRD_EyfB1hH3JycAD5lVMrE4FeBjpoKkLISmr7WZkDUdq3FarHTMOUXCbJyAjCkZhyB4yTSE42UKveSSTyD1OaS9Pa3XGZ8c_sDS6WtH9mN2lggLMhwJvDn1NKltJFD0iohzlSgcfyWT4uvoUKOaY1ExJeTjSerzXwq6_ml5sBso-vNMHoQ5vTfzvdNP2o7YggXpLu43a57OY1H7e6-WaQjDtLzMzmr3-zmnOkYH11sTKaENpsgBboO69rhEbQdGUIBw5BX\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'IiwUBNhWg4fNgjkZRpr/pMWM63SoTvPUBrnDWVQXWESmIS7+M+kEH/n4smwlzEeIs1dNepjq/kYrTyWJLgIl+FQsSnXvyHvWKKru9lXtzH0ldneY5qH0wCN0lyboQ7godGps0oh2MPNsOWcQfKNvAL2/UZPOIvg0E8+ZzNUMlkkIpdKQFePGPZkyxWHYM2k8pib7+nc6kDFdqVihSw6M960oZUeIoiWK4TnUInh5pQFkptgGL8JEjJIHv9VpZfgqUK9Za1OKjSBDOav9urmBD7HiuSHC8kw3JE51tAGkmu6augUtbcT7okg91WCe/1aXdze7ksIeteDNe4hIzOZFv0v+0F1/m9uhZ/QjYr7CNOhArKnGLzyEagyj30zab+sytCuyVblwiVndJBSSiKM5L6xdpugl4OIDr0jKewS5Aevlt502bDgA19GeEf0fT3bQvmILzr6rtivLpE4MSyDT++rV3+Zdq52/N5NCSd0gVOftL5yESeqFHPjK8wYhTY0ANUD8UdR7EFjjN5L1U2LyvL+rqGZNsO+Y2bK/Ta4JoeNPqVUYan11/qlJ6lo8uUYX',t: 'MTY5NzMzMTA1Ni45NjMwMDA=',cT: Math.floor(Date.now() / 1000),m: 'szSZVxOxDDkLnjnjj9h3jc2Gu0Mzd24Wp/Fd1wv7e74=',i1: '/gIy2D2f9Dod2YzaGznYaA==',i2: 'qHu9TQ8YKXiVJQ342as1cw==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641221faa57c80';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=CiZBJq93I3wnxunxvMJHVcvou639wLna8FWtjseS_z4-1697331056-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641221faa57c80\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:50:57.259818249Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "clear-site-data",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641267ec6552b9-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:08 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '7841',cRay: '81641267ec6552b9',cHash: '7c372e45827fbb4',cUPMDTk: \"\\/?__cf_chl_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",md: \"oMSfx6CiIUEJYFc73UA7DLJWnQjCgI0.i4LkYsbW4sE-1697331068-0-AQGzZnJ3fB7BJrL8rAEACvj7vG4uQYGLRrRqtyH70g1LeBagbxHDBf2TkC_AsKaCkTMuAeZO6HR3J-LNVoAJc0q2IIcMjcL3H5FzsUpcSgrKJ5hcZ3p65b9gurnrQ-szgppW4Y2Rt1yj1Vboe53lyIHSFXx4d0LyPo4txIPmKg1bI0NBqnrU4qAa2QTheYdSIi8sBrpg91JMB-9oho10TOpPiH_lcKfge085tUdvYjfD1aQ4GpjFmM7shr1WxdiFCjCnC_hQcEVKGTwqt0wSoD-PrIgjXb53IqZVDF96dsvXDnH1oBDOo_keq5tOGWLxKFpDxkf32IruwTPsounEzz0vZ_XPfWWJm47y_6-xvOFBZpc5aLI1N6U_lAEf61S_FQ__1pys108-UiW0JrHBVomqkCJNaHsFdxYEBLXVB-JOyLG_OmcmBOGmQ07x-2KMgA4fojb4evBILYMIhztgBrHBWqjzYSKVR5BqawhxxggHr7u5mHiBd0yw-uooKSt0tMgVoHxKO3s_LYczMategcMC5lpf5mtfgbdD8s-un3k5NWlRXqthZzbDQY9E9diTuv3aNdqtci4w1KQKvrC1D8c7QN3aTTRh-UjAsREx0ZvVPrIM9f4B3bCd1EkMiOF5WKrhxV4x3ETJMaS-kjFC8QAXgWhSiSQSlIWn40h3zYtBoSIC0GdXcGQunNgzUmnhtxF7mDXW3kB6rUtuEuQVLt-P-1HvHe9rSpp7FgGvynQ8jaSBZobRkGWluv-zhawgpDm12GD5h54LjH1pwwSMqcb6GArcFl6gTXU-xB_vLBi06jFdNfYUoX28GjG7qj9bJD5KyqHh9ekijhlitLT904asWk3kim_Bzs8qtkPVaIQmguNIC-oFYqTXvJXDhEa-1kzxOu8T5QERDNsDMVSYRZ6tn9KHDDTLy6Gz7Ei4x4e8q3_ZaF-ursgsWc2tSRczohHdjijErtddKnn6r7-RD7u4TbzvhNcgBOLUTOVPe4y_2lSFLiDOKCyOFSDX_FpyvL3z3fdZFdZeSYNv3x8Jbap-t-78W0lD2LzMWZeKz3q8j7Z-mQvHd9wvshCM_4hpuLYDviCYxNN9bA6Wwgn8xNp4ijvo3Sma1gL1zO46fa2Sl2hPOIU6YgbiUVLt-JuUuKaDzNuEL8bN4WPhSuRJ8KxhLoD68h7RHIt1AdLXUQjjBnuYKZWXIRZYhb-ZvUGXxQ3LRyM3rXHGyeJArNH9hA9eDG9cbPpcR4EhPWzJ7SmeCa5BG1COZMHgyRUIP5K8wJ6697X-M9Rs82OKPGw_ZfHHBR-3z8YjlkzE5H_ydfAJoQmsLjw3yKrmFqULMbfoy0qDdqbfATRyVtkTF0WYf5bNgjOLXmaD1zIAE5G6Ab9_8ZdhvVZ70oWvpTdcrFL_pHJat6uzW55l07T-yzlN4-cIIP1X1jR0OimdtSYK5LjXdH5CQwydbuYrhO79AU9EYWp4z6biGEI47QrJaRgca75EE4MtSUYA8VIMURL5NLojspKFobzknw7QVRymf4caSD01PxxLMrrRBR0PFkgvulKiVsyyNHZogW1j8KqSs6X_YMMhLrJvG1_l_y-t5ZCFLfWqZDCj2fQ_yKTMcQub2Z7x86M2ztBgdDwajphGRzWJbXertgNlBpHk48uyBLS4njWYG7ATsBQvxtn4bpq18OllqkodrE57fnSqjgbBSPjFxEmQMMsicFedJvd-PPG_wORds2pE1Y6AXhwJzNoM7sK7eQzeCHvYdcvRDvPyTACkTBiPRuiNxJG54rRayxpBTQZOIUc_dxCDVo7r6U-wMS58KEAX3k8eHBVh48iQxDUaXsQ5n_Vyw8nVlOULOP3xqQ38ID9zOFDbZcOf-8pwsRhK-XlMganxNzkJCY0_EK_ofDqVOLx1tAkCH7MBSUGJ4KTBNStxSoddU3SUhByjjjbgYJXCyztJofuNMLI6X9J_223nccaX6mwRcriNaMO3EHm55Q_F_8gxCxYdOmzfj2ahtmxmXQmza6KLcttypOLapU9_lUo4msDI7X88CaErQQcDMzsKaUKzhFqZN8dC3167ZJWK9ygZJJryLMmrbkT_tZXjSPgfvH-p690c_F9vcZZt7OXRwMiQJvLEenl3tbIcr5Ru0tpRAQTwPwYmCvPRf2v8TtbR_wcEtQK9sV4zRkubHCVYJ0GfKldM87CN2dAp19SWS4uplbTW-fqXClPvKZReyZPWLPoUcKu7Ak0tzWKvcCtRFQOIV1RLKBS7EaKOGy7VpAhGw64H4VundjRTkB0DDFb5vccSn7K8COFQNnQDUKUyLhheLtr5pOvPUBlCz2kW000eEQU4SuQYdTLGqgQcFKhabrTz-Zio6PMqaZLql30AepKOmYrKEHx5unEGfe6ijmpNmmwao4-AxBBgPUIuuwMLPiIw2QLeDHt9ho_XB-ZKw2AzLOxwGr2GiY5QC9QV4fao3OvtbW7xa8Gt\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'LJdkYoiC2v3Xt6uTaJSYxWKJHETuPQd9RCbTQOwFgoisuih8Au+iWbAHJEYLWrg6w0KdWLLH2JBuaO3fGP2DRdcxUUbIbzjI7vdh4yEHKvfC2qvoOEbVkVC4znLxTZBMvMVqPA9q29BKt9Q3so+hylsO6cymD6/M7Y3FmtLrlJTxBOQL1PrZOQlT3zPrFqjFe8486dKcQxrBiJqRQXN2UyVJS0Mn0XgyDk1lDOYQq2uYOGavA0h19+DDLuHfbFjwlUFLOzIo0H1IoKfn7pi+vUeX+gD1Yok/7SbQhBmHpqJn02RqiDpiFKZ4ssfAHZOzdJzVauufvm7z55JYpqIm6KNHGA+f/AjtrsZwdh64NWRQ9X8n8k/BTuA3rbjdOwVBhpR05pIqeusRXfI1OnUXP5INXCxKlCosnZeDDXIh8suoe3WCccJGs7z6OEFYxC77pIgsvWgGIBrSntCPLxMNqLXXlyjxSAsfzXDaWVv0tGfvCYxwdQ4bv1MSjySofBTkaTQygryG9xwbI3iOz4Oc1cb8gjNlMwSQSL/m3v9zNHrW1C6GYnPZpIoU+qXSLcxp',t: 'MTY5NzMzMTA2OC4xNDgwMDA=',cT: Math.floor(Date.now() / 1000),m: 'L8h79KoJ4sNrmPqLOawO2ER0ul9PEc+vhmVrcQCw/9g=',i1: 'Uv/BkTAkdzHkfb16aANr2A==',i2: 'MD84pOiBUEFWNsP5Rir9/g==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641267ec6552b9';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641267ec6552b9\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:08.155960848Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "strict-transport-security",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641267ec6552b9-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:08 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '7841',cRay: '81641267ec6552b9',cHash: '7c372e45827fbb4',cUPMDTk: \"\\/?__cf_chl_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",md: \"oMSfx6CiIUEJYFc73UA7DLJWnQjCgI0.i4LkYsbW4sE-1697331068-0-AQGzZnJ3fB7BJrL8rAEACvj7vG4uQYGLRrRqtyH70g1LeBagbxHDBf2TkC_AsKaCkTMuAeZO6HR3J-LNVoAJc0q2IIcMjcL3H5FzsUpcSgrKJ5hcZ3p65b9gurnrQ-szgppW4Y2Rt1yj1Vboe53lyIHSFXx4d0LyPo4txIPmKg1bI0NBqnrU4qAa2QTheYdSIi8sBrpg91JMB-9oho10TOpPiH_lcKfge085tUdvYjfD1aQ4GpjFmM7shr1WxdiFCjCnC_hQcEVKGTwqt0wSoD-PrIgjXb53IqZVDF96dsvXDnH1oBDOo_keq5tOGWLxKFpDxkf32IruwTPsounEzz0vZ_XPfWWJm47y_6-xvOFBZpc5aLI1N6U_lAEf61S_FQ__1pys108-UiW0JrHBVomqkCJNaHsFdxYEBLXVB-JOyLG_OmcmBOGmQ07x-2KMgA4fojb4evBILYMIhztgBrHBWqjzYSKVR5BqawhxxggHr7u5mHiBd0yw-uooKSt0tMgVoHxKO3s_LYczMategcMC5lpf5mtfgbdD8s-un3k5NWlRXqthZzbDQY9E9diTuv3aNdqtci4w1KQKvrC1D8c7QN3aTTRh-UjAsREx0ZvVPrIM9f4B3bCd1EkMiOF5WKrhxV4x3ETJMaS-kjFC8QAXgWhSiSQSlIWn40h3zYtBoSIC0GdXcGQunNgzUmnhtxF7mDXW3kB6rUtuEuQVLt-P-1HvHe9rSpp7FgGvynQ8jaSBZobRkGWluv-zhawgpDm12GD5h54LjH1pwwSMqcb6GArcFl6gTXU-xB_vLBi06jFdNfYUoX28GjG7qj9bJD5KyqHh9ekijhlitLT904asWk3kim_Bzs8qtkPVaIQmguNIC-oFYqTXvJXDhEa-1kzxOu8T5QERDNsDMVSYRZ6tn9KHDDTLy6Gz7Ei4x4e8q3_ZaF-ursgsWc2tSRczohHdjijErtddKnn6r7-RD7u4TbzvhNcgBOLUTOVPe4y_2lSFLiDOKCyOFSDX_FpyvL3z3fdZFdZeSYNv3x8Jbap-t-78W0lD2LzMWZeKz3q8j7Z-mQvHd9wvshCM_4hpuLYDviCYxNN9bA6Wwgn8xNp4ijvo3Sma1gL1zO46fa2Sl2hPOIU6YgbiUVLt-JuUuKaDzNuEL8bN4WPhSuRJ8KxhLoD68h7RHIt1AdLXUQjjBnuYKZWXIRZYhb-ZvUGXxQ3LRyM3rXHGyeJArNH9hA9eDG9cbPpcR4EhPWzJ7SmeCa5BG1COZMHgyRUIP5K8wJ6697X-M9Rs82OKPGw_ZfHHBR-3z8YjlkzE5H_ydfAJoQmsLjw3yKrmFqULMbfoy0qDdqbfATRyVtkTF0WYf5bNgjOLXmaD1zIAE5G6Ab9_8ZdhvVZ70oWvpTdcrFL_pHJat6uzW55l07T-yzlN4-cIIP1X1jR0OimdtSYK5LjXdH5CQwydbuYrhO79AU9EYWp4z6biGEI47QrJaRgca75EE4MtSUYA8VIMURL5NLojspKFobzknw7QVRymf4caSD01PxxLMrrRBR0PFkgvulKiVsyyNHZogW1j8KqSs6X_YMMhLrJvG1_l_y-t5ZCFLfWqZDCj2fQ_yKTMcQub2Z7x86M2ztBgdDwajphGRzWJbXertgNlBpHk48uyBLS4njWYG7ATsBQvxtn4bpq18OllqkodrE57fnSqjgbBSPjFxEmQMMsicFedJvd-PPG_wORds2pE1Y6AXhwJzNoM7sK7eQzeCHvYdcvRDvPyTACkTBiPRuiNxJG54rRayxpBTQZOIUc_dxCDVo7r6U-wMS58KEAX3k8eHBVh48iQxDUaXsQ5n_Vyw8nVlOULOP3xqQ38ID9zOFDbZcOf-8pwsRhK-XlMganxNzkJCY0_EK_ofDqVOLx1tAkCH7MBSUGJ4KTBNStxSoddU3SUhByjjjbgYJXCyztJofuNMLI6X9J_223nccaX6mwRcriNaMO3EHm55Q_F_8gxCxYdOmzfj2ahtmxmXQmza6KLcttypOLapU9_lUo4msDI7X88CaErQQcDMzsKaUKzhFqZN8dC3167ZJWK9ygZJJryLMmrbkT_tZXjSPgfvH-p690c_F9vcZZt7OXRwMiQJvLEenl3tbIcr5Ru0tpRAQTwPwYmCvPRf2v8TtbR_wcEtQK9sV4zRkubHCVYJ0GfKldM87CN2dAp19SWS4uplbTW-fqXClPvKZReyZPWLPoUcKu7Ak0tzWKvcCtRFQOIV1RLKBS7EaKOGy7VpAhGw64H4VundjRTkB0DDFb5vccSn7K8COFQNnQDUKUyLhheLtr5pOvPUBlCz2kW000eEQU4SuQYdTLGqgQcFKhabrTz-Zio6PMqaZLql30AepKOmYrKEHx5unEGfe6ijmpNmmwao4-AxBBgPUIuuwMLPiIw2QLeDHt9ho_XB-ZKw2AzLOxwGr2GiY5QC9QV4fao3OvtbW7xa8Gt\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'LJdkYoiC2v3Xt6uTaJSYxWKJHETuPQd9RCbTQOwFgoisuih8Au+iWbAHJEYLWrg6w0KdWLLH2JBuaO3fGP2DRdcxUUbIbzjI7vdh4yEHKvfC2qvoOEbVkVC4znLxTZBMvMVqPA9q29BKt9Q3so+hylsO6cymD6/M7Y3FmtLrlJTxBOQL1PrZOQlT3zPrFqjFe8486dKcQxrBiJqRQXN2UyVJS0Mn0XgyDk1lDOYQq2uYOGavA0h19+DDLuHfbFjwlUFLOzIo0H1IoKfn7pi+vUeX+gD1Yok/7SbQhBmHpqJn02RqiDpiFKZ4ssfAHZOzdJzVauufvm7z55JYpqIm6KNHGA+f/AjtrsZwdh64NWRQ9X8n8k/BTuA3rbjdOwVBhpR05pIqeusRXfI1OnUXP5INXCxKlCosnZeDDXIh8suoe3WCccJGs7z6OEFYxC77pIgsvWgGIBrSntCPLxMNqLXXlyjxSAsfzXDaWVv0tGfvCYxwdQ4bv1MSjySofBTkaTQygryG9xwbI3iOz4Oc1cb8gjNlMwSQSL/m3v9zNHrW1C6GYnPZpIoU+qXSLcxp',t: 'MTY5NzMzMTA2OC4xNDgwMDA=',cT: Math.floor(Date.now() / 1000),m: 'L8h79KoJ4sNrmPqLOawO2ER0ul9PEc+vhmVrcQCw/9g=',i1: 'Uv/BkTAkdzHkfb16aANr2A==',i2: 'MD84pOiBUEFWNsP5Rir9/g==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641267ec6552b9';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641267ec6552b9\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:08.156010648Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "content-security-policy",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641267ec6552b9-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:08 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '7841',cRay: '81641267ec6552b9',cHash: '7c372e45827fbb4',cUPMDTk: \"\\/?__cf_chl_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",md: \"oMSfx6CiIUEJYFc73UA7DLJWnQjCgI0.i4LkYsbW4sE-1697331068-0-AQGzZnJ3fB7BJrL8rAEACvj7vG4uQYGLRrRqtyH70g1LeBagbxHDBf2TkC_AsKaCkTMuAeZO6HR3J-LNVoAJc0q2IIcMjcL3H5FzsUpcSgrKJ5hcZ3p65b9gurnrQ-szgppW4Y2Rt1yj1Vboe53lyIHSFXx4d0LyPo4txIPmKg1bI0NBqnrU4qAa2QTheYdSIi8sBrpg91JMB-9oho10TOpPiH_lcKfge085tUdvYjfD1aQ4GpjFmM7shr1WxdiFCjCnC_hQcEVKGTwqt0wSoD-PrIgjXb53IqZVDF96dsvXDnH1oBDOo_keq5tOGWLxKFpDxkf32IruwTPsounEzz0vZ_XPfWWJm47y_6-xvOFBZpc5aLI1N6U_lAEf61S_FQ__1pys108-UiW0JrHBVomqkCJNaHsFdxYEBLXVB-JOyLG_OmcmBOGmQ07x-2KMgA4fojb4evBILYMIhztgBrHBWqjzYSKVR5BqawhxxggHr7u5mHiBd0yw-uooKSt0tMgVoHxKO3s_LYczMategcMC5lpf5mtfgbdD8s-un3k5NWlRXqthZzbDQY9E9diTuv3aNdqtci4w1KQKvrC1D8c7QN3aTTRh-UjAsREx0ZvVPrIM9f4B3bCd1EkMiOF5WKrhxV4x3ETJMaS-kjFC8QAXgWhSiSQSlIWn40h3zYtBoSIC0GdXcGQunNgzUmnhtxF7mDXW3kB6rUtuEuQVLt-P-1HvHe9rSpp7FgGvynQ8jaSBZobRkGWluv-zhawgpDm12GD5h54LjH1pwwSMqcb6GArcFl6gTXU-xB_vLBi06jFdNfYUoX28GjG7qj9bJD5KyqHh9ekijhlitLT904asWk3kim_Bzs8qtkPVaIQmguNIC-oFYqTXvJXDhEa-1kzxOu8T5QERDNsDMVSYRZ6tn9KHDDTLy6Gz7Ei4x4e8q3_ZaF-ursgsWc2tSRczohHdjijErtddKnn6r7-RD7u4TbzvhNcgBOLUTOVPe4y_2lSFLiDOKCyOFSDX_FpyvL3z3fdZFdZeSYNv3x8Jbap-t-78W0lD2LzMWZeKz3q8j7Z-mQvHd9wvshCM_4hpuLYDviCYxNN9bA6Wwgn8xNp4ijvo3Sma1gL1zO46fa2Sl2hPOIU6YgbiUVLt-JuUuKaDzNuEL8bN4WPhSuRJ8KxhLoD68h7RHIt1AdLXUQjjBnuYKZWXIRZYhb-ZvUGXxQ3LRyM3rXHGyeJArNH9hA9eDG9cbPpcR4EhPWzJ7SmeCa5BG1COZMHgyRUIP5K8wJ6697X-M9Rs82OKPGw_ZfHHBR-3z8YjlkzE5H_ydfAJoQmsLjw3yKrmFqULMbfoy0qDdqbfATRyVtkTF0WYf5bNgjOLXmaD1zIAE5G6Ab9_8ZdhvVZ70oWvpTdcrFL_pHJat6uzW55l07T-yzlN4-cIIP1X1jR0OimdtSYK5LjXdH5CQwydbuYrhO79AU9EYWp4z6biGEI47QrJaRgca75EE4MtSUYA8VIMURL5NLojspKFobzknw7QVRymf4caSD01PxxLMrrRBR0PFkgvulKiVsyyNHZogW1j8KqSs6X_YMMhLrJvG1_l_y-t5ZCFLfWqZDCj2fQ_yKTMcQub2Z7x86M2ztBgdDwajphGRzWJbXertgNlBpHk48uyBLS4njWYG7ATsBQvxtn4bpq18OllqkodrE57fnSqjgbBSPjFxEmQMMsicFedJvd-PPG_wORds2pE1Y6AXhwJzNoM7sK7eQzeCHvYdcvRDvPyTACkTBiPRuiNxJG54rRayxpBTQZOIUc_dxCDVo7r6U-wMS58KEAX3k8eHBVh48iQxDUaXsQ5n_Vyw8nVlOULOP3xqQ38ID9zOFDbZcOf-8pwsRhK-XlMganxNzkJCY0_EK_ofDqVOLx1tAkCH7MBSUGJ4KTBNStxSoddU3SUhByjjjbgYJXCyztJofuNMLI6X9J_223nccaX6mwRcriNaMO3EHm55Q_F_8gxCxYdOmzfj2ahtmxmXQmza6KLcttypOLapU9_lUo4msDI7X88CaErQQcDMzsKaUKzhFqZN8dC3167ZJWK9ygZJJryLMmrbkT_tZXjSPgfvH-p690c_F9vcZZt7OXRwMiQJvLEenl3tbIcr5Ru0tpRAQTwPwYmCvPRf2v8TtbR_wcEtQK9sV4zRkubHCVYJ0GfKldM87CN2dAp19SWS4uplbTW-fqXClPvKZReyZPWLPoUcKu7Ak0tzWKvcCtRFQOIV1RLKBS7EaKOGy7VpAhGw64H4VundjRTkB0DDFb5vccSn7K8COFQNnQDUKUyLhheLtr5pOvPUBlCz2kW000eEQU4SuQYdTLGqgQcFKhabrTz-Zio6PMqaZLql30AepKOmYrKEHx5unEGfe6ijmpNmmwao4-AxBBgPUIuuwMLPiIw2QLeDHt9ho_XB-ZKw2AzLOxwGr2GiY5QC9QV4fao3OvtbW7xa8Gt\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'LJdkYoiC2v3Xt6uTaJSYxWKJHETuPQd9RCbTQOwFgoisuih8Au+iWbAHJEYLWrg6w0KdWLLH2JBuaO3fGP2DRdcxUUbIbzjI7vdh4yEHKvfC2qvoOEbVkVC4znLxTZBMvMVqPA9q29BKt9Q3so+hylsO6cymD6/M7Y3FmtLrlJTxBOQL1PrZOQlT3zPrFqjFe8486dKcQxrBiJqRQXN2UyVJS0Mn0XgyDk1lDOYQq2uYOGavA0h19+DDLuHfbFjwlUFLOzIo0H1IoKfn7pi+vUeX+gD1Yok/7SbQhBmHpqJn02RqiDpiFKZ4ssfAHZOzdJzVauufvm7z55JYpqIm6KNHGA+f/AjtrsZwdh64NWRQ9X8n8k/BTuA3rbjdOwVBhpR05pIqeusRXfI1OnUXP5INXCxKlCosnZeDDXIh8suoe3WCccJGs7z6OEFYxC77pIgsvWgGIBrSntCPLxMNqLXXlyjxSAsfzXDaWVv0tGfvCYxwdQ4bv1MSjySofBTkaTQygryG9xwbI3iOz4Oc1cb8gjNlMwSQSL/m3v9zNHrW1C6GYnPZpIoU+qXSLcxp',t: 'MTY5NzMzMTA2OC4xNDgwMDA=',cT: Math.floor(Date.now() / 1000),m: 'L8h79KoJ4sNrmPqLOawO2ER0ul9PEc+vhmVrcQCw/9g=',i1: 'Uv/BkTAkdzHkfb16aANr2A==',i2: 'MD84pOiBUEFWNsP5Rir9/g==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641267ec6552b9';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641267ec6552b9\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:08.156021348Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-content-type-options",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641267ec6552b9-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:08 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '7841',cRay: '81641267ec6552b9',cHash: '7c372e45827fbb4',cUPMDTk: \"\\/?__cf_chl_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",md: \"oMSfx6CiIUEJYFc73UA7DLJWnQjCgI0.i4LkYsbW4sE-1697331068-0-AQGzZnJ3fB7BJrL8rAEACvj7vG4uQYGLRrRqtyH70g1LeBagbxHDBf2TkC_AsKaCkTMuAeZO6HR3J-LNVoAJc0q2IIcMjcL3H5FzsUpcSgrKJ5hcZ3p65b9gurnrQ-szgppW4Y2Rt1yj1Vboe53lyIHSFXx4d0LyPo4txIPmKg1bI0NBqnrU4qAa2QTheYdSIi8sBrpg91JMB-9oho10TOpPiH_lcKfge085tUdvYjfD1aQ4GpjFmM7shr1WxdiFCjCnC_hQcEVKGTwqt0wSoD-PrIgjXb53IqZVDF96dsvXDnH1oBDOo_keq5tOGWLxKFpDxkf32IruwTPsounEzz0vZ_XPfWWJm47y_6-xvOFBZpc5aLI1N6U_lAEf61S_FQ__1pys108-UiW0JrHBVomqkCJNaHsFdxYEBLXVB-JOyLG_OmcmBOGmQ07x-2KMgA4fojb4evBILYMIhztgBrHBWqjzYSKVR5BqawhxxggHr7u5mHiBd0yw-uooKSt0tMgVoHxKO3s_LYczMategcMC5lpf5mtfgbdD8s-un3k5NWlRXqthZzbDQY9E9diTuv3aNdqtci4w1KQKvrC1D8c7QN3aTTRh-UjAsREx0ZvVPrIM9f4B3bCd1EkMiOF5WKrhxV4x3ETJMaS-kjFC8QAXgWhSiSQSlIWn40h3zYtBoSIC0GdXcGQunNgzUmnhtxF7mDXW3kB6rUtuEuQVLt-P-1HvHe9rSpp7FgGvynQ8jaSBZobRkGWluv-zhawgpDm12GD5h54LjH1pwwSMqcb6GArcFl6gTXU-xB_vLBi06jFdNfYUoX28GjG7qj9bJD5KyqHh9ekijhlitLT904asWk3kim_Bzs8qtkPVaIQmguNIC-oFYqTXvJXDhEa-1kzxOu8T5QERDNsDMVSYRZ6tn9KHDDTLy6Gz7Ei4x4e8q3_ZaF-ursgsWc2tSRczohHdjijErtddKnn6r7-RD7u4TbzvhNcgBOLUTOVPe4y_2lSFLiDOKCyOFSDX_FpyvL3z3fdZFdZeSYNv3x8Jbap-t-78W0lD2LzMWZeKz3q8j7Z-mQvHd9wvshCM_4hpuLYDviCYxNN9bA6Wwgn8xNp4ijvo3Sma1gL1zO46fa2Sl2hPOIU6YgbiUVLt-JuUuKaDzNuEL8bN4WPhSuRJ8KxhLoD68h7RHIt1AdLXUQjjBnuYKZWXIRZYhb-ZvUGXxQ3LRyM3rXHGyeJArNH9hA9eDG9cbPpcR4EhPWzJ7SmeCa5BG1COZMHgyRUIP5K8wJ6697X-M9Rs82OKPGw_ZfHHBR-3z8YjlkzE5H_ydfAJoQmsLjw3yKrmFqULMbfoy0qDdqbfATRyVtkTF0WYf5bNgjOLXmaD1zIAE5G6Ab9_8ZdhvVZ70oWvpTdcrFL_pHJat6uzW55l07T-yzlN4-cIIP1X1jR0OimdtSYK5LjXdH5CQwydbuYrhO79AU9EYWp4z6biGEI47QrJaRgca75EE4MtSUYA8VIMURL5NLojspKFobzknw7QVRymf4caSD01PxxLMrrRBR0PFkgvulKiVsyyNHZogW1j8KqSs6X_YMMhLrJvG1_l_y-t5ZCFLfWqZDCj2fQ_yKTMcQub2Z7x86M2ztBgdDwajphGRzWJbXertgNlBpHk48uyBLS4njWYG7ATsBQvxtn4bpq18OllqkodrE57fnSqjgbBSPjFxEmQMMsicFedJvd-PPG_wORds2pE1Y6AXhwJzNoM7sK7eQzeCHvYdcvRDvPyTACkTBiPRuiNxJG54rRayxpBTQZOIUc_dxCDVo7r6U-wMS58KEAX3k8eHBVh48iQxDUaXsQ5n_Vyw8nVlOULOP3xqQ38ID9zOFDbZcOf-8pwsRhK-XlMganxNzkJCY0_EK_ofDqVOLx1tAkCH7MBSUGJ4KTBNStxSoddU3SUhByjjjbgYJXCyztJofuNMLI6X9J_223nccaX6mwRcriNaMO3EHm55Q_F_8gxCxYdOmzfj2ahtmxmXQmza6KLcttypOLapU9_lUo4msDI7X88CaErQQcDMzsKaUKzhFqZN8dC3167ZJWK9ygZJJryLMmrbkT_tZXjSPgfvH-p690c_F9vcZZt7OXRwMiQJvLEenl3tbIcr5Ru0tpRAQTwPwYmCvPRf2v8TtbR_wcEtQK9sV4zRkubHCVYJ0GfKldM87CN2dAp19SWS4uplbTW-fqXClPvKZReyZPWLPoUcKu7Ak0tzWKvcCtRFQOIV1RLKBS7EaKOGy7VpAhGw64H4VundjRTkB0DDFb5vccSn7K8COFQNnQDUKUyLhheLtr5pOvPUBlCz2kW000eEQU4SuQYdTLGqgQcFKhabrTz-Zio6PMqaZLql30AepKOmYrKEHx5unEGfe6ijmpNmmwao4-AxBBgPUIuuwMLPiIw2QLeDHt9ho_XB-ZKw2AzLOxwGr2GiY5QC9QV4fao3OvtbW7xa8Gt\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'LJdkYoiC2v3Xt6uTaJSYxWKJHETuPQd9RCbTQOwFgoisuih8Au+iWbAHJEYLWrg6w0KdWLLH2JBuaO3fGP2DRdcxUUbIbzjI7vdh4yEHKvfC2qvoOEbVkVC4znLxTZBMvMVqPA9q29BKt9Q3so+hylsO6cymD6/M7Y3FmtLrlJTxBOQL1PrZOQlT3zPrFqjFe8486dKcQxrBiJqRQXN2UyVJS0Mn0XgyDk1lDOYQq2uYOGavA0h19+DDLuHfbFjwlUFLOzIo0H1IoKfn7pi+vUeX+gD1Yok/7SbQhBmHpqJn02RqiDpiFKZ4ssfAHZOzdJzVauufvm7z55JYpqIm6KNHGA+f/AjtrsZwdh64NWRQ9X8n8k/BTuA3rbjdOwVBhpR05pIqeusRXfI1OnUXP5INXCxKlCosnZeDDXIh8suoe3WCccJGs7z6OEFYxC77pIgsvWgGIBrSntCPLxMNqLXXlyjxSAsfzXDaWVv0tGfvCYxwdQ4bv1MSjySofBTkaTQygryG9xwbI3iOz4Oc1cb8gjNlMwSQSL/m3v9zNHrW1C6GYnPZpIoU+qXSLcxp',t: 'MTY5NzMzMTA2OC4xNDgwMDA=',cT: Math.floor(Date.now() / 1000),m: 'L8h79KoJ4sNrmPqLOawO2ER0ul9PEc+vhmVrcQCw/9g=',i1: 'Uv/BkTAkdzHkfb16aANr2A==',i2: 'MD84pOiBUEFWNsP5Rir9/g==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641267ec6552b9';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641267ec6552b9\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:08.156030948Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 81641267ec6552b9-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:08 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '7841',cRay: '81641267ec6552b9',cHash: '7c372e45827fbb4',cUPMDTk: \"\\/?__cf_chl_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\",md: \"oMSfx6CiIUEJYFc73UA7DLJWnQjCgI0.i4LkYsbW4sE-1697331068-0-AQGzZnJ3fB7BJrL8rAEACvj7vG4uQYGLRrRqtyH70g1LeBagbxHDBf2TkC_AsKaCkTMuAeZO6HR3J-LNVoAJc0q2IIcMjcL3H5FzsUpcSgrKJ5hcZ3p65b9gurnrQ-szgppW4Y2Rt1yj1Vboe53lyIHSFXx4d0LyPo4txIPmKg1bI0NBqnrU4qAa2QTheYdSIi8sBrpg91JMB-9oho10TOpPiH_lcKfge085tUdvYjfD1aQ4GpjFmM7shr1WxdiFCjCnC_hQcEVKGTwqt0wSoD-PrIgjXb53IqZVDF96dsvXDnH1oBDOo_keq5tOGWLxKFpDxkf32IruwTPsounEzz0vZ_XPfWWJm47y_6-xvOFBZpc5aLI1N6U_lAEf61S_FQ__1pys108-UiW0JrHBVomqkCJNaHsFdxYEBLXVB-JOyLG_OmcmBOGmQ07x-2KMgA4fojb4evBILYMIhztgBrHBWqjzYSKVR5BqawhxxggHr7u5mHiBd0yw-uooKSt0tMgVoHxKO3s_LYczMategcMC5lpf5mtfgbdD8s-un3k5NWlRXqthZzbDQY9E9diTuv3aNdqtci4w1KQKvrC1D8c7QN3aTTRh-UjAsREx0ZvVPrIM9f4B3bCd1EkMiOF5WKrhxV4x3ETJMaS-kjFC8QAXgWhSiSQSlIWn40h3zYtBoSIC0GdXcGQunNgzUmnhtxF7mDXW3kB6rUtuEuQVLt-P-1HvHe9rSpp7FgGvynQ8jaSBZobRkGWluv-zhawgpDm12GD5h54LjH1pwwSMqcb6GArcFl6gTXU-xB_vLBi06jFdNfYUoX28GjG7qj9bJD5KyqHh9ekijhlitLT904asWk3kim_Bzs8qtkPVaIQmguNIC-oFYqTXvJXDhEa-1kzxOu8T5QERDNsDMVSYRZ6tn9KHDDTLy6Gz7Ei4x4e8q3_ZaF-ursgsWc2tSRczohHdjijErtddKnn6r7-RD7u4TbzvhNcgBOLUTOVPe4y_2lSFLiDOKCyOFSDX_FpyvL3z3fdZFdZeSYNv3x8Jbap-t-78W0lD2LzMWZeKz3q8j7Z-mQvHd9wvshCM_4hpuLYDviCYxNN9bA6Wwgn8xNp4ijvo3Sma1gL1zO46fa2Sl2hPOIU6YgbiUVLt-JuUuKaDzNuEL8bN4WPhSuRJ8KxhLoD68h7RHIt1AdLXUQjjBnuYKZWXIRZYhb-ZvUGXxQ3LRyM3rXHGyeJArNH9hA9eDG9cbPpcR4EhPWzJ7SmeCa5BG1COZMHgyRUIP5K8wJ6697X-M9Rs82OKPGw_ZfHHBR-3z8YjlkzE5H_ydfAJoQmsLjw3yKrmFqULMbfoy0qDdqbfATRyVtkTF0WYf5bNgjOLXmaD1zIAE5G6Ab9_8ZdhvVZ70oWvpTdcrFL_pHJat6uzW55l07T-yzlN4-cIIP1X1jR0OimdtSYK5LjXdH5CQwydbuYrhO79AU9EYWp4z6biGEI47QrJaRgca75EE4MtSUYA8VIMURL5NLojspKFobzknw7QVRymf4caSD01PxxLMrrRBR0PFkgvulKiVsyyNHZogW1j8KqSs6X_YMMhLrJvG1_l_y-t5ZCFLfWqZDCj2fQ_yKTMcQub2Z7x86M2ztBgdDwajphGRzWJbXertgNlBpHk48uyBLS4njWYG7ATsBQvxtn4bpq18OllqkodrE57fnSqjgbBSPjFxEmQMMsicFedJvd-PPG_wORds2pE1Y6AXhwJzNoM7sK7eQzeCHvYdcvRDvPyTACkTBiPRuiNxJG54rRayxpBTQZOIUc_dxCDVo7r6U-wMS58KEAX3k8eHBVh48iQxDUaXsQ5n_Vyw8nVlOULOP3xqQ38ID9zOFDbZcOf-8pwsRhK-XlMganxNzkJCY0_EK_ofDqVOLx1tAkCH7MBSUGJ4KTBNStxSoddU3SUhByjjjbgYJXCyztJofuNMLI6X9J_223nccaX6mwRcriNaMO3EHm55Q_F_8gxCxYdOmzfj2ahtmxmXQmza6KLcttypOLapU9_lUo4msDI7X88CaErQQcDMzsKaUKzhFqZN8dC3167ZJWK9ygZJJryLMmrbkT_tZXjSPgfvH-p690c_F9vcZZt7OXRwMiQJvLEenl3tbIcr5Ru0tpRAQTwPwYmCvPRf2v8TtbR_wcEtQK9sV4zRkubHCVYJ0GfKldM87CN2dAp19SWS4uplbTW-fqXClPvKZReyZPWLPoUcKu7Ak0tzWKvcCtRFQOIV1RLKBS7EaKOGy7VpAhGw64H4VundjRTkB0DDFb5vccSn7K8COFQNnQDUKUyLhheLtr5pOvPUBlCz2kW000eEQU4SuQYdTLGqgQcFKhabrTz-Zio6PMqaZLql30AepKOmYrKEHx5unEGfe6ijmpNmmwao4-AxBBgPUIuuwMLPiIw2QLeDHt9ho_XB-ZKw2AzLOxwGr2GiY5QC9QV4fao3OvtbW7xa8Gt\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'LJdkYoiC2v3Xt6uTaJSYxWKJHETuPQd9RCbTQOwFgoisuih8Au+iWbAHJEYLWrg6w0KdWLLH2JBuaO3fGP2DRdcxUUbIbzjI7vdh4yEHKvfC2qvoOEbVkVC4znLxTZBMvMVqPA9q29BKt9Q3so+hylsO6cymD6/M7Y3FmtLrlJTxBOQL1PrZOQlT3zPrFqjFe8486dKcQxrBiJqRQXN2UyVJS0Mn0XgyDk1lDOYQq2uYOGavA0h19+DDLuHfbFjwlUFLOzIo0H1IoKfn7pi+vUeX+gD1Yok/7SbQhBmHpqJn02RqiDpiFKZ4ssfAHZOzdJzVauufvm7z55JYpqIm6KNHGA+f/AjtrsZwdh64NWRQ9X8n8k/BTuA3rbjdOwVBhpR05pIqeusRXfI1OnUXP5INXCxKlCosnZeDDXIh8suoe3WCccJGs7z6OEFYxC77pIgsvWgGIBrSntCPLxMNqLXXlyjxSAsfzXDaWVv0tGfvCYxwdQ4bv1MSjySofBTkaTQygryG9xwbI3iOz4Oc1cb8gjNlMwSQSL/m3v9zNHrW1C6GYnPZpIoU+qXSLcxp',t: 'MTY5NzMzMTA2OC4xNDgwMDA=',cT: Math.floor(Date.now() / 1000),m: 'L8h79KoJ4sNrmPqLOawO2ER0ul9PEc+vhmVrcQCw/9g=',i1: 'Uv/BkTAkdzHkfb16aANr2A==',i2: 'MD84pOiBUEFWNsP5Rir9/g==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=81641267ec6552b9';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=ycfibcSllFJ_mAovAmzunk9OZoGjhiRVtJcdYd1xN_s-1697331068-0-gaNycGzNCeU\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641267ec6552b9\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:08.156041448Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/missing-sri.yaml",
+      "template-url": "https://templates.nuclei.sh/public/missing-sri",
+      "template-id": "missing-sri",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/missing-sri.yaml",
+      "info": {
+        "name": "Missing Subresource Integrity",
+        "author": [
+          "lucky0x0d",
+          "pulsesecurity.co.nz"
+        ],
+        "tags": [
+          "compliance",
+          "js",
+          "sri",
+          "misconfig"
+        ],
+        "description": "Checks if script tags within the HTML response have Subresource Integrity implemented via the integrity attribute\n",
+        "reference": [
+          "https://cheatsheetseries.owasp.org/cheatsheets/third_party_javascript_management_cheat_sheet.html#subresource-integrity"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr/",
+      "extracted-results": [
+        "https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 429 Too Many Requests\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nCf-Mitigated: challenge\r\nCf-Ray: 8164127fadfc28f3-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nCross-Origin-Embedder-Policy: require-corp\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nDate: Sun, 15 Oct 2023 00:51:11 GMT\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nOrigin-Agent-Cluster: ?1\r\nPermissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link href=\"/cdn-cgi/styles/challenges.css\" rel=\"stylesheet\"></head><body class=\"no-js\"><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div id=\"challenge-error-title\"><div class=\"h2\"><span class=\"icon-wrapper\"><div class=\"heading-icon warning-icon\"></div></span><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '2',cZone: \"www.elysee.fr\",cType: 'managed',cNounce: '43323',cRay: '8164127fadfc28f3',cHash: 'f5947609b0199ed',cUPMDTk: \"\\/?__cf_chl_tk=aVDDHe5KpmV7ijn.80L4FwPObwFVvFKRF_Iu8reAU2c-1697331071-0-gaNycGzNCbs\",cFPWv: 'g',cTTimeMs: '1000',cMTimeMs: '0',cTplV: 5,cTplB: 'cf',cK: \"visitor-time\",fa: \"\\/?__cf_chl_f_tk=aVDDHe5KpmV7ijn.80L4FwPObwFVvFKRF_Iu8reAU2c-1697331071-0-gaNycGzNCbs\",md: \"BaGWvH9xDQwriqp73LGoqFIJK1JDf8TuPo4QweP7DHU-1697331071-0-Ae4-YzWAm1QSOImXaH_cNH602zCl78-qy38XDkRJkdsR_alW2NBX_Y-Ded8cXbx8EVLp3UHJeG3NcYRbcZyPKm-6bDYQBgY0YG9zWx6LFL3Q49JurJxdXg3Jm2mr1r6TDgQv80zsZj46-WqB0Esag0SjJsO-P7a5uAzHiTYzRTd1aOGFnwBJzB5Wo8TdJ9zrjaOJ3ZgsFqPP1w_AyQQ6ZDS2pro77iAtvkfZbQM71UMul3qSnwA86EPYlTgcfuKRGEAxkHafKhxFmrUlqcT2YcnHPhnEm0XXy05LQMDiOn-SkxozwRfKJCh_GM_lc6FTQ2zUi4luF9j88qTKuzJ-82v49bYsSpoQTlFBcSP9yPfr4t83QhZGV07aOx8FADmLX9VuxdLmivVx1qw7reoPpeyro7FfDAx7Gcva3-sezfYUy_7GNKAzBwlDUDFbvPqSfEVU4hTdhOYgmVEYJhwRg99r0LjVoTYFP7dxgqxZw5rVVm6N4bj_yDN3dk94pE4d40KLLoRlSQ_Prlqs13Mzts-JwlBJszgddaUsJpDKwBghzkWndY42pyNlZUiNGjD8mjd3Q2vYe1FGTs-yfhItuyZWyvbUS9fVzKTlR0P_9c2wydGrUihsuirrrt89gk554rz2wXg3Z2ws5jof87DYpL0ThgIit2e3-MILtWLMDMEx3Hqg7G6bEnXytYRj4fanYi5lNRpfYa9saoUUBSMM7aSyQC8wXPiPp7WWCdBez_eSAarNCpMdbEu9KAo2_AtahtpZv_-t0WYtq22xd7NQHbyA-eH7NOjL2P2wNh9SN6Xh3X7Zxs4ws9xO-shexVF9RcCZux_8orYnU-PEIwtZUS5tBnE1mDtgmRWonI5KliiZKAlTrTL51hiqSMs5KYipguWtto0dFWybvj97TUpRrUPW80AIH-xPi664a23zafPeHFilbU0_QzXv0Cl9afckQIL228TQvZzEk0afgazAElHah0NtpfkThJHNAcfWWpfDtmlE31k5bFOvLrOKIPqHIPGTOVXxRJ07Poy7lYk4pjA1FB3bTagnmnR9brvUbuVTTx5YL9fdaN9F9gKcOl3YYaRtcN-21T3HjzQlilVf5btzkI_cdJExEtCTwXhX3McPUbJrNioLYsrsbu3s4sdmhGhhGbWZE8Y0cv1QTJnLUMJAGzAosqvmV7pfOxZe00oqBdQfl51VJz7F-_MiY1kTcNP5q406-4N5Fp6FL31Rzi0602qvP6gDoLoDtVg9QDdfLR4178LKOtkiJ1jsBf39oGnHeFkBExNvVFb65Z0vpzaQwQHpF4AMfXSo_xz9p7fMJUQkUUYvEVsgylBIVLiPad6zY9Gg7NrOX_01Fo4jLB87I8qTf6UdzfvuGB2FHjWhyVmvDs0S1GZb2SATD53tMMaryyj3kSDf47S0wXNwXHUggrI320b1J8NhEGf1tkAGXiqX-7jyWML1c5zTGXYvZ749cHs1Z0GklsuvuBIzdZa-xyU_Vdg_nKd_sVbPyHP8O9QXZ9mp7cQYSgoGqM-CzgAOc52r5o31suRHZuFNK0H-eG-wXLdGeNWEfUeUmw42DN0ygP75sP_3shnJeJWWwmqe3JLuTfodgtJ2rWVc9vj2oUXR40CFvdpN7JrXjp8RD8fKcnKWUn98ogxGSjTK3Z_5LE7nRI8clM2ar_ye1HS3Ebjgayge1BMqLXYFoAczJP01yZANFpFiNSljMyuQv2eQrsfKGqMs4610KrKGeE2KnykRqRc7SP-SfWzk-aVfhDpzdzz-ZIdjPfQVaQ4nuzzntJ94Chap3VT5bI2iE7yFqXEUU078tYBlEaEQQq1XpQViOT5Vu9HsvCxunbOTqFJnH4IlOPf8SyIMY-MmobsCygBmDkHserjMbsCSkEtiTLVRSYypFD0x51D8r5ij9pXT34P4UVJTuTeB_1Zwa4ZtE-n1m18eLFJYWkYZpEd7DK40XtqKcXUMNa7lQJbidyOGlGPfcLBG8iH-K9FQNhdx-6f4uAL7YIMkD-qgS3fA4na85XGbZq-Szd_i7ycGWkr1nTpplCHyxNnsNH5dkRh1IVYD3L1YRxiSskG1ceLMgKJefGwA37A05wd4NShWIHw31G-Ow7zGBffNfmg6avHdiyxXApk87HcFylrwPA9bD3M6exTNApiIUvRDGt57KuAp6XbD5-OmjCYQ3Q123Acof_Xqj4Da8zc0-l7BiBNeYkxeANsXozE1antLvzwFlrOTV_kXt1_dsqr1avtrgup8DRkHTRUJMdamBcRKUil5_by49O-HZ_CN5p2wvcHQWyq3W-fJf94RbUtWIE6ioNuW-qLjt6EDTZ0W9jSgmB_Hb51PbeXVJ-5D46we81fSxsGFgHoM5bI0xDk3pOmtdytPR_ChynpTrumXEmYaYgAdGw2ui6mu0XPDwt_R9FG9xQ\",cRq: {ru: 'aHR0cHM6Ly93d3cuZWx5c2VlLmZyLw==',ra: 'TnVjbGVpIC0gT3Blbi1zb3VyY2UgcHJvamVjdCAoZ2l0aHViLmNvbS9wcm9qZWN0ZGlzY292ZXJ5L251Y2xlaSk=',rm: 'R0VU',d: 'VuBNxASWQR7bIFkII/yrx1NMphOILXuhTdDrSrbfZDAFUVZj6/TIhf/TnkfNBMr7jejUembERTvvy6PN3Uy1d1AhrqEXMc7vfdrkvRNVAGi+9Fk7XQzt4ojs4HY5iFNMmmk5lowSfbNm6IrfYbRuZOfH/tfO0R8i/1iGVtVa9+uZojl3S/CjtTLZWhrgjC40JawYti+JQDTMviEa0O73zngD0Xglxbt3BNQfOt7UfoRvuWMtoOe6C05VE4rquSHfceG+jRCsK5Qwk1bDbGzu0By76wY/0HEHYwi07h0w4BPvVkNht2rxTcuCTs29Gl1hs3md1MHrsZDjri70LKezXm+zTplpyxrmItBKezuVZ0xnkQNDTSaeMfl3VN/pYSy5Ko6FKExiDG3tAWNdSZdYhalM43pkW9Zl6rQr589E9P1GCjj1QwM1pnA7G3f2U//jnmUjpayDv2tSrbVlfMZOty8epHRwe3iUBLz9zvfngv7MvRFVlb39YvlHzrcTeCS2YeMo6hD2wy1HiseUT35K4KLIYDmxTB0omCtELMnJ++IFvQktJjJPYrTFqU9uJ04F',t: 'MTY5NzMzMTA3MS45NTQwMDA=',cT: Math.floor(Date.now() / 1000),m: 'iVRsbkSutICTODDHJGypCX0qFKZCRxbp7nFM72wsbX8=',i1: 'lOmJX0geD8MFDobty90SsQ==',i2: 'I6xy4oZg5hks+sKU97UBcQ==',zh: 't7a6+vRUpBhH5217dVjtQuoNu/JgH/wIldMPeGuOn/4=',uh: 'iMmAO4Q3VWlxw7mIbHqZvaeBOOczHhiE21SZ0CNGcJg=',hh: 'ElaOz61ue5FE/MPq3XvmgWOIzGsEdckl2pLplOTStUk=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=8164127fadfc28f3';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, \"\\/?__cf_chl_rt_tk=aVDDHe5KpmV7ijn.80L4FwPObwFVvFKRF_Iu8reAU2c-1697331071-0-gaNycGzNCbs\" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script><script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"8164127fadfc28f3\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body></html>",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:11.962155966Z",
+      "curl-command": "curl -X 'GET' -d '' -H 'Host: www.elysee.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/waf-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/waf-detect",
+      "template-id": "waf-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/waf-detect.yaml",
+      "info": {
+        "name": "WAF Detection",
+        "author": [
+          "dwisiswant0",
+          "lu4nx"
+        ],
+        "tags": [
+          "waf",
+          "tech",
+          "misc"
+        ],
+        "description": "A web application firewall was detected.",
+        "reference": [
+          "https://github.com/ekultek/whatwaf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "matcher-name": "cloudflare",
+      "type": "http",
+      "host": "https://www.elysee.fr",
+      "matched-at": "https://www.elysee.fr/",
+      "request": "POST / HTTP/1.1\r\nHost: www.elysee.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nCache-Control: max-age=15\r\nCf-Ray: 81641298e8931506-LAX\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 15 Oct 2023 00:51:15 GMT\r\nExpires: Sun, 15 Oct 2023 00:51:30 GMT\r\nReferrer-Policy: same-origin\r\nServer: cloudflare\r\nVary: Accept-Encoding\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-js ie8 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if gt IE 8]><!--> <html class=\"no-js\" lang=\"en-US\"> <!--<![endif]-->\n<head>\n<title>Attention Required! | Cloudflare</title>\n<meta charset=\"UTF-8\" />\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\n<meta name=\"robots\" content=\"noindex, nofollow\" />\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n<link rel=\"stylesheet\" id=\"cf_styles-css\" href=\"/cdn-cgi/styles/cf.errors.css\" />\n<!--[if lt IE 9]><link rel=\"stylesheet\" id='cf_styles-ie-css' href=\"/cdn-cgi/styles/cf.errors.ie.css\" /><![endif]-->\n<style>body{margin:0;padding:0}</style>\n\n\n<!--[if gte IE 10]><!-->\n<script>\n  if (!navigator.cookieEnabled) {\n    window.addEventListener('DOMContentLoaded', function () {\n      var cookieEl = document.getElementById('cookie-alert');\n      cookieEl.style.display = 'block';\n    })\n  }\n</script>\n<!--<![endif]-->\n\n\n</head>\n<body>\n  <div id=\"cf-wrapper\">\n    <div class=\"cf-alert cf-alert-error cf-cookie-error\" id=\"cookie-alert\" data-translate=\"enable_cookies\">Please enable cookies.</div>\n    <div id=\"cf-error-details\" class=\"cf-error-details-wrapper\">\n      <div class=\"cf-wrapper cf-header cf-error-overview\">\n        <h1 data-translate=\"block_headline\">Sorry, you have been blocked</h1>\n        <h2 class=\"cf-subheadline\"><span data-translate=\"unable_to_access\">You are unable to access</span> elysee.fr</h2>\n      </div><!-- /.header -->\n\n      <div class=\"cf-section cf-highlight\">\n        <div class=\"cf-wrapper\">\n          <div class=\"cf-screenshot-container cf-screenshot-full\">\n            \n              <span class=\"cf-no-screenshot error\"></span>\n            \n          </div>\n        </div>\n      </div><!-- /.captcha-container -->\n\n      <div class=\"cf-section cf-wrapper\">\n        <div class=\"cf-columns two\">\n          <div class=\"cf-column\">\n            <h2 data-translate=\"blocked_why_headline\">Why have I been blocked?</h2>\n\n            <p data-translate=\"blocked_why_detail\">This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or malformed data.</p>\n          </div>\n\n          <div class=\"cf-column\">\n            <h2 data-translate=\"blocked_resolve_headline\">What can I do to resolve this?</h2>\n\n            <p data-translate=\"blocked_resolve_detail\">You can email the site owner to let them know you were blocked. Please include what you were doing when this page came up and the Cloudflare Ray ID found at the bottom of this page.</p>\n          </div>\n        </div>\n      </div><!-- /.section -->\n\n      <div class=\"cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300\">\n  <p class=\"text-13\">\n    <span class=\"cf-footer-item sm:block sm:mb-1\">Cloudflare Ray ID: <strong class=\"font-semibold\">81641298e8931506</strong></span>\n    <span class=\"cf-footer-separator sm:hidden\">&bull;</span>\n    <span id=\"cf-footer-item-ip\" class=\"cf-footer-item hidden sm:block sm:mb-1\">\n      Your IP:\n      <button type=\"button\" id=\"cf-footer-ip-reveal\" class=\"cf-footer-ip-reveal-btn\">Click to reveal</button>\n      <span class=\"hidden\" id=\"cf-footer-ip\">20.171.134.183</span>\n      <span class=\"cf-footer-separator sm:hidden\">&bull;</span>\n    </span>\n    <span class=\"cf-footer-item sm:block sm:mb-1\"><span>Performance &amp; security by</span> <a rel=\"noopener noreferrer\" href=\"https://www.cloudflare.com/5xx-error-landing\" id=\"brand_link\" target=\"_blank\">Cloudflare</a></span>\n    \n  </p>\n  <script>(function(){function d(){var b=a.getElementById(\"cf-footer-item-ip\"),c=a.getElementById(\"cf-footer-ip-reveal\");b&&\"classList\"in b&&(b.classList.remove(\"hidden\"),c.addEventListener(\"click\",function(){c.classList.add(\"hidden\");a.getElementById(\"cf-footer-ip\").classList.remove(\"hidden\")}))}var a=document;document.addEventListener&&a.addEventListener(\"DOMContentLoaded\",d)})();</script>\n</div><!-- /.error-footer -->\n\n\n    </div><!-- /#cf-error-details -->\n  </div><!-- /#cf-wrapper -->\n\n  <script>\n  window._cf_translation = {};\n  \n  \n</script>\n\n<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854\" integrity=\"sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==\" data-cf-beacon='{\"rayId\":\"81641298e8931506\",\"version\":\"2023.8.0\",\"b\":1,\"token\":\"6f6e93e192a64a69a4bef29b135e078d\",\"si\":100}' crossorigin=\"anonymous\"></script>\n</body>\n</html>\n",
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:51:16.035511828Z",
+      "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: www.elysee.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.elysee.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.elysee.fr",
+      "matched-at": "www.elysee.fr:443",
+      "extracted-results": [
+        "DHIMYOTIS"
+      ],
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:53:33.317332586Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.elysee.fr",
+      "matched-at": "www.elysee.fr:443",
+      "extracted-results": [
+        "elysee.fr",
+        "www.elysee.fr"
+      ],
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:53:33.317460286Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "www.elysee.fr",
+      "matched-at": "www.elysee.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:53:33.88177314Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "www.elysee.fr",
+      "matched-at": "www.elysee.fr:443",
+      "extracted-results": [
+        "tls13"
+      ],
+      "ip": "104.18.30.248",
+      "timestamp": "2023-10-15T00:53:35.053827599Z",
+      "matcher-status": true
+    }
+  ]
+]
