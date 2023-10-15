@@ -1,0 +1,288 @@
+[
+  [
+    {
+      "template": "dns/dns-saas-service-detection.yaml",
+      "template-url": "https://templates.nuclei.sh/public/dns-saas-service-detection",
+      "template-id": "dns-saas-service-detection",
+      "template-path": "/home/runner/nuclei-templates/dns/dns-saas-service-detection.yaml",
+      "info": {
+        "name": "DNS SaaS Service Detection",
+        "author": [
+          "noah @thesubtlety",
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "service"
+        ],
+        "description": "A CNAME DNS record was discovered",
+        "reference": [
+          "https://ns1.com/resources/cname",
+          "https://www.theregister.com/2021/02/24/dns_cname_tracking/",
+          "https://www.ionos.com/digitalguide/hosting/technical-matters/cname-record/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "dns",
+      "host": "www.demarches.interieur.gouv.fr.",
+      "matched-at": "www.demarches.interieur.gouv.fr",
+      "extracted-results": [
+        "cs543.wpc.omicroncdn.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 12469\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.demarches.interieur.gouv.fr.\tIN\t CNAME\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 12469\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.demarches.interieur.gouv.fr.\tIN\t CNAME\n\n;; ANSWER SECTION:\nwww.demarches.interieur.gouv.fr.\t300\tIN\tCNAME\tcs543.wpc.omicroncdn.net.\n",
+      "timestamp": "2023-10-15T01:00:52.100871023Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/httponly-cookie-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/httponly-cookie-detect",
+      "template-id": "httponly-cookie-detect",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/httponly-cookie-detect.yaml",
+      "info": {
+        "name": "HttpOnly Cookie - Detect",
+        "author": [
+          "mr. bobo hp"
+        ],
+        "tags": [
+          "misconfig",
+          "http",
+          "cookie",
+          "generic"
+        ],
+        "description": "Checks whether cookies in the HTTP response contain the HttpOnly attribute. If the HttpOnly flag is set, it means that the cookie is HTTP-only\n",
+        "reference": [
+          "https://stackoverflow.com/questions/4316539/how-do-i-test-httponly-cookie-flag"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": null,
+          "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "type": "http",
+      "host": "https://www.demarches.interieur.gouv.fr",
+      "matched-at": "https://www.demarches.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.demarches.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Length: 122\r\nCache-Control: no-cache, no-store\r\nContent-Type: text/html\r\nDate: Sun, 15 Oct 2023 01:01:12 GMT\r\nEc_policy_version: V5.1\r\nLocation: https://www.demarches.interieur.gouv.fr/\r\nServer: ECAcc (sac/2533)\r\nSet-Cookie: visid_incap_1098373=42FBhBJvQGK1xsQiCfBlVdc5K2UAAAAAQUIPAAAAAABPGz9+52xkiCMMhW8Qog/4; expires=Sun, 13 Oct 2024 22:24:55 GMT; HttpOnly; path=/; Domain=.demarches.interieur.gouv.fr\r\nSet-Cookie: incap_ses_1386_1098373=BD3iE3wA9lA5Q64LxA88E9c5K2UAAAAAlBY83aSTi4N0g7SY/CP2hQ==; path=/; Domain=.demarches.interieur.gouv.fr\r\nX-Iinfo: 12-5881313-0 0NNN RT(1697331671230 156) q(0 -1 -1 -1) r(0 -1) B13(0,50093,0) U24\r\n\r\n\r\n<HTML><HEAD><TITLE>Loading</TITLE></HEAD><BODY bgcolor=\"#ffffff\"><H3 style=\"color: #ffffff\">Loading</H3></BODY></HTML>\r\n",
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:01:12.29109392Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.demarches.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/tech-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tech-detect",
+      "template-id": "tech-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/tech-detect.yaml",
+      "info": {
+        "name": "Wappalyzer Technology Detection",
+        "author": [
+          "hakluke"
+        ],
+        "tags": [
+          "tech"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "Imperva",
+      "type": "http",
+      "host": "https://www.demarches.interieur.gouv.fr",
+      "matched-at": "https://www.demarches.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.demarches.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 301 Moved Permanently\r\nConnection: close\r\nContent-Length: 237\r\nAccess-Control-Allow-Headers: x-requested-with, Content-Type, origin, authorization, accept, client-security-token\r\nAccess-Control-Allow-Methods: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Expose-Headers: Date, Server, Access-Control-Allow-Credentials, Access-Control-Allow-Origin, Content-Type, Vary, Keep-Alive, Connection, Transfer-Encoding\r\nAccess-Control-Max-Age: 1000\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Sun, 15 Oct 2023 01:00:30 GMT\r\nEc_policy_version: V5.1\r\nLocation: https://www.service-public.fr\r\nServer: Apache\r\nSet-Cookie: visid_incap_1098373=AjkfOvysRx6E7WUK09gq0f05K2UAAAAAQUIPAAAAAAA3x9bR3jCWQF+BUN6aIheu; expires=Sun, 13 Oct 2024 22:24:52 GMT; HttpOnly; path=/; Domain=.demarches.interieur.gouv.fr\r\nSet-Cookie: incap_ses_1386_1098373=Oh2RJCfopjYqRq4LxA88E/05K2UAAAAAqYtXn/Q0je5w15ETQtkKwA==; path=/; Domain=.demarches.interieur.gouv.fr\r\nX-Cdn: Imperva\r\nX-Iinfo: 10-2939996-2939997 SNNy RT(1697331705021 4245) q(0 0 0 -1) r(0 0) U24\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>301 Moved Permanently</title>\n</head><body>\n<h1>Moved Permanently</h1>\n<p>The document has moved <a href=\"https://www.service-public.fr\">here</a>.</p>\n</body></html>\n",
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:01:50.270895514Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.demarches.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/waf-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/waf-detect",
+      "template-id": "waf-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/waf-detect.yaml",
+      "info": {
+        "name": "WAF Detection",
+        "author": [
+          "dwisiswant0",
+          "lu4nx"
+        ],
+        "tags": [
+          "waf",
+          "tech",
+          "misc"
+        ],
+        "description": "A web application firewall was detected.",
+        "reference": [
+          "https://github.com/ekultek/whatwaf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "matcher-name": "incapsula",
+      "type": "http",
+      "host": "https://www.demarches.interieur.gouv.fr",
+      "matched-at": "https://www.demarches.interieur.gouv.fr/",
+      "request": "POST / HTTP/1.1\r\nHost: www.demarches.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 881\r\nCache-Control: no-cache, no-store\r\nContent-Type: text/html\r\nDate: Sun, 15 Oct 2023 01:02:39 GMT\r\nEc_policy_version: V5.1\r\nServer: ECAcc (sac/2533)\r\nSet-Cookie: visid_incap_1098373=Zq+zGtnbR/21wdR9yxoUfis6K2UAAAAAQUIPAAAAAABR5c9WOPFOBqg3FGa/CIjE; expires=Sun, 13 Oct 2024 22:24:56 GMT; HttpOnly; path=/; Domain=.demarches.interieur.gouv.fr\r\nSet-Cookie: incap_ses_1386_1098373=M+58OXeDJQHZSq4LxA88Ey46K2UAAAAAprAEgK+KspunLg0H/n5Xvw==; path=/; Domain=.demarches.interieur.gouv.fr\r\nX-Iinfo: 7-4775649-0 SNNN RT(1697331755332 3211) q(0 0 0 0) r(0 -1) B15(1,502,52) U24\r\n\r\n<html style=\"height:100%\"><head><META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><script type=\"text/javascript\" src=\"/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3\"></script></head><body style=\"margin:0px;height:100%\"><iframe id=\"main-iframe\" src=\"/_Incapsula_Resource?CWUDNSAI=23&xinfo=7-4775649-0%20SNNN%20RT%281697331755332%203211%29%20q%280%200%200%200%29%20r%280%20-1%29%20B15%281%2c502%2c52%29%20U24&incident_id=1386000120007248601-19109387627528967&edet=15&cinfo=010000009e12&rpinfo=0&cip=13.83.4.101&mth=POST\" frameborder=0 width=\"100%\" height=\"100%\" marginheight=\"0px\" marginwidth=\"0px\">Request unsuccessful. Incapsula incident ID: 1386000120007248601-19109387627528967</iframe></body></html>",
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:02:39.454809406Z",
+      "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: www.demarches.interieur.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.demarches.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "www.demarches.interieur.gouv.fr",
+      "matched-at": "www.demarches.interieur.gouv.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:04:34.462431895Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.demarches.interieur.gouv.fr",
+      "matched-at": "www.demarches.interieur.gouv.fr:443",
+      "extracted-results": [
+        "DHIMYOTIS"
+      ],
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:04:34.707049181Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.demarches.interieur.gouv.fr",
+      "matched-at": "www.demarches.interieur.gouv.fr:443",
+      "extracted-results": [
+        "edition-api-demarches.interieur.gouv.fr",
+        "www.edition-api-demarches.interieur.gouv.fr",
+        "www.immigration.interieur.gouv.fr",
+        "www.interieur.gouv.fr",
+        "immigration.interieur.gouv.fr",
+        "www.demarches.interieur.gouv.fr",
+        "police-nationale.interieur.gouv.fr",
+        "www.elections.interieur.gouv.fr",
+        "www.api-demarches.interieur.gouv.fr",
+        "api-demarches.interieur.gouv.fr",
+        "www.police-nationale.interieur.gouv.fr",
+        "www.dgsi.interieur.gouv.fr",
+        "elections.interieur.gouv.fr",
+        "mobile.interieur.gouv.fr",
+        "interieur.gouv.fr",
+        "demarches.interieur.gouv.fr",
+        "dgsi.interieur.gouv.fr",
+        "media.interieur.gouv.fr"
+      ],
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:04:34.707227795Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "www.demarches.interieur.gouv.fr",
+      "matched-at": "www.demarches.interieur.gouv.fr:443",
+      "extracted-results": [
+        "tls13"
+      ],
+      "ip": "152.199.5.204",
+      "timestamp": "2023-10-15T01:04:35.722115739Z",
+      "matcher-status": true
+    }
+  ]
+]
