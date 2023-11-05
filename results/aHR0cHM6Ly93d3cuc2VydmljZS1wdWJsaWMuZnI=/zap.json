@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 29 Oct 2023 00:45:48",
+	"@generated": "Sun, 5 Nov 2023 00:46:09",
 	"site":[ 
 		{
 			"@name": "https://www.service-public.fr",
@@ -9,41 +9,6 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
-				{
-					"pluginid": "10062",
-					"alertRef": "10062",
-					"alert": "PII Disclosure",
-					"name": "PII Disclosure",
-					"riskcode": "3",
-					"confidence": "2",
-					"riskdesc": "High (Medium)",
-					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F19030",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "6742773934179890344",
-							"otherinfo": "Credit Card Type detected: Maestro"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F14128",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "563473649834208513",
-							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 563473\nBrand: MAESTRO\nCategory: \nIssuer: "
-						}
-					],
-					"count": "2",
-					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
-					"otherinfo": "<p>Credit Card Type detected: Maestro</p>",
-					"reference": "",
-					"cweid": "359",
-					"wascid": "13",
-					"sourceid": "6398"
-				},
 				{
 					"pluginid": "10202",
 					"alertRef": "10202",
@@ -379,7 +344,66 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "6939"
+					"sourceid": "6940"
+				},
+				{
+					"pluginid": "90022",
+					"alertRef": "90022",
+					"alert": "Application Error Disclosure",
+					"name": "Application Error Disclosure",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr/particuliers/download-echeance-actu-ics-calendar/A14944",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/download-echeance-actu-ics-calendar/A15144",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/download-echeance-actu-ics-calendar/A15183",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/download-echeance-actu-ics-calendar/A15216",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/download-echeance-actu-ics-calendar/A15275",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"solution": "<p>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "7904"
 				},
 				{
 					"pluginid": "10054",
@@ -604,7 +628,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "6948"
+					"sourceid": "6950"
 				},
 				{
 					"pluginid": "10063",
@@ -719,7 +743,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "179"
+					"sourceid": "228"
 				},
 				{
 					"pluginid": "10035",
@@ -804,7 +828,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-fdc6861340/assets/img/favicon/favicon-120.png",
+							"uri": "https://www.service-public.fr/resources/v-fdc6861340/assets/img/favicon/favicon-144.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -834,7 +858,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "179"
+					"sourceid": "228"
 				},
 				{
 					"pluginid": "10096",
@@ -869,7 +893,7 @@
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "6923"
+					"sourceid": "6925"
 				},
 				{
 					"pluginid": "10021",
@@ -984,7 +1008,7 @@
 					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6916"
+					"sourceid": "6919"
 				},
 				{
 					"pluginid": "10094",
@@ -1120,30 +1144,6 @@
 							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script>\n    requirejs(['entreprendre/autocomplete-a11y','domReady', 'jquery'], function (autocompleteA11y, domReady, $) {\n     \", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.service-public.fr/D10002",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "from",
-							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script>\n      let timerID;\n      let targetOP = \"https:\\/\\/auth.service-public.fr\";\n      let clientId = \"spclient\";\n      let \", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.service-public.fr/P10017",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "from",
-							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script>\n      let timerID;\n      let targetOP = \"https:\\/\\/auth.service-public.fr\";\n      let clientId = \"spclient\";\n      let \", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/F17904",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "from",
-							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in the element starting with: \"<script>\n      let timerID;\n      let targetOP = \"https:\\/\\/auth.service-public.fr\";\n      let clientId = \"spclient\";\n      let \", see evidence field for the suspicious comment/snippet."
-						},
-						{
 							"uri": "https://www.service-public.fr/resources/v-fdc6861340/assets/dsfr/dsfr/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1190,6 +1190,30 @@
 							"attack": "",
 							"evidence": "query",
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"/*! Respond.js v1.4.2: min/max-width media query polyfill\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/jquery/jquery-3.6.0.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "username",
+							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in the element starting with: \"!function(e,t){\"use strict\";\"object\"==typeof module&&\"object\"==typeof module.exports?module.exports=e.document?t(e,!0):function(\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/orejime/configRgpd.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "debug",
+							"otherinfo": "The following pattern was used: \\bDEBUG\\b and was detected 2 times, the first in the element starting with: \"    // Optional. Set Orejime in debug mode to have a few stuff\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/orejime/configRgpd.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected 7 times, the first in the element starting with: \"    // user consent decisions.\", see evidence field for the suspicious comment/snippet."
 						}
 					],
 					"count": "11",
@@ -1216,7 +1240,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=3ade3d5c-43ff-4ba3-9531-b8dc3755c303\r\nTS01425d24=012a7f58e0819b53d9971158132352356305e59dd8059dac9914dea8db52416cef3035e26ae1d30a04ea87487442ec94d932a5156960a708d3238fedea5de396dbd62bbcf1\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=63eb675b-7ec6-43ae-82ab-e893c1f7a1e8\r\nTS01425d24=012a7f58e0769f7a17a74313ae3d90b1bcc6739c2bdca542e097d0c4245462fdc679171fc641eda276385bd69ab7c5d612d7abb5914061cde05aac84ffbfe7ded4dfbf0a1c\r\n"
 						},
 						{
 							"uri": "https://www.service-public.fr",
@@ -1224,7 +1248,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=597f78ce-489e-41b9-9ab3-9aab3777f4a1\r\nTS01425d24=012a7f58e0af77a29a6d65732cd75ef0170350ae846efec28b0e3ecb2d0f7807f4c2296a0ca0ed0b8d3b0eafdfd300b16b779ef1988d0fe1888554fef88c4ef2c6f8d8c926\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=d449adbe-0eac-4933-bf63-75efcf61330a\r\nTS01425d24=012a7f58e070e444950f911248e3a0c87aaeb548dbb981f7efae7c9d3db27e07ca37b146d459c56be817e564ec9e9595dd811333f6e9fbcebcf772c8acc49a77edabf5dde9\r\n"
 						},
 						{
 							"uri": "https://www.service-public.fr/sitemap.xml",
@@ -1232,12 +1256,12 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=1a5f40e5-0836-4444-ba40-be65c959f2f9\r\nTS01425d24=012a7f58e079a3dc3590650b1efe897c0088f5cd503b39d02efeb02a901c8e9f8c5f5359bf33f7f94806063f99fa506d6558e1db2bcb4fc4ada854b3b795061bf6d52e84f4\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=2bfc901a-d5ab-459f-acbd-10d1cd10077e\r\nTS01425d24=012a7f58e02407279abe0b91a048b9e41c670b89efaef5d2ed64257465f5a66441438e47358f628d52d7cbfb9ca223599a951e2082f426fb94d4d07e05072322727fdd41cd\r\n"
 						}
 					],
 					"count": "3",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=3ade3d5c-43ff-4ba3-9531-b8dc3755c303</p><p>TS01425d24=012a7f58e0819b53d9971158132352356305e59dd8059dac9914dea8db52416cef3035e26ae1d30a04ea87487442ec94d932a5156960a708d3238fedea5de396dbd62bbcf1</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=63eb675b-7ec6-43ae-82ab-e893c1f7a1e8</p><p>TS01425d24=012a7f58e0769f7a17a74313ae3d90b1bcc6739c2bdca542e097d0c4245462fdc679171fc641eda276385bd69ab7c5d612d7abb5914061cde05aac84ffbfe7ded4dfbf0a1c</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
@@ -1441,7 +1465,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-8.xml",
+							"uri": "https://www.service-public.fr/urlset-9.xml",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1472,15 +1496,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 2106",
-							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 2118",
+							"evidence": "Age: 954",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1488,7 +1504,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 26537",
+							"evidence": "Age: 5649",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1504,7 +1520,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0",
+							"evidence": "Age: 5392",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1512,7 +1528,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0",
+							"evidence": "Age: 8198",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1536,7 +1552,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0",
+							"evidence": "Age: 5383",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1556,21 +1572,21 @@
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-8.xml",
+							"uri": "https://www.service-public.fr/urlset-9.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 0",
+							"evidence": "Age: 23095",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use.</p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "39"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1759,7 +1775,7 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "3ade3d5c-43ff-4ba3-9531-b8dc3755c303",
+							"evidence": "63eb675b-7ec6-43ae-82ab-e893c1f7a1e8",
 							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
 						},
 						{
@@ -1767,7 +1783,7 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "597f78ce-489e-41b9-9ab3-9aab3777f4a1",
+							"evidence": "d449adbe-0eac-4933-bf63-75efcf61330a",
 							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
 						},
 						{
@@ -1775,7 +1791,7 @@
 							"method": "GET",
 							"param": "TS012e9d3d",
 							"attack": "",
-							"evidence": "012a7f58e03ea67d6c9beb02e44b26287487915cebe1fab7a3b8c857c63b8e9e1343993b0caea6ce241433d5c39a73b7835c396418",
+							"evidence": "012a7f58e036e3c2e85fc3c552b389ee0360ad50deceda61744d68439975a341e204594db8052ddf90c0c19a0f1b39c886a9738ace",
 							"otherinfo": "\ncookie:TS012e9d3d"
 						},
 						{
@@ -1783,31 +1799,31 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "1a5f40e5-0836-4444-ba40-be65c959f2f9",
+							"evidence": "2bfc901a-d5ab-459f-acbd-10d1cd10077e",
 							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
 						},
 						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
+							"uri": "https://www.service-public.fr",
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "1a5f40e5-0836-4444-ba40-be65c959f2f9",
+							"evidence": "63eb675b-7ec6-43ae-82ab-e893c1f7a1e8",
 							"otherinfo": "\ncookie:SP_SESSION"
 						},
 						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
+							"uri": "https://www.service-public.fr",
 							"method": "GET",
 							"param": "TS012e9d3d",
 							"attack": "",
-							"evidence": "012a7f58e0edc1a8f46699749588f44b1ff0843dbc3b39d02efeb02a901c8e9f8c5f5359bfc08018a7c9acf7fea8d399b399310d95",
+							"evidence": "012a7f58e0e16845edb80de29e2010ed45b56d989fdca542e097d0c4245462fdc679171fc6a23689170963e4d58166f5b7d397700a",
 							"otherinfo": "\ncookie:TS012e9d3d"
 						},
 						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
+							"uri": "https://www.service-public.fr",
 							"method": "GET",
 							"param": "TS01425d24",
 							"attack": "",
-							"evidence": "012a7f58e079a3dc3590650b1efe897c0088f5cd503b39d02efeb02a901c8e9f8c5f5359bf33f7f94806063f99fa506d6558e1db2bcb4fc4ada854b3b795061bf6d52e84f4",
+							"evidence": "012a7f58e0769f7a17a74313ae3d90b1bcc6739c2bdca542e097d0c4245462fdc679171fc641eda276385bd69ab7c5d612d7abb5914061cde05aac84ffbfe7ded4dfbf0a1c",
 							"otherinfo": "\ncookie:TS01425d24"
 						}
 					],
@@ -1836,6 +1852,14 @@
 							"attack": "",
 							"evidence": "s-maxage=28800",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/accueil/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
 							"uri": "https://www.service-public.fr/actualites/lettresp/archives/L",
@@ -1895,14 +1919,6 @@
 						},
 						{
 							"uri": "https://www.service-public.fr/urlset-2.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-3.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1985,6 +2001,14 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword=ZAP&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+autres+organismes+g%C3%A9rant+un+service+public+administratif\r\n\r\nappears to include user input in: \r\n\r\na(n) [input] tag [value] attribute \r\n\r\nThe user input found was:\r\nperimetres=Proc\u00E9dures SVA autres organismes g\u00E9rant un service public administratif\r\n\r\nThe user-controlled value was:\r\nproc\u00E9dures sva autres organismes g\u00E9rant un service public administratif"
 						},
 						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?keyword=ZAP",
+							"method": "GET",
+							"param": "keyword",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/demarches-silence-vaut-accord/recherche?keyword=ZAP\r\n\r\nappears to include user input in: \r\n\r\na(n) [input] tag [value] attribute \r\n\r\nThe user input found was:\r\nkeyword=ZAP\r\n\r\nThe user-controlled value was:\r\nzap"
+						},
+						{
 							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page=50",
 							"method": "GET",
 							"param": "page",
@@ -2033,13 +2057,13 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&rubricTypeFilter=simulateur\r\n\r\nappears to include user input in: \r\n\r\na(n) [button] tag [title] attribute \r\n\r\nThe user input found was:\r\nrubricTypeFilter=simulateur\r\n\r\nThe user-controlled value was:\r\nsimulateurs -  d\u00E9sactiver le filtre"
 						}
 					],
-					"count": "12",
+					"count": "13",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
 					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword=ZAP&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+autres+organismes+g%C3%A9rant+un+service+public+administratif</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [meta] tag [content] attribute </p><p></p><p>The user input found was:</p><p>_codesSva=1</p><p></p><p>The user-controlled value was:</p><p>width=device-width, initial-scale=1, shrink-to-fit=no</p>",
 					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "7159"
+					"sourceid": "7163"
 				}
 			]
 		}
