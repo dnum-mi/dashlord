@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 5 Nov 2023 01:12:23",
+	"@generated": "Sun, 12 Nov 2023 01:13:34",
 	"site":[ 
 		{
 			"@name": "https://pro.permisdeconduire.gouv.fr",
@@ -136,7 +136,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10035",
@@ -195,7 +195,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10096",
@@ -212,30 +212,73 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1699146740",
-							"otherinfo": "1699146740, which evaluates to: 2023-11-05 01:12:20"
+							"evidence": "1699751612",
+							"otherinfo": "1699751612, which evaluates to: 2023-11-12 01:13:32"
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1699751613",
+							"otherinfo": "1699751613, which evaluates to: 2023-11-12 01:13:33"
 						},
 						{
 							"uri": "https://pro.permisdeconduire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1699146740",
-							"otherinfo": "1699146740, which evaluates to: 2023-11-05 01:12:20"
+							"evidence": "1699751613",
+							"otherinfo": "1699751613, which evaluates to: 2023-11-12 01:13:33"
 						},
 						{
 							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1699146740",
-							"otherinfo": "1699146740, which evaluates to: 2023-11-05 01:12:20"
+							"evidence": "1699751613",
+							"otherinfo": "1699751613, which evaluates to: 2023-11-12 01:13:33"
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1699146740, which evaluates to: 2023-11-05 01:12:20</p>",
+					"otherinfo": "<p>1699751612, which evaluates to: 2023-11-12 01:13:32</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10094",
+					"alertRef": "10094-3",
+					"alert": "Base64 Disclosure",
+					"name": "Base64 Disclosure",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
+					"instances":[ 
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "QvMt3IX3_O79Xevk9wSzF8V4ejTBIkQbiN",
+							"otherinfo": "B\uFFFD-\u0705\uFFFD\uFFFD\uFFFD\uFFFD]\uFFFD\uFFFD\uFFFD\\x0004\uFFFD\\x0017\uFFFDxz4\uFFFD\"D\\x001b\uFFFD"
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "vw-1699751612-0-ATHqY2gJNkKudDNh4o/z+9e0JV7byeZMft8vb/dRBTzgGWD7A363JEQnQsmFKRElFhWopCor3itRSC51mdqCZ+0=",
+							"otherinfo": "\uFFFD\\x000f\uFFFD\uFFFD\uFFFD{\uFFFD^\uFFFD\uFFFD\uFFFD>\\x00011\uFFFDch\t6B\uFFFDt3a\uFFFD\uFFFD\uFFFD\u05F4%^\uFFFD\uFFFD\uFFFDL~\uFFFD/o\uFFFDQ\\x0005<\uFFFD\\x0019`\uFFFD\\x0003~\uFFFD$D'B\u0245)\\x0011%\\x0016\\x0015\uFFFD\uFFFD*+\uFFFD+QH.u\uFFFD\u0682g\uFFFD"
+						}
+					],
+					"count": "2",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>B\uFFFD-\u0705\uFFFD\uFFFD\uFFFD\uFFFD]\uFFFD\uFFFD\uFFFD\\x0004\uFFFD\\x0017\uFFFDxz4\uFFFD\"D\\x001b\uFFFD</p>",
+					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
 					"sourceid": "6"
@@ -256,7 +299,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=_hR.LlDdei5P7AoFqN4Wm64RcZ.ytUc2V5yayzfBrls-1699146740-0-AZmTXsAuxoNXYYs9uvb4soL7I+BInIb7JEri1EWc/7/L9gcmeuVV+tAMB6fHxM+RfvZexyk2zmHrhBtBKRd5ys4=\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=CUQ5rLq5rj_tPhLyFCkn8sc.dfAGTVCtoaxveOtp.vw-1699751612-0-ATHqY2gJNkKudDNh4o/z+9e0JV7byeZMft8vb/dRBTzgGWD7A363JEQnQsmFKRElFhWopCor3itRSC51mdqCZ+0=\r\n"
 						},
 						{
 							"uri": "https://pro.permisdeconduire.gouv.fr",
@@ -264,7 +307,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=EBSRj0RVe0CM5_eXjr6FiXUIngMPr8Xy_m5XdZkYLFs-1699146740-0-AY/rmlXBuThw1TC46aXyExK1jIINGbnc76N/nJkXsBqVr2NZgIBY+gL0hTMl9lEBstSEGPa7I4dT+spLh1VoyQs=\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=QvMt3IX3_O79Xevk9wSzF8V4ejTBIkQbiN.P3gaY3uc-1699751613-0-AXKnqvMEjbqfQugRYYNS3uBTM8BDAp45GYrAtMBuyFSMZhqbXNJdn5T9qPEtALORq5uAdmuky9g1wF4Ts5oFb/s=\r\n"
 						},
 						{
 							"uri": "https://pro.permisdeconduire.gouv.fr/robots.txt",
@@ -272,7 +315,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=TioXi8d7pjol2XzjfaCvs239AhpLlFaazMcwBh8X7c0-1699146740-0-AeHntnKVBbaipyR9Zban+e1yWgcM1dbW0r+eSbSG6mJm5dBpBMF34W8+qaYNpYfSGtkGzX4oLDDsJjSTBtdNU0I=\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=Ip2OJOfJQSXgwA0wuyRYoq10nlB0jcR4VWrIYz1lBFw-1699751613-0-ARA0YsfoeQVmqAXiX0bwoqdbf8d2WcBSPhJcc9spy5FYkdjvJlGbdFCv57Jo7Ohg8yswe4kmE9Fb5PPGlcFGOy4=\r\n"
 						},
 						{
 							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
@@ -280,16 +323,16 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=KD38QkPZ19t0T.9KUcYh9oc9Y.ypndEasKbRxi8672s-1699146740-0-AXY/HrJe408YdgEA6DYvRufMPKkhIYUJw1dAMhgl8Ytq+uVMgoIDaMD+8z5cjl0u9ybxasMFJG/NHVWrRQUCChc=\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\npro.permisdeconduire.gouv.fr\r\n__cf_bm=LfWM6CoJzVk1Zi.OV8G.Qr6QCXcLy7vJ1PJNHLSys4A-1699751613-0-AUwfWtEB3EJKU+YVj7RrQoQ1Hf+tCbI1C+ffG4cosa7em3xyMrVgSthZiSEF1dDYe0igKJvM3Fo/QiK3fDpWPcI=\r\n"
 						}
 					],
 					"count": "4",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>pro.permisdeconduire.gouv.fr</p><p>__cf_bm=_hR.LlDdei5P7AoFqN4Wm64RcZ.ytUc2V5yayzfBrls-1699146740-0-AZmTXsAuxoNXYYs9uvb4soL7I+BInIb7JEri1EWc/7/L9gcmeuVV+tAMB6fHxM+RfvZexyk2zmHrhBtBKRd5ys4=</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>pro.permisdeconduire.gouv.fr</p><p>__cf_bm=CUQ5rLq5rj_tPhLyFCkn8sc.dfAGTVCtoaxveOtp.vw-1699751612-0-ATHqY2gJNkKudDNh4o/z+9e0JV7byeZMft8vb/dRBTzgGWD7A363JEQnQsmFKRElFhWopCor3itRSC51mdqCZ+0=</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -316,15 +359,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -351,15 +402,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -386,15 +445,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -421,15 +488,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10112",
@@ -446,7 +521,7 @@
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
-							"evidence": "_hR.LlDdei5P7AoFqN4Wm64RcZ.ytUc2V5yayzfBrls-1699146740-0-AZmTXsAuxoNXYYs9uvb4soL7I+BInIb7JEri1EWc/7/L9gcmeuVV+tAMB6fHxM+RfvZexyk2zmHrhBtBKRd5ys4=",
+							"evidence": "CUQ5rLq5rj_tPhLyFCkn8sc.dfAGTVCtoaxveOtp.vw-1699751612-0-ATHqY2gJNkKudDNh4o/z+9e0JV7byeZMft8vb/dRBTzgGWD7A363JEQnQsmFKRElFhWopCor3itRSC51mdqCZ+0=",
 							"otherinfo": "\ncookie:__cf_bm"
 						},
 						{
@@ -454,33 +529,17 @@
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
-							"evidence": "TioXi8d7pjol2XzjfaCvs239AhpLlFaazMcwBh8X7c0-1699146740-0-AeHntnKVBbaipyR9Zban+e1yWgcM1dbW0r+eSbSG6mJm5dBpBMF34W8+qaYNpYfSGtkGzX4oLDDsJjSTBtdNU0I=",
-							"otherinfo": "\ncookie:__cf_bm"
-						},
-						{
-							"uri": "https://pro.permisdeconduire.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "__cf_bm",
-							"attack": "",
-							"evidence": "KD38QkPZ19t0T.9KUcYh9oc9Y.ypndEasKbRxi8672s-1699146740-0-AXY/HrJe408YdgEA6DYvRufMPKkhIYUJw1dAMhgl8Ytq+uVMgoIDaMD+8z5cjl0u9ybxasMFJG/NHVWrRQUCChc=",
-							"otherinfo": "\ncookie:__cf_bm"
-						},
-						{
-							"uri": "https://pro.permisdeconduire.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__cf_bm",
-							"attack": "",
-							"evidence": "TioXi8d7pjol2XzjfaCvs239AhpLlFaazMcwBh8X7c0-1699146740-0-AeHntnKVBbaipyR9Zban+e1yWgcM1dbW0r+eSbSG6mJm5dBpBMF34W8+qaYNpYfSGtkGzX4oLDDsJjSTBtdNU0I=",
+							"evidence": "Ip2OJOfJQSXgwA0wuyRYoq10nlB0jcR4VWrIYz1lBFw-1699751613-0-ARA0YsfoeQVmqAXiX0bwoqdbf8d2WcBSPhJcc9spy5FYkdjvJlGbdFCv57Jo7Ohg8yswe4kmE9Fb5PPGlcFGOy4=",
 							"otherinfo": "\ncookie:__cf_bm"
 						}
 					],
-					"count": "4",
+					"count": "2",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
 					"otherinfo": "<p></p><p>cookie:__cf_bm</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
