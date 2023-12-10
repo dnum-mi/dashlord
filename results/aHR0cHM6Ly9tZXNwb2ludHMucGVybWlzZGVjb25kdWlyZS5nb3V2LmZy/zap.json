@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Wed, 6 Dec 2023 08:27:07",
+	"@generated": "Sun, 10 Dec 2023 01:08:26",
 	"site":[ 
 		{
 			"@name": "https://mespoints.permisdeconduire.gouv.fr",
@@ -34,15 +34,23 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "7"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10054",
@@ -63,7 +71,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://mespoints.permisdeconduire.gouv.fr/robots.txt",
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
@@ -77,7 +85,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10063",
@@ -120,7 +128,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10035",
@@ -196,25 +204,52 @@
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1701851226",
-							"otherinfo": "1701851226, which evaluates to: 2023-12-06 08:27:06"
+							"evidence": "1702170504",
+							"otherinfo": "1702170504, which evaluates to: 2023-12-10 01:08:24"
 						},
 						{
-							"uri": "https://mespoints.permisdeconduire.gouv.fr/robots.txt",
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1701851227",
-							"otherinfo": "1701851227, which evaluates to: 2023-12-06 08:27:07"
+							"evidence": "1702170504",
+							"otherinfo": "1702170504, which evaluates to: 2023-12-10 01:08:24"
 						}
 					],
 					"count": "2",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1701851226, which evaluates to: 2023-12-06 08:27:06</p>",
+					"otherinfo": "<p>1702170504, which evaluates to: 2023-12-10 01:08:24</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10094",
+					"alertRef": "10094-3",
+					"alert": "Base64 Disclosure",
+					"name": "Base64 Disclosure",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
+					"instances":[ 
+						{
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "x0OMhvt0DGYIF8Ymw6wcS77Re9ENP2kxs0",
+							"otherinfo": "\uFFFDC\uFFFD\uFFFD\uFFFDt\\x000cf\\x0008\\x0017\uFFFD&\u00EC\\x001cK\uFFFD\uFFFD{\uFFFD\r?i1\uFFFD"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>\uFFFDC\uFFFD\uFFFD\uFFFDt\\x000cf\\x0008\\x0017\uFFFD&\u00EC\\x001cK\uFFFD\uFFFD{\uFFFD\r?i1\uFFFD</p>",
+					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "7"
 				},
 				{
 					"pluginid": "90005",
@@ -257,7 +292,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -300,7 +335,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -343,7 +378,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -386,7 +421,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10112",
@@ -403,33 +438,49 @@
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
-							"evidence": "jAM4u6J78TrzuMdHlkRJTHZh8jX2I7TMHJYz4gaEgGg-1701851226-0-AfPIIF03kg/tgK00CxeWdMjD5RCtILgPgyZW0VW9Ouvb5sfP22kw6UCB5jhG53sqXQQgPVa3t1VzwBOXBgcMnYQ=",
+							"evidence": "Zt2TRVN29n7SzbcFJNsIEpkyLP4CuNFonSpQ_EtIKGY-1702170504-0-AfPcQj6uulz+9QKHVndH0Jhrrzp17E4xrXrNelPlvlZk6f+yQ6HZ1ggXJRXpxeb5181YKf79e9MY1COrfZDcZfk=",
 							"otherinfo": "\ncookie:__cf_bm"
 						},
 						{
-							"uri": "https://mespoints.permisdeconduire.gouv.fr/robots.txt",
+							"uri": "https://mespoints.permisdeconduire.gouv.fr",
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
-							"evidence": "7kd5u07hcpxtSAO4pxirv2YsR6aSLHtqaqgF6XIQIhs-1701851227-0-Aee+t7PmbbHWXBl/F0nzj3Yv1TtjiiHXdhFadl5lzAghLocxMHxl2pWNFZ/TsQ/1BSkubO9DDgCa/u3bEDaC6io=",
+							"evidence": "ls7Z5YIbTY.cd.cs8OnGn8V_v_0jSQhx6.PLOiTiQ_Y-1702170504-0-AeY8HmjyACML3Nmc1CwvezlQejP0TqwLcNrRNtpE1YVPmx8wxnik9EaNpsGS6E97PlnEBfqBSuHxzU6CwzNdQkY=",
 							"otherinfo": "\ncookie:__cf_bm"
 						},
 						{
-							"uri": "https://mespoints.permisdeconduire.gouv.fr/robots.txt",
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "__cf_bm",
 							"attack": "",
-							"evidence": "7kd5u07hcpxtSAO4pxirv2YsR6aSLHtqaqgF6XIQIhs-1701851227-0-Aee+t7PmbbHWXBl/F0nzj3Yv1TtjiiHXdhFadl5lzAghLocxMHxl2pWNFZ/TsQ/1BSkubO9DDgCa/u3bEDaC6io=",
+							"evidence": "x0OMhvt0DGYIF8Ymw6wcS77Re9ENP2kxs0.oywq1yWw-1702170504-0-AcVBKpxxkW4iIHYftA7ygC8HiiJhTNLSAiqRTTrQVLC3AtL/XLu4UTMzld5f5MSWRMbd/m0EYCBYmdUYLt9SbFw=",
+							"otherinfo": "\ncookie:__cf_bm"
+						},
+						{
+							"uri": "https://mespoints.permisdeconduire.gouv.fr",
+							"method": "GET",
+							"param": "__cf_bm",
+							"attack": "",
+							"evidence": "Zt2TRVN29n7SzbcFJNsIEpkyLP4CuNFonSpQ_EtIKGY-1702170504-0-AfPcQj6uulz+9QKHVndH0Jhrrzp17E4xrXrNelPlvlZk6f+yQ6HZ1ggXJRXpxeb5181YKf79e9MY1COrfZDcZfk=",
+							"otherinfo": "\ncookie:__cf_bm"
+						},
+						{
+							"uri": "https://mespoints.permisdeconduire.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "__cf_bm",
+							"attack": "",
+							"evidence": "x0OMhvt0DGYIF8Ymw6wcS77Re9ENP2kxs0.oywq1yWw-1702170504-0-AcVBKpxxkW4iIHYftA7ygC8HiiJhTNLSAiqRTTrQVLC3AtL/XLu4UTMzld5f5MSWRMbd/m0EYCBYmdUYLt9SbFw=",
 							"otherinfo": "\ncookie:__cf_bm"
 						}
 					],
-					"count": "3",
+					"count": "5",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
 					"otherinfo": "<p></p><p>cookie:__cf_bm</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10049",
@@ -488,7 +539,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				}
 			]
 		}
