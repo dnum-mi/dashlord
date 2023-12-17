@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 10 Dec 2023 00:58:50",
+	"@generated": "Sun, 17 Dec 2023 00:58:20",
 	"site":[ 
 		{
 			"@name": "https://www.demarches.interieur.gouv.fr",
@@ -26,17 +26,9 @@
 							"attack": "",
 							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
-						},
-						{
-							"uri": "https://www.demarches.interieur.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"#\" class=\"form-select-language\" method=\"get\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 2: \"\" ]."
 						}
 					],
-					"count": "2",
+					"count": "1",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ].</p>",
 					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
@@ -129,7 +121,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<link href=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/css/sp-dsfr.css\" rel=\"stylesheet\">",
+							"evidence": "<link href=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/css/sp-dsfr.css\" rel=\"stylesheet\">",
 							"otherinfo": ""
 						},
 						{
@@ -137,7 +129,15 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<link href=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr/dsfr/dsfr.css\" rel=\"stylesheet\">",
+							"evidence": "<link href=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.min.css\" rel=\"stylesheet\">",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link href=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/utility.min.css\" rel=\"stylesheet\">",
 							"otherinfo": ""
 						},
 						{
@@ -177,7 +177,55 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"evidence": "<script type=\"module\"\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"module\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"module\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/js/configRgpdPart.js\"></script>",
 							"otherinfo": ""
 						},
 						{
@@ -186,14 +234,6 @@
 							"param": "",
 							"attack": "",
 							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/js/common.js\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.demarches.interieur.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/js/configRgpdPart.js\"></script>",
 							"otherinfo": ""
 						},
 						{
@@ -213,7 +253,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "17",
 					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
@@ -483,9 +523,57 @@
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr",
 							"method": "GET",
-							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr/dsfr/dsfr.module.min.js",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.module.min.js",
 							"attack": "",
-							"evidence": "<script src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"evidence": "<script type=\"module\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.nomodule.min.js",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/analytics.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js",
+							"attack": "",
+							"evidence": "<script type=\"module\"\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js",
+							"attack": "",
+							"evidence": "<script type=\"module\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule\n              src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" nomodule src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/js/configRgpdPart.js",
+							"attack": "",
+							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/dsfr-1.9/js/configRgpdPart.js\"></script>",
 							"otherinfo": ""
 						},
 						{
@@ -494,14 +582,6 @@
 							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/js/common.js",
 							"attack": "",
 							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/js/common.js\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.demarches.interieur.gouv.fr",
-							"method": "GET",
-							"param": "https://www.service-public.fr/resources/v-68f054e1b3/assets/js/configRgpdPart.js",
-							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"https://www.service-public.fr/resources/v-68f054e1b3/assets/js/configRgpdPart.js\"></script>",
 							"otherinfo": ""
 						},
 						{
@@ -521,7 +601,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "5",
+					"count": "10",
 					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
 					"otherinfo": "",
 					"reference": "",
@@ -571,38 +651,65 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "sha384-sz2c/zDJtH3HqNz8Y0Z7+vK8/6aeU1Fir1OpAMNZgXxiW2kLqRSjL0AKG09TBWKw",
-							"otherinfo": "\uFFFD\\x0016\uFFFD\uFFFD\uFFFDg?\uFFFD2m\\x001fq\uFFFD7?\\x0018\u045E\uFFFD\uFFFD\uFFFD?\u99D4\uFFFDX\uFFFD\uFFFD\uFFFD@0\uFFFD`_\\x0018\uFFFD\uFFFDB\uFFFDE(\uFFFD\uFFFD\\x0002\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD"
+							"evidence": "Qr4Q1dEAQ8qH1X4cpcw4Z6lHfmUAAAAAQUIPAAAAAAAlfVZl2m3jWzR1xPQGT2r2",
+							"otherinfo": "B\uFFFD\\x0010\uFFFD\uFFFD\\x0000C\u0287\uFFFD~\\x001c\uFFFD\uFFFD8g\uFFFDG~e\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000%}Ve\uFFFDm\uFFFD[4u\uFFFD\uFFFD\\x0006Oj\uFFFD"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "pvHVsBX4Tmy7gPxCYm5NnUcNdWUAAAAAQUIPAAAAAACWFEQks8QxqhNBxfHiYApT",
-							"otherinfo": "\uFFFD\uFFFD\u0570\\x0015\uFFFDNl\uFFFD\uFFFD\uFFFDBbnM\uFFFDG\rue\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\\x0014D$\uFFFD\uFFFD1\uFFFD\\x0013A\uFFFD\uFFFD\uFFFD`\nS"
+							"evidence": "sha384-sz2c/zDJtH3HqNz8Y0Z7+vK8/6aeU1Fir1OpAMNZgXxiW2kLqRSjL0AKG09TBWKw",
+							"otherinfo": "\uFFFD\\x0016\uFFFD\uFFFD\uFFFDg?\uFFFD2m\\x001fq\uFFFD7?\\x0018\u045E\uFFFD\uFFFD\uFFFD?\u99D4\uFFFDX\uFFFD\uFFFD\uFFFD@0\uFFFD`_\\x0018\uFFFD\uFFFDB\uFFFDE(\uFFFD\uFFFD\\x0002\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "irHemt5PTEKxmijVM7R9ABMNdWUAAAAAQUIPAAAAAACymAjSXN/nN4MfijyBo4YV",
-							"otherinfo": "\uFFFD\uFFFD\u079A\uFFFDOLB\uFFFD\uFFFD(\uFFFD3\uFFFD}\\x0000\\x0013\rue\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFD\\x0008\uFFFD\\\uFFFD\uFFFD7\uFFFD\\x001f\uFFFD<\uFFFD\uFFFD\uFFFD\\x0015"
+							"evidence": "sLw9Rz6RTb2T4OfdGVy5enZHfmUAAAAAQUIPAAAAAACEnHtFA7+cKKdcuzNd3EXc",
+							"otherinfo": "\uFFFD\uFFFD=G>\uFFFDM\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x0019\\\uFFFDzvG~e\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFD{E\\x0003\uFFFD\uFFFD(\uFFFD\\\uFFFD3]\uFFFDE\uFFFD"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "a7QZ/h30RraGs58zUp7TvUgNdWUAAAAAQUIPAAAAAABeIqZJP+aMo/kCuoJNcmkX",
-							"otherinfo": "k\uFFFD\\x0019\uFFFD\\x001d\uFFFDF\uFFFD\uFFFD\uFFFD\uFFFD3R\uFFFD\u04FDH\rue\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000^\"\uFFFDI?\u6323\uFFFD\\x0002\uFFFD\uFFFDMri\\x0017"
+							"evidence": "XwXxFuhMRye+g50jdP2n4qpHfmUAAAAAQUIPAAAAAACOAmtb+eW7T1V2xswJqfKd",
+							"otherinfo": "_\\x0005\uFFFD\\x0016\uFFFDLG'\uFFFD\uFFFD\uFFFD#t\uFFFD\uFFFD\uFFFDG~e\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\\x0002k[\uFFFD\uFFFDOUv\uFFFD\uFFFD\t\uFFFD\uFFFD"
 						}
 					],
 					"count": "4",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>\uFFFD\\x0016\uFFFD\uFFFD\uFFFDg?\uFFFD2m\\x001fq\uFFFD7?\\x0018\u045E\uFFFD\uFFFD\uFFFD?\u99D4\uFFFDX\uFFFD\uFFFD\uFFFD@0\uFFFD`_\\x0018\uFFFD\uFFFDB\uFFFDE(\uFFFD\uFFFD\\x0002\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD</p>",
+					"otherinfo": "<p>B\uFFFD\\x0010\uFFFD\uFFFD\\x0000C\u0287\uFFFD~\\x001c\uFFFD\uFFFD8g\uFFFDG~e\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000%}Ve\uFFFDm\uFFFD[4u\uFFFD\uFFFD\\x0006Oj\uFFFD</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.demarches.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-type=\"application/javascript\" data-test=\"eulerian\">\n        window.dsfr = {\n            analytics: {\n              \", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script data-type=\"application/javascript\" data-test=\"eulerian\"></p><p>        window.dsfr = {</p><p>            analytics: {</p><p>              \", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
 					"sourceid": "1"
@@ -623,7 +730,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nSP_SESSION=84dba01d-96da-46d6-af1a-92bff3c09021\r\nTS012e9d3d=012a7f58e0bd32e17aeccab1766024ac6c30bbec4b7887f4bb7923101aed49589e705d645f2a946516c6046d6ab5802bf3f1538468\r\nTS01425d24=012a7f58e0b2f5e47da409aac2aea617a8793395c97887f4bb7923101aed49589e705d645f37a29788968c527729c18e40633d65b74b69ad22e7531134e3c10415389453db\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nSP_SESSION=b9d4f46f-45d0-4e3a-ba45-46b448f937b8\r\nTS012e9d3d=012a7f58e0401f447cc840f6dda66fbfdbf6c859c479744221264a0ec7b0f8003a0acfcb57213095dac9330f417a67f0778e8c28a3\r\nTS01425d24=012a7f58e06d8cc8e43e7a965d68367475bc26151379744221264a0ec7b0f8003a0acfcb57da1908b37de8c5dc9ce12b8545eb25943395a974618d16ecb4ea8121bcac0c0e\r\n"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr",
@@ -631,7 +738,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=pvHVsBX4Tmy7gPxCYm5NnUcNdWUAAAAAQUIPAAAAAACWFEQks8QxqhNBxfHiYApT\r\nincap_ses_727_1098373=NtxCDVAQZ3Pw42HGuNMWCkcNdWUAAAAApyJ2aRA+AkGXRKGaYb193A==\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=Qr4Q1dEAQ8qH1X4cpcw4Z6lHfmUAAAAAQUIPAAAAAAAlfVZl2m3jWzR1xPQGT2r2\r\nincap_ses_727_1098373=Viu1WsD9JRb468IIu9MWCqlHfmUAAAAAWAWgxgK+iGrpi9MAFnHung==\r\n"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr/robots.txt",
@@ -639,7 +746,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=irHemt5PTEKxmijVM7R9ABMNdWUAAAAAQUIPAAAAAACymAjSXN/nN4MfijyBo4YV\r\nnlbi_1098373=sdE6Hq27ozpkxq7gK4C/SAAAAAB+9M/Jihfuv7Prw/2aR7eD\r\nincap_ses_408_1098373=oxirDda2qGY8Dk/U1oKpBUgNdWUAAAAA9FHjbB9sDyaNQ4we1goZAw==\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=sLw9Rz6RTb2T4OfdGVy5enZHfmUAAAAAQUIPAAAAAACEnHtFA7+cKKdcuzNd3EXc\r\nnlbi_1098373=IStTCH/AAXOSxNISK4C/SAAAAACS/B//SPnWBzru5qzJQHP6\r\nincap_ses_408_1098373=vgtlah9T7S6TBo4e2YKpBalHfmUAAAAAP+ZrIWwdESX0BRorW12acg==\r\n"
 						},
 						{
 							"uri": "https://www.demarches.interieur.gouv.fr/sitemap.xml",
@@ -647,12 +754,12 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=a7QZ/h30RraGs58zUp7TvUgNdWUAAAAAQUIPAAAAAABeIqZJP+aMo/kCuoJNcmkX\r\nnlbi_1098373=42LHbtTKkWUj9BBGK4C/SAAAAADX2agE9EYnlFMGxSQn3Ng5\r\nincap_ses_108_1098373=TtUmA1LBZgoif0ksOLJ/AUgNdWUAAAAAfLQuzzijcoJBx0qqhbgcRA==\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.demarches.interieur.gouv.fr\r\nvisid_incap_1098373=XwXxFuhMRye+g50jdP2n4qpHfmUAAAAAQUIPAAAAAACOAmtb+eW7T1V2xswJqfKd\r\nnlbi_1098373=4LvZFvRde2VqjIIgK4C/SAAAAADbqzz1GaTS5y8v0cLe1O/K\r\nincap_ses_108_1098373=5T3+OeaJt1R2zjVKOLJ/AapHfmUAAAAAm43br0IQy0MIhInIoC71xA==\r\n"
 						}
 					],
 					"count": "4",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.demarches.interieur.gouv.fr</p><p>SP_SESSION=84dba01d-96da-46d6-af1a-92bff3c09021</p><p>TS012e9d3d=012a7f58e0bd32e17aeccab1766024ac6c30bbec4b7887f4bb7923101aed49589e705d645f2a946516c6046d6ab5802bf3f1538468</p><p>TS01425d24=012a7f58e0b2f5e47da409aac2aea617a8793395c97887f4bb7923101aed49589e705d645f37a29788968c527729c18e40633d65b74b69ad22e7531134e3c10415389453db</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.demarches.interieur.gouv.fr</p><p>SP_SESSION=b9d4f46f-45d0-4e3a-ba45-46b448f937b8</p><p>TS012e9d3d=012a7f58e0401f447cc840f6dda66fbfdbf6c859c479744221264a0ec7b0f8003a0acfcb57213095dac9330f417a67f0778e8c28a3</p><p>TS01425d24=012a7f58e06d8cc8e43e7a965d68367475bc26151379744221264a0ec7b0f8003a0acfcb57da1908b37de8c5dc9ce12b8545eb25943395a974618d16ecb4ea8121bcac0c0e</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
@@ -727,7 +834,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 467",
+							"evidence": "Age: 1285",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
@@ -926,7 +1033,7 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "84dba01d-96da-46d6-af1a-92bff3c09021",
+							"evidence": "b9d4f46f-45d0-4e3a-ba45-46b448f937b8",
 							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
 						},
 						{
@@ -934,7 +1041,7 @@
 							"method": "GET",
 							"param": "visid_incap_1098373",
 							"attack": "",
-							"evidence": "pvHVsBX4Tmy7gPxCYm5NnUcNdWUAAAAAQUIPAAAAAACWFEQks8QxqhNBxfHiYApT",
+							"evidence": "Qr4Q1dEAQ8qH1X4cpcw4Z6lHfmUAAAAAQUIPAAAAAAAlfVZl2m3jWzR1xPQGT2r2",
 							"otherinfo": "\ncookie:visid_incap_1098373\ncookie:incap_ses_727_1098373"
 						},
 						{
@@ -942,7 +1049,7 @@
 							"method": "GET",
 							"param": "visid_incap_1098373",
 							"attack": "",
-							"evidence": "irHemt5PTEKxmijVM7R9ABMNdWUAAAAAQUIPAAAAAACymAjSXN/nN4MfijyBo4YV",
+							"evidence": "sLw9Rz6RTb2T4OfdGVy5enZHfmUAAAAAQUIPAAAAAACEnHtFA7+cKKdcuzNd3EXc",
 							"otherinfo": "\ncookie:visid_incap_1098373\ncookie:nlbi_1098373\ncookie:incap_ses_408_1098373"
 						},
 						{
@@ -950,7 +1057,7 @@
 							"method": "GET",
 							"param": "visid_incap_1098373",
 							"attack": "",
-							"evidence": "a7QZ/h30RraGs58zUp7TvUgNdWUAAAAAQUIPAAAAAABeIqZJP+aMo/kCuoJNcmkX",
+							"evidence": "XwXxFuhMRye+g50jdP2n4qpHfmUAAAAAQUIPAAAAAACOAmtb+eW7T1V2xswJqfKd",
 							"otherinfo": "\ncookie:visid_incap_1098373\ncookie:nlbi_1098373\ncookie:incap_ses_108_1098373"
 						}
 					],
