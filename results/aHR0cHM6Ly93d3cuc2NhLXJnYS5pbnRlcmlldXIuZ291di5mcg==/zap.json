@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 10 Dec 2023 01:19:21",
+	"@generated": "Sun, 17 Dec 2023 01:19:39",
 	"site":[ 
 		{
 			"@name": "https://www.sca-rga.interieur.gouv.fr",
@@ -50,7 +50,7 @@
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "15"
 				},
 				{
 					"pluginid": "10055",
@@ -93,7 +93,7 @@
 					"reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "15"
 				},
 				{
 					"pluginid": "10003",
@@ -219,7 +219,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10011",
@@ -318,7 +318,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10054",
@@ -495,7 +495,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10094",
@@ -600,7 +600,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -712,7 +712,23 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "private, no-cache, no-store, max-age=0",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "private, no-cache, no-store, max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -728,13 +744,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "4",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "14"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -755,7 +771,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"uri": "https://www.sca-rga.interieur.gouv.fr/favicon.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -763,13 +787,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -790,7 +814,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"uri": "https://www.sca-rga.interieur.gouv.fr/favicon.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -798,13 +830,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -825,7 +857,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"uri": "https://www.sca-rga.interieur.gouv.fr/favicon.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -833,13 +873,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -860,7 +900,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.sca-rga.interieur.gouv.fr/manifest.json",
+							"uri": "https://www.sca-rga.interieur.gouv.fr/favicon.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -868,7 +916,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
@@ -891,15 +939,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
-							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
-						},
-						{
-							"uri": "https://www.sca-rga.interieur.gouv.fr/css/Material_Icons/Material_Icons.css",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -907,7 +947,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -915,7 +955,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -923,7 +963,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -931,7 +971,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -939,7 +979,15 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
+							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
+						},
+						{
+							"uri": "https://www.sca-rga.interieur.gouv.fr/static/css/main.256ce6e2.css",
+							"method": "GET",
+							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
+							"attack": "",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
@@ -947,7 +995,7 @@
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
-							"evidence": "v1YPbOgwSDvbm",
+							"evidence": "v1T-rOgwSDTVR",
 							"otherinfo": "\ncookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						}
 					],
@@ -957,7 +1005,7 @@
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				}
 			]
 		}
