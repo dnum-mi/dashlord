@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 14 Jan 2024 00:48:31",
+	"@generated": "Sun, 21 Jan 2024 00:48:45",
 	"site":[ 
 		{
 			"@name": "https://www.service-public.fr",
@@ -9,6 +9,41 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10062",
+					"alertRef": "10062",
+					"alert": "PII Disclosure",
+					"name": "PII Disclosure",
+					"riskcode": "3",
+					"confidence": "3",
+					"riskdesc": "High (High)",
+					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr/particuliers/actualites/A15736",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "5638162160031353475",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 563816\nBrand: MAESTRO\nCategory: \nIssuer: "
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/actualites/A15774",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "5700650593743775394",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 570065\nBrand: MAESTRO\nCategory: \nIssuer: "
+						}
+					],
+					"count": "2",
+					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
+					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 563816</p><p>Brand: MAESTRO</p><p>Category: </p><p>Issuer: </p>",
+					"reference": "",
+					"cweid": "359",
+					"wascid": "13",
+					"sourceid": "9381"
+				},
 				{
 					"pluginid": "10202",
 					"alertRef": "10202",
@@ -24,7 +59,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -32,7 +67,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -40,7 +75,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -60,19 +95,19 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 3: \"_codesSva\" \"_ministeres\" \"_perimetres\" \"a11y-filtre-code-js\" \"a11y-filtre-ministere-js\" \"filterKeyword\" \"perimetre0\" \"perimetre1\" \"perimetre2\" \"perimetre3\" \"perimetre4\" ]."
 						},
 						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19803",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
+						},
+						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19806",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -80,7 +115,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -88,7 +123,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -96,7 +131,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						},
 						{
@@ -104,16 +139,145 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form\n          id=\"header-search-main\"\n          method=\"get\"\n          action=\"https://www.service-public.fr/particuliers/recherche\"\n          role=\"search\"\n          class=\"fr-search-bar sp-autocomplete\"\n          aria-label=\"Tout le site\">",
+							"evidence": "<form\n              id=\"header-search-main\"\n              method=\"get\"\n              action=\"https://www.service-public.fr/particuliers/recherche?audience=particuliers\"\n              role=\"search\"\n              class=\"fr-search-bar sp-autocomplete\"\n              aria-label=\"Tout le site\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ]."
 						}
 					],
 					"count": "11",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"header-search-input\" ].</p>",
-					"reference": "<p>http://projects.webappsec.org/Cross-Site-Request-Forgery</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-4",
+					"alert": "CSP: Wildcard Directive",
+					"name": "CSP: Wildcard Directive",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: </p><p>script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src, form-action</p><p></p><p>The directive(s): form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-5",
+					"alert": "CSP: script-src unsafe-inline",
+					"name": "CSP: script-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "script-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "script-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "script-src includes unsafe-inline."
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>script-src includes unsafe-inline.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-6",
+					"alert": "CSP: style-src unsafe-inline",
+					"name": "CSP: style-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+							"otherinfo": "style-src includes unsafe-inline."
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
 					"sourceid": "1"
 				},
 				{
@@ -126,22 +290,6 @@
 					"riskdesc": "Medium (High)",
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
 						{
 							"uri": "https://www.service-public.fr/*/partager-par-courriel",
 							"method": "GET",
@@ -183,6 +331,14 @@
 							"otherinfo": ""
 						},
 						{
+							"uri": "https://www.service-public.fr/accueil",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/actualites/lettresp/archives/L",
 							"method": "GET",
 							"param": "",
@@ -191,7 +347,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/demarches-silence-vaut-accord/recherche?page",
+							"uri": "https://www.service-public.fr/allo-sp",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -199,15 +355,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
+							"uri": "https://www.service-public.fr/particuliers/recherche?audience=particuliers&keyword=ZAP",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -215,13 +363,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "9",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "173"
 				},
 				{
 					"pluginid": "10098",
@@ -234,7 +382,7 @@
 					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/css/sp-dsfr.css",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/css/sp-dsfr.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -242,7 +390,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/dsfr/analytics.module.min.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/dsfr/analytics.module.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -250,7 +398,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/dsfr/analytics.nomodule.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -258,7 +406,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/dsfr/dsfr.nomodule.min.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/dsfr/dsfr.min.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -266,7 +414,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/dsfr/utility.min.css",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/dsfr/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -274,7 +422,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/apple-touch-icon.png",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/favicon/apple-touch-icon.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -282,7 +430,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/favicon.svg",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/favicon/favicon.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -290,7 +438,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/manifest.webmanifest",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/dsfr/favicon/manifest.webmanifest",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -298,7 +446,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/js/configRgpdPart.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/dsfr-1.9/js/configRgpdPart.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -306,7 +454,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/js/common.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/js/coperia.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -314,7 +462,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/js/readspeaker/webReader.js?notools=1&pids=wr",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/js/readspeaker/webReader.js?notools=1&pids=wr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -322,7 +470,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/js/require.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/js/require.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -336,7 +484,34 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "6932"
+					"sourceid": "6592"
+				},
+				{
+					"pluginid": "90022",
+					"alertRef": "90022",
+					"alert": "Application Error Disclosure",
+					"name": "Application Error Disclosure",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.service-public.fr/particuliers/recherche?audience=particuliers&keyword=ZAP",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HTTP/1.1 500 Internal Server Error",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "7001"
 				},
 				{
 					"pluginid": "10054",
@@ -424,7 +599,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/js/common.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/js/common.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -432,7 +607,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/js/require.js",
+							"uri": "https://www.service-public.fr/resources/v-b59d9c524b/assets/js/require.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -454,7 +629,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "6955"
+					"sourceid": "6961"
 				},
 				{
 					"pluginid": "10063",
@@ -515,7 +690,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/static-error/dsfr/dsfr.module.min.js",
+							"uri": "https://www.service-public.fr/allo-sp",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -524,14 +699,6 @@
 						},
 						{
 							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.service-public.fr/static-error/js/ie/polyfill.min.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -555,6 +722,14 @@
 							"otherinfo": ""
 						},
 						{
+							"uri": "https://www.service-public.fr/static-error/js/orejime/orejime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/static-error/js/xiti/smarttag.js",
 							"method": "GET",
 							"param": "",
@@ -569,11 +744,11 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "179"
+					"sourceid": "173"
 				},
 				{
 					"pluginid": "10035",
-					"alertRef": "10035",
+					"alertRef": "10035-1",
 					"alert": "Strict-Transport-Security Header Not Set",
 					"name": "Strict-Transport-Security Header Not Set",
 					"riskcode": "1",
@@ -630,7 +805,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/apple-touch-icon.png",
+							"uri": "https://www.service-public.fr/allo-sp",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -681,10 +856,10 @@
 					"count": "12",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
 					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "179"
+					"sourceid": "173"
 				},
 				{
 					"pluginid": "10096",
@@ -705,6 +880,22 @@
 							"otherinfo": "1717735209, which evaluates to: 2024-06-07 04:40:09"
 						},
 						{
+							"uri": "https://www.service-public.fr/particuliers/actualites/A15828",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1658232781",
+							"otherinfo": "1658232781, which evaluates to: 2022-07-19 12:13:01"
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/actualites/A15828",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1658841542",
+							"otherinfo": "1658841542, which evaluates to: 2022-07-26 13:19:02"
+						},
+						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/R58845",
 							"method": "GET",
 							"param": "",
@@ -719,23 +910,15 @@
 							"attack": "",
 							"evidence": "1648203384",
 							"otherinfo": "1648203384, which evaluates to: 2022-03-25 10:16:24"
-						},
-						{
-							"uri": "https://www.service-public.fr/particuliers/vosdroits/R66158",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1695030959",
-							"otherinfo": "1695030959, which evaluates to: 2023-09-18 09:55:59"
 						}
 					],
-					"count": "4",
+					"count": "5",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
 					"otherinfo": "<p>1717735209, which evaluates to: 2024-06-07 04:40:09</p>",
 					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "6522"
+					"sourceid": "5448"
 				},
 				{
 					"pluginid": "10021",
@@ -747,30 +930,6 @@
 					"riskdesc": "Low (Medium)",
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
-						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/apple-touch-icon.png",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/favicon.svg",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"uri": "https://www.service-public.fr/resources/v-b20a8d3fb1/assets/dsfr-1.9/dsfr/favicon/manifest.webmanifest",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
 						{
 							"uri": "https://www.service-public.fr/robots.txt",
 							"method": "GET",
@@ -828,7 +987,31 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
+							"uri": "https://www.service-public.fr/static-error/img/logo-rf-top.svg",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
 							"uri": "https://www.service-public.fr/static-error/js/ie/html5shiv.min.js",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/ie/respond.min.js",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"uri": "https://www.service-public.fr/static-error/js/jquery/jquery-3.7.0.min.js",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -847,10 +1030,10 @@
 					"count": "12",
 					"solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
 					"otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
-					"reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
+					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6712"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10094",
@@ -864,14 +1047,6 @@
 					"instances":[ 
 						{
 							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "EjfbmjAxVpCGzkyjF4wTemZfr0-HRfRr0Cltkv4VpUs",
-							"otherinfo": "\\x00127\u06DA01V\uFFFD\uFFFD\uFFFDL\uFFFD\\x0017\uFFFD\\x0013zf_\uFFFDO\uFFFDE\uFFFDk\uFFFD)m\uFFFD\uFFFD\\x0015\uFFFDK"
-						},
-						{
-							"uri": "https://www.service-public.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -935,6 +1110,14 @@
 							"otherinfo": "\uFFFD\\x0016\uFFFD\uFFFD\uFFFDg?\uFFFD2m\\x001fq\uFFFD7?\\x0018\u045E\uFFFD\uFFFD\uFFFD?\u99D4\uFFFDX\uFFFD\uFFFD\uFFFD@0\uFFFD`_\\x0018\uFFFD\uFFFDB\uFFFDE(\uFFFD\uFFFD\\x0002\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD"
 						},
 						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19805",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "sha384-sz2c/zDJtH3HqNz8Y0Z7+vK8/6aeU1Fir1OpAMNZgXxiW2kLqRSjL0AKG09TBWKw",
+							"otherinfo": "\uFFFD\\x0016\uFFFD\uFFFD\uFFFDg?\uFFFD2m\\x001fq\uFFFD7?\\x0018\u045E\uFFFD\uFFFD\uFFFD?\u99D4\uFFFDX\uFFFD\uFFFD\uFFFD@0\uFFFD`_\\x0018\uFFFD\uFFFDB\uFFFDE(\uFFFD\uFFFD\\x0002\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD"
+						},
+						{
 							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19810",
 							"method": "GET",
 							"param": "",
@@ -947,8 +1130,8 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/particuliers/vosdroits/R56828",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFDbr\uFFFDbz\uFFFD?\uFFFD\uFFFD\\x001d\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\u037C"
+							"evidence": "fr/particuliers/vosdroits/R55153",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFDbr\uFFFDbz\uFFFD?\uFFFD\uFFFD\\x001d\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD^w"
 						}
 					],
 					"count": "11",
@@ -957,7 +1140,7 @@
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "42"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10027",
@@ -1056,7 +1239,7 @@
 					"reference": "",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "42"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90033",
@@ -1074,7 +1257,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=32408307-eedf-48b8-8b02-6e04465e47cb\r\nTS01425d24=012a7f58e0a599a2cd71e65156dc537f8d6ce0b13e00b1d614f35ff493da3ed32060b60a1676a9bb8b41bcdb40ebdef6085dccc1db557b208096d9f15eeee825edf64b3094\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=2041b75c-7d6e-453b-84a0-6aa0cf655621\r\nTS01425d24=012a7f58e0a47d647ac90299bb0bf2b78bd513ea6a14836a666e10607897c1fe126175adbc1bd2e9becdfd44cc52ac25d47726c5b488d4d9f8bd0ec805d54af46d5df611a9\r\n"
 						},
 						{
 							"uri": "https://www.service-public.fr",
@@ -1082,7 +1265,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=fd99d81a-f085-4af4-ba27-97c46a5ec361\r\nTS01425d24=012a7f58e0b7adbbf0ebc34734932df92cc5e73a55e661a375e9bc9296ac45fa4b491265854fc6efb1b687325bdcd245b9537d78af45920851577067c26a80efc3ba643fa6\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=bca4fbe2-dfdc-4c49-bd57-50e5f2fe051a\r\nTS01425d24=012a7f58e0026b000ff305ae650d831be431b871a71f1dc2e82f82f3c4e1b28a0d40ece185168f3b7d6f597fb61918ac39752a71f564df04215efc098969031cfa17052feb\r\n"
 						},
 						{
 							"uri": "https://www.service-public.fr/sitemap.xml",
@@ -1090,13 +1273,13 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=bef02dcd-241e-4f4a-96f7-5ddb1677aef3\r\nTS01425d24=012a7f58e0d45586bb30dc74ef159757a066d18f6395cd8723589bccd292c127f78fdd659fbbb7eb06f68540f67a3b029243da4859aeb166b80fba40583e6e2dd30f556451\r\n"
+							"otherinfo": "The origin domain used for comparison was: \r\nwww.service-public.fr\r\nSP_SESSION=6472098f-6bef-49d6-ba84-c0b019182ff1\r\nTS01425d24=012a7f58e033a96ef298a12a9f97f33581fd7194ab782d05b46ff9fc5d6af92bcbb32bfe4b4a7f03127d32b41638ee52902e656bbaca7ac36fa7a26785787003dbd0deadff\r\n"
 						}
 					],
 					"count": "3",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=32408307-eedf-48b8-8b02-6e04465e47cb</p><p>TS01425d24=012a7f58e0a599a2cd71e65156dc537f8d6ce0b13e00b1d614f35ff493da3ed32060b60a1676a9bb8b41bcdb40ebdef6085dccc1db557b208096d9f15eeee825edf64b3094</p><p></p>",
-					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.service-public.fr</p><p>SP_SESSION=2041b75c-7d6e-453b-84a0-6aa0cf655621</p><p>TS01425d24=012a7f58e0a47d647ac90299bb0bf2b78bd513ea6a14836a666e10607897c1fe126175adbc1bd2e9becdfd44cc52ac25d47726c5b488d4d9f8bd0ec805d54af46d5df611a9</p><p></p>",
+					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
 					"sourceid": "1"
@@ -1113,14 +1296,6 @@
 					"instances":[ 
 						{
 							"uri": "https://www.service-public.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"fr-footer__top-link\"\n     rel=\"noopener noreferrer\"\n     target=\"_self\"\n     href=\"https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&amp;rubricTypeFilter=teleservice\"\n     title=\"D\u00E9marches en ligne - www.service-public.fr - Nouvelle fen\u00EAtre\" data-xiti-name=\"Particuliers::Footer::Demarches_en_ligne_-_www.service-public.fr_-_Nouvelle_fen\u00EAtre::null\" data-xiti-type=\"navigation\">D\u00E9marches en ligne</a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"uri": "https://www.service-public.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1198,6 +1373,14 @@
 							"attack": "",
 							"evidence": "<a class=\"fr-footer__top-link\"\n     rel=\"noopener noreferrer\"\n     target=\"_self\"\n     href=\"https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&amp;rubricTypeFilter=teleservice\"\n     title=\"D\u00E9marches en ligne - www.service-public.fr - Nouvelle fen\u00EAtre\" data-xiti-name=\"Particuliers::Footer::Demarches_en_ligne_-_www.service-public.fr_-_Nouvelle_fen\u00EAtre::null\" data-xiti-type=\"navigation\">D\u00E9marches en ligne</a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"uri": "https://www.service-public.fr/particuliers/vosdroits/N19811",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a class=\"fr-footer__top-link\"\n     rel=\"noopener noreferrer\"\n     target=\"_self\"\n     href=\"https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&amp;rubricTypeFilter=teleservice\"\n     title=\"D\u00E9marches en ligne - www.service-public.fr - Nouvelle fen\u00EAtre\" data-xiti-name=\"Particuliers::Footer::Demarches_en_ligne_-_www.service-public.fr_-_Nouvelle_fen\u00EAtre::null\" data-xiti-type=\"navigation\">D\u00E9marches en ligne</a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						}
 					],
 					"count": "11",
@@ -1206,7 +1389,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "42"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10015",
@@ -1243,6 +1426,14 @@
 							"otherinfo": ""
 						},
 						{
+							"uri": "https://www.service-public.fr/sitemap.xml",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/urlset-1.xml",
 							"method": "GET",
 							"param": "cache-control",
@@ -1267,7 +1458,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
+							"uri": "https://www.service-public.fr/urlset-4.xml",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1299,7 +1490,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "10",
+					"count": "11",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
@@ -1322,7 +1513,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 17",
+							"evidence": "Age: 28479",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1330,7 +1521,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 8",
+							"evidence": "Age: 28486",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1346,7 +1537,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 8033",
+							"evidence": "Age: 5769",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1358,11 +1549,19 @@
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
+							"uri": "https://www.service-public.fr/urlset-10.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 4118",
+							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
 							"uri": "https://www.service-public.fr/urlset-2.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5527",
+							"evidence": "Age: 10753",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1370,7 +1569,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5528",
+							"evidence": "Age: 5702",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1378,15 +1577,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 21033",
-							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 244",
+							"evidence": "Age: 5703",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1402,7 +1593,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5531",
+							"evidence": "Age: 0",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
@@ -1410,17 +1601,17 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 5533",
+							"evidence": "Age: 0",
 							"otherinfo": "The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
 					"count": "12",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>The presence of the 'Age' header indicates that that a HTTP/1.1 compliant caching server is in use.</p>",
-					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)</p>",
+					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html (obsoleted by rfc7234)</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "42"
+					"sourceid": "50"
 				},
 				{
 					"pluginid": "90005",
@@ -1433,6 +1624,14 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/compte/",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1457,13 +1656,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "39"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1476,6 +1675,14 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/compte/",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1500,13 +1707,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "39"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1519,6 +1726,14 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/compte/",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1543,13 +1758,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "39"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1562,6 +1777,14 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.service-public.fr/compte/",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1586,13 +1809,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "4",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "39"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10112",
@@ -1605,11 +1828,19 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.service-public.fr",
+							"method": "GET",
+							"param": "SP_SESSION",
+							"attack": "",
+							"evidence": "2041b75c-7d6e-453b-84a0-6aa0cf655621",
+							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
+						},
+						{
 							"uri": "https://www.service-public.fr/robots.txt",
 							"method": "GET",
 							"param": "TS012e9d3d",
 							"attack": "",
-							"evidence": "012a7f58e0278a413a51c14f313f279887d9be7fe83bae368822b76f580f6c08f5b422bcf86126a58be136ad7fbc7143d23aa01465",
+							"evidence": "012a7f58e0d421d953052eca4e9c81071d653cbc13ef88b5191e37be1a105bedac4752d7f652dfe4d66adb9e7391a01809c3fc39f6",
 							"otherinfo": "\ncookie:TS012e9d3d"
 						},
 						{
@@ -1617,7 +1848,7 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "bef02dcd-241e-4f4a-96f7-5ddb1677aef3",
+							"evidence": "6472098f-6bef-49d6-ba84-c0b019182ff1",
 							"otherinfo": "\ncookie:SP_SESSION\ncookie:TS01425d24\ncookie:TS012e9d3d"
 						},
 						{
@@ -1625,7 +1856,7 @@
 							"method": "GET",
 							"param": "SP_SESSION",
 							"attack": "",
-							"evidence": "fd99d81a-f085-4af4-ba27-97c46a5ec361",
+							"evidence": "bca4fbe2-dfdc-4c49-bd57-50e5f2fe051a",
 							"otherinfo": "\ncookie:SP_SESSION"
 						},
 						{
@@ -1633,7 +1864,7 @@
 							"method": "GET",
 							"param": "TS012e9d3d",
 							"attack": "",
-							"evidence": "012a7f58e032c5f2ec9ad8aa8278836ee71430e9bbe661a375e9bc9296ac45fa4b4912658537500ca599e8ef3d8a4b720e3b6a26b4",
+							"evidence": "012a7f58e0f5baca899ba542256aa1866b5c6665ac1f1dc2e82f82f3c4e1b28a0d40ece185f30002ed1fceec0ca3ec4eea26dc5a4f",
 							"otherinfo": "\ncookie:TS012e9d3d"
 						},
 						{
@@ -1641,41 +1872,17 @@
 							"method": "GET",
 							"param": "TS01425d24",
 							"attack": "",
-							"evidence": "012a7f58e0b7adbbf0ebc34734932df92cc5e73a55e661a375e9bc9296ac45fa4b491265854fc6efb1b687325bdcd245b9537d78af45920851577067c26a80efc3ba643fa6",
-							"otherinfo": "\ncookie:TS01425d24"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
-							"param": "SP_SESSION",
-							"attack": "",
-							"evidence": "bef02dcd-241e-4f4a-96f7-5ddb1677aef3",
-							"otherinfo": "\ncookie:SP_SESSION"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
-							"param": "TS012e9d3d",
-							"attack": "",
-							"evidence": "012a7f58e00457ee057f57d721dfe5dc7f136ab0ac95cd8723589bccd292c127f78fdd659f0d272a48be06c8b050c2a3d6849a1bb3",
-							"otherinfo": "\ncookie:TS012e9d3d"
-						},
-						{
-							"uri": "https://www.service-public.fr/sitemap.xml",
-							"method": "GET",
-							"param": "TS01425d24",
-							"attack": "",
-							"evidence": "012a7f58e0d45586bb30dc74ef159757a066d18f6395cd8723589bccd292c127f78fdd659fbbb7eb06f68540f67a3b029243da4859aeb166b80fba40583e6e2dd30f556451",
+							"evidence": "012a7f58e0026b000ff305ae650d831be431b871a71f1dc2e82f82f3c4e1b28a0d40ece185168f3b7d6f597fb61918ac39752a71f564df04215efc098969031cfa17052feb",
 							"otherinfo": "\ncookie:TS01425d24"
 						}
 					],
-					"count": "8",
+					"count": "6",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
-					"otherinfo": "<p></p><p>cookie:TS012e9d3d</p>",
+					"otherinfo": "<p></p><p>cookie:SP_SESSION</p><p>cookie:TS01425d24</p><p>cookie:TS012e9d3d</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -1694,6 +1901,22 @@
 							"attack": "",
 							"evidence": "s-maxage=28800",
 							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.service-public.fr/*/recherche",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"uri": "https://www.service-public.fr/*/recherche-guidee/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
 							"uri": "https://www.service-public.fr/*?xtor",
@@ -1758,22 +1981,6 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-5.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						},
-						{
-							"uri": "https://www.service-public.fr/urlset-6.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						}
 					],
 					"count": "11",
@@ -1782,7 +1989,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "42"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10031",
@@ -1859,14 +2066,6 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/demarches-silence-vaut-accord/recherche?page=50\r\n\r\nappears to include user input in: \r\n\r\na(n) [img] tag [width] attribute \r\n\r\nThe user input found was:\r\npage=50\r\n\r\nThe user-controlled value was:\r\n50"
 						},
 						{
-							"uri": "https://www.service-public.fr/particuliers/recherche?keyword=ZAP",
-							"method": "GET",
-							"param": "keyword",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/particuliers/recherche?keyword=ZAP\r\n\r\nappears to include user input in: \r\n\r\na(n) [input] tag [value] attribute \r\n\r\nThe user input found was:\r\nkeyword=ZAP\r\n\r\nThe user-controlled value was:\r\nzap"
-						},
-						{
 							"uri": "https://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&rubricTypeFilter=formulaire",
 							"method": "GET",
 							"param": "rubricTypeFilter",
@@ -1899,13 +2098,13 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\r\n\r\nhttps://www.service-public.fr/particuliers/recherche?rubricFilter=serviceEnLigne&rubricTypeFilter=simulateur\r\n\r\nappears to include user input in: \r\n\r\na(n) [button] tag [title] attribute \r\n\r\nThe user input found was:\r\nrubricTypeFilter=simulateur\r\n\r\nThe user-controlled value was:\r\nsimulateurs -  d\u00E9sactiver le filtre"
 						}
 					],
-					"count": "13",
+					"count": "12",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
 					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.service-public.fr/demarches-silence-vaut-accord/recherche?_codesSva=1&_ministeres=1&_perimetres=on&codesSva=Code+de+l%27artisanat&keyword=ZAP&ministeres=Affaires+sociales+et+sant%C3%A9&perimetres=Proc%C3%A9dures+SVA+autres+organismes+g%C3%A9rant+un+service+public+administratif</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [meta] tag [content] attribute </p><p></p><p>The user input found was:</p><p>_codesSva=1</p><p></p><p>The user-controlled value was:</p><p>width=device-width, initial-scale=1, shrink-to-fit=no</p>",
-					"reference": "<p>http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "7148"
+					"sourceid": "7175"
 				}
 			]
 		}
