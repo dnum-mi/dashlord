@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 11 Feb 2024 00:45:18",
+	"@generated": "Sun, 18 Feb 2024 00:45:24",
 	"site":[ 
 		{
 			"@name": "https://www.interieur.gouv.fr",
@@ -9,6 +9,33 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10062",
+					"alertRef": "10062",
+					"alert": "PII Disclosure",
+					"name": "PII Disclosure",
+					"riskcode": "3",
+					"confidence": "2",
+					"riskdesc": "High (Medium)",
+					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
+					"instances":[ 
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/communiques-de-presse/generalisation-de-lapplication-france-identite-et-lancement-du",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "344082223088637",
+							"otherinfo": "Credit Card Type detected: American Express"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
+					"otherinfo": "<p>Credit Card Type detected: American Express</p>",
+					"reference": "",
+					"cweid": "359",
+					"wascid": "13",
+					"sourceid": "501"
+				},
 				{
 					"pluginid": "10202",
 					"alertRef": "10202",
@@ -36,15 +63,39 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">",
+							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form action=\"/fr/content/search\" method=\"get\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"SearchText\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -52,15 +103,7 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"views-exposed-form bef-exposed-form\" data-drupal-selector=\"views-exposed-form-actualites-bloc-block-2\" action=\"/actualites/actu-du-ministere\" method=\"get\" id=\"views-exposed-form-actualites-bloc-block-2\" accept-charset=\"UTF-8\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 2: \"edit-date-debut\" \"edit-date-fin\" \"edit-submit-actualites-bloc\" \"edit-titre\" ]."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -68,43 +111,27 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form class=\"views-exposed-form bef-exposed-form\" data-drupal-selector=\"views-exposed-form-actualites-bloc-block-4\" action=\"/actualites/dossiers\" method=\"get\" id=\"views-exposed-form-actualites-bloc-block-4\" accept-charset=\"UTF-8\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 2: \"edit-date-debut\" \"edit-date-fin\" \"edit-submit-actualites-bloc\" \"edit-titre\" ]."
+							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">",
+							"evidence": "<form action=\"/fr/content/search\" method=\"get\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"SearchText\" ]."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"header-searchbar\" action=\"/recherche\" method=\"GET\" accept-charset=\"UTF-8\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"search-home-input\" ]."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"/content/search\" method=\"get\">",
+							"evidence": "<form action=\"/fr/content/search\" method=\"get\">",
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token] was found in the following HTML form: [Form 1: \"SearchText\" ]."
 						}
 					],
@@ -143,7 +170,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -151,7 +178,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -159,7 +186,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -167,7 +194,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -175,7 +202,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"uri": "https://www.interieur.gouv.fr/ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -183,7 +210,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/dominique-faure",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -191,7 +218,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -199,7 +226,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -207,7 +234,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/web.config",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -221,7 +248,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10098",
@@ -234,7 +261,7 @@
 					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/core/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -242,7 +269,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Filiere-services-techniques",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -250,7 +277,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Travailleurs-handicapes",
+							"uri": "https://www.interieur.gouv.fr/profiles/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -258,7 +285,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Archives",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -266,7 +293,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -274,7 +301,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/content/view/sitemap/438",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -282,7 +309,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/images/default_share.jpg",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -290,7 +317,15 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Patrimoine",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -306,23 +341,15 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/Publications",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/rss/feed/actu-ministere",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/search/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -336,7 +363,7 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "339"
+					"sourceid": "635"
 				},
 				{
 					"pluginid": "10020",
@@ -349,7 +376,7 @@
 					"desc": "<p>The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?CWUDNSAI=23&cinfo=03000000&cip=20.230.57.22&edet=15&incident_id=151000730338547404-667113677842223692&mth=GET&rpinfo=0&xinfo=12-135906912-0%200NNN%20RT%281707612242302%2082%29%20q%280%20-1%20-1%20-1%29%20r%280%20-1%29%20B15%283%2c306018%2c0%29%20U24",
+							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Filiere-administrative",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -389,7 +416,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Collectivites-territoriales",
+							"uri": "https://www.interieur.gouv.fr/Le-ministere/Gendarmerie-nationale",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -429,7 +456,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Publications",
+							"uri": "https://www.interieur.gouv.fr/Menu-accessibilite/Nous-contacter",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -437,7 +464,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Publications/Statistiques",
+							"uri": "https://www.interieur.gouv.fr/Publications",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -451,7 +478,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
-					"sourceid": "890"
+					"sourceid": "957"
 				},
 				{
 					"pluginid": "90003",
@@ -480,7 +507,31 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -488,7 +539,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -496,7 +547,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -504,7 +555,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -512,39 +571,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministres/dominique-faure",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministres/sabrina-agresti-roubache",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<link rel=\"stylesheet\" media=\"all\" href=\"https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css\" />",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -558,7 +585,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10003",
@@ -585,7 +612,7 @@
 					"reference": "<p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://github.com/advisories/GHSA-rmxg-73gg-4p98</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://github.com/jquery/jquery.com/issues/162</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"cweid": "829",
 					"wascid": "-1",
-					"sourceid": "1518"
+					"sourceid": "1586"
 				},
 				{
 					"pluginid": "10044",
@@ -670,6 +697,14 @@
 							"otherinfo": "Location header URI length: 41 [https://www.interieur.gouv.fr/filter/tips].\nPredicted response size: 341.\nResponse Body Length: 410."
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/index.php/media/oembed",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 42 [https://www.interieur.gouv.fr/media/oembed].\nPredicted response size: 342.\nResponse Body Length: 414."
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/recherche?edit-created-monthFrom=01&edit-created-monthTo=01&edit-created-yearFrom=2024&edit-created-yearTo=2024&field_theme%5B10%5D=10&field_theme%5B13%5D=13&field_theme%5B14%5D=14&field_theme%5B15%5D=15&field_theme%5B16%5D=16&field_theme%5B24%5D=24&field_theme%5B29%5D=29&field_theme%5B30%5D=30&field_theme%5B31%5D=31&field_theme%5B32%5D=32&field_theme%5B33%5D=33&field_theme%5B34%5D=34&field_theme%5B35%5D=35&field_theme%5B36%5D=36&field_theme%5B39%5D=39&field_theme%5B40%5D=40&field_theme%5B43%5D=43&field_theme%5B61%5D=61&field_theme%5B67%5D=67&field_theme%5B70%5D=70&op=R%C3%A9initialiser+les+filtres&search=ZAP&sort_by=search_api_relevance",
 							"method": "GET",
 							"param": "",
@@ -678,13 +713,13 @@
 							"otherinfo": "Location header URI length: 39 [https://www.interieur.gouv.fr/recherche].\nPredicted response size: 339.\nResponse Body Length: 402."
 						}
 					],
-					"count": "10",
+					"count": "11",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
 					"otherinfo": "<p>Location header URI length: 116 [https://www.interieur.gouv.fr/actualites/actualites-du-ministere/situation-en-ukraine/protection-contre-violences-et].</p><p>Predicted response size: 416.</p><p>Response Body Length: 710.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "2212"
+					"sourceid": "2065"
 				},
 				{
 					"pluginid": "10010",
@@ -697,99 +732,99 @@
 					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "incap_ses_1689_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "incap_ses_1686_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "incap_ses_764_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_764_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/presse",
+							"method": "GET",
+							"param": "incap_ses_764_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_764_651915",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_1184_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1184_651915",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1687_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
+							"evidence": "Set-Cookie: incap_ses_1687_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
-							"param": "incap_ses_874_651915",
+							"param": "incap_ses_1688_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_874_651915",
+							"evidence": "Set-Cookie: incap_ses_1688_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
-							"param": "incap_ses_867_651915",
+							"param": "incap_ses_767_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_867_651915",
+							"evidence": "Set-Cookie: incap_ses_767_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
-							"param": "incap_ses_9206_651915",
+							"param": "incap_ses_764_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9206_651915",
+							"evidence": "Set-Cookie: incap_ses_764_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
-							"param": "incap_ses_1183_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1689_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "incap_ses_9125_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9125_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "incap_ses_9206_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9206_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
-							"method": "GET",
-							"param": "incap_ses_452_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_452_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
-							"method": "GET",
-							"param": "incap_ses_1582_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1582_651915",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_8218_651915",
+							"param": "incap_ses_770_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_8218_651915",
+							"evidence": "Set-Cookie: incap_ses_770_651915",
 							"otherinfo": ""
 						}
 					],
@@ -799,7 +834,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10011",
@@ -812,11 +847,43 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "incap_ses_1689_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: visid_incap_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "incap_ses_1686_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: visid_incap_651915",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_1184_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1184_651915",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
 							"otherinfo": ""
 						},
 						{
@@ -830,61 +897,13 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1687_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
+							"evidence": "Set-Cookie: incap_ses_1687_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "incap_ses_874_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_874_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "incap_ses_9206_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9206_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
-							"method": "GET",
-							"param": "incap_ses_1183_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
@@ -894,9 +913,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1689_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
 							"otherinfo": ""
 						},
 						{
@@ -910,9 +929,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_8218_651915",
+							"param": "incap_ses_770_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_8218_651915",
+							"evidence": "Set-Cookie: incap_ses_770_651915",
 							"otherinfo": ""
 						},
 						{
@@ -924,13 +943,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "14",
+					"count": "12",
 					"solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10054",
@@ -943,11 +962,43 @@
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "incap_ses_1689_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: visid_incap_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "incap_ses_1686_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "Set-Cookie: visid_incap_651915",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
-							"param": "incap_ses_1184_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1184_651915",
+							"evidence": "Set-Cookie: incap_ses_1686_651915",
 							"otherinfo": ""
 						},
 						{
@@ -961,61 +1012,13 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1687_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
+							"evidence": "Set-Cookie: incap_ses_1687_651915",
 							"otherinfo": ""
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "incap_ses_874_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_874_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "incap_ses_9206_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9206_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "visid_incap_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: visid_incap_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
-							"method": "GET",
-							"param": "incap_ses_1183_651915",
-							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_1183_651915",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
@@ -1025,9 +1028,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1689_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_9210_651915",
+							"evidence": "Set-Cookie: incap_ses_1689_651915",
 							"otherinfo": ""
 						},
 						{
@@ -1041,9 +1044,9 @@
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "incap_ses_8218_651915",
+							"param": "incap_ses_770_651915",
 							"attack": "",
-							"evidence": "Set-Cookie: incap_ses_8218_651915",
+							"evidence": "Set-Cookie: incap_ses_770_651915",
 							"otherinfo": ""
 						},
 						{
@@ -1055,13 +1058,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "14",
+					"count": "12",
 					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10017",
@@ -1074,7 +1077,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1082,7 +1085,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Filiere-services-techniques",
+							"uri": "https://www.interieur.gouv.fr/ministere/metiers-du-ministere",
+							"method": "GET",
+							"param": "https://api.myjobglasses.com/widgets/professional_search/forms?filter%5Bdomaine_d_emploi%5D=&widget_div_id=widget-preview-6512f9b23be54a00b98fd192&widget_id=6512f9b23be54a00b98fd192",
+							"attack": "",
+							"evidence": "<script async crossorigin src=\"https://api.myjobglasses.com/widgets/professional_search/forms?filter%5Bdomaine_d_emploi%5D=&amp;widget_div_id=widget-preview-6512f9b23be54a00b98fd192&amp;widget_id=6512f9b23be54a00b98fd192\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1090,7 +1101,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Travailleurs-handicapes",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1098,7 +1109,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Archives",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1106,7 +1117,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1114,7 +1125,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/content/view/sitemap/438",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1122,7 +1133,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Collectivites-territoriales",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1130,15 +1141,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Patrimoine",
-							"method": "GET",
-							"param": "https://tag.aticdn.net/445732/smarttag.js",
-							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"https://tag.aticdn.net/445732/smarttag.js\"></script>",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Securite-civile",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1154,7 +1157,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Publications",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.svg",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1162,7 +1165,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/search/",
+							"uri": "https://www.interieur.gouv.fr/Publications",
 							"method": "GET",
 							"param": "https://tag.aticdn.net/445732/smarttag.js",
 							"attack": "",
@@ -1176,7 +1179,7 @@
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "339"
+					"sourceid": "214"
 				},
 				{
 					"pluginid": "10110",
@@ -1189,7 +1192,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1189249567&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1197,7 +1200,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1204992951&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1439412331&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1205,7 +1208,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1315162561&ns=3",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1505327839&ns=1",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1213,7 +1216,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1343973331&ns=4",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1552501999&ns=2",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1221,7 +1224,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1809587790&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1808596237&ns=3",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1229,7 +1232,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=1953948777&ns=2",
+							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=683182914&ns=2",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1237,15 +1240,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=2082964636&ns=1",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&cb=3376881&ns=2",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery-form/jquery.form.min.js?v=4.3.0",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1293,13 +1288,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "13",
+					"count": "12",
 					"solution": "<p>See the references for security advice on the use of these functions.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "913"
+					"sourceid": "1611"
 				},
 				{
 					"pluginid": "110009",
@@ -1312,7 +1307,7 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/core/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1320,7 +1315,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/a",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1328,7 +1323,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/blockquote",
+							"uri": "https://www.interieur.gouv.fr/profiles/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1336,7 +1331,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/cite",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1344,7 +1339,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1352,7 +1347,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/em",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1360,27 +1355,27 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/index.php/node/add/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/system/",
+							"evidence": "/var/",
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/media/oembed",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/system/",
+							"evidence": "/var/",
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/system/",
+							"evidence": "/var/",
 							"otherinfo": ""
 						},
 						{
@@ -1392,7 +1387,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/search/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1400,7 +1395,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/strong",
+							"uri": "https://www.interieur.gouv.fr/README.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1414,7 +1409,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "339"
+					"sourceid": "635"
 				},
 				{
 					"pluginid": "10063",
@@ -1443,7 +1438,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1451,7 +1446,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1459,7 +1454,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1467,7 +1462,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1475,7 +1470,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"uri": "https://www.interieur.gouv.fr/ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1483,7 +1478,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/dominique-faure",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1491,7 +1486,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1499,7 +1494,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1507,7 +1502,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/web.config",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1521,7 +1516,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10040",
@@ -1548,7 +1543,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html</p>",
 					"cweid": "311",
 					"wascid": "4",
-					"sourceid": "1333"
+					"sourceid": "1282"
 				},
 				{
 					"pluginid": "10037",
@@ -1561,7 +1556,7 @@
 					"desc": "<p>The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/core/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1569,7 +1564,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Filiere-services-techniques",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1577,7 +1572,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/A-votre-service/Le-ministere-recrute/Travailleurs-handicapes",
+							"uri": "https://www.interieur.gouv.fr/profiles/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1585,7 +1580,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Archives",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1593,7 +1588,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1601,7 +1596,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/content/view/sitemap/438",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1609,7 +1604,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Patrimoine",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1617,7 +1612,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Le-ministere/Securite-civile",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "X-Powered-By: MI",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1633,7 +1636,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/Publications",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.svg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1641,15 +1644,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/rss/feed/actu-ministere",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "X-Powered-By: eZ Publish",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/search/",
+							"uri": "https://www.interieur.gouv.fr/Publications",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1663,7 +1658,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework</p><p>https://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "339"
+					"sourceid": "635"
 				},
 				{
 					"pluginid": "10036",
@@ -1680,7 +1675,39 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26DE)",
+							"evidence": "ECAcc (sac/2533)",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "ECAcc (sac/2533)",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "ECAcc (sac/2506)",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "ECAcc (sac/2576)",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "ECAcc (sac/2550)",
 							"otherinfo": ""
 						},
 						{
@@ -1688,7 +1715,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26CE)",
+							"evidence": "ECAcc (sac/253D)",
 							"otherinfo": ""
 						},
 						{
@@ -1696,23 +1723,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26BA)",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "ECAcc (dce/26CA)",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "ECAcc (dce/26CC)",
+							"evidence": "ECAcc (sac/252A)",
 							"otherinfo": ""
 						},
 						{
@@ -1720,7 +1731,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26A6)",
+							"evidence": "ECAcc (sac/2550)",
 							"otherinfo": ""
 						},
 						{
@@ -1728,7 +1739,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26D0)",
+							"evidence": "ECAcc (sac/2509)",
 							"otherinfo": ""
 						},
 						{
@@ -1736,15 +1747,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26B3)",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "ECAcc (dce/26C8)",
+							"evidence": "ECAcc (sac/256C)",
 							"otherinfo": ""
 						},
 						{
@@ -1752,7 +1755,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/2689)",
+							"evidence": "ECAcc (sac/2523)",
 							"otherinfo": ""
 						},
 						{
@@ -1760,44 +1763,17 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ECAcc (dce/26E9)",
+							"evidence": "ECAcc (sac/253B)",
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to suppress the \"Server\" header or provide generic details.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://httpd.apache.org/docs/current/mod/core.html#servertokens</p><p>https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff648552(v=pandp.10)</p><p>https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>",
 					"cweid": "200",
 					"wascid": "13",
 					"sourceid": "1"
-				},
-				{
-					"pluginid": "10035",
-					"alertRef": "10035-1",
-					"alert": "Strict-Transport-Security Header Not Set",
-					"name": "Strict-Transport-Security Header Not Set",
-					"riskcode": "1",
-					"confidence": "3",
-					"riskdesc": "Low (High)",
-					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
-					"instances":[ 
-						{
-							"uri": "https://www.interieur.gouv.fr/web.config",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
-					"cweid": "319",
-					"wascid": "15",
-					"sourceid": "219"
 				},
 				{
 					"pluginid": "10035",
@@ -1826,7 +1802,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1834,7 +1810,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1842,7 +1818,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1850,7 +1826,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
+							"uri": "https://www.interieur.gouv.fr/ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1858,7 +1834,31 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1872,25 +1872,9 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/user/password",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/user/register",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
 						}
 					],
-					"count": "10",
+					"count": "11",
 					"solution": "<p>Ensure that only one component in your stack: code, web server, application server, load balancer, etc. is configured to set or add a HTTP Strict-Transport-Security (HSTS) header.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc6797#section-8.1</p>",
@@ -1929,40 +1913,32 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1609385212",
-							"otherinfo": "1609385212, which evaluates to: 2020-12-31 03:26:52"
+							"evidence": "1677236663",
+							"otherinfo": "1677236663, which evaluates to: 2023-02-24 11:04:23"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1677236663",
-							"otherinfo": "1677236663, which evaluates to: 2023-02-24 11:04:23"
+							"evidence": "1808596237",
+							"otherinfo": "1808596237, which evaluates to: 2027-04-24 19:50:37"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1692784162",
-							"otherinfo": "1692784162, which evaluates to: 2023-08-23 09:49:22"
+							"evidence": "1552501999",
+							"otherinfo": "1552501999, which evaluates to: 2019-03-13 18:33:19"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1692784354",
-							"otherinfo": "1692784354, which evaluates to: 2023-08-23 09:52:34"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1953948777",
-							"otherinfo": "1953948777, which evaluates to: 2031-12-02 03:32:57"
+							"evidence": "1646131094",
+							"otherinfo": "1646131094, which evaluates to: 2022-03-01 10:38:14"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/ministere",
@@ -1973,45 +1949,45 @@
 							"otherinfo": "1674650799, which evaluates to: 2023-01-25 12:46:39"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/dominique-faure",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1669647737",
-							"otherinfo": "1669647737, which evaluates to: 2022-11-28 15:02:17"
+							"evidence": "1505327839",
+							"otherinfo": "1505327839, which evaluates to: 2017-09-13 18:37:19"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/sabrina-agresti-roubache",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1689883862",
-							"otherinfo": "1689883862, which evaluates to: 2023-07-20 20:11:02"
+							"evidence": "1619105250",
+							"otherinfo": "1619105250, which evaluates to: 2021-04-22 15:27:30"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1675435576",
-							"otherinfo": "1675435576, which evaluates to: 2023-02-03 14:46:16"
+							"evidence": "1439412331",
+							"otherinfo": "1439412331, which evaluates to: 2015-08-12 20:45:31"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "1809587790",
-							"otherinfo": "1809587790, which evaluates to: 2027-05-06 07:16:30"
+							"evidence": "1707427930",
+							"otherinfo": "1707427930, which evaluates to: 2024-02-08 21:32:10"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
 					"otherinfo": "<p>1613135843, which evaluates to: 2021-02-12 13:17:23</p>",
-					"reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
 					"cweid": "200",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10021",
@@ -2024,7 +2000,7 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2032,7 +2008,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/core.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/core.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2040,7 +2016,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/menu.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/menu.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2048,7 +2024,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/ajax-progress.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/ajax-progress.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2056,7 +2032,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/align.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/align.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2064,7 +2040,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2072,7 +2048,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/clearfix.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/clearfix.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2080,7 +2056,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/container-inline.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/container-inline.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2088,7 +2064,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/fieldgroup.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/fieldgroup.module.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2096,7 +2072,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/modules/contrib/ajax_loader/css/throbber-general.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/modules/contrib/ajax_loader/css/throbber-general.css?s8wien",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -2126,7 +2102,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "664"
+					"sourceid": "738"
 				},
 				{
 					"pluginid": "10094",
@@ -2147,87 +2123,95 @@
 							"otherinfo": "\uFFFD\u022Dz\uFFFD\uFFFDx\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD?\uFFFD\uFFFDbj\uFFFD\u2668\\x001e\uFFFD\uFFFD\uFFFDr\uFFFD?1\uFFFDm\uFFFD\uFFFD\uFFFDjw\\x001e\uFFFD"
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/sites/minint/files/medias/images/Picto_Maltraitance-4",
+							"otherinfo": "\uFFFD\u022Dz\uFFFD\uFFFDx\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD?\uFFFD\uFFFDbj\uFFFD\u2668\\x001e\uFFFD\uFFFD\uFFFDr\uFFFD?1\uFFFDm\uFFFD\uFFFD\uFFFDjw\\x001e\uFFFD"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "BQ72Is/qRHO8S8ym6hntPKpS0WUAAAAAQUIPAAAAAABBDQejgNIKdgyoPHI/G/g0",
+							"otherinfo": "\\x0005\\x000e\uFFFD\"\uFFFD\uFFFDDs\uFFFDK\u0326\uFFFD\\x0019\uFFFD<\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000A\r\\x0007\uFFFD\uFFFD\uFFFD\nv\\x000c\uFFFD<r?\\x001b\uFFFD4"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "ZnVEZdONS2GK8VUVoeUA3d9S0WUAAAAAQUIPAAAAAABxVKiJIy+zg4IemqZ8pGKe",
+							"otherinfo": "fuDe\u04CDKa\uFFFD\uFFFDU\\x0015\uFFFD\uFFFD\\x0000\uFFFD\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000qT\uFFFD\uFFFD#/\uFFFD\uFFFD\uFFFD\\x001e\uFFFD\uFFFD|\uFFFDb\uFFFD"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "S+7QTNWEj2KqXEsmhEaaCt9S0WUAAAAASSalEHnUphOvlLwZAJDf0A==",
+							"otherinfo": "K\uFFFD\uFFFDL\u0544\uFFFDb\uFFFD\\K&\uFFFDF\uFFFD\n\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000I&\uFFFD\\x0010y\u0526\\x0013\uFFFD\uFFFD\uFFFD\\x0019\\x0000\uFFFD\uFFFD\uFFFD"
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "yROnyR7VQDSiDFLUPDWeUFEYyGUAAAAAQUIPAAAAAACI1YZimE4t4LRmUQhSsIMg",
-							"otherinfo": "\uFFFD\\x0013\uFFFD\uFFFD\\x001e\uFFFD@4\uFFFD\\x000cR\uFFFD<5\uFFFDPQ\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\u0546b\uFFFDN-\uFFFDfQ\\x0008R\uFFFD\uFFFD "
+							"evidence": "y9tSAaFGSYSDGQEeOHfw/t9S0WUAAAAAQUIPAAAAAABznA8rmMYRqllb6DEZC3Wq",
+							"otherinfo": "\uFFFD\uFFFDR\\x0001\uFFFDFI\uFFFD\uFFFD\\x0019\\x0001\\x001e8w\uFFFD\uFFFD\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000s\uFFFD\\x000f+\uFFFD\uFFFD\\x0011\uFFFDY[\uFFFD1\\x0019\\x000bu\uFFFD"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq",
-							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDL\\x000c\uFFFD\uFFFD\uFFFD#\uFFFDoY\uFFFDQ\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFDh[\uFFFD\uFFFD\uFFFD@z\uFFFD\\x0006]\uFFFDi\uFFFDV\uFFFD"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "wbkT0oD7RC6OHbYVAyxeUFAYyGUAAAAAQUIPAAAAAABenvK+b/lfm8VLNFrY3teh",
-							"otherinfo": "\uFFFD\uFFFD\\x0013\u0480\uFFFDD.\uFFFD\\x001d\uFFFD\\x0015\\x0003,^PP\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000^\uFFFD\uFFFDo\uFFFD_\uFFFD\uFFFDK4Z\uFFFD\uFFFD\u05E1"
+							"evidence": "RmH6Ij7ORQ6HOsb4t9iZBt9S0WUAAAAAQUIPAAAAAACoYTElUdZpILPnoV/FaAeM",
+							"otherinfo": "Fa\uFFFD\">\uFFFDE\\x000e\uFFFD:\uFFFD\uFFFD\uFFFD\u0619\\x0006\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFDa1%Q\uFFFDi \uFFFD\uFFFD_\uFFFDh\\x0007\uFFFD"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "aN67OenX3BJSUfRqKTUIDFEYyGUAAAAASM21OorA7ky5oIatCZ4/Yg==",
-							"otherinfo": "h\u07BB9\uFFFD\uFFFD\uFFFD\\x0012RQ\uFFFDj)5\\x0008\\x000cQ\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000H\u0375:\uFFFD\uFFFD\uFFFDL\uFFFD\uFFFD\uFFFD\uFFFD\t\uFFFD?b"
+							"evidence": "We2CLbh7CCYG3NNeAu+kCt9S0WUAAAAArchBO7PDAb/BST8OixwROA==",
+							"otherinfo": "Y\uFFFD-\uFFFD{\\x0008&\\x0006\uFFFD\uFFFD^\\x0002\uFFFD\n\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFDA;\uFFFD\uFFFD\\x0001\uFFFD\uFFFDI?\\x000e\uFFFD\\x001c\\x00118"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "VcO+WHf9SkaJ4ANeZ+C/k1EYyGUAAAAAQUIPAAAAAAA85qRvZq+zfm0oUOzIwJ51",
-							"otherinfo": "U\u00FEXw\uFFFDJF\uFFFD\uFFFD\\x0003^g\u0FD3Q\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000<\uFFFDof\uFFFD\uFFFD~m(P\uFFFD\uFFFD\uFFFD\uFFFDu"
+							"evidence": "8tcLX2TYUkOqXEsmhEaaCuBS0WUAAAAAEbRw/DhubfvX+DTy6pcB1A==",
+							"otherinfo": "\uFFFD\uFFFD\\x000b_d\uFFFDRC\uFFFD\\K&\uFFFDF\uFFFD\n\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000\\x0011\uFFFDp\uFFFD8nm\uFFFD\uFFFD\uFFFD4\uFFFD\uFFFD\\x0001\uFFFD"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "3T0omOVOTyubUdQ9Gq12Fh0YyGUAAAAAQUIPAAAAAADv3GTxT2bRVHI/7io0RGou",
-							"otherinfo": "\uFFFD=(\uFFFD\uFFFDNO+\uFFFDQ\uFFFD=\\x001a\uFFFDv\\x0016\\x001d\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFDd\uFFFDOf\uFFFDTr?\uFFFD*4Dj."
+							"evidence": "752eJVB07nkBRjo8NOBlF+BS0WUAAAAApKc0xfqBGeJ8a7pKM1VfUQ==",
+							"otherinfo": "\uF75E%Pt\uFFFDy\\x0001F:<4\uFFFDe\\x0017\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFD4\uFFFD\uFFFD\uFFFD\\x0019\uFFFD|k\uFFFDJ3U_Q"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq",
-							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDL\\x000c\uFFFD\uFFFD\uFFFD#\uFFFDoY\uFFFDQ\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFDh[\uFFFD\uFFFD\uFFFD@z\uFFFD\\x0006]\uFFFDi\uFFFDV\uFFFD"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "E5JKY5PfTDZA4iJ/LoSiflEYyGUAAAAA71JnW9CxKAygP6z6FRAZ5Q==",
-							"otherinfo": "\\x0013\uFFFDJc\uFFFD\uFFFDL6@\uFFFD\".\uFFFD\uFFFD~Q\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000\uFFFDRg[\u0431(\\x000c\uFFFD?\uFFFD\uFFFD\\x0015\\x0010\\x0019\uFFFD"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "0LeUOfQMOzdnSe//NEnCf1EYyGUAAAAAsfdexCIAMoeJuW0inUDYEg==",
-							"otherinfo": "\u0437\uFFFD9\uFFFD\\x000c;7gI\uFFFD\uFFFD4I\uFFFDQ\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFD^\uFFFD\"\\x00002\uFFFD\uFFFD\uFFFDm\"\uFFFD@\uFFFD\\x0012"
+							"evidence": "0B5IUrzLSt2muVLxntlopt9S0WUAAAAAQUIPAAAAAAAZN7CiCnGxkFBfGLeAaDZ5",
+							"otherinfo": "\uFFFD\\x001eHR\uFFFD\uFFFDJ\u0766\uFFFDR\uFFFD\uFFFDh\uFFFD\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\\x00197\uFFFD\uFFFD\nq\uFFFD\uFFFDP_\\x0018\uFFFD\uFFFDh6y"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "TCcWN+4PTsqPapHo7z5HMlAYyGUAAAAAQUIPAAAAAABImOXEBX5SV/J+SPDpRcmE",
-							"otherinfo": "L'\\x00167\uFFFD\\x000fN\u028Fj\uFFFD\uFFFD\uFFFD>G2P\\x0018\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000H\uFFFD\uFFFD\uFFFD\\x0005~RW\uFFFD~H\uFFFD\uFFFDE\u0244"
+							"evidence": "u7ZcISIORimbedBjVmRRoalS0WUAAAAAQUIPAAAAAACZmSw4TM4wj+T6Wt9tCz2w",
+							"otherinfo": "\uFFFD\uFFFD\\!\"\\x000eF)\uFFFDy\uFFFDcVdQ\uFFFD\uFFFDR\uFFFDe\\x0000\\x0000\\x0000\\x0000AB\\x000f\\x0000\\x0000\\x0000\\x0000\\x0000\uFFFD\uFFFD,8L\uFFFD0\uFFFD\uFFFD\uFFFDZ\uFFFDm\\x000b=\uFFFD"
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
 					"otherinfo": "<p>\uFFFD\u022Dz\uFFFD\uFFFDx\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD?\uFFFD\uFFFDbj\uFFFD\u2668\\x001e\uFFFD\uFFFD\uFFFDr\uFFFD?1\uFFFDm\uFFFD\uFFFD\uFFFDjw\\x001e\uFFFD</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
@@ -2262,55 +2246,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "select",
-							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script type=\"text/javascript\"> \n    $(function(){    \tif(screen.width < 640){   \n\t        $(\"#header_searchbox select\").selectB\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/*.pdf$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"text/javascript\">\n<!--\n    //$('#header_searchbox').css('opacity', 0);\r\n//$('#header_searchbox').hide();\r\n\r\nif (wi\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "todo",
-							"otherinfo": "The following pattern was used: \\bTODO\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "todo",
-							"otherinfo": "The following pattern was used: \\bTODO\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "select",
-							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script type=\"text/javascript\"> \n    $(function(){    \tif(screen.width < 640){   \n\t        $(\"#header_searchbox select\").selectB\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/comment/reply/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"text/javascript\">\n<!--\n    //$('#header_searchbox').css('opacity', 0);\r\n//$('#header_searchbox').hide();\r\n\r\nif (wi\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2318,7 +2254,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2326,7 +2262,63 @@
 							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script type=\"text/javascript\"> \n    $(function(){    \tif(screen.width < 640){   \n\t        $(\"#header_searchbox select\").selectB\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"text/javascript\">\n<!--\n    //$('#header_searchbox').css('opacity', 0);\r\n//$('#header_searchbox').hide();\r\n\r\nif (wi\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministere",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script type=\"text/javascript\"> \n    $(function(){    \tif(screen.width < 640){   \n\t        $(\"#header_searchbox select\").selectB\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"text/javascript\">\n<!--\n    //$('#header_searchbox').css('opacity', 0);\r\n//$('#header_searchbox').hide();\r\n\r\nif (wi\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<script type=\"text/javascript\"> \n    $(function(){    \tif(screen.width < 640){   \n\t        $(\"#header_searchbox select\").selectB\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2334,7 +2326,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"text/javascript\">\n<!--\n    //$('#header_searchbox').css('opacity', 0);\r\n//$('#header_searchbox').hide();\r\n\r\nif (wi\", see evidence field for the suspicious comment/snippet."
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
 					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in the element starting with: \"<script type=\"application/json\" data-drupal-selector=\"drupal-settings-json\">{\"path\":{\"baseUrl\":\"\\/\",\"pathPrefix\":\"\",\"currentPath\", see evidence field for the suspicious comment/snippet.</p>",
 					"reference": "",
@@ -2353,12 +2345,44 @@
 					"desc": "<p>Cookies can be scoped by domain or path. This check is only concerned with domain scope.The domain scope applied to a cookie determines which domains can access it. For example, a cookie can be scoped strictly to a subdomain e.g. www.nottrusted.com, or loosely scoped to a parent domain e.g. nottrusted.com. In the latter case, any subdomain of nottrusted.com can access the cookie. Loosely scoped cookies are common in mega-applications like google.com and live.com. Cookies set from a subdomain like app.foo.bar are transmitted only to that domain by the browser. However, cookies scoped to a parent-level domain may be transmitted to the parent, or any subdomain of the parent.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=BQ72Is/qRHO8S8ym6hntPKpS0WUAAAAAQUIPAAAAAABBDQejgNIKdgyoPHI/G/g0\nincap_ses_1689_651915=5G1hRqllGSUR8cV/q4hwF99S0WUAAAAA7N59SCh5Bfvts7eVHUJk8Q==\n"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=ZnVEZdONS2GK8VUVoeUA3d9S0WUAAAAAQUIPAAAAAABxVKiJIy+zg4IemqZ8pGKe\nincap_ses_1686_651915=ojUMN2jZdHtMRTo8NOBlF99S0WUAAAAAh6J18qvbOPTanUEY3bIq/Q==\n"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_764_651915=S+7QTNWEj2KqXEsmhEaaCt9S0WUAAAAASSalEHnUphOvlLwZAJDf0A==\n"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/presse",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_764_651915=vFWyIhQGDESqXEsmhEaaCuBS0WUAAAAA20i1qso+Yajc8HqWBoYROA==\n"
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=yROnyR7VQDSiDFLUPDWeUFEYyGUAAAAAQUIPAAAAAACI1YZimE4t4LRmUQhSsIMg\nincap_ses_1184_651915=Po8gD2/Li0dBfBnuG2puEFEYyGUAAAAA+qtduHzkNQ4ka3FYXFC+bg==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=y9tSAaFGSYSDGQEeOHfw/t9S0WUAAAAAQUIPAAAAAABznA8rmMYRqllb6DEZC3Wq\nincap_ses_1686_651915=zc32WcAbV3QYRTo8NOBlF99S0WUAAAAAvq+cjb4g/pdXTcxAgwA8Kw==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
@@ -2366,7 +2390,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq\nincap_ses_9210_651915=FS/WQDxYQx6n+zavTX7Qf1EYyGUAAAAAiJJFx9PMLXoAGB7EvbgKsw==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=RmH6Ij7ORQ6HOsb4t9iZBt9S0WUAAAAAQUIPAAAAAACoYTElUdZpILPnoV/FaAeM\nincap_ses_1687_651915=zDYpOWaMswAiLoo0vG1pF99S0WUAAAAAo7AUhn2BMqqP87pbR+lG1A==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
@@ -2374,7 +2398,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=wbkT0oD7RC6OHbYVAyxeUFAYyGUAAAAAQUIPAAAAAABenvK+b/lfm8VLNFrY3teh\nincap_ses_874_651915=69X4BuDA/xw1TYX49RIhDFAYyGUAAAAAEeX/bQhtBJV5A7Xa7sOHrQ==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_1688_651915=+UA8fZq2SEwye05LKPtsF+BS0WUAAAAAzq+Z0ytLGK99hDxRPlll0Q==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
@@ -2382,7 +2406,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_867_651915=aN67OenX3BJSUfRqKTUIDFEYyGUAAAAASM21OorA7ky5oIatCZ4/Yg==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_767_651915=We2CLbh7CCYG3NNeAu+kCt9S0WUAAAAArchBO7PDAb/BST8OixwROA==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
@@ -2390,7 +2414,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=VcO+WHf9SkaJ4ANeZ+C/k1EYyGUAAAAAQUIPAAAAAAA85qRvZq+zfm0oUOzIwJ51\nincap_ses_9206_651915=z/aWYbaDDQJnSe//NEnCf1EYyGUAAAAAFyH+fIll6H17KXaFee7HVw==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_764_651915=8tcLX2TYUkOqXEsmhEaaCuBS0WUAAAAAEbRw/DhubfvX+DTy6pcB1A==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
@@ -2398,7 +2422,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=3T0omOVOTyubUdQ9Gq12Fh0YyGUAAAAAQUIPAAAAAADv3GTxT2bRVHI/7io0RGou\nincap_ses_1183_651915=oGlBJTKkojPggv5Eq9xqEFEYyGUAAAAAcjULNPrL254OSgm5rg/7tA==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_1686_651915=752eJVB07nkBRjo8NOBlF+BS0WUAAAAApKc0xfqBGeJ8a7pKM1VfUQ==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
@@ -2406,39 +2430,7 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq\nincap_ses_9210_651915=L1w9XQGTdFSn+zavTX7Qf1EYyGUAAAAAgyTo9frJOd6PUhz4q6sG5A==\n"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_9125_651915=E5JKY5PfTDZA4iJ/LoSiflEYyGUAAAAA71JnW9CxKAygP6z6FRAZ5Q==\n"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_9206_651915=0LeUOfQMOzdnSe//NEnCf1EYyGUAAAAAsfdexCIAMoeJuW0inUDYEg==\n"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_452_651915=OhJKRXRPjwm9XymebNVFBlEYyGUAAAAAmmoj2WPKpN4St9VDY5pubw==\n"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nincap_ses_1582_651915=u3X9EKKDvGEvrWhC5GX0FVEYyGUAAAAAiOpOrt81muBTl5cuM22mRA==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=0B5IUrzLSt2muVLxntlopt9S0WUAAAAAQUIPAAAAAAAZN7CiCnGxkFBfGLeAaDZ5\nincap_ses_1689_651915=DQiuf8tR2RhIVMZ/q4hwF99S0WUAAAAApBq43CqG/c5rFCHzloR2Fw==\n"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
@@ -2446,16 +2438,16 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=TCcWN+4PTsqPapHo7z5HMlAYyGUAAAAAQUIPAAAAAABImOXEBX5SV/J+SPDpRcmE\nincap_ses_8218_651915=l7tBc25pI1Lhlke1dTQMclAYyGUAAAAA+Qewao8IUeMs6HZO7QoWoQ==\n"
+							"otherinfo": "The origin domain used for comparison was: \nwww.interieur.gouv.fr\nvisid_incap_651915=u7ZcISIORimbedBjVmRRoalS0WUAAAAAQUIPAAAAAACZmSw4TM4wj+T6Wt9tCz2w\nincap_ses_770_651915=5G9aQIlHunEybM+uDpivCt9S0WUAAAAAgZPz9kdtpK09haxGj/cqXQ==\n"
 						}
 					],
 					"count": "12",
 					"solution": "<p>Always scope cookies to a FQDN (Fully Qualified Domain Name).</p>",
-					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.interieur.gouv.fr</p><p>visid_incap_651915=yROnyR7VQDSiDFLUPDWeUFEYyGUAAAAAQUIPAAAAAACI1YZimE4t4LRmUQhSsIMg</p><p>incap_ses_1184_651915=Po8gD2/Li0dBfBnuG2puEFEYyGUAAAAA+qtduHzkNQ4ka3FYXFC+bg==</p><p></p>",
+					"otherinfo": "<p>The origin domain used for comparison was: </p><p>www.interieur.gouv.fr</p><p>visid_incap_651915=BQ72Is/qRHO8S8ym6hntPKpS0WUAAAAAQUIPAAAAAABBDQejgNIKdgyoPHI/G/g0</p><p>incap_ses_1689_651915=5G1hRqllGSUR8cV/q4hwF99S0WUAAAAA7N59SCh5Bfvts7eVHUJk8Q==</p><p></p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc6265#section-4.1</p><p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p><p>https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</p>",
 					"cweid": "565",
 					"wascid": "15",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10109",
@@ -2492,27 +2484,27 @@
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"uri": "https://www.interieur.gouv.fr/actualites/grands-dossiers/situation-en-ukraine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">L&#039;actualit\u00E9 du minist\u00E8re</a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Situation en Ukraine </a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Grands dossiers</a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Signaler une maltraitance animale</a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-un-rodeo-urbain",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Astuces de r\u00E9daction</a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Signaler un rod\u00E9o urbain</a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
@@ -2524,36 +2516,36 @@
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/dominique-faure",
+							"uri": "https://www.interieur.gouv.fr/ministere/metiers-du-ministere",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">La ministre d\u00E9l\u00E9gu\u00E9e charg\u00E9e des Collectivit\u00E9s territoriales et de la Ruralit\u00E9</a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Les m\u00E9tiers du minist\u00E8re</a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministres/sabrina-agresti-roubache",
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">La secr\u00E9taire d&#039;\u00C9tat charg\u00E9e de la Citoyennet\u00E9 et de la Ville </a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Le ministre de l&#039;Int\u00E9rieur et des Outre-mer</a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/node/add/",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">Acc\u00E8s refus\u00E9</a>",
+							"evidence": "<a class=\"fr-breadcrumb__link\" aria-current=\"page\">La ministre d\u00E9l\u00E9gu\u00E9e charg\u00E9e des Outre-mer</a>",
 							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/web.config",
+							"uri": "https://www.interieur.gouv.fr/Publications",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3\"></script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+							"evidence": "<a href=\"https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000042592860\" target=\"_self\">d\u00E9cret n\u00B0 2020-1493 du 30 novembre 2020</a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						}
 					],
 					"count": "11",
@@ -2562,7 +2554,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10049",
@@ -2575,6 +2567,30 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -2584,30 +2600,6 @@
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2631,14 +2623,6 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -2647,13 +2631,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "9",
+					"count": "8",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).   </p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10015",
@@ -2682,7 +2666,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actualites-du-ministere/plan-vigipirate-niveau-urgence-attentat-declare",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -2690,7 +2674,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"uri": "https://www.interieur.gouv.fr/actualites/communiques-de-presse/adoption-par-lassemblee-nationale-du-projet-de-loi-visant-a",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "max-age=3600, public",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/communiques-de-presse/generalisation-de-lapplication-france-identite-et-lancement-du",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -2706,7 +2698,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/filter/tips",
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-un-rodeo-urbain",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/ministres/gerald-darmanin",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -2714,23 +2714,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/ministere",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "max-age=3600, public",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/ministres/sabrina-agresti-roubache",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "max-age=3600, public",
-							"otherinfo": ""
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/nerienlaisserpasser",
+							"uri": "https://www.interieur.gouv.fr/ministres/marie-guevenoux",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -2760,7 +2744,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10050",
@@ -2789,7 +2773,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2797,7 +2781,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/core.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/core.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2805,7 +2789,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/menu.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/assets/vendor/jquery.ui/themes/base/menu.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2813,7 +2797,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/align.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/ajax-progress.module.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2821,7 +2805,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/align.module.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2829,7 +2813,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/images/default_share.jpg",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/autocomplete-loading.module.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2837,7 +2821,15 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/modules/contrib/ajax_loader/css/throbber-general.css?s8g1hx",
+							"uri": "https://www.interieur.gouv.fr/core/modules/system/css/components/fieldgroup.module.css?s8wien",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "HIT",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/modules/contrib/ajax_loader/css/throbber-general.css?s8wien",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -2861,7 +2853,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html</p>",
@@ -3007,7 +2999,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10112",
@@ -3020,125 +3012,125 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
+							"uri": "https://www.interieur.gouv.fr/actualites",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "BQ72Is/qRHO8S8ym6hntPKpS0WUAAAAAQUIPAAAAAABBDQejgNIKdgyoPHI/G/g0",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1689_651915"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere",
+							"method": "GET",
+							"param": "visid_incap_651915",
+							"attack": "",
+							"evidence": "ZnVEZdONS2GK8VUVoeUA3d9S0WUAAAAAQUIPAAAAAABxVKiJIy+zg4IemqZ8pGKe",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1686_651915"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/dossiers",
+							"method": "GET",
+							"param": "incap_ses_764_651915",
+							"attack": "",
+							"evidence": "S+7QTNWEj2KqXEsmhEaaCt9S0WUAAAAASSalEHnUphOvlLwZAJDf0A==",
+							"otherinfo": "\ncookie:incap_ses_764_651915"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/actualites/presse",
+							"method": "GET",
+							"param": "incap_ses_764_651915",
+							"attack": "",
+							"evidence": "vFWyIhQGDESqXEsmhEaaCuBS0WUAAAAA20i1qso+Yajc8HqWBoYROA==",
+							"otherinfo": "\ncookie:incap_ses_764_651915"
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
-							"evidence": "yROnyR7VQDSiDFLUPDWeUFEYyGUAAAAAQUIPAAAAAACI1YZimE4t4LRmUQhSsIMg",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1184_651915"
+							"evidence": "y9tSAaFGSYSDGQEeOHfw/t9S0WUAAAAAQUIPAAAAAABznA8rmMYRqllb6DEZC3Wq",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1686_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
-							"evidence": "5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_9210_651915"
+							"evidence": "RmH6Ij7ORQ6HOsb4t9iZBt9S0WUAAAAAQUIPAAAAAACoYTElUdZpILPnoV/FaAeM",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1687_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
-							"param": "visid_incap_651915",
+							"param": "incap_ses_1688_651915",
 							"attack": "",
-							"evidence": "wbkT0oD7RC6OHbYVAyxeUFAYyGUAAAAAQUIPAAAAAABenvK+b/lfm8VLNFrY3teh",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_874_651915"
+							"evidence": "+UA8fZq2SEwye05LKPtsF+BS0WUAAAAAzq+Z0ytLGK99hDxRPlll0Q==",
+							"otherinfo": "\ncookie:incap_ses_1688_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
-							"param": "incap_ses_867_651915",
+							"param": "incap_ses_767_651915",
 							"attack": "",
-							"evidence": "aN67OenX3BJSUfRqKTUIDFEYyGUAAAAASM21OorA7ky5oIatCZ4/Yg==",
-							"otherinfo": "\ncookie:incap_ses_867_651915"
+							"evidence": "We2CLbh7CCYG3NNeAu+kCt9S0WUAAAAArchBO7PDAb/BST8OixwROA==",
+							"otherinfo": "\ncookie:incap_ses_767_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
-							"param": "incap_ses_9206_651915",
+							"param": "incap_ses_764_651915",
 							"attack": "",
-							"evidence": "z/aWYbaDDQJnSe//NEnCf1EYyGUAAAAAFyH+fIll6H17KXaFee7HVw==",
-							"otherinfo": "\ncookie:incap_ses_9206_651915\ncookie:visid_incap_651915"
+							"evidence": "8tcLX2TYUkOqXEsmhEaaCuBS0WUAAAAAEbRw/DhubfvX+DTy6pcB1A==",
+							"otherinfo": "\ncookie:incap_ses_764_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
-							"param": "visid_incap_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "3T0omOVOTyubUdQ9Gq12Fh0YyGUAAAAAQUIPAAAAAADv3GTxT2bRVHI/7io0RGou",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1183_651915"
+							"evidence": "752eJVB07nkBRjo8NOBlF+BS0WUAAAAApKc0xfqBGeJ8a7pKM1VfUQ==",
+							"otherinfo": "\ncookie:incap_ses_1686_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
-							"evidence": "5vPvo+TVTAyL9e8jmm9ZslEYyGUAAAAAQUIPAAAAAADcaFuIgcBAeqEGXftp8laq",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_9210_651915"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "incap_ses_9125_651915",
-							"attack": "",
-							"evidence": "E5JKY5PfTDZA4iJ/LoSiflEYyGUAAAAA71JnW9CxKAygP6z6FRAZ5Q==",
-							"otherinfo": "\ncookie:incap_ses_9125_651915"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/core/*.svg",
-							"method": "GET",
-							"param": "incap_ses_9125_651915",
-							"attack": "",
-							"evidence": "ZE7EFqnr9ARA4iJ/LoSiflEYyGUAAAAA8AAJT/1S3ExxkDRxe7Ft/w==",
-							"otherinfo": "\ncookie:incap_ses_9125_651915"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "incap_ses_9206_651915",
-							"attack": "",
-							"evidence": "0LeUOfQMOzdnSe//NEnCf1EYyGUAAAAAsfdexCIAMoeJuW0inUDYEg==",
-							"otherinfo": "\ncookie:incap_ses_9206_651915"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
-							"method": "GET",
-							"param": "incap_ses_452_651915",
-							"attack": "",
-							"evidence": "OhJKRXRPjwm9XymebNVFBlEYyGUAAAAAmmoj2WPKpN4St9VDY5pubw==",
-							"otherinfo": "\ncookie:incap_ses_452_651915"
+							"evidence": "0B5IUrzLSt2muVLxntlopt9S0WUAAAAAQUIPAAAAAAAZN7CiCnGxkFBfGLeAaDZ5",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_1689_651915"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "visid_incap_651915",
 							"attack": "",
-							"evidence": "TCcWN+4PTsqPapHo7z5HMlAYyGUAAAAAQUIPAAAAAABImOXEBX5SV/J+SPDpRcmE",
-							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_8218_651915"
+							"evidence": "u7ZcISIORimbedBjVmRRoalS0WUAAAAAQUIPAAAAAACZmSw4TM4wj+T6Wt9tCz2w",
+							"otherinfo": "\ncookie:visid_incap_651915\ncookie:incap_ses_770_651915"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*/media",
+							"uri": "https://www.interieur.gouv.fr/a-votre-service",
 							"method": "GET",
-							"param": "incap_ses_8218_651915",
+							"param": "incap_ses_770_651915",
 							"attack": "",
-							"evidence": "l7tBc25pI1Lhlke1dTQMclAYyGUAAAAA+Qewao8IUeMs6HZO7QoWoQ==",
-							"otherinfo": "\ncookie:incap_ses_8218_651915"
+							"evidence": "5G9aQIlHunEybM+uDpivCt9S0WUAAAAAgZPz9kdtpK09haxGj/cqXQ==",
+							"otherinfo": "\ncookie:incap_ses_770_651915"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/*/media",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
-							"param": "incap_ses_9210_651915",
+							"param": "incap_ses_1686_651915",
 							"attack": "",
-							"evidence": "L1w9XQGTdFSn+zavTX7Qf1EYyGUAAAAAgyTo9frJOd6PUhz4q6sG5A==",
-							"otherinfo": "\ncookie:incap_ses_9210_651915"
+							"evidence": "zc32WcAbV3QYRTo8NOBlF99S0WUAAAAAvq+cjb4g/pdXTcxAgwA8Kw==",
+							"otherinfo": "\ncookie:incap_ses_1686_651915"
 						}
 					],
 					"count": "14",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
-					"otherinfo": "<p></p><p>cookie:visid_incap_651915</p><p>cookie:incap_ses_1184_651915</p>",
+					"otherinfo": "<p></p><p>cookie:visid_incap_651915</p><p>cookie:incap_ses_1689_651915</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "127"
+					"sourceid": "200"
 				},
 				{
 					"pluginid": "10049",
@@ -3159,6 +3151,14 @@
 							"otherinfo": ""
 						},
 						{
+							"uri": "https://www.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=3600",
+							"otherinfo": ""
+						},
+						{
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -3167,7 +3167,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request. </p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
@@ -3186,52 +3186,28 @@
 					"desc": "<p>This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.</p>",
 					"instances":[ 
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP",
-							"method": "GET",
-							"param": "date_debut",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ndate_debut=2024-02-11\n\nThe user-controlled value was:\n2024-02-11"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP",
-							"method": "GET",
-							"param": "date_fin",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ndate_fin=2024-02-11\n\nThe user-controlled value was:\n2024-02-11"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP",
+							"uri": "https://www.interieur.gouv.fr/actualites?theme=16",
 							"method": "GET",
 							"param": "theme",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP\n\nappears to include user input in: \n\na(n) [link] tag [media] attribute \n\nThe user input found was:\ntheme=All\n\nThe user-controlled value was:\nall"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites?theme=16\n\nappears to include user input in: \n\na(n) [nav] tag [data-fr-analytics-page-total] attribute \n\nThe user input found was:\ntheme=16\n\nThe user-controlled value was:\n16"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP",
+							"uri": "https://www.interieur.gouv.fr/actualites?theme=16",
 							"method": "GET",
 							"param": "theme",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP\n\nappears to include user input in: \n\na(n) [option] tag [value] attribute \n\nThe user input found was:\ntheme=All\n\nThe user-controlled value was:\nall"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites?theme=16\n\nappears to include user input in: \n\na(n) [option] tag [value] attribute \n\nThe user input found was:\ntheme=16\n\nThe user-controlled value was:\n16"
 						},
 						{
-							"uri": "https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP",
-							"method": "GET",
-							"param": "titre",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ntitre=ZAP\n\nThe user-controlled value was:\nzap"
-						},
-						{
-							"uri": "https://www.interieur.gouv.fr/content/search?SearchText=ZAP&searchinto=438",
+							"uri": "https://www.interieur.gouv.fr/fr/content/search?SearchText=ZAP&searchinto=438",
 							"method": "GET",
 							"param": "searchinto",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/content/search?SearchText=ZAP&searchinto=438\n\nappears to include user input in: \n\na(n) [option] tag [value] attribute \n\nThe user input found was:\nsearchinto=438\n\nThe user-controlled value was:\n438"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/fr/content/search?SearchText=ZAP&searchinto=438\n\nappears to include user input in: \n\na(n) [option] tag [value] attribute \n\nThe user input found was:\nsearchinto=438\n\nThe user-controlled value was:\n438"
 						},
 						{
 							"uri": "https://www.interieur.gouv.fr/recherche?search=ZAP",
@@ -3240,15 +3216,167 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/recherche?search=ZAP\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nsearch=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "adresse_des_faits[address]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nadresse_des_faits[address]=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "adresse_des_faits[city]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nadresse_des_faits[city]=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "adresse_des_faits[postal_code]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nadresse_des_faits[postal_code]=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "captcha_response",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ncaptcha_response=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "captcha_sid",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ncaptcha_sid=4924955\n\nThe user-controlled value was:\n4924955"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "captcha_token",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ncaptcha_token=7r5xIxWBiXUDOzysmp59JfTM9Lb4cUUgvC6grzitSEY\n\nThe user-controlled value was:\n7r5xixwbixudozysmp59jftm9lb4cuugvc6grzitsey"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "date_des_faits",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [max] attribute \n\nThe user input found was:\ndate_des_faits=2024-02-18\n\nThe user-controlled value was:\n2024-02-18"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "date_des_faits",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ndate_des_faits=2024-02-18\n\nThe user-controlled value was:\n2024-02-18"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "etat_animal[other]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\netat_animal[other]=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "etat_animal[radios]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\netat_animal[radios]=Maigre\n\nThe user-controlled value was:\nmaigre"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "form_id",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nform_id=webform_submission_signaler_maltraitance_animale_paragraph_4426_add_form\n\nThe user-controlled value was:\nwebform_submission_signaler_maltraitance_animale_paragraph_4426_add_form"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "heure_des_faits",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nheure_des_faits=00:44:18\n\nThe user-controlled value was:\n00:44:18"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "homepage",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nhomepage=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "honeypot_time",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nhoneypot_time=cWoQ8sqBw6IU8zRh2iL1bn1fgPwKJ1k7ckjM62l7fE8\n\nThe user-controlled value was:\ncwoq8sqbw6iu8zrh2il1bn1fgpwkj1k7ckjm62l7fe8"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "op",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nop=Aper\u00E7u\n\nThe user-controlled value was:\naper\u00E7u"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "plusieurs_reprises",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\nplusieurs_reprises=Oui\n\nThe user-controlled value was:\noui"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "type_animal[other]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ntype_animal[other]=ZAP\n\nThe user-controlled value was:\nzap"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "type_animal[radios]",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ntype_animal[radios]=Chien\n\nThe user-controlled value was:\nchien"
+						},
+						{
+							"uri": "https://www.interieur.gouv.fr/contact/signaler-maltraitance-animale",
+							"method": "POST",
+							"param": "type_mis_en_cause",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://www.interieur.gouv.fr/contact/signaler-maltraitance-animale\n\nappears to include user input in: \n\na(n) [input] tag [value] attribute \n\nThe user input found was:\ntype_mis_en_cause=Particulier\n\nThe user-controlled value was:\nparticulier"
 						}
 					],
-					"count": "7",
+					"count": "23",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
-					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.interieur.gouv.fr/actualites/actu-du-ministere?date_debut=2024-02-11&date_fin=2024-02-11&theme=All&titre=ZAP</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [input] tag [value] attribute </p><p></p><p>The user input found was:</p><p>date_debut=2024-02-11</p><p></p><p>The user-controlled value was:</p><p>2024-02-11</p>",
+					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://www.interieur.gouv.fr/actualites?theme=16</p><p></p><p>appears to include user input in: </p><p></p><p>a(n) [nav] tag [data-fr-analytics-page-total] attribute </p><p></p><p>The user input found was:</p><p>theme=16</p><p></p><p>The user-controlled value was:</p><p>16</p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "1792"
+					"sourceid": "1799"
 				}
 			]
 		}
