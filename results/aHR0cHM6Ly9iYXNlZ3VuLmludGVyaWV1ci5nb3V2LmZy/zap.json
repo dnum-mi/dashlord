@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.14.0",
-	"@generated": "Sun, 25 Feb 2024 01:57:04",
+	"@generated": "Sun, 3 Mar 2024 01:49:37",
 	"site":[ 
 		{
 			"@name": "https://basegun.interieur.gouv.fr",
@@ -50,7 +50,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10020",
@@ -93,7 +93,50 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90003",
+					"alertRef": "90003",
+					"alert": "Sub Resource Integrity Attribute Missing",
+					"name": "Sub Resource Integrity Attribute Missing",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content. </p>",
+					"instances":[ 
+						{
+							"uri": "https://basegun.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://basegun.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://basegun.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
+					"cweid": "345",
+					"wascid": "15",
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10010",
@@ -120,7 +163,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10011",
@@ -155,7 +198,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10054",
@@ -190,7 +233,50 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10017",
+					"alertRef": "10017",
+					"alert": "Cross-Domain JavaScript Source File Inclusion",
+					"name": "Cross-Domain JavaScript Source File Inclusion",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
+					"instances":[ 
+						{
+							"uri": "https://basegun.interieur.gouv.fr",
+							"method": "GET",
+							"param": "https://plausible.io/js/script.js",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://basegun.interieur.gouv.fr/",
+							"method": "GET",
+							"param": "https://plausible.io/js/script.js",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "https://basegun.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "https://plausible.io/js/script.js",
+							"attack": "",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "829",
+					"wascid": "15",
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10063",
@@ -219,7 +305,7 @@
 							"otherinfo": ""
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -286,7 +372,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -340,7 +426,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10094",
@@ -361,7 +447,7 @@
 							"otherinfo": "\uFFFD\uFFFD,z\uFFFD?1\uFFFD\uFFFDjy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u07FBo\u075C\uFFFD"
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -388,7 +474,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
 					"instances":[ 
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -396,7 +482,7 @@
 							"otherinfo": "The following pattern was used: \\bDB\\b and was detected in the element starting with: \"  */const Fv={escapeDeactivates:{type:Boolean,default:!0},returnFocusOnDeactivate:{type:Boolean,default:!0},allowOutsideClick:{t\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -404,7 +490,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected 2 times, the first in the element starting with: \" */let Oc;const Ir=t=>Oc=t,Dc=Symbol();function Ps(t){return t&&typeof t==\"object\"&&Object.prototype.toString.call(t)===\"[object\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -412,7 +498,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"  */const Cn=typeof window<\"u\";function e4(t){return t.__esModule||t[Symbol.toStringTag]===\"Module\"}const Le=Object.assign;funct\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -420,7 +506,7 @@
 							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected 4 times, the first in the element starting with: \"`):\" \"+Oa(s[0]):\"as no adapter specified\";throw new Te(\"There is no suitable adapter to dispatch the request \"+a,\"ERR_NOT_SUPPOR\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -451,7 +537,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script type=\"module\" crossorigin src=\"/assets/index-dc17a817.js\"></script>",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
@@ -459,7 +545,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script type=\"module\" crossorigin src=\"/assets/index-dc17a817.js\"></script>",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
@@ -467,7 +553,7 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script type=\"module\" crossorigin src=\"/assets/index-dc17a817.js\"></script>",
+							"evidence": "<script defer data-domain=\"basegun.interieur.gouv.fr\" src=\"https://plausible.io/js/script.js\"></script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						}
 					],
@@ -477,7 +563,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -504,7 +590,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10015",
@@ -563,7 +649,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -606,7 +692,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -649,7 +735,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -676,23 +762,15 @@
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
-						},
-						{
-							"uri": "https://basegun.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Sec-Fetch-Site",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "90005",
@@ -735,7 +813,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10112",
@@ -752,7 +830,7 @@
 							"method": "GET",
 							"param": "d7f32cfdb0f8e4d0ad8d884e41774982",
 							"attack": "",
-							"evidence": "970f07f6d016606b1658cb3cc4399ddb",
+							"evidence": "02a1f129dedcdda08e4b16ac61436b4c",
 							"otherinfo": "\ncookie:d7f32cfdb0f8e4d0ad8d884e41774982\ncookie:bZA_"
 						},
 						{
@@ -768,7 +846,7 @@
 							"method": "GET",
 							"param": "d7f32cfdb0f8e4d0ad8d884e41774982",
 							"attack": "",
-							"evidence": "970f07f6d016606b1658cb3cc4399ddb",
+							"evidence": "02a1f129dedcdda08e4b16ac61436b4c",
 							"otherinfo": "\ncookie:d7f32cfdb0f8e4d0ad8d884e41774982"
 						}
 					],
@@ -778,7 +856,7 @@
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -815,7 +893,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"uri": "https://basegun.interieur.gouv.fr/assets/index-dc17a817.js",
+							"uri": "https://basegun.interieur.gouv.fr/assets/index-f026de53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
