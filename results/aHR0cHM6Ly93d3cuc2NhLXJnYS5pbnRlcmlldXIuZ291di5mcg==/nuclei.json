@@ -1,0 +1,569 @@
+[
+  [
+    {
+      "template": "dns/caa-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/caa-fingerprint",
+      "template-id": "caa-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/caa-fingerprint.yaml",
+      "info": {
+        "name": "CAA Record",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "caa"
+        ],
+        "description": "A CAA record was discovered. A CAA record is used to specify which certificate authorities (CAs) are allowed to issue certificates for a domain.",
+        "reference": [
+          "https://support.dnsimple.com/articles/caa-record/#whats-a-caa-record"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "www.sca-rga.interieur.gouv.fr.",
+      "matched-at": "www.sca-rga.interieur.gouv.fr",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 1471\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.sca-rga.interieur.gouv.fr.\tIN\t CAA\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 1471\n;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.sca-rga.interieur.gouv.fr.\tIN\t CAA\n\n;; AUTHORITY SECTION:\ninterieur.gouv.fr.\t33200\tIN\tSOA\tmaster.ns.mailclub.fr. domaines.mailclub.fr. 2023103784 28800 14400 3600000 33200\n",
+      "timestamp": "2024-09-01T01:37:29.155698181Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/miscellaneous/options-method.yaml",
+      "template-url": "https://templates.nuclei.sh/public/options-method",
+      "template-id": "options-method",
+      "template-path": "/home/runner/nuclei-templates/http/miscellaneous/options-method.yaml",
+      "info": {
+        "name": "Allowed Options Method",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "miscellaneous",
+          "misc",
+          "generic"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "extracted-results": [
+        "OPTIONS,HEAD,GET,POST"
+      ],
+      "request": "OPTIONS / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: OPTIONS,HEAD,GET,POST\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:37:39 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1T-rOgwSDTVR; Expires=Sun, 01-Sep-2024 03:37:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\nContent-Length: 0\r\n\r\n",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:37:39.556894594Z",
+      "curl-command": "curl -X 'OPTIONS' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/xss-deprecated-header.yaml",
+      "template-url": "https://templates.nuclei.sh/public/xss-deprecated-header",
+      "template-id": "xss-deprecated-header",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/xss-deprecated-header.yaml",
+      "info": {
+        "name": "XSS-Protection Header - Cross-Site Scripting",
+        "author": [
+          "joshlarsen"
+        ],
+        "tags": [
+          "xss",
+          "misconfig",
+          "generic"
+        ],
+        "description": "Setting the XSS-Protection header is deprecated. Setting the header to anything other than `0` can actually introduce an XSS vulnerability.",
+        "reference": [
+          "https://developer.mozilla.org/en-us/docs/web/http/headers/x-xss-protection",
+          "https://owasp.org/www-project-secure-headers/#x-xss-protection"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": null,
+          "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "extracted-results": [
+        "1; mode=block"
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:37:47 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1T-rOgwSDTVR; Expires=Sun, 01-Sep-2024 03:37:47 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:37:47.140893863Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/cookies-without-httponly.yaml",
+      "template-url": "https://templates.nuclei.sh/public/cookies-without-httponly",
+      "template-id": "cookies-without-httponly",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/cookies-without-httponly.yaml",
+      "info": {
+        "name": "Cookies without HttpOnly attribute - Detect",
+        "author": [
+          "princechaddha",
+          "mr.bobo hp"
+        ],
+        "tags": [
+          "misconfig",
+          "http",
+          "cookie",
+          "generic"
+        ],
+        "description": "Checks whether cookies in the HTTP response contain the HttpOnly attribute. If the HttpOnly flag is set, it means that the cookie is HTTP-only\n",
+        "impact": "Lack of HttpOnly flag on cookies increases the risk of client-side attacks, compromising user session security and data privacy.\n",
+        "reference": [
+          "https://owasp.org/www-community/httponly"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": null,
+          "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        },
+        "remediation": "Ensure that all cookies are set with the HttpOnly attribute to prevent client-side access.\n"
+      },
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:26 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1T-rOgwSDTVR; Expires=Sun, 01-Sep-2024 03:38:26 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:27.007838815Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/cookies-without-secure.yaml",
+      "template-url": "https://templates.nuclei.sh/public/cookies-without-secure",
+      "template-id": "cookies-without-secure",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/cookies-without-secure.yaml",
+      "info": {
+        "name": "Cookies without Secure attribute - Detect",
+        "author": [
+          "vthiery"
+        ],
+        "tags": [
+          "misconfig",
+          "http",
+          "cookie",
+          "generic"
+        ],
+        "description": "Checks whether cookies in the HTTP response contain the Secure attribute. If the Secure flag is set, it means that the cookie can only be transmitted over HTTPS\n",
+        "impact": "Lack of Secure flag on cookies allows the cookie to be sent over unsecure HTTP, making it vulnerable to man-in-the-middle (MITM) attacks.\n",
+        "reference": [
+          "https://owasp.org/www-community/controls/securecookieattribute"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": null,
+          "cvss-metrics": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        },
+        "remediation": "Ensure that all cookies are set with the Secure attribute to prevent MITM attacks.\n"
+      },
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:26 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1T-rOgwSDTVR; Expires=Sun, 01-Sep-2024 03:38:26 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:27.007944353Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "referrer-policy",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.03344643Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "clear-site-data",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033500792Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-embedder-policy",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033520088Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-opener-policy",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033531529Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-resource-policy",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033550735Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "permissions-policy",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033565272Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://www.sca-rga.interieur.gouv.fr",
+      "matched-at": "https://www.sca-rga.interieur.gouv.fr",
+      "request": "GET / HTTP/1.1\r\nHost: www.sca-rga.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nCache-Control: private, no-cache, no-store, max-age=0\r\nContent-Security-Policy: default-src 'none' ; connect-src http: https: ws: ;  font-src 'self' http: https: ws: data: ; img-src 'self' http: https: ws: data: ; media-src 'self' https: http: ws:; script-src 'self' http: https: ws:; style-src 'self' 'unsafe-inline' http: https: ws:;\r\nContent-Type: text/html\r\nDate: Sun, 01 Sep 2024 01:38:39 GMT\r\nEtag: \"276-61a4950098580-gzip\"\r\nExpect-Ct: max-age=86400, enforce\r\nExpires: 0\r\nLast-Modified: Fri, 07 Jun 2024 09:20:38 GMT\r\nPragma: no-cache\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1YPbOgwSDvbm; Expires=Sun, 01-Sep-2024 03:38:39 GMT; Path=/\r\nStrict-Transport-Security: max-age=2678400\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!doctype html><html lang=\"fr\" data-fr-theme=\"light\"><head><meta charset=\"utf-8\"/><link rel=\"shortcut icon\" href=\"/favicon.ico\"/><script src=\"/config.js\" type=\"text/javascript\"></script><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"manifest\" href=\"/manifest.json\"/><title>Référentiel Général des armes</title><script defer=\"defer\" src=\"/static/js/main.752813a9.js\"></script><link href=\"/static/css/main.fbe51668.css\" rel=\"stylesheet\"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id=\"root\"></div></body></html>",
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:38:40.033611178Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.sca-rga.interieur.gouv.fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.sca-rga.interieur.gouv.fr",
+      "matched-at": "www.sca-rga.interieur.gouv.fr:443",
+      "extracted-results": [
+        "DHIMYOTIS"
+      ],
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:41:22.43440036Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "www.sca-rga.interieur.gouv.fr",
+      "matched-at": "www.sca-rga.interieur.gouv.fr:443",
+      "extracted-results": [
+        "sca-rga.interieur.gouv.fr",
+        "www.sca-rga.interieur.gouv.fr"
+      ],
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:41:22.434529852Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "www.sca-rga.interieur.gouv.fr",
+      "matched-at": "www.sca-rga.interieur.gouv.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "143.196.253.130",
+      "timestamp": "2024-09-01T01:41:22.625819255Z",
+      "matcher-status": true
+    }
+  ]
+]
