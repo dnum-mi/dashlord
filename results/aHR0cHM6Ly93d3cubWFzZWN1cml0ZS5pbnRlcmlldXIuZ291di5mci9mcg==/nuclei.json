@@ -1,41 +1,40 @@
 [
   [
     {
-      "template": "dns/nameserver-fingerprint.yaml",
-      "template-url": "https://templates.nuclei.sh/public/nameserver-fingerprint",
-      "template-id": "nameserver-fingerprint",
-      "template-path": "/home/runner/nuclei-templates/dns/nameserver-fingerprint.yaml",
+      "template": "dns/dns-saas-service-detection.yaml",
+      "template-url": "https://templates.nuclei.sh/public/dns-saas-service-detection",
+      "template-id": "dns-saas-service-detection",
+      "template-path": "/home/runner/nuclei-templates/dns/dns-saas-service-detection.yaml",
       "info": {
-        "name": "NS Record Detection",
+        "name": "DNS SaaS Service Detection",
         "author": [
+          "noah @thesubtlety",
           "pdteam"
         ],
         "tags": [
           "dns",
-          "ns"
+          "service"
         ],
-        "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
+        "description": "A CNAME DNS record was discovered",
+        "reference": [
+          "https://ns1.com/resources/cname",
+          "https://www.theregister.com/2021/02/24/dns_cname_tracking/",
+          "https://www.ionos.com/digitalguide/hosting/technical-matters/cname-record/"
+        ],
         "severity": "info",
         "metadata": {
           "max-request": 1
-        },
-        "classification": {
-          "cve-id": null,
-          "cwe-id": [
-            "cwe-200"
-          ]
         }
       },
       "type": "dns",
       "host": "www.masecurite.interieur.gouv.fr.",
       "matched-at": "www.masecurite.interieur.gouv.fr",
       "extracted-results": [
-        "ns2.as30781.net.",
-        "ns1.as30781.net."
+        "masecurite.interieur.gouv.fr."
       ],
-      "request": ";; opcode: QUERY, status: NOERROR, id: 5155\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t NS\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 5155\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t NS\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t19248\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tNS\tns1.as30781.net.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tNS\tns2.as30781.net.\n",
-      "timestamp": "2024-11-17T02:02:32.732011057Z",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 37662\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CNAME\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 37662\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CNAME\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t21600\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\n",
+      "timestamp": "2024-11-20T16:19:01.517478206Z",
       "matcher-status": true
     },
     {
@@ -67,9 +66,9 @@
       "extracted-results": [
         "v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\""
       ],
-      "request": ";; opcode: QUERY, status: NOERROR, id: 5534\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 5534\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t19248\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\"\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\"\n",
-      "timestamp": "2024-11-17T02:02:32.740444786Z",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 53489\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 53489\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t21600\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\"\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\"\n",
+      "timestamp": "2024-11-20T16:19:01.520471773Z",
       "matcher-status": true
     },
     {
@@ -105,49 +104,12 @@
       "host": "www.masecurite.interieur.gouv.fr.",
       "matched-at": "www.masecurite.interieur.gouv.fr",
       "extracted-results": [
-        "\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\"",
-        "\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\""
+        "\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\"",
+        "\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\""
       ],
-      "request": ";; opcode: QUERY, status: NOERROR, id: 5534\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 5534\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t19248\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\"\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\"\n",
-      "timestamp": "2024-11-17T02:02:32.740539771Z",
-      "matcher-status": true
-    },
-    {
-      "template": "dns/dns-saas-service-detection.yaml",
-      "template-url": "https://templates.nuclei.sh/public/dns-saas-service-detection",
-      "template-id": "dns-saas-service-detection",
-      "template-path": "/home/runner/nuclei-templates/dns/dns-saas-service-detection.yaml",
-      "info": {
-        "name": "DNS SaaS Service Detection",
-        "author": [
-          "noah @thesubtlety",
-          "pdteam"
-        ],
-        "tags": [
-          "dns",
-          "service"
-        ],
-        "description": "A CNAME DNS record was discovered",
-        "reference": [
-          "https://ns1.com/resources/cname",
-          "https://www.theregister.com/2021/02/24/dns_cname_tracking/",
-          "https://www.ionos.com/digitalguide/hosting/technical-matters/cname-record/"
-        ],
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "type": "dns",
-      "host": "www.masecurite.interieur.gouv.fr.",
-      "matched-at": "www.masecurite.interieur.gouv.fr",
-      "extracted-results": [
-        "masecurite.interieur.gouv.fr."
-      ],
-      "request": ";; opcode: QUERY, status: NOERROR, id: 32222\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CNAME\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 32222\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CNAME\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t86000\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\n",
-      "timestamp": "2024-11-17T02:02:32.829209146Z",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 53489\n;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 53489\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t TXT\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t21600\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"google-site-verification=f2QnKEGhUK0f2BhSjTttfAWe9c0ycbmC-wLxjpaDG9k\"\nmasecurite.interieur.gouv.fr.\t21600\tIN\tTXT\t\"v=spf1 a:vip-minist-fw2.jaguar-network.net a:smtps.masecurite.interieur.gouv.fr mx:mx1.masecurite.interieur.gouv.fr mx:mx2.masecurite.interieur.gouv.fr -all\"\n",
+      "timestamp": "2024-11-20T16:19:01.520697626Z",
       "matcher-status": true
     },
     {
@@ -187,9 +149,47 @@
         "10 mx1.masecurite.interieur.gouv.fr.",
         "15 mx2.masecurite.interieur.gouv.fr."
       ],
-      "request": ";; opcode: QUERY, status: NOERROR, id: 30228\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t MX\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 30228\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t MX\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t86000\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t86000\tIN\tMX\t10 mx1.masecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t86000\tIN\tMX\t15 mx2.masecurite.interieur.gouv.fr.\n",
-      "timestamp": "2024-11-17T02:02:32.845933097Z",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 36073\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t MX\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 36073\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t MX\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t86000\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t86000\tIN\tMX\t15 mx2.masecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t86000\tIN\tMX\t10 mx1.masecurite.interieur.gouv.fr.\n",
+      "timestamp": "2024-11-20T16:19:01.709055611Z",
+      "matcher-status": true
+    },
+    {
+      "template": "dns/nameserver-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/nameserver-fingerprint",
+      "template-id": "nameserver-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/nameserver-fingerprint.yaml",
+      "info": {
+        "name": "NS Record Detection",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "ns"
+        ],
+        "description": "An NS record was detected. An NS record delegates a subdomain to a set of name servers.",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "www.masecurite.interieur.gouv.fr.",
+      "matched-at": "www.masecurite.interieur.gouv.fr",
+      "extracted-results": [
+        "ns2.as30781.net.",
+        "ns1.as30781.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 43383\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t NS\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 43383\n;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t NS\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t13851\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tNS\tns2.as30781.net.\nmasecurite.interieur.gouv.fr.\t21600\tIN\tNS\tns1.as30781.net.\n",
+      "timestamp": "2024-11-20T16:19:02.519818289Z",
       "matcher-status": true
     },
     {
@@ -224,9 +224,9 @@
       "type": "dns",
       "host": "www.masecurite.interieur.gouv.fr.",
       "matched-at": "www.masecurite.interieur.gouv.fr",
-      "request": ";; opcode: QUERY, status: NOERROR, id: 12943\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CAA\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 12943\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CAA\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t86000\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\n\n;; AUTHORITY SECTION:\nmasecurite.interieur.gouv.fr.\t86400\tIN\tSOA\tns1.as30781.net. hostmaster.as30781.net. 2024103001 21600 3600 1209600 86400\n",
-      "timestamp": "2024-11-17T02:02:32.918361289Z",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 37231\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CAA\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 37231\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;www.masecurite.interieur.gouv.fr.\tIN\t CAA\n\n;; ANSWER SECTION:\nwww.masecurite.interieur.gouv.fr.\t86000\tIN\tCNAME\tmasecurite.interieur.gouv.fr.\n\n;; AUTHORITY SECTION:\nmasecurite.interieur.gouv.fr.\t86400\tIN\tSOA\tns1.as30781.net. hostmaster.as30781.net. 2024111801 21600 3600 1209600 86400\n",
+      "timestamp": "2024-11-20T16:19:02.714885039Z",
       "matcher-status": true
     },
     {
@@ -266,89 +266,9 @@
         "1; mode=block"
       ],
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466077913<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637496730937<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:02:42.83177016Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "x-permitted-cross-domain-policies",
-      "type": "http",
-      "host": "https://www.masecurite.interieur.gouv.fr/fr",
-      "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
-      "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
-      "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.304891856Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "referrer-policy",
-      "type": "http",
-      "host": "https://www.masecurite.interieur.gouv.fr/fr",
-      "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
-      "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
-      "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.30493659Z",
+      "timestamp": "2024-11-20T16:19:12.894938635Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -386,9 +306,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.304954984Z",
+      "timestamp": "2024-11-20T16:19:56.344508339Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -426,9 +346,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.304970393Z",
+      "timestamp": "2024-11-20T16:19:56.344552131Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -466,9 +386,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.304985631Z",
+      "timestamp": "2024-11-20T16:19:56.344565135Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -506,9 +426,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.305003595Z",
+      "timestamp": "2024-11-20T16:19:56.344579162Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -546,9 +466,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.305022901Z",
+      "timestamp": "2024-11-20T16:19:56.344597676Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -586,9 +506,89 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
       "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466213832<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:22.305039572Z",
+      "timestamp": "2024-11-20T16:19:56.3446208Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://www.masecurite.interieur.gouv.fr/fr",
+      "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
+      "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "ip": "46.22.207.60",
+      "timestamp": "2024-11-20T16:19:56.344638132Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "referrer-policy",
+      "type": "http",
+      "host": "https://www.masecurite.interieur.gouv.fr/fr",
+      "matched-at": "https://www.masecurite.interieur.gouv.fr/fr",
+      "request": "GET /fr HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637494382730<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "ip": "46.22.207.60",
+      "timestamp": "2024-11-20T16:19:56.344654673Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr'",
       "matcher-status": true
     },
@@ -628,9 +628,9 @@
       "host": "https://www.masecurite.interieur.gouv.fr/fr",
       "matched-at": "https://www.masecurite.interieur.gouv.fr/fr/",
       "request": "POST /fr/ HTTP/1.1\r\nHost: www.masecurite.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
-      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637466092257<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 247\r\nCache-Control: no-cache\r\nContent-Type: text/html; charset=utf-8\r\nPragma: no-cache\r\nStrict-Transport-Security: max-age=63072000; includeSubdomains\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: SAMEORIGIN\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 18244332637496753817<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:03:47.442856977Z",
+      "timestamp": "2024-11-20T16:20:22.255882716Z",
       "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: www.masecurite.interieur.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://www.masecurite.interieur.gouv.fr/fr/'",
       "matcher-status": true
     },
@@ -661,7 +661,7 @@
         "DHIMYOTIS"
       ],
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:08:41.354455066Z",
+      "timestamp": "2024-11-20T16:25:13.172525279Z",
       "matcher-status": true
     },
     {
@@ -693,7 +693,7 @@
         "masecurite.interieur.gouv.fr"
       ],
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:08:41.354577212Z",
+      "timestamp": "2024-11-20T16:25:13.172645664Z",
       "matcher-status": true
     },
     {
@@ -724,7 +724,7 @@
         "tls12"
       ],
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:08:41.644983562Z",
+      "timestamp": "2024-11-20T16:25:13.404879592Z",
       "matcher-status": true
     },
     {
@@ -755,7 +755,7 @@
         "tls13"
       ],
       "ip": "46.22.207.60",
-      "timestamp": "2024-11-17T02:08:42.524534573Z",
+      "timestamp": "2024-11-20T16:25:14.292386499Z",
       "matcher-status": true
     }
   ]
