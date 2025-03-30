@@ -25,16 +25,16 @@ runs:
       run: |
         # version dsfr
         npm install puppeteer
-        dsfr-version = "echo | node version-dsfr.js ${{url}}"
+        dsfr_version = `node version-dsfr.js ${url}`
         
         # this exits 1 when no fr-header__brand or rf-header__brand
         set +e
         grep -q "\(rf\|fr\)-header__brand" < ./dsfr-html.html
         if [ $? -eq 0 ]
         then
-            JSON="{\"detected\": true,\"version\":dsfr-version"}"
+            JSON="{\"detected\": true,\"version\":\"${dsfr_version}\"}"
         else
-            JSON="{\"detected\": false,\"version\":dsfr-version"}"
+            JSON="{\"detected\": false,\"version\":\"${dsfr_version}\"}"
         fi
 
         echo "$JSON" > ${{ github.workspace }}/${{ inputs.output }}

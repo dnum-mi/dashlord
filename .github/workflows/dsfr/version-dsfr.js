@@ -1,4 +1,4 @@
-onst puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer');
 const process = require( 'process' );
 
 (async () => {
