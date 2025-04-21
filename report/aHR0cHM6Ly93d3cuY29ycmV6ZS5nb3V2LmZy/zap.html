@@ -212,7 +212,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on Sat, 19 Apr 2025 02:37:22
+		Generated on Mon, 21 Apr 2025 02:38:24
 	</h3>
 
 	<h3>
@@ -245,7 +245,7 @@ td {
 					<div>Medium</div>
 				</td>
 				<td align="center">
-					<div>4</div>
+					<div>5</div>
 				</td>
 			</tr>
 			<tr>
@@ -299,6 +299,11 @@ td {
 				<td><a href="#10062">PII Disclosure</a></td>
 				<td align="center" class="risk-3">High</td>
 				<td align="center">4</td>
+			</tr>
+			<tr>
+				<td><a href="#10202">Absence of Anti-CSRF Tokens</a></td>
+				<td align="center" class="risk-2">Medium</td>
+				<td align="center">1</td>
 			</tr>
 			<tr>
 				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
@@ -645,6 +650,153 @@ Issuer: </td>
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-2"><a
+						id="10202"></a>
+						<div>Medium</div></th>
+					<th class="risk-2">Absence of Anti-CSRF Tokens</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>No Anti-CSRF tokens were found in a HTML submission form.</div>
+							<br />
+						
+							<div>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</div>
+							<br />
+						
+							<div>CSRF attacks are effective in a number of situations, including:</div>
+							<br />
+						
+							<div>    * The victim has an active session on the target site.</div>
+							<br />
+						
+							<div>    * The victim is authenticated via HTTP auth on the target site.</div>
+							<br />
+						
+							<div>    * The victim is on the same local network as the target site.</div>
+							<br />
+						
+							<div>CSRF has primarily been used to perform an action against a target site using the victim&#39;s privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/contenu/conseiller/22230">https://www.correze.gouv.fr/contenu/conseiller/22230</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">&lt;form class=&quot;&quot; action=&quot;/contenu/conseiller&quot; method=&quot;post&quot;&gt;</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: &quot;captcha&quot; &quot;name&quot; &quot;NodeID&quot; &quot;receiversemail&quot; &quot;SendButton&quot; &quot;youremail&quot; ].</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Phase: Architecture and Design</div>
+							<br />
+						
+							<div>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</div>
+							<br />
+						
+							<div>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</div>
+							<br />
+						
+							<div>Phase: Implementation</div>
+							<br />
+						
+							<div>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</div>
+							<br />
+						
+							<div>Phase: Architecture and Design</div>
+							<br />
+						
+							<div>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</div>
+							<br />
+						
+							<div>Note that this can be bypassed using XSS.</div>
+							<br />
+						
+							<div>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</div>
+							<br />
+						
+							<div>Note that this can be bypassed using XSS.</div>
+							<br />
+						
+							<div>Use the ESAPI Session Management control.</div>
+							<br />
+						
+							<div>This control includes a component for CSRF.</div>
+							<br />
+						
+							<div>Do not use the GET method for any request that triggers a state change.</div>
+							<br />
+						
+							<div>Phase: Implementation</div>
+							<br />
+						
+							<div>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</a>
+							<br />
+						
+							<a href="https://cwe.mitre.org/data/definitions/352.html">https://cwe.mitre.org/data/definitions/352.html</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/352.html">352</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">9</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10202/">10202</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-2"><a
 						id="10038"></a>
 						<div>Medium</div></th>
 					<th class="risk-2">Content Security Policy (CSP) Header Not Set</th>
@@ -664,6 +816,37 @@ Issuer: </td>
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr">https://www.correze.gouv.fr</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -725,37 +908,6 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Agriculture-et-alimentation">https://www.correze.gouv.fr/Action-de-l-Etat/Agriculture-et-alimentation</a></td>
 					</tr>
 					<tr>
@@ -787,7 +939,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -818,38 +970,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -881,6 +1002,37 @@ Issuer: </td>
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1106,7 +1258,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1137,7 +1289,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1199,7 +1351,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1230,7 +1382,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1261,7 +1413,7 @@ Issuer: </td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2905,7 +3057,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2936,7 +3088,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Toute-l-actualite">https://www.correze.gouv.fr/Actualites/Toute-l-actualite</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2998,7 +3150,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3029,7 +3181,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Toute-l-actualite">https://www.correze.gouv.fr/Actualites/Toute-l-actualite</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3091,7 +3243,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3122,7 +3274,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Toute-l-actualite">https://www.correze.gouv.fr/Actualites/Toute-l-actualite</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3246,7 +3398,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3277,7 +3429,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3339,7 +3491,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3370,38 +3522,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3433,6 +3554,37 @@ Response Body Length: 632.</td>
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3652,7 +3804,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3683,7 +3835,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3745,7 +3897,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3776,38 +3928,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3839,6 +3960,37 @@ Response Body Length: 632.</td>
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4058,7 +4210,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4089,7 +4241,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4151,7 +4303,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4182,7 +4334,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4213,7 +4365,7 @@ Response Body Length: 632.</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4453,7 +4605,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4485,7 +4637,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4549,7 +4701,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4581,7 +4733,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4613,7 +4765,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4863,7 +5015,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4883,12 +5035,12 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">/Action-de-l-Etat/Anciens-combattants/Centenaire-de-la-1ere-guerre-mondiale</td>
+						<td width="80%">fr/particuliers/vosdroits/N19804</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">�-���u��KZ��&#39;r&#39;���(�������קj*��׾���z���竭廉wbjW</td>
+						<td width="80%">~��j�br�bz�?�������u��8</td>
 					</tr>
 				
 					<tr>
@@ -4914,18 +5066,20 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">php/var/ezwebin_site/storage/images/politiques-publiques/agriculture-et-alimentation/155882-2-fre-FR/Agriculture-et-alimentation</td>
+						<td width="80%">fr/var/ezwebin_site/storage/images/politiques-publiques/agriculture-et-alimentation/155882-2-fre-FR/Agriculture-et-alimentation</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">����{&lt;n)��+^��h���)���?��b�*�zϩ��b����+�˥�����~jX�z{Z�*&#39;�^y�;���{�Q�+�˥�����~jX�z{Z�*&#39;</td>
+						<td width="80%">~��j������׿��+j��f�z��X������nnX���?j
+�r�m���zߚ�)��֭���מ|�o�����T
+�r�m���zߚ�)��֭��</td>
 					</tr>
 				
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4945,43 +5099,12 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">/Action-de-l-Etat/Anciens-combattants/Centenaire-de-la-1ere-guerre-mondiale</td>
+						<td width="80%">fr/var/ezwebin_site/storage/images/action-de-l-etat/anciens-combattants/156499-2-fre-FR/Anciens-combattants</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">�-���u��KZ��&#39;r&#39;���(�������קj*��׾���z���竭廉wbjW</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">fr/var/ezwebin_site/storage/images/politiques-publiques/collectivites-territoriales/14017-7-fre-FR/Collectivites-territoriales</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">~��j������׿��+j��f�z��X������nnX���?r�ey�b�+^��^��������?׍5���~��¢Y^rد�׬�׫�+h�&amp;�z</td>
+						<td width="80%">~��j������׿��+j��f�z��rب��^�_���jw&quot;z{&gt;r��j�Z��?מ��߶����Tw&quot;z{&gt;r��j�Z��</td>
 					</tr>
 				
 					<tr>
@@ -5018,7 +5141,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5038,12 +5161,43 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">fr/var/ezwebin_site/storage/images/politiques-publiques/emploi-economie-et-finances/12259-10-fre-FR/Emploi-economie-et-finances</td>
+						<td width="80%">fr/var/ezwebin_site/storage/images/politiques-publiques/elections/155950-1-fre-FR/Elections</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">~��j������׿��+j��f�z��X������nnX���?zje�/�r��&#39;�zߟ�v�q�?�m���t����Tje�/�r��&#39;�zߟ�v�q�</td>
+						<td width="80%">~��j������׿��+j��f�z��X������nnX���?zW��*&#39;��y��t�_���G�%y�b�{</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Environnement">https://www.correze.gouv.fr/Action-de-l-Etat/Environnement</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">fr/var/ezwebin_site/storage/images/action-de-l-etat/environnement/36910-35-fre-FR/Environnement</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">~��j������׿��+j��f�z��rب��^�_���z{⮉�zg�����]&gt;ߟ���G�&#39;�*�w�z{</td>
 					</tr>
 				
 					<tr>
@@ -5080,7 +5234,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Numerique-et-telephonie-mobile">https://www.correze.gouv.fr/Action-de-l-Etat/Numerique-et-telephonie-mobile</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Jeunesse-sport-et-vie-associative">https://www.correze.gouv.fr/Action-de-l-Etat/Jeunesse-sport-et-vie-associative</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5100,12 +5254,12 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">/Action-de-l-Etat/Anciens-combattants/Centenaire-de-la-1ere-guerre-mondiale</td>
+						<td width="80%">fr/var/ezwebin_site/storage/images/politiques-publiques/jeunesse-sport-et-vie-associative/37145-3-fre-FR/Jeunesse-sport-et-vie-associative</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">�-���u��KZ��&#39;r&#39;���(�������קj*��׾���z���竭廉wbjW</td>
+						<td width="80%">~��j������׿��+j��f�z��X������nnX���?��z���h�ߞ���{欲�&quot;jد{��׎~���{�Q�����,{�)��~z߯����b�</td>
 					</tr>
 				
 					<tr>
@@ -5610,7 +5764,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5643,7 +5797,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5696,7 +5850,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">&lt;a id=&quot;9d60bf504b734e1eae7677aa582cbdbf&quot; class=&quot;fr-nav__link&quot; target=&quot;_self&quot; href=&quot;/index.php/Actualites/Toute-l-actualite&quot;&gt;
+						<td width="80%">&lt;a id=&quot;9d60bf504b734e1eae7677aa582cbdbf&quot; class=&quot;fr-nav__link&quot; target=&quot;_self&quot; href=&quot;/Actualites/Toute-l-actualite&quot;&gt;
                                 Toute l&#39;actualité
                             &lt;/a&gt;</td>
 					</tr>
@@ -5709,7 +5863,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5742,7 +5896,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5775,7 +5929,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6020,6 +6174,37 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">private</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
@@ -6082,69 +6267,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">private</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">private</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6176,6 +6299,37 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">private</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6391,7 +6545,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6422,7 +6576,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze">https://www.correze.gouv.fr/Action-de-l-Etat/Acces-aux-services-publics-en-Correze</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6484,7 +6638,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6515,7 +6669,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales">https://www.correze.gouv.fr/Action-de-l-Etat/Collectivites-territoriales</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Culture">https://www.correze.gouv.fr/Action-de-l-Etat/Culture</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6546,7 +6700,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Elections">https://www.correze.gouv.fr/Action-de-l-Etat/Elections</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6791,6 +6945,37 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/">https://www.correze.gouv.fr/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Age: 0</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">The presence of the &#39;Age&#39; header indicates that a HTTP/1.1 compliant caching server is in use.</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat">https://www.correze.gouv.fr/Action-de-l-Etat</a></td>
 					</tr>
 					<tr>
@@ -6853,69 +7038,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement">https://www.correze.gouv.fr/Action-de-l-Etat/Amenagement-du-territoire-construction-et-logement</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Age: 0</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">The presence of the &#39;Age&#39; header indicates that a HTTP/1.1 compliant caching server is in use.</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances">https://www.correze.gouv.fr/Action-de-l-Etat/Emploi-economie-et-finances</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Age: 0</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">The presence of the &#39;Age&#39; header indicates that a HTTP/1.1 compliant caching server is in use.</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites">https://www.correze.gouv.fr/Action-de-l-Etat/France-Ruralites</a></td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants">https://www.correze.gouv.fr/Action-de-l-Etat/Anciens-combattants</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6947,6 +7070,37 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites">https://www.correze.gouv.fr/Actualites</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Age: 0</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">The presence of the &#39;Age&#39; header indicates that a HTTP/1.1 compliant caching server is in use.</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://www.correze.gouv.fr/Actualites/Espace-presse">https://www.correze.gouv.fr/Actualites/Espace-presse</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7775,7 +7929,7 @@ At &quot;High&quot; threshold this scan rule will not alert on client or server 
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">9l33i7ldqv1eddgkomghlhg2h6</td>
+						<td width="80%">jsqq8sv2t65f38ogapehsabdv6</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7807,7 +7961,7 @@ cookie:eZSESSID</td>
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">oriq415h9s8rt82vdmv8b9np65</td>
+						<td width="80%">k13ae8hbi13hb5c5gscfegkr22</td>
 					</tr>
 					<tr>
 						<td width="20%"
