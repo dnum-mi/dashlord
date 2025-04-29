@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 27 Apr 2025 07:18:25",
+	"@generated": "Tue, 29 Apr 2025 07:17:08",
 	"site":[ 
 		{
 			"@name": "https://www.hautes-pyrenees.gouv.fr",
@@ -20,7 +20,7 @@
 					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
 					"instances":[ 
 						{
-							"id": "179",
+							"id": "185",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique/Ceremonies-officielles",
 							"method": "GET",
 							"param": "",
@@ -35,7 +35,35 @@
 					"reference": "",
 					"cweid": "359",
 					"wascid": "13",
-					"sourceid": "987"
+					"sourceid": "1060"
+				},
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"id": "183",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/contenu/conseiller/1017",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" action=\"/contenu/conseiller\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ].</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "865"
 				},
 				{
 					"pluginid": "10038",
@@ -57,7 +85,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "136",
+							"id": "58",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -66,16 +94,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "58",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "97",
+							"id": "99",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -84,7 +103,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "128",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -93,7 +112,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "84",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -102,8 +121,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "95",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "103",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -111,7 +130,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "99",
+							"id": "101",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "",
@@ -120,8 +139,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "126",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
+							"id": "130",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -129,8 +148,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
+							"id": "71",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -139,6 +158,15 @@
 						},
 						{
 							"id": "22",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "21",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -175,7 +203,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "134",
+							"id": "56",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -184,7 +212,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "56",
+							"id": "148",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -193,7 +221,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
+							"id": "95",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -202,7 +230,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
+							"id": "125",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -211,7 +239,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "82",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -220,8 +248,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "93",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "96",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -229,7 +257,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "97",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -239,15 +267,6 @@
 						},
 						{
 							"id": "143",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Environnement-et-risques-majeurs",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "121",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -256,7 +275,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "142",
+							"id": "126",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "69",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -284,7 +312,7 @@
 					"desc": "<p>The identified library appears to be vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "174",
+							"id": "184",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727168600.js",
 							"method": "GET",
 							"param": "",
@@ -308,7 +336,7 @@
 					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
 					"cweid": "1395",
 					"wascid": "-1",
-					"sourceid": "825"
+					"sourceid": "846"
 				},
 				{
 					"pluginid": "10044",
@@ -321,7 +349,7 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "160",
+							"id": "162",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/accessibilite",
 							"method": "GET",
 							"param": "",
@@ -330,7 +358,7 @@
 							"otherinfo": "Location header URI length: 62 [https://www.hautes-pyrenees.gouv.fr/Pied-de-page/Accessibilite].\nPredicted response size: 362.\nResponse Body Length: 492."
 						},
 						{
-							"id": "159",
+							"id": "157",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/actualites",
 							"method": "GET",
 							"param": "",
@@ -339,7 +367,7 @@
 							"otherinfo": "Location header URI length: 46 [https://www.hautes-pyrenees.gouv.fr/Actualites].\nPredicted response size: 346.\nResponse Body Length: 428."
 						},
 						{
-							"id": "155",
+							"id": "158",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -354,10 +382,10 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 104 [https://www.hautes-pyrenees.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/534853304?SearchText=ZAP].\nPredicted response size: 404.\nResponse Body Length: 660."
+							"otherinfo": "Location header URI length: 105 [https://www.hautes-pyrenees.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/1904059164?SearchText=ZAP].\nPredicted response size: 405.\nResponse Body Length: 664."
 						},
 						{
-							"id": "157",
+							"id": "154",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -366,7 +394,7 @@
 							"otherinfo": "Location header URI length: 45 [https://www.hautes-pyrenees.gouv.fr/Demarches].\nPredicted response size: 345.\nResponse Body Length: 424."
 						},
 						{
-							"id": "162",
+							"id": "163",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/donnees-personnelles-et-cookies",
 							"method": "GET",
 							"param": "",
@@ -375,7 +403,7 @@
 							"otherinfo": "Location header URI length: 97 [https://www.hautes-pyrenees.gouv.fr/Pied-de-page/Politique-de-protection-des-donnees-personnelles].\nPredicted response size: 397.\nResponse Body Length: 632."
 						},
 						{
-							"id": "154",
+							"id": "153",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -384,7 +412,7 @@
 							"otherinfo": "Location header URI length: 66 [https://www.hautes-pyrenees.gouv.fr/Outils/Horaires-et-coordonnees].\nPredicted response size: 366.\nResponse Body Length: 508."
 						},
 						{
-							"id": "161",
+							"id": "167",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -393,7 +421,7 @@
 							"otherinfo": "Location header URI length: 52 [https://www.hautes-pyrenees.gouv.fr/Mentions-legales].\nPredicted response size: 352.\nResponse Body Length: 452."
 						},
 						{
-							"id": "122",
+							"id": "92",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -402,7 +430,7 @@
 							"otherinfo": "Location header URI length: 50 [https://www.hautes-pyrenees.gouv.fr/Nous-contacter].\nPredicted response size: 350.\nResponse Body Length: 444."
 						},
 						{
-							"id": "158",
+							"id": "159",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -411,7 +439,7 @@
 							"otherinfo": "Location header URI length: 55 [https://www.hautes-pyrenees.gouv.fr/Demarches/Passeport].\nPredicted response size: 355.\nResponse Body Length: 464."
 						},
 						{
-							"id": "156",
+							"id": "155",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -420,7 +448,7 @@
 							"otherinfo": "Location header URI length: 64 [https://www.hautes-pyrenees.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 364.\nResponse Body Length: 500."
 						},
 						{
-							"id": "153",
+							"id": "156",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -435,7 +463,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "730"
+					"sourceid": "691"
 				},
 				{
 					"pluginid": "10010",
@@ -532,7 +560,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "171",
+							"id": "169",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -547,7 +575,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "768"
+					"sourceid": "705"
 				},
 				{
 					"pluginid": "110009",
@@ -560,7 +588,7 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"id": "177",
+							"id": "174",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
 							"method": "GET",
 							"param": "",
@@ -569,7 +597,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "176",
+							"id": "173",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
 							"method": "GET",
 							"param": "",
@@ -578,7 +606,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "178",
+							"id": "181",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.slug.replace(%22article%22,%22actualite%22)%20+",
 							"method": "GET",
 							"param": "",
@@ -587,7 +615,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "166",
+							"id": "160",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/tags/view/Accueil+et+dossier/Grands+dossiers/Services+Publics+%2B",
 							"method": "GET",
 							"param": "",
@@ -602,7 +630,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "831"
+					"sourceid": "769"
 				},
 				{
 					"pluginid": "90004",
@@ -625,7 +653,7 @@
 						},
 						{
 							"id": "65",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -633,8 +661,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "78",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -652,7 +680,7 @@
 						},
 						{
 							"id": "66",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -660,8 +688,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "79",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -679,7 +707,7 @@
 						},
 						{
 							"id": "67",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -687,8 +715,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "79",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "80",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -724,7 +752,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "140",
+							"id": "64",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -733,16 +761,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "114",
+							"id": "113",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -751,7 +770,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
+							"id": "139",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -760,7 +779,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
+							"id": "90",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -769,8 +788,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "112",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "121",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -778,7 +797,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "117",
+							"id": "119",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "",
@@ -787,8 +806,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "132",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
+							"id": "140",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -796,7 +815,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "28",
+							"id": "77",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "34",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -805,7 +833,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "30",
+							"id": "28",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -842,7 +870,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "138",
+							"id": "61",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -851,16 +879,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "105",
+							"id": "106",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -869,7 +888,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
+							"id": "134",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -878,7 +897,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "87",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -887,8 +906,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "103",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "115",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -905,8 +924,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
+							"id": "135",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -914,7 +933,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "24",
+							"id": "74",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "29",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -923,7 +951,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "26",
+							"id": "24",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -939,6 +967,43 @@
 					"cweid": "319",
 					"wascid": "15",
 					"sourceid": "1"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "Timestamp Disclosure - Unix",
+					"name": "Timestamp Disclosure - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
+					"instances":[ 
+						{
+							"id": "177",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/contenu/action?SearchText=ZAP",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1904059164",
+							"otherinfo": "1904059164, which evaluates to: 2030-05-03 17:19:24."
+						},
+						{
+							"id": "176",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/contenu/action?SearchText=ZAP",
+							"method": "GET",
+							"param": "location",
+							"attack": "",
+							"evidence": "1904059164",
+							"otherinfo": "1904059164, which evaluates to: 2030-05-03 17:19:24."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+					"otherinfo": "<p>1904059164, which evaluates to: 2030-05-03 17:19:24.</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
+					"cweid": "497",
+					"wascid": "13",
+					"sourceid": "782"
 				},
 				{
 					"pluginid": "10021",
@@ -960,7 +1025,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "139",
+							"id": "62",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -969,7 +1034,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "62",
+							"id": "151",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -987,7 +1052,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "74",
+							"id": "136",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -996,7 +1061,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "87",
+							"id": "88",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1005,8 +1070,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "107",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "117",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1014,7 +1079,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "115",
+							"id": "116",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1023,7 +1088,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "130",
+							"id": "146",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1032,8 +1097,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "149",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Securite-et-protection-de-la-population",
+							"id": "137",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1041,7 +1106,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "147",
+							"id": "75",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1078,7 +1143,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'^\uFFFD\u022D{\uFFFD-\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFDj\\x0007\uFFFD\uFFFD\uFFFD-\uFFFD\uFFFDb\uFFFD\uFFFD?}\uFFFD\uFFFDz\u06EBz\u03DE\uFFFD\u01E9\uFFFD*'\uFFFD\uFFFDez\u03DDz\u03ECz\uFFFD\uFFFDq\uFFFD>u\uFFFDk\uFFFDky\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06EBj{~\uFFFD\uF9A2+>u\uFFFDj/\uFFFD\uFFFD7\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD\u07B3\uFFFDq\uFFFDm\uFFFD\uFFFD\uFFFDzY^\uFFFD\uFFFD^\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFDz\u03DD{\uFFFDZ\uFFFD\uFFFD\uFFFD}\uFFFD-\uFFFD\uFFFD\uFFFDv\uFFFD\u069E\u07E5{\u9A0A\u03DD{\u968B\uFFFD\uFFFD{ij\\x0007\uFFFDr\u06EC\uFFFD\uFFFD\uFFFDr*Z\uFFFD\uFFFD"
 						},
 						{
-							"id": "141",
+							"id": "68",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1087,7 +1152,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'^\uFFFD\u022D{\uFFFD-\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFDj\\x0007\uFFFD\uFFFD\uFFFD-\uFFFD\uFFFDb\uFFFD\uFFFD?}\uFFFD\uFFFDz\u06EBz\u03DE\uFFFD\u01E9\uFFFD*'\uFFFD\uFFFDez\u03DDz\u03ECz\uFFFD\uFFFDq\uFFFD>u\uFFFDk\uFFFDky\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06EBj{~\uFFFD\uF9A2+>u\uFFFDj/\uFFFD\uFFFD7\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD\u07B3\uFFFDq\uFFFDm\uFFFD\uFFFD\uFFFDzY^\uFFFD\uFFFD^\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFDz\u03DD{\uFFFDZ\uFFFD\uFFFD\uFFFD}\uFFFD-\uFFFD\uFFFD\uFFFDv\uFFFD\u069E\u07E5{\u9A0A\u03DD{\u968B\uFFFD\uFFFD{ij\\x0007\uFFFDr\u06EC\uFFFD\uFFFD\uFFFDr*Z\uFFFD\uFFFD"
 						},
 						{
-							"id": "119",
+							"id": "123",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -1096,7 +1161,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD\\x001c\uFFFDjZ\uFFFDw\uFFFDz{~u\uFFFD>\uFFFD\uFFFD\uFFFD\uFFFD\"\uFFFD\uFFFD?\uFFFD\uFFFDu\uFFFD\uFFFD\uFFFD\uFFFDG\uFFFD\\x001cr\uFFFD\uFFFDj\t\u0799\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05EB\uFFFD+h\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "80",
+							"id": "141",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1105,7 +1170,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD+\uFFFD\u02E5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD|\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD"
 						},
 						{
-							"id": "90",
+							"id": "91",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -1114,17 +1179,8 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
 						},
 						{
-							"id": "120",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique/Prix-de-la-Laicite-2024",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
-						},
-						{
-							"id": "118",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
+							"id": "124",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1133,7 +1189,7 @@
 						},
 						{
 							"id": "152",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Environnement-et-risques-majeurs",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1141,7 +1197,16 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
 						},
 						{
-							"id": "133",
+							"id": "122",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique/Prix-de-la-Laicite-2024",
+							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
+						},
+						{
+							"id": "147",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
 							"method": "GET",
 							"param": "",
@@ -1150,8 +1215,8 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
 						},
 						{
-							"id": "151",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Securite-et-protection-de-la-population",
+							"id": "142",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1159,13 +1224,13 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u008A\uFFFD2zy\u07B5\uF7B7\uFFFD\u0695\uBAF3\uFFFD^\uFFFDV\uFFFDE\uFFFDnnX\uFFFD\uFFFD\uFFFD\u03EE,~u\uFFFDk\uFFFD\u0689\u022D{\uFFFD\uFFFD"
 						},
 						{
-							"id": "150",
+							"id": "81",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/var/ide_site/storage/images/actualites/fermetures-exceptionnelles-des-services-de-la-prefecture-durant-le-mois-de-mai/145836-2-fre-FR/Fermetures-exceptionnelles-des-services-de-la-prefecture-durant-le-mois-de-mai_listitem",
-							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'^\uFFFD\u022D{\uFFFD-\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFDj\\x0007\uFFFD\uFFFD\uFFFD-\uFFFD\uFFFDb\uFFFD\uFFFD?}\uFFFD\uFFFDz\u06EBz\u03DE\uFFFD\u01E9\uFFFD*'\uFFFD\uFFFDez\u03DDz\u03ECz\uFFFD\uFFFDq\uFFFD>u\uFFFDk\uFFFDky\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06EBj{~\uFFFD\uF9A2+>u\uFFFDj/\uFFFD\uFFFD7\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD\u07B3\uFFFDq\uFFFDm\uFFFD\uFFFD\uFFFDzY^\uFFFD\uFFFD^\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFDz\u03DD{\uFFFDZ\uFFFD\uFFFD\uFFFD}\uFFFD-\uFFFD\uFFFD\uFFFDv\uFFFD\u069E\u07E5{\u9A0A\u03DD{\u968B\uFFFDb\uFFFD\u062Dz"
+							"evidence": "/var/ide_site/storage/images/actualites/mai-a-velo-lancement-du-challenge-d-activite-collectif-hautes-pyrenees-a-velo/146636-1-fre-FR/Mai-a-velo-Lancement-du-challenge-d-activite-collectif-Hautes-Pyrenees-a-velo_listitem",
+							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'^\uFFFD\u022D{\uFFFD-\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFDj\\x0007\uFFFD\uFFFD\uFFFD-\uFFFD\uFFFDb\uFFFD\uFFFD?\uFFFD\uFFFD\uFFFDk\uFFFD\u0796\uFFFD\uFFFDjw\\x001e\uFFFD\uFFFD\uFFFD\uFFFD\u06FEr\\x0016\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFD~i\uFFFDb\uFFFD+^\uFFFD\uFFFD%\uFFFD\uFFFD-\uFFFD\uFFFD\uFFFDj\uFFFD^\uFFFD\uFFFDr\uFFFD\uFFFD\uFFFDz\u03DA\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDx\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFD\uFFFDG\uFFFD\\x001a\uFFFD\u6FBD\uFFFDh\uFFFD\uFFFD\uFFFDq\u979E\u07DD\uFFFD\uFFFD!jY^\uFFFD\\x0007\uFFFDw\u6736+\uFFFD\uF722Y^r\u061F\uFFFDv\uFFFD\uFFFD\uFFFD>?*\u079D\uFFFD\uFFFD\uFFFD\uFFFDzZ?\uFFFD+-\uFFFD\u05E6"
 						}
 					],
 					"count": "11",
@@ -1187,7 +1252,7 @@
 					"desc": "<p>The Content-Type header was either missing or empty.</p>",
 					"instances":[ 
 						{
-							"id": "163",
+							"id": "161",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
 							"method": "GET",
 							"param": "content-type",
@@ -1202,7 +1267,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
 					"cweid": "345",
 					"wascid": "12",
-					"sourceid": "753"
+					"sourceid": "673"
 				},
 				{
 					"pluginid": "10027",
@@ -1215,7 +1280,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "168",
+							"id": "172",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1233,7 +1298,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "167",
+							"id": "166",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1242,7 +1307,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "172",
+							"id": "171",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1251,7 +1316,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "169",
+							"id": "168",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -1260,7 +1325,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "173",
+							"id": "182",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727168600.js",
 							"method": "GET",
 							"param": "",
@@ -1284,7 +1349,7 @@
 					"reference": "",
 					"cweid": "615",
 					"wascid": "13",
-					"sourceid": "765"
+					"sourceid": "745"
 				},
 				{
 					"pluginid": "10109",
@@ -1306,7 +1371,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "137",
+							"id": "59",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1315,7 +1380,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "59",
+							"id": "150",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1324,7 +1389,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "101",
+							"id": "104",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -1333,7 +1398,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "71",
+							"id": "131",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1342,7 +1407,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "84",
+							"id": "85",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -1351,8 +1416,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "100",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "111",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1360,7 +1425,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "106",
+							"id": "107",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "",
@@ -1369,7 +1434,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "127",
+							"id": "145",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
 							"method": "GET",
 							"param": "",
@@ -1378,8 +1443,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "148",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Securite-et-protection-de-la-population",
+							"id": "132",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1387,12 +1452,12 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "145",
+							"id": "72",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"9b1ec11743ff77c58cd3aab7849c9454\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Presse-et-communication-interministerielle\">\n                                Presse et communication interminist\u00E9rielle\n                            </a>",
+							"evidence": "<a id=\"9b1ec11743ff77c58cd3aab7849c9454\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Presse-et-communication-interministerielle\">\n                                Presse et communication interminist\u00E9rielle\n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						}
 					],
@@ -1425,7 +1490,7 @@
 						},
 						{
 							"id": "63",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1433,7 +1498,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "113",
+							"id": "112",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -1442,7 +1507,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "138",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1451,7 +1516,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "88",
+							"id": "89",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -1460,8 +1525,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "111",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "120",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1469,7 +1534,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "116",
+							"id": "118",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "",
@@ -1478,8 +1543,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "131",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
+							"id": "76",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1487,7 +1552,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "124",
+							"id": "94",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1524,7 +1589,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
+							"id": "57",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1533,7 +1598,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
+							"id": "149",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1542,7 +1607,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
+							"id": "98",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "cache-control",
@@ -1551,7 +1616,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
+							"id": "127",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "cache-control",
@@ -1560,7 +1625,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
+							"id": "83",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "cache-control",
@@ -1569,8 +1634,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "94",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "102",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1578,7 +1643,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
+							"id": "100",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "cache-control",
@@ -1587,7 +1652,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "125",
+							"id": "144",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
 							"method": "GET",
 							"param": "cache-control",
@@ -1596,8 +1661,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "146",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Securite-et-protection-de-la-population",
+							"id": "129",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Relations-avec-les-collectivites-locales",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1605,7 +1670,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "144",
+							"id": "70",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1643,7 +1708,7 @@
 						},
 						{
 							"id": "60",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1651,7 +1716,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "104",
+							"id": "105",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Accompagnement-des-territoires",
 							"method": "GET",
 							"param": "",
@@ -1660,7 +1725,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "72",
+							"id": "133",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1669,7 +1734,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "85",
+							"id": "86",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire.-construction.-logement-et-urbanisme",
 							"method": "GET",
 							"param": "",
@@ -1678,8 +1743,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "102",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Defense-et-anciens-combattants",
+							"id": "114",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Citoyennete-et-valeurs-de-la-Republique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1696,8 +1761,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "128",
-							"uri": "https://www.hautes-pyrenees.gouv.fr/Actions-de-l-Etat/Jeunesse.-sports-et-vie-associative-et-politique-de-la-ville",
+							"id": "73",
+							"uri": "https://www.hautes-pyrenees.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1705,7 +1770,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "123",
+							"id": "93",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1714,7 +1779,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "23",
+							"id": "27",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1723,7 +1788,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "25",
+							"id": "23",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1760,7 +1825,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "36",
+							"id": "38",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1769,7 +1834,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "34",
+							"id": "32",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1806,7 +1871,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "35",
+							"id": "37",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1815,7 +1880,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "31",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1852,7 +1917,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "31",
+							"id": "36",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1861,7 +1926,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "32",
+							"id": "30",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1898,7 +1963,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "38",
+							"id": "39",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1907,7 +1972,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "37",
+							"id": "35",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1935,21 +2000,21 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "49",
-							"uri": "https://www.hautes-pyrenees.gouv.fr",
-							"method": "GET",
-							"param": "eZSESSID",
-							"attack": "",
-							"evidence": "djugc86fit6ltero6fd6h4ien4",
-							"otherinfo": "\ncookie:eZSESSID"
-						},
-						{
 							"id": "10",
 							"uri": "https://www.hautes-pyrenees.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
 							"attack": "",
-							"evidence": "gsn4lajt82gc1sgp0l8dom5ft1",
+							"evidence": "tkc044q1it60oc4643uefc30j0",
+							"otherinfo": "\ncookie:eZSESSID"
+						},
+						{
+							"id": "49",
+							"uri": "https://www.hautes-pyrenees.gouv.fr",
+							"method": "GET",
+							"param": "eZSESSID",
+							"attack": "",
+							"evidence": "trfui337u3sm7ougcbk81pg2r5",
 							"otherinfo": "\ncookie:eZSESSID"
 						}
 					],
@@ -1959,7 +2024,7 @@
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "8"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -1972,7 +2037,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "27",
+							"id": "33",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1981,7 +2046,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "29",
+							"id": "26",
 							"uri": "https://www.hautes-pyrenees.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1996,7 +2061,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "7"
 				}
 			]
 		}
