@@ -1,43 +1,6 @@
 [
   [
     {
-      "template": "dns/caa-fingerprint.yaml",
-      "template-url": "https://templates.nuclei.sh/public/caa-fingerprint",
-      "template-id": "caa-fingerprint",
-      "template-path": "/home/runner/nuclei-templates/dns/caa-fingerprint.yaml",
-      "info": {
-        "name": "CAA Record",
-        "author": [
-          "pdteam"
-        ],
-        "tags": [
-          "dns",
-          "caa"
-        ],
-        "description": "A CAA record was discovered. A CAA record is used to specify which certificate authorities (CAs) are allowed to issue certificates for a domain.",
-        "reference": [
-          "https://support.dnsimple.com/articles/caa-record/#whats-a-caa-record"
-        ],
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        },
-        "classification": {
-          "cve-id": null,
-          "cwe-id": [
-            "cwe-200"
-          ]
-        }
-      },
-      "type": "dns",
-      "host": "sie.numerique-interieur.com.",
-      "matched-at": "sie.numerique-interieur.com",
-      "request": ";; opcode: QUERY, status: NOERROR, id: 40626\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;sie.numerique-interieur.com.\tIN\t CAA\n",
-      "response": ";; opcode: QUERY, status: NOERROR, id: 40626\n;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;sie.numerique-interieur.com.\tIN\t CAA\n\n;; AUTHORITY SECTION:\nnumerique-interieur.com.\t1800\tIN\tSOA\tns0.dom.scw.cloud. hostmaster.numerique-interieur.com. 2025051501 10800 3600 604800 3600\n",
-      "timestamp": "2025-05-15T14:03:11.627195374Z",
-      "matcher-status": true
-    },
-    {
       "template": "http/technologies/basic-auth-detect.yaml",
       "template-url": "https://templates.nuclei.sh/public/basic-auth-detect",
       "template-id": "basic-auth-detect",
@@ -66,9 +29,9 @@
         "Basic realm=\"Authentication Required\""
       ],
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:03:22 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:53:27 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:03:23.016703659Z",
+      "timestamp": "2025-05-19T13:53:28.501590711Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -96,209 +59,9 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:03:53 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:53:58 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:03:53.69324643Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "permissions-policy",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.83972199Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "x-permitted-cross-domain-policies",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839777393Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "referrer-policy",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839794906Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "clear-site-data",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.83980766Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "cross-origin-embedder-policy",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839827477Z",
+      "timestamp": "2025-05-19T13:53:59.363409922Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -336,9 +99,9 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839841162Z",
+      "timestamp": "2025-05-19T13:54:10.252136996Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -371,14 +134,14 @@
           "max-request": 1
         }
       },
-      "matcher-name": "content-security-policy",
+      "matcher-name": "permissions-policy",
       "type": "http",
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839864797Z",
+      "timestamp": "2025-05-19T13:54:10.252187991Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -416,49 +179,9 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839885726Z",
-      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
-      "matcher-status": true
-    },
-    {
-      "template": "http/misconfiguration/http-missing-security-headers.yaml",
-      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
-      "template-id": "http-missing-security-headers",
-      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
-      "info": {
-        "name": "HTTP Missing Security Headers",
-        "author": [
-          "socketz",
-          "geeknik",
-          "g4l1t0",
-          "convisoappsec",
-          "kurohost",
-          "dawid-czarnecki",
-          "forgedhallpass",
-          "jub0bs",
-          "userdehghani"
-        ],
-        "tags": [
-          "misconfig",
-          "headers",
-          "generic"
-        ],
-        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
-        "severity": "info",
-        "metadata": {
-          "max-request": 1
-        }
-      },
-      "matcher-name": "x-content-type-options",
-      "type": "http",
-      "host": "https://sie.numerique-interieur.com",
-      "matched-at": "https://sie.numerique-interieur.com",
-      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
-      "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839904892Z",
+      "timestamp": "2025-05-19T13:54:10.25220355Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -496,9 +219,9 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839919058Z",
+      "timestamp": "2025-05-19T13:54:10.252217906Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -536,9 +259,9 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839946269Z",
+      "timestamp": "2025-05-19T13:54:10.252230269Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -576,9 +299,249 @@
       "host": "https://sie.numerique-interieur.com",
       "matched-at": "https://sie.numerique-interieur.com",
       "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
-      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Thu, 15 May 2025 14:04:04 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:04.839954665Z",
+      "timestamp": "2025-05-19T13:54:10.252248634Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "content-security-policy",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.252261748Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-content-type-options",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.252276616Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.25231109Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "referrer-policy",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.252328592Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "clear-site-data",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.252341827Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-embedder-policy",
+      "type": "http",
+      "host": "https://sie.numerique-interieur.com",
+      "matched-at": "https://sie.numerique-interieur.com",
+      "request": "GET / HTTP/1.1\r\nHost: sie.numerique-interieur.com\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nDate: Mon, 19 May 2025 13:54:09 GMT\r\nServer: istio-envoy\r\nWww-Authenticate: Basic realm=\"Authentication Required\"\r\nContent-Length: 0\r\n\r\n",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:54:10.25235395Z",
       "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sie.numerique-interieur.com'",
       "matcher-status": true
     },
@@ -609,7 +572,72 @@
         "Let's Encrypt"
       ],
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:57.453760932Z",
+      "timestamp": "2025-05-19T13:55:02.710790952Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/expired-ssl.yaml",
+      "template-url": "https://templates.nuclei.sh/public/expired-ssl",
+      "template-id": "expired-ssl",
+      "template-path": "/home/runner/nuclei-templates/ssl/expired-ssl.yaml",
+      "info": {
+        "name": "Expired SSL Certificate",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "After an SSL certificate expires, you will no longer be able to communicate over a secure, encrypted HTTPS connection.\n",
+        "reference": [
+          "https://www.acunetix.com/vulnerabilities/web/tls-ssl-certificate-about-to-expire/"
+        ],
+        "severity": "low",
+        "metadata": {
+          "max-request": 1
+        },
+        "remediation": "Purchase or generate a new SSL/TLS certificate to replace the existing one.\n"
+      },
+      "type": "ssl",
+      "host": "sie.numerique-interieur.com",
+      "matched-at": "sie.numerique-interieur.com:443",
+      "extracted-results": [
+        "2025-05-17 07:32:21 +0000 UTC"
+      ],
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:55:02.710849151Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/revoked-ssl-certificate.yaml",
+      "template-url": "https://templates.nuclei.sh/public/revoked-ssl-certificate",
+      "template-id": "revoked-ssl-certificate",
+      "template-path": "/home/runner/nuclei-templates/ssl/revoked-ssl-certificate.yaml",
+      "info": {
+        "name": "Revoked SSL Certificate - Detect",
+        "author": [
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl",
+          "tls",
+          "revoked"
+        ],
+        "description": "Certificate revocation is the act of invalidating a TLS/SSL before its scheduled expiration date. A certificate should be revoked immediately when its private key shows signs of being compromised. It should also be revoked when the domain for which it was issued is no longer operational.\n",
+        "reference": [
+          "- https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/revoked-ssl-certificate/\n- https://www.tenable.com/plugins/nnm/5837"
+        ],
+        "severity": "low",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "sie.numerique-interieur.com",
+      "matched-at": "sie.numerique-interieur.com:443",
+      "ip": "51.159.114.163",
+      "timestamp": "2025-05-19T13:55:02.710926895Z",
       "matcher-status": true
     },
     {
@@ -636,13 +664,13 @@
       "host": "sie.numerique-interieur.com",
       "matched-at": "sie.numerique-interieur.com:443",
       "extracted-results": [
-        "mrsie-api.c99.cloud-pi-native.com",
         "mrsie.c99.cloud-pi-native.com",
         "sie-api.numerique-interieur.com",
-        "sie.numerique-interieur.com"
+        "sie.numerique-interieur.com",
+        "mrsie-api.c99.cloud-pi-native.com"
       ],
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:57.453899862Z",
+      "timestamp": "2025-05-19T13:55:02.710985514Z",
       "matcher-status": true
     },
     {
@@ -673,7 +701,7 @@
         "tls12"
       ],
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:59.775221773Z",
+      "timestamp": "2025-05-19T13:55:24.54347959Z",
       "matcher-status": true
     },
     {
@@ -704,7 +732,7 @@
         "tls13"
       ],
       "ip": "51.159.114.163",
-      "timestamp": "2025-05-15T14:04:59.9839857Z",
+      "timestamp": "2025-05-19T13:55:24.72590097Z",
       "matcher-status": true
     }
   ]
