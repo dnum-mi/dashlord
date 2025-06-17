@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 15 Jun 2025 16:43:40",
+	"@generated": "Tue, 17 Jun 2025 16:42:33",
 	"site":[ 
 		{
 			"@name": "https://ants.gouv.fr",
@@ -10,57 +10,85 @@
 			"@ssl": "true",
 			"alerts": [ 
 				{
-					"pluginid": "10202",
-					"alertRef": "10202",
-					"alert": "Absence of Anti-CSRF Tokens",
-					"name": "Absence of Anti-CSRF Tokens",
-					"riskcode": "2",
-					"confidence": "1",
-					"riskdesc": "Medium (Low)",
-					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
-					"instances":[ 
-						{
-							"id": "60",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form action=\"\" method=POST style=\"width:300px;margin-left:auto;margin-right:auto;\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"cf_input\" ]."
-						}
-					],
-					"count": "1",
-					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"cf_input\" ].</p>",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
-					"cweid": "352",
-					"wascid": "9",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10038",
-					"alertRef": "10038-1",
-					"alert": "Content Security Policy (CSP) Header Not Set",
-					"name": "Content Security Policy (CSP) Header Not Set",
+					"pluginid": "10055",
+					"alertRef": "10055-13",
+					"alert": "CSP: Failure to Define Directive with No Fallback",
+					"name": "CSP: Failure to Define Directive with No Fallback",
 					"riskcode": "2",
 					"confidence": "3",
 					"riskdesc": "Medium (High)",
-					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
 					"instances":[ 
 						{
-							"id": "31",
+							"id": "135",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
-							"param": "",
+							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cfb764ef-7b5d-4897-9998-5fa143e19c1a' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						}
 					],
 					"count": "1",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-4",
+					"alert": "CSP: Wildcard Directive",
+					"name": "CSP: Wildcard Directive",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "136",
+							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cfb764ef-7b5d-4897-9998-5fa143e19c1a' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:</p><p>img-src</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-6",
+					"alert": "CSP: style-src unsafe-inline",
+					"name": "CSP: style-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "137",
+							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cfb764ef-7b5d-4897-9998-5fa143e19c1a' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"otherinfo": "style-src includes unsafe-inline."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
 					"sourceid": "1"
@@ -76,7 +104,7 @@
 					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>",
 					"instances":[ 
 						{
-							"id": "21",
+							"id": "20",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -85,7 +113,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "71",
+							"id": "87",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -94,7 +122,16 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "103",
+							"id": "63",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "83",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -103,7 +140,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "104",
+							"id": "106",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
@@ -112,16 +149,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "133",
-							"uri": "https://ants.gouv.fr/home/csca-e-id",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "132",
+							"id": "78",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
@@ -130,7 +158,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "131",
+							"id": "105",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
@@ -139,7 +167,16 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "23",
+							"id": "126",
+							"uri": "https://ants.gouv.fr/nos-missions/les-titres-produits-par-l-ants/les-cartes-agents",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "22",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -148,7 +185,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "73",
+							"id": "54",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -157,7 +194,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "123",
+							"id": "61",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -166,16 +203,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "144",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "74",
+							"id": "107",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
@@ -190,72 +218,7 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "7"
-				},
-				{
-					"pluginid": "10020",
-					"alertRef": "10020-1",
-					"alert": "Missing Anti-clickjacking Header",
-					"name": "Missing Anti-clickjacking Header",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
-					"instances":[ 
-						{
-							"id": "19",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
-					"cweid": "1021",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "90003",
-					"alertRef": "90003",
-					"alert": "Sub Resource Integrity Attribute Missing",
-					"name": "Sub Resource Integrity Attribute Missing",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
-					"instances":[ 
-						{
-							"id": "115",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://captcha.perfdrive.com/captcha-public/css/shieldsquare_styles.min.css\">",
-							"otherinfo": ""
-						},
-						{
-							"id": "116",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"https://hcaptcha.com/1/api.js?recaptchacompat=off\"></script>",
-							"otherinfo": ""
-						}
-					],
-					"count": "2",
-					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
-					"cweid": "345",
-					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10044",
@@ -268,185 +231,139 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "4",
+							"id": "3",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 792 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=8579b59e-a4e3-40c7-8173-5b0cbba7efaf&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2F&ssi=6bfd45d3-cslv-409a-a1fc-3ad203dd47f8&ssk=botmanager_support@radware.com&ssm=08261260900339293108389257736229&ssn=026c0b491a38c5ea3f0ad922ed360a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d285a02c114228d25c3af0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMDRmOWRhNjMtMmE5Zi00MmNhLTg4ZGItZGI4ODk3MDVlODI1MS0xNzUwMDA1ODE1MTg3MC0wMTQ1ZmZiM2M4MmMyOWQ4MTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3MC0zODJlNGEzZWM0NDZkYmYyMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIn0=].\nPredicted response size: 1,092.\nResponse Body Length: 1,432."
+							"otherinfo": "Location header URI length: 788 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=5337c63f-082b-4ddc-b3ec-8591aafa2d70&ssb=13672253213&ssc=https%3A%2F%2Fants.gouv.fr%2F&ssi=15206e3b-d8te-4b18-8397-fe9ed99adc67&ssk=botmanager_support@radware.com&ssm=19219140897667829105045056016143&ssn=7b1c752efcc18dec8931acfd94e9cca44f3a22ab29f4-9763-4f30-86f2cd&sso=474d2309-8093ceb4021b309f4d5fa5e533379e599b7b48a4127ee142&ssp=21982559101750182128175010097020018&ssq=53176657854155529149578541882801563472316&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2MC04NmZlMGZkNjRlNzkwYWQzMTAiLCJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTYwLWMwMWEyNzc3YWVmMDU1NWQxMCJ9].\nPredicted response size: 1,088.\nResponse Body Length: 1,428."
 						},
 						{
-							"id": "68",
+							"id": "82",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 811 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=dc514480-5b53-4125-8c6f-13725f67f584&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fabout-us&ssi=b191a7b9-cslv-4a02-bf6a-ca6d46ed4c63&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b497494c3b240220e9cb7980a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30df4ae2efaaadd786541870a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDYxLWI5ZWMzNTE3ODI5MDFlZDUxMyIsInV6bXgiOiI3ZjkwMDA1OWM4ZWYxMC03ODIwLTRkMzktYjQwNC0zYmExMGM0MzI5YTAxLTE3NTAwMDU4MTU2NDgwLWE5ZjE2NjBjYzI2YmIyZTIxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,111.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 811 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=1ad509a3-4401-4802-8f9e-f52bd4470d26&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fabout-us&ssi=0b6a5653-d8te-4f44-af2a-0407034d6db4&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe4932df7564f27387a227fd5efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7bd221f536abadf61647398782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2Njc4LTY5YWM3MzZlN2QxNTJjMzAxMyIsInJkIjoiYW50cy5nb3V2LmZyIiwiX191em1mIjoiN2Y2MDAwYTAwZDAwMDItNWNjMy00ZTZmLWI3MjUtYzU2ODdmYWE2YWU5MTc1MDE3ODU0MTQxNjY3OC0yMzE0YjM3NDQ3YjcyMjYxMTMifQ==].\nPredicted response size: 1,111.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "101",
+							"id": "60",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 836 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=d8091c54-8a7b-46e1-881e-0d7b3473ba1d&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Faccessibility-partially-compliant&ssi=289f8225-d8te-47f5-b659-f83d3e374803&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe4936b2d14acf7dbd60c17eeefa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b65f5c559434a98841c8d8782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTY2ODEtZTNjYzM3MjcxNTRmYjhmODEzIiwidXpteCI6IjdmOTAwMGM4MTU4MzFhLWNkY2UtNGNjOS05ODJhLWE3NjZkN2ViMzNiODEtMTc1MDE3ODU0MTQxNjY4MS0xN2Q1NzI2MDc3NWZiOTRhMTMifQ==].\nPredicted response size: 1,136.\nResponse Body Length: 1,432."
+						},
+						{
+							"id": "80",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 879 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=addfb425-17ff-4bad-83a7-1ee41ed45aaf&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fall-the-news%2Ffrance-identite-becomes-an-identity-supplier-on-franceconnect&ssi=ed6945d3-cslv-4724-800a-4b1378c2c9d8&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b496bad816c7ab7b4a697f30a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d4900c0f9ff5c8efc87d00a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDY4LTUxNWZhMGM0Njc1YzkyMzIxMyIsInV6bXgiOiI3ZjkwMDBmZjEyNGZjNy0yMTRjLTQ4OTQtOWRmOC0wYjNmYmZlM2RhZTExLTE3NTAwMDU4MTU2NTUwLWEyMzAxNTQ5ODhiMTdlMjAxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,179.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 879 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=c44d28dc-6b0f-4eb1-a688-7acd5a796f3f&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fall-the-news%2Ffrance-identite-becomes-an-identity-supplier-on-franceconnect&ssi=6f579d48-d8te-4eb1-a91b-20b0140ba020&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe49303706166a90c81d821a4efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7be93a6668784522a28e5d8782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTY2ODYtNmE5YzBkNmUyNWM1N2ZkMjEzIiwidXpteCI6IjdmOTAwMGM4MTU4MzFhLWNkY2UtNGNjOS05ODJhLWE3NjZkN2ViMzNiODEtMTc1MDE3ODU0MTQxNjY4Ni03YmI3NDdjZGM2Y2IzMDkyMTMifQ==].\nPredicted response size: 1,179.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "102",
+							"id": "103",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 829 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=bbedbd4c-83ab-4c7b-b011-d6b33a23ea02&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fall-the-news%2Ffraud-alert&ssi=95080741-cslv-40e8-850b-d8d0c3ad4e5b&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b494fa93481b0e050f031e40a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30dc2ad5ce02f4f846dfdeb0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDcwLTU4NjYyMGY1YWE2YmI1MWExMyIsInV6bXgiOiI3ZjkwMDA3Y2ZkNDg0Yi1lZjQ0LTRlNDYtOThlOS1iMWU2ODhkOTkxNjAxLTE3NTAwMDU4MTU2NTcwLWRiM2VhNTVkNGI2MGViZjcxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,129.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 829 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=c904c678-d69c-47bf-84ed-e1b282313b37&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fall-the-news%2Ffraud-alert&ssi=b91eb8eb-d8te-4322-9a5f-afea059c2855&ssk=botmanager_support@radware.com&ssm=45007939917992767163174613440121&ssn=11bfe493c7f71ccc5512a6d7fccfefa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b8f643df61d469779e8e08782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2ODQ4LWNhZjU3YTZlODViNjFiMDAxNiIsInJkIjoiYW50cy5nb3V2LmZyIiwidXpteCI6IjdmOTAwMGM4MTU4MzFhLWNkY2UtNGNjOS05ODJhLWE3NjZkN2ViMzNiODEtMTc1MDE3ODU0MTQxNjg0OC0yZmE1MTBjZjBhMTRmMDRhMTYifQ==].\nPredicted response size: 1,129.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "130",
+							"id": "125",
 							"uri": "https://ants.gouv.fr/home/csca-e-id",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 812 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=9092cdd6-c87a-4be1-80d3-07011bef5870&ssb=40178298755&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fcsca-e-id&ssi=ee2ac35d-cslv-4efb-930b-bbd6c544801c&ssk=botmanager_support@radware.com&ssm=95366646840299957163127080351987&ssn=0cba455ab92e1005a61fee227827791bf24e9f211f85-5bea-4d05-90d976&sso=90feff21-e0f6aa5b55e6dad3848fd0ebd0a29955a211f0604c05d0cd&ssp=85084758111750006428175007738148486&ssq=90098290581622822213505815391472599799782&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3ODQxLTU5ODY1YzZkMjFmNWQ3OWUxNiIsInV6bXgiOiI3ZjkwMDA1NzA4MmVlOS05ZmVlLTQ0YmItYjdmYS0xZWMyNGY2MDc1NjUxLTE3NTAwMDU4MTYwMjgwLWFhYzEzMDkwNDhkNDhmMDMxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,112.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 812 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=534dd63f-e567-4393-ac67-f1212bc154ea&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Fcsca-e-id&ssi=937aef5e-d8te-43c3-9913-eebe711ffe6f&ssk=botmanager_support@radware.com&ssm=45007939917992767163174613440121&ssn=11bfe493119d2827239bf156b3acefa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7bcc257a37488b9ee6116a8782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2MTI3NC04YjMzMjFhNzc3NzM3ZDQ3MTYiLCJyZCI6ImFudHMuZ291di5mciIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTYxMjc0LWJjMDRlYTg2YmJhYTk3YTIxNiJ9].\nPredicted response size: 1,112.\nResponse Body Length: 1,434."
 						},
 						{
-							"id": "128",
+							"id": "76",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 844 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=a8ea099b-7594-442d-9b70-0189a67fa6ee&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Four-missions%2Fdigital-solutions%2F2d-doc&ssi=92012213-cslv-4187-a420-14a6a9e66d79&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b4950a8f4e372607002b97b0a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d02a6b26561247578c8a00a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwN2Q4OWM3YTAtMTMwYy00MjZjLWJkN2ItY2ZkODk1ZjZiZjc3MS0xNzUwMDA1ODE1NjU2MC0yYzVmZTcwMzM2ZjhiOTUzMTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDY5LWUzNjQ0YmIzMDY2Y2NjYjExMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,144.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 844 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=c29fd665-c530-4a30-a530-d98d22b55ce5&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Four-missions%2Fdigital-solutions%2F2d-doc&ssi=d8bf9e67-d8te-43ed-ba4a-dd45c34f54e5&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe493512136791f540f887607efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b531a66bcf6affec452088782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2Njg4LWYyMTA5MmY5NTBhYzRlMmQxMyIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTY2ODgtZWNlMmRiNTI3NjdmNWRlMzEzIiwicmQiOiJhbnRzLmdvdXYuZnIifQ==].\nPredicted response size: 1,144.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "126",
+							"id": "104",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 900 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=cc423429-cce2-4a27-8ca5-078bd56d29f0&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Four-missions%2Fdocuments-produced-by-the-ants%2Fidentity-documents%2Fdriving-and-boating-licences&ssi=5c605e33-cslv-48b3-851d-b9bd71483158&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b49aa10d1b9585aa392a7380a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d41d6f99f76f65e6afecb0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNDJkYzljMWQtOTYyNi00YWY0LTk4Y2QtMWQ2NTdlMGJjOGU5MS0xNzUwMDA1ODE1Njk3MC04NmEwNmMyZmI3YmM0YzU4MTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NTEwLTIwYjc5YzdlZjllMzM1NTgxMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,200.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 900 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=f4e389a3-b0e9-4911-b418-b0689356c47c&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fhome%2Four-missions%2Fdocuments-produced-by-the-ants%2Fidentity-documents%2Fdriving-and-boating-licences&ssi=3290fa2b-d8te-493d-93ec-14dfd9288adb&ssk=botmanager_support@radware.com&ssm=45007939917992767163174613440121&ssn=11bfe493a65b5a04f6ba4c6c4a41efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b93546e72046ead7101768782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2MTI2OC1mNzgyY2E4NzkwYmZmOGJiMTYiLCJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTYxMjY4LTU4YWIyMzM5N2MyNDVmOTcxNiJ9].\nPredicted response size: 1,200.\nResponse Body Length: 1,434."
 						},
 						{
-							"id": "3",
+							"id": "124",
+							"uri": "https://ants.gouv.fr/nos-missions/les-titres-produits-par-l-ants/les-cartes-agents",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 861 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=eced3e98-6efb-4329-a92e-3573c6584b43&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Fnos-missions%2Fles-titres-produits-par-l-ants%2Fles-cartes-agents&ssi=8217409f-d8te-487d-a43a-fbbe49f19a49&ssk=botmanager_support@radware.com&ssm=45007939917992767193174613440121&ssn=11bfe493a0984784fd79f06b34eeefa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7bd15206e6893f620235d78782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2MTI5Ni1hMzAzZGQ3NTgwYTFlOTE5MTkiLCJyZCI6ImFudHMuZ291di5mciIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTYxMjk2LWI0YWE5NzQ5YjYzYmFjMDUxOSJ9].\nPredicted response size: 1,161.\nResponse Body Length: 1,434."
+						},
+						{
+							"id": "4",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 802 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=fcc8e70d-4ca6-464e-9ec1-9cd5c4344edc&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Frobots.txt&ssi=915d600f-cslv-4b84-aa4d-5fffcf7afa44&ssk=botmanager_support@radware.com&ssm=08261260900339293108389257736229&ssn=026c0b49a33af6aacf5958261d9b0a991ea2eb7c3c30-76cf-4ccd-8c02f7&sso=a1119b7b-14de27220b85e1efa30dba49b721b78c83f563cf0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBjMmEyMDA5OC0wMWRjLTRlNTUtOWY5Yi1mMzZmZGY4YjQ4NzExNzUwMDA1ODE1MTcwMC1iNDdkNzBhYTc0OWVjMmJlMTAiLCJ1em14IjoiN2Y5MDAwZmI4NzFjZDItNmExMy00MTRjLThkZWQtYzk5NGVmN2U4YjM5MS0xNzUwMDA1ODE1MTcwMC0wY2Q2MjQ3ODY1NDg1NWIyMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIn0=].\nPredicted response size: 1,102.\nResponse Body Length: 1,432."
+							"otherinfo": "Location header URI length: 798 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=1cbbede5-504b-4f0a-b749-e295091bb54e&ssb=13672253213&ssc=https%3A%2F%2Fants.gouv.fr%2Frobots.txt&ssi=27528c70-d8te-4ba1-96b8-8015e6209d77&ssk=botmanager_support@radware.com&ssm=19219140897667829105045056016143&ssn=7b1c752e725348084b116d42eeaecca44f3a5763127e-9125-4cdb-a6f2cd&sso=474d2e0b-670d4cef56cf309f4d5fdb3dc26e4df51bee2605127ee142&ssp=21982559101750182128175010097020018&ssq=53176657854155529149578541882801563472316&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMuZ291di5mciIsInV6bXgiOiI3ZjkwMDA1Y2YyMDE5OS0zMzM2LTQyZmYtODA1MS1jNzkwYjkzNjg2MWQxLTE3NTAxNzg1NDE0MTQwLWZkOTc3N2Y0ZGFmZGZlZjgxMCIsIl9fdXptZiI6IjdmNjAwMDM4OWZkNjU0LWYzZGYtNDAyOC05MjY1LWZlZjNiNTMyODkwNzE3NTAxNzg1NDE0MTQwLTNhMmZjMmUwOWI0NDk1NTcxMCJ9].\nPredicted response size: 1,098.\nResponse Body Length: 1,428."
 						},
 						{
-							"id": "69",
+							"id": "53",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 813 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=32247482-42ec-4dae-98f9-465397dba20c&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite&ssi=bb1a5c94-cslv-47e5-9b3d-cebc3b789e12&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b49a9aa002f8969325c161a0a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d754f8d41091703cfc9650a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNGRhMTMyMTEtZmVlYy00NjA3LWIzM2YtN2EwYTk1Nzk3MzBhMS0xNzUwMDA1ODE1NjQ0MC1hYzkwOTI4ZmU1ODkyZWExMTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDU3LTBjMmQ0M2E2YThhY2UzYjIxMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,113.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 813 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=c2de171d-9794-4d89-8f1a-8d653b59d060&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite&ssi=cad516ad-d8te-462f-bd85-932e58d76412&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe4939366e29651d46ad049a8efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b382fc104d3e8867c07758782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2NjcwLWEzN2I5NzBiYjRmN2VkYzExMyIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTY2NzAtNjc4YzhhNTc1YzgxOWZkMTEzIiwicmQiOiJhbnRzLmdvdXYuZnIifQ==].\nPredicted response size: 1,113.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "122",
+							"id": "57",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 876 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=f8ad0f3d-65cf-471f-bb3f-e443ab077382&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Fcentres-temporaires-d-accueil-cta-2023-bilan-et-perspectives&ssi=341ebf4a-cslv-4fa2-97de-929d6e929c1d&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b492f34e69a6d450376492c0a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d92de193c6ba3b296f2400a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNWQwZGRlMTUtNWNlOS00MzgwLWJmMDYtMGMzYmRlMzkyYWJjMS0xNzUwMDA1ODE1NjU1MC02MTRhNmFkNmUzMDJkMTJkMTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDY4LTUxNWZhMGM0Njc1YzkyMzIxMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,176.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 876 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=8922ad35-38f5-44cc-b1ec-2758e6260148&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Fcentres-temporaires-d-accueil-cta-2023-bilan-et-perspectives&ssi=73bf0041-d8te-49b0-bb85-7390ed024970&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe49355e487ec42be5cebf9f4efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7bc11793b5bd75544948bc8782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTY2NzctYzViYjY5ODNhYmE2YjFmMzEzIiwidXpteCI6IjdmOTAwMGM4MTU4MzFhLWNkY2UtNGNjOS05ODJhLWE3NjZkN2ViMzNiODEtMTc1MDE3ODU0MTQxNjY3Ny1hZDczNDA4OGEzMzU0MzU4MTMifQ==].\nPredicted response size: 1,176.\nResponse Body Length: 1,432."
 						},
 						{
-							"id": "142",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 912 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=0a47c83c-fd00-44f0-a56f-43cfda31bb55&ssb=40178298755&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Fla-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee&ssi=fac67b56-cslv-4c5d-a687-006cc8e6ac0b&ssk=botmanager_support@radware.com&ssm=95366646840299957163127080351987&ssn=0cba455aaf203b7879d7930a464f791bf24e9f211f85-5bea-4d05-90d976&sso=90feff21-e0f6aa5b55e6dad3848f40909d431a7b7cc010854c05d0cd&ssp=85084758111750006428175007738148486&ssq=90098290581622822213505815391472599799782&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3ODQ2LTdlMGViN2E5ZDExMDJkZmUxNiIsInJkIjoiYW50cy0yLmdvdXYuZnIiLCJ1em14IjoiN2Y5MDAwMjk4NTUzZGYtMDU4Mi00NDA4LTkxZmQtOTgyYmY4Njk4N2ExMS0xNzUwMDA1ODE2MDMzMC1mZWQ1MzE1ZTIyNzc3MTVhMTAifQ==].\nPredicted response size: 1,212.\nResponse Body Length: 1,434."
-						},
-						{
-							"id": "72",
+							"id": "102",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 908 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=763ee98c-31cb-4d4d-93a4-d4b04b71e462&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Fmaintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens&ssi=621f59e3-cslv-420e-932d-80ad94db302a&ssk=botmanager_support@radware.com&ssm=08261260900339293138389257736229&ssn=026c0b4941ddbce58e25d52877cb0a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30ddfb679c04ec42cdeee0e0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMzI1Yjg2ZmYtNTBkOS00YTJiLWExZDgtOTY5Y2IwYjQ3YzA4MS0xNzUwMDA1ODE1NjUzMC01MmU2NThmOGMwZmNjYjk3MTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDY2LTcyOTE5NDdkZjNlYjVkNTQxMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,208.\nResponse Body Length: 1,434."
+							"otherinfo": "Location header URI length: 908 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=0c51b9c5-1c01-41a8-ad8c-0da1a7574e79&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Fmaintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens&ssi=95c0e545-d8te-42e0-bdec-f5ada5f7b151&ssk=botmanager_support@radware.com&ssm=45007939917992767133174613440121&ssn=11bfe493a5dee5c38fb447b5aabfefa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7baf8ff0265e1e3f05df208782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2NzI0LWMxZGI0NWQ0NmIzMmUzZTAxMyIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTY3MjQtODZjYjhiYjBjMjdiMmViYTEzIiwicmQiOiJhbnRzLmdvdXYuZnIifQ==].\nPredicted response size: 1,208.\nResponse Body Length: 1,432."
+						},
+						{
+							"id": "123",
+							"uri": "https://ants.gouv.fr/toute-l-actualite/renouvellement-des-titres-didentite-choisissez-le-bon-moment-pour-effectuer-vos-demarches",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 905 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=8cdada84-be02-47b2-9f2f-bc6fa5beda8f&ssb=54265223914&ssc=https%3A%2F%2Fants.gouv.fr%2Ftoute-l-actualite%2Frenouvellement-des-titres-didentite-choisissez-le-bon-moment-pour-effectuer-vos-demarches&ssi=689747d6-d8te-4a92-b82f-f48c6872cf3c&ssk=botmanager_support@radware.com&ssm=45007939917992767193174613440121&ssn=11bfe49325556d16183891d34de5efa8890122ab29f4-9763-4f30-8180e3&sso=2373d309-8093ceb4021b489aee7b51b89963f9817a23e47e8782155e&ssp=57172142891750164089175010158265790&ssq=50895827854232931140878541183053979759564&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTYxMjk4LWM3ZGZlYzRlNGQ1YTk1MjExOSIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTYxMjk4LWRmN2E5OTgzOTNiMGUyMjkxOSJ9].\nPredicted response size: 1,205.\nResponse Body Length: 1,434."
 						}
 					],
-					"count": "12",
+					"count": "14",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 792 [https://validate.perfdrive.com/d9591a763813cfa3c46a5696d6f2a2aa/?ssa=8579b59e-a4e3-40c7-8173-5b0cbba7efaf&ssb=94095265259&ssc=https%3A%2F%2Fants.gouv.fr%2F&ssi=6bfd45d3-cslv-409a-a1fc-3ad203dd47f8&ssk=botmanager_support@radware.com&ssm=08261260900339293108389257736229&ssn=026c0b491a38c5ea3f0ad922ed360a991ea29f211f85-5bea-4d05-9c02f7&sso=a1119f21-e0f6aa5b55e6e1efa30d285a02c114228d25c3af0a75b374&ssp=48755707941750069055175001921613972&ssq=52028580581508712949205815539934432977344&ssr=MjAuNDIuMTQuMjA=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMDRmOWRhNjMtMmE5Zi00MmNhLTg4ZGItZGI4ODk3MDVlODI1MS0xNzUwMDA1ODE1MTg3MC0wMTQ1ZmZiM2M4MmMyOWQ4MTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3MC0zODJlNGEzZWM0NDZkYmYyMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIn0=].</p><p>Predicted response size: 1,092.</p><p>Response Body Length: 1,432.</p>",
+					"otherinfo": "<p>Location header URI length: 788 [https://validate.perfdrive.com/719c3c0d880e0a0df389521898158d78/?ssa=5337c63f-082b-4ddc-b3ec-8591aafa2d70&ssb=13672253213&ssc=https%3A%2F%2Fants.gouv.fr%2F&ssi=15206e3b-d8te-4b18-8397-fe9ed99adc67&ssk=botmanager_support@radware.com&ssm=19219140897667829105045056016143&ssn=7b1c752efcc18dec8931acfd94e9cca44f3a22ab29f4-9763-4f30-86f2cd&sso=474d2309-8093ceb4021b309f4d5fa5e533379e599b7b48a4127ee142&ssp=21982559101750182128175010097020018&ssq=53176657854155529149578541882801563472316&ssr=MjAuMTY5LjE0LjQx&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2MC04NmZlMGZkNjRlNzkwYWQzMTAiLCJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTYwLWMwMWEyNzc3YWVmMDU1NWQxMCJ9].</p><p>Predicted response size: 1,088.</p><p>Response Body Length: 1,428.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "7"
-				},
-				{
-					"pluginid": "10010",
-					"alertRef": "10010",
-					"alert": "Cookie No HttpOnly Flag",
-					"name": "Cookie No HttpOnly Flag",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
-					"instances":[ 
-						{
-							"id": "35",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzma",
-							"otherinfo": ""
-						},
-						{
-							"id": "36",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmb",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmb",
-							"otherinfo": ""
-						},
-						{
-							"id": "40",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmc",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmc",
-							"otherinfo": ""
-						},
-						{
-							"id": "41",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmd",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmd",
-							"otherinfo": ""
-						},
-						{
-							"id": "34",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "PHPSESSID",
-							"attack": "",
-							"evidence": "Set-Cookie: PHPSESSID",
-							"otherinfo": ""
-						}
-					],
-					"count": "5",
-					"solution": "<p>Ensure that the HttpOnly flag is set for all cookies.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
-					"cweid": "1004",
-					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10011",
@@ -459,7 +376,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "8",
+							"id": "9",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzma",
@@ -477,7 +394,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "15",
+							"id": "13",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzmc",
@@ -495,7 +412,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "12",
+							"id": "11",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzme",
@@ -513,7 +430,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "20",
+							"id": "18",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "uzmx",
@@ -531,7 +448,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
+							"id": "8",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmb",
@@ -540,7 +457,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "14",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmc",
@@ -549,7 +466,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "14",
+							"id": "15",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmd",
@@ -558,7 +475,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
+							"id": "12",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzme",
@@ -567,7 +484,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "18",
+							"id": "19",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmf",
@@ -576,7 +493,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "21",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "uzmx",
@@ -591,99 +508,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "7"
-				},
-				{
-					"pluginid": "10054",
-					"alertRef": "10054-1",
-					"alert": "Cookie without SameSite Attribute",
-					"name": "Cookie without SameSite Attribute",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
-					"instances":[ 
-						{
-							"id": "45",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzma",
-							"otherinfo": ""
-						},
-						{
-							"id": "46",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmb",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmb",
-							"otherinfo": ""
-						},
-						{
-							"id": "47",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmc",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmc",
-							"otherinfo": ""
-						},
-						{
-							"id": "49",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "__uzmd",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmd",
-							"otherinfo": ""
-						},
-						{
-							"id": "43",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "PHPSESSID",
-							"attack": "",
-							"evidence": "Set-Cookie: PHPSESSID",
-							"otherinfo": ""
-						}
-					],
-					"count": "5",
-					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
-					"cweid": "1275",
-					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10017",
-					"alertRef": "10017",
-					"alert": "Cross-Domain JavaScript Source File Inclusion",
-					"name": "Cross-Domain JavaScript Source File Inclusion",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
-					"instances":[ 
-						{
-							"id": "51",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "https://hcaptcha.com/1/api.js?recaptchacompat=off",
-							"attack": "",
-							"evidence": "<script type=\"text/javascript\" src=\"https://hcaptcha.com/1/api.js?recaptchacompat=off\"></script>",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
-					"otherinfo": "",
-					"reference": "",
-					"cweid": "829",
-					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "90004",
@@ -696,7 +521,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "98",
+							"id": "139",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -705,7 +530,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "39",
+							"id": "33",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -714,7 +539,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "99",
+							"id": "140",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -723,7 +548,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "42",
+							"id": "34",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -732,7 +557,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
+							"id": "141",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -741,7 +566,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "44",
+							"id": "35",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -759,34 +584,6 @@
 					"sourceid": "1"
 				},
 				{
-					"pluginid": "10063",
-					"alertRef": "10063-1",
-					"alert": "Permissions Policy Header Not Set",
-					"name": "Permissions Policy Header Not Set",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
-					"instances":[ 
-						{
-							"id": "97",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
 					"pluginid": "10035",
 					"alertRef": "10035-1",
 					"alert": "Strict-Transport-Security Header Not Set",
@@ -797,7 +594,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "27",
+							"id": "25",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -806,7 +603,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "90",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -815,7 +612,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "108",
+							"id": "70",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "89",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -824,7 +630,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "114",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
@@ -833,7 +639,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "140",
+							"id": "130",
 							"uri": "https://ants.gouv.fr/home/csca-e-id",
 							"method": "GET",
 							"param": "",
@@ -842,7 +648,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "137",
+							"id": "84",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
@@ -851,8 +657,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "138",
+							"id": "111",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "128",
+							"uri": "https://ants.gouv.fr/nos-missions/les-titres-produits-par-l-ants/les-cartes-agents",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -869,7 +684,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "80",
+							"id": "58",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -878,7 +693,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "125",
+							"id": "66",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -887,8 +702,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "113",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "131",
+							"uri": "https://ants.gouv.fr/toute-l-actualite/renouvellement-des-titres-didentite-choisissez-le-bon-moment-pour-effectuer-vos-demarches",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -896,13 +720,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "14",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10096",
@@ -915,122 +739,112 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "91",
+							"id": "27",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005814",
-							"otherinfo": "1750005814, which evaluates to: 2025-06-15 16:43:34."
+							"evidence": "1750178541",
+							"otherinfo": "1750178541, which evaluates to: 2025-06-17 16:42:21."
 						},
 						{
-							"id": "29",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
-						},
-						{
-							"id": "82",
+							"id": "92",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						},
 						{
-							"id": "110",
+							"id": "71",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "Set-Cookie",
+							"attack": "",
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
+						},
+						{
+							"id": "91",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						},
 						{
-							"id": "109",
+							"id": "115",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						},
 						{
-							"id": "28",
+							"id": "85",
+							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
+							"method": "GET",
+							"param": "Set-Cookie",
+							"attack": "",
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
+						},
+						{
+							"id": "112",
+							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
+							"method": "GET",
+							"param": "Set-Cookie",
+							"attack": "",
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
+						},
+						{
+							"id": "29",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178541",
+							"otherinfo": "1750178541, which evaluates to: 2025-06-17 16:42:21."
 						},
 						{
-							"id": "84",
+							"id": "59",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						},
 						{
-							"id": "127",
+							"id": "68",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						},
 						{
-							"id": "79",
+							"id": "116",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1750005815",
-							"otherinfo": "1750005815, which evaluates to: 2025-06-15 16:43:35."
+							"evidence": "1750178542",
+							"otherinfo": "1750178542, which evaluates to: 2025-06-17 16:42:22."
 						}
 					],
-					"count": "9",
+					"count": "11",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1750005814, which evaluates to: 2025-06-15 16:43:34.</p>",
+					"otherinfo": "<p>1750178541, which evaluates to: 2025-06-17 16:42:21.</p>",
 					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10021",
-					"alertRef": "10021",
-					"alert": "X-Content-Type-Options Header Missing",
-					"name": "X-Content-Type-Options Header Missing",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
-					"instances":[ 
-						{
-							"id": "93",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
-					"otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
-					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10094",
@@ -1043,34 +857,34 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "117",
+							"id": "37",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZDllZTRiYzItY3Nsdi00MzY3LTllYzEtY2M0NjNmZTEwNWUyJDIwLjQyLjE0LjIw",
-							"otherinfo": "d9ee4bc2-cslv-4367-9ec1-cc463fe105e2$20.42.14.20"
+							"evidence": "eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2MC04NmZlMGZkNjRlNzkwYWQzMTAiLCJyZCI6ImFudHMuZ291di5mciIsIl9fdXptZiI6IjdmNjAwMGEwMGQwMDAyLTVjYzMtNGU2Zi1iNzI1LWM1Njg3ZmFhNmFlOTE3NTAxNzg1NDE0MTYwLWMwMWEyNzc3YWVmMDU1NWQxMCJ9",
+							"otherinfo": "{\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414160-86fe0fd64e790ad310\",\"rd\":\"ants.gouv.fr\",\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414160-c01a2777aef0555d10\"}"
 						},
 						{
-							"id": "48",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwMDRmOWRhNjMtMmE5Zi00MmNhLTg4ZGItZGI4ODk3MDVlODI1MS0xNzUwMDA1ODE1MTg3MC0wMTQ1ZmZiM2M4MmMyOWQ4MTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3MC0zODJlNGEzZWM0NDZkYmYyMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIn0=",
-							"otherinfo": "{\"uzmx\":\"7f900004f9da63-2a9f-42ca-88db-db889705e8251-17500058151870-0145ffb3c82c29d810\",\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f72117500058151870-382e4a3ec446dbf210\",\"rd\":\"ants-2.gouv.fr\"}"
-						},
-						{
-							"id": "89",
+							"id": "98",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDYxLWI5ZWMzNTE3ODI5MDFlZDUxMyIsInV6bXgiOiI3ZjkwMDA1OWM4ZWYxMC03ODIwLTRkMzktYjQwNC0zYmExMGM0MzI5YTAxLTE3NTAwMDU4MTU2NDgwLWE5ZjE2NjBjYzI2YmIyZTIxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187461-b9ec351782901ed513\",\"uzmx\":\"7f900059c8ef10-7820-4d39-b404-3ba10c4329a01-17500058156480-a9f1660cc26bb2e210\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJ1em14IjoiN2Y5MDAwYzgxNTgzMWEtY2RjZS00Y2M5LTk4MmEtYTc2NmQ3ZWIzM2I4MS0xNzUwMTc4NTQxNDE2Njc4LTY5YWM3MzZlN2QxNTJjMzAxMyIsInJkIjoiYW50cy5nb3V2LmZyIiwiX191em1mIjoiN2Y2MDAwYTAwZDAwMDItNWNjMy00ZTZmLWI3MjUtYzU2ODdmYWE2YWU5MTc1MDE3ODU0MTQxNjY3OC0yMzE0YjM3NDQ3YjcyMjYxMTMifQ==",
+							"otherinfo": "{\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416678-69ac736e7d152c3013\",\"rd\":\"ants.gouv.fr\",\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416678-2314b37447b7226113\"}"
 						},
 						{
-							"id": "114",
+							"id": "75",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2Faccessibility-partially-compliant",
+							"otherinfo": "\uFFFDV\uFFFDq\uFFFD,\uFFFD\uFFFD\uFFFD\uFFFD\u073E\uFFFD\uFFFD\uD269e\uFFFD\uFFFD(\uFFFD\uFFFDbj{"
+						},
+						{
+							"id": "97",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -1079,34 +893,25 @@
 							"otherinfo": "\uFFFDW\uFFFDjw\\x001e\uFFFD'^\uFFFD\u062D{\uFFFD\uFFFDr\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD'^\uFFFD\u062D\uFFFD\uFFFD.\uFFFD\uFFFDbz\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDjw\\x001er\uFFFD\uFFFDy\uFFFD"
 						},
 						{
-							"id": "113",
+							"id": "120",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDcwLTU4NjYyMGY1YWE2YmI1MWExMyIsInV6bXgiOiI3ZjkwMDA3Y2ZkNDg0Yi1lZjQ0LTRlNDYtOThlOS1iMWU2ODhkOTkxNjAxLTE3NTAwMDU4MTU2NTcwLWRiM2VhNTVkNGI2MGViZjcxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187470-586620f5aa6bb51a13\",\"uzmx\":\"7f90007cfd484b-ef44-4e46-98e9-b1e688d991601-17500058156570-db3ea55d4b60ebf710\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2ODQ4LWNhZjU3YTZlODViNjFiMDAxNiIsInJkIjoiYW50cy5nb3V2LmZyIiwidXpteCI6IjdmOTAwMGM4MTU4MzFhLWNkY2UtNGNjOS05ODJhLWE3NjZkN2ViMzNiODEtMTc1MDE3ODU0MTQxNjg0OC0yZmE1MTBjZjBhMTRmMDRhMTYifQ==",
+							"otherinfo": "{\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416848-caf57a6e85b61b0016\",\"rd\":\"ants.gouv.fr\",\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416848-2fa510cf0a14f04a16\"}"
 						},
 						{
-							"id": "146",
-							"uri": "https://ants.gouv.fr/home/csca-e-id",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3ODQxLTU5ODY1YzZkMjFmNWQ3OWUxNiIsInV6bXgiOiI3ZjkwMDA1NzA4MmVlOS05ZmVlLTQ0YmItYjdmYS0xZWMyNGY2MDc1NjUxLTE3NTAwMDU4MTYwMjgwLWFhYzEzMDkwNDhkNDhmMDMxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187841-59865c6d21f5d79e16\",\"uzmx\":\"7f900057082ee9-9fee-44bb-b7fa-1ec24f6075651-17500058160280-aac1309048d48f0310\",\"rd\":\"ants-2.gouv.fr\"}"
-						},
-						{
-							"id": "145",
+							"id": "96",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwN2Q4OWM3YTAtMTMwYy00MjZjLWJkN2ItY2ZkODk1ZjZiZjc3MS0xNzUwMDA1ODE1NjU2MC0yYzVmZTcwMzM2ZjhiOTUzMTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDY5LWUzNjQ0YmIzMDY2Y2NjYjExMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"uzmx\":\"7f90007d89c7a0-130c-426c-bd7b-cfd895f6bf771-17500058156560-2c5fe70336f8b95310\",\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187469-e3644bb3066cccb113\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2Njg4LWYyMTA5MmY5NTBhYzRlMmQxMyIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTY2ODgtZWNlMmRiNTI3NjdmNWRlMzEzIiwicmQiOiJhbnRzLmdvdXYuZnIifQ==",
+							"otherinfo": "{\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416688-f21092f950ac4e2d13\",\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416688-ece2db52767f5de313\",\"rd\":\"ants.gouv.fr\"}"
 						},
 						{
-							"id": "147",
+							"id": "121",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
@@ -1115,25 +920,34 @@
 							"otherinfo": "\uFFFDWhr\u979E\uFFFD>\uFFFD\uFFFD\\x001d\uFFFD\u01DD\uFFFD\uFFFD\uFFFD\uFFFD\\x0017\uFFFDj{l"
 						},
 						{
-							"id": "50",
+							"id": "132",
+							"uri": "https://ants.gouv.fr/nos-missions/les-titres-produits-par-l-ants/les-cartes-agents",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2Fles-titres-produits-par-l-ants",
+							"otherinfo": "\uFFFDY^\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\u8B73\uFFFDZ\uFFFD\uFFFD~j{l"
+						},
+						{
+							"id": "42",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBjMmEyMDA5OC0wMWRjLTRlNTUtOWY5Yi1mMzZmZGY4YjQ4NzExNzUwMDA1ODE1MTcwMC1iNDdkNzBhYTc0OWVjMmJlMTAiLCJ1em14IjoiN2Y5MDAwZmI4NzFjZDItNmExMy00MTRjLThkZWQtYzk5NGVmN2U4YjM5MS0xNzUwMDA1ODE1MTcwMC0wY2Q2MjQ3ODY1NDg1NWIyMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIn0=",
-							"otherinfo": "{\"__uzmf\":\"7f6000c2a20098-01dc-4e55-9f9b-f36fdf8b487117500058151700-b47d70aa749ec2be10\",\"uzmx\":\"7f9000fb871cd2-6a13-414c-8ded-c994ef7e8b391-17500058151700-0cd62478654855b210\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJyZCI6ImFudHMuZ291di5mciIsInV6bXgiOiI3ZjkwMDA1Y2YyMDE5OS0zMzM2LTQyZmYtODA1MS1jNzkwYjkzNjg2MWQxLTE3NTAxNzg1NDE0MTQwLWZkOTc3N2Y0ZGFmZGZlZjgxMCIsIl9fdXptZiI6IjdmNjAwMDM4OWZkNjU0LWYzZGYtNDAyOC05MjY1LWZlZjNiNTMyODkwNzE3NTAxNzg1NDE0MTQwLTNhMmZjMmUwOWI0NDk1NTcxMCJ9",
+							"otherinfo": "{\"rd\":\"ants.gouv.fr\",\"uzmx\":\"7f90005cf20199-3336-42ff-8051-c790b936861d1-17501785414140-fd9777f4dafdfef810\",\"__uzmf\":\"7f6000389fd654-f3df-4028-9265-fef3b532890717501785414140-3a2fc2e09b44955710\"}"
 						},
 						{
-							"id": "90",
+							"id": "67",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNGRhMTMyMTEtZmVlYy00NjA3LWIzM2YtN2EwYTk1Nzk3MzBhMS0xNzUwMDA1ODE1NjQ0MC1hYzkwOTI4ZmU1ODkyZWExMTAiLCJfX3V6bWYiOiI3ZjYwMDBiNTNhNjFjMS1hNmYzLTQ3OTAtYmFmMC02MGE1ZTU0NmY3MjExNzUwMDA1ODE1MTg3NDU3LTBjMmQ0M2E2YThhY2UzYjIxMyIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"uzmx\":\"7f90004da13211-feec-4607-b33f-7a0a9579730a1-17500058156440-ac90928fe5892ea110\",\"__uzmf\":\"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187457-0c2d43a6a8ace3b213\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjYwMDBhMDBkMDAwMi01Y2MzLTRlNmYtYjcyNS1jNTY4N2ZhYTZhZTkxNzUwMTc4NTQxNDE2NjcwLWEzN2I5NzBiYjRmN2VkYzExMyIsInV6bXgiOiI3ZjkwMDBjODE1ODMxYS1jZGNlLTRjYzktOTgyYS1hNzY2ZDdlYjMzYjgxLTE3NTAxNzg1NDE0MTY2NzAtNjc4YzhhNTc1YzgxOWZkMTEzIiwicmQiOiJhbnRzLmdvdXYuZnIifQ==",
+							"otherinfo": "{\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416670-a37b970bb4f7edc113\",\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416670-678c8a575c819fd113\",\"rd\":\"ants.gouv.fr\"}"
 						},
 						{
-							"id": "134",
+							"id": "74",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -1142,22 +956,31 @@
 							"otherinfo": "\uFFFDW\\x001e\uFFFD\uFFFD\u07B3\uFFFD^\uFFFD\uFFFD+j*\u07B3\uFFFD~i\uFFFD.z)~r\u05BE\uFFFDM\uFFFD\uFFFD\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFD^r\u062Fz"
 						},
 						{
-							"id": "87",
+							"id": "122",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "2Fmaintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"otherinfo": "\uFFFDY\uFFFD\uFFFD{bz\uFFFDz\u03DD\uFFFD\uFFFDh\uFFFD+b\uFFFD{>\uFFFD\uFFFDZ\uFFFD+\u07B3\uFFFD\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFD\u061Dz{b\uFFFD\uFFFD\u0198\uFFFDz\u03E9\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDj\uFFFD\\x001a\uFFFD\uFFFDz\u03DE\u0169\uFFFD\uFFFD"
+						},
+						{
+							"id": "133",
+							"uri": "https://ants.gouv.fr/toute-l-actualite/renouvellement-des-titres-didentite-choisissez-le-bon-moment-pour-effectuer-vos-demarches",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2Frenouvellement-des-titres-didentite-choisissez-le-bon-moment-pour-effectuer-vos-demarches",
+							"otherinfo": "\uFFFDZ\u079E\uFFFD\uFFFDzY^\uFFFD\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u062D\uFFFD\uFFFD>v'^\uFFFD\u062D{\uFFFD!\uFFFD+\"\uFFFD\u01F3\uFFFDW\uFFFDn\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u07E9\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFDr\u06DE\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFD\u0705\uFFFD"
 						}
 					],
-					"count": "12",
+					"count": "13",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>d9ee4bc2-cslv-4367-9ec1-cc463fe105e2$20.42.14.20</p>",
+					"otherinfo": "<p>{\"uzmx\":\"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414160-86fe0fd64e790ad310\",\"rd\":\"ants.gouv.fr\",\"__uzmf\":\"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414160-c01a2777aef0555d10\"}</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "90011",
@@ -1185,7 +1008,35 @@
 					"reference": "<p>https://code.google.com/p/browsersec/wiki/Part2#Character_set_handling_and_detection</p>",
 					"cweid": "436",
 					"wascid": "15",
-					"sourceid": "8"
+					"sourceid": "7"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
+					"instances":[ 
+						{
+							"id": "138",
+							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "615",
+					"wascid": "13",
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10109",
@@ -1198,75 +1049,84 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "67",
+							"id": "23",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script type=\"text/javascript\">\n\twindow.SSJSInternal = 79419;\n\n\tvar __uzdbm_1 = \"a65090dc-56a1-415c-beee-b906fc05aabb\";\n\tvar __uzdbm_2 = \"ZDllZTRiYzItY3Nsdi00MzY3LTllYzEtY2M0NjNmZTEwNWUyJDIwLjQyLjE0LjIw\";\n\t\n\t(function(w, d, e, u, c, g, a, b){\n\t\tw[\"SSJSConnectorObj\"] = w[\"SSJSConnectorObj\"] || {ss_cid : c, domain_info: g};\n\t\ta = d.createElement(e);\n\t\ta.async = true;\n\t\ta.src = u;\n\t\tb = d.getElementsByTagName(e)[0];\n\t\tb.parentNode.insertBefore(a, b);\n\t})(window,document,\"script\",\"https://cdn.perfdrive.com/aperture/aperture.js\",\"b8c3\",\"auto\");\n</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"MTUyMDZlM2ItZDh0ZS00YjE4LTgzOTctZmU5ZWQ5OWFkYzY3JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414160-c01a2777aef0555d10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414160-86fe0fd64e790ad310\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "25",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"NmJmZDQ1ZDMtY3Nsdi00MDlhLWExZmMtM2FkMjAzZGQ0N2Y4JDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f72117500058151870-382e4a3ec446dbf210\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900004f9da63-2a9f-42ca-88db-db889705e8251-17500058151870-0145ffb3c82c29d810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "75",
+							"id": "88",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"YjE5MWE3YjktY3Nsdi00YTAyLWJmNmEtY2E2ZDQ2ZWQ0YzYzJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187461-b9ec351782901ed513\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900059c8ef10-7820-4d39-b404-3ba10c4329a01-17500058156480-a9f1660cc26bb2e210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"MGI2YTU2NTMtZDh0ZS00ZjQ0LWFmMmEtMDQwNzAzNGQ2ZGI0JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416678-2314b37447b7226113\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416678-69ac736e7d152c3013\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "106",
+							"id": "65",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"Mjg5ZjgyMjUtZDh0ZS00N2Y1LWI2NTktZjgzZDNlMzc0ODAzJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416681-e3cc3727154fb8f813\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416681-17d57260775fb94a13\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"id": "86",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"ZWQ2OTQ1ZDMtY3Nsdi00NzI0LTgwMGEtNGIxMzc4YzJjOWQ4JDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187468-515fa0c4675c923213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000ff124fc7-214c-4894-9df8-0b3fbfe3dae11-17500058156550-a230154988b17e2010\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"NmY1NzlkNDgtZDh0ZS00ZWIxLWE5MWItMjBiMDE0MGJhMDIwJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416686-6a9c0d6e25c57fd213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416686-7bb747cdc6cb309213\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "105",
+							"id": "108",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"OTUwODA3NDEtY3Nsdi00MGU4LTg1MGItZDhkMGMzYWQ0ZTViJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187470-586620f5aa6bb51a13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90007cfd484b-ef44-4e46-98e9-b1e688d991601-17500058156570-db3ea55d4b60ebf710\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"YjkxZWI4ZWItZDh0ZS00MzIyLTlhNWYtYWZlYTA1OWMyODU1JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416848-caf57a6e85b61b0016\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416848-2fa510cf0a14f04a16\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "139",
+							"id": "129",
 							"uri": "https://ants.gouv.fr/home/csca-e-id",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"ZWUyYWMzNWQtY3Nsdi00ZWZiLTkzMGItYmJkNmM1NDQ4MDFjJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187841-59865c6d21f5d79e16\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900057082ee9-9fee-44bb-b7fa-1ec24f6075651-17500058160280-aac1309048d48f0310\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"OTM3YWVmNWUtZDh0ZS00M2MzLTk5MTMtZWViZTcxMWZmZTZmJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414161274-8b3321a777737d4716\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414161274-bc04ea86bbaa97a216\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "135",
+							"id": "81",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"OTIwMTIyMTMtY3Nsdi00MTg3LWE0MjAtMTRhNmE5ZTY2ZDc5JDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187469-e3644bb3066cccb113\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90007d89c7a0-130c-426c-bd7b-cfd895f6bf771-17500058156560-2c5fe70336f8b95310\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"ZDhiZjllNjctZDh0ZS00M2VkLWJhNGEtZGQ0NWMzNGY1NGU1JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416688-f21092f950ac4e2d13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416688-ece2db52767f5de313\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "136",
+							"id": "109",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"NWM2MDVlMzMtY3Nsdi00OGIzLTg1MWQtYjliZDcxNDgzMTU4JDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187510-20b79c7ef9e3355813\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900042dc9c1d-9626-4af4-98cd-1d657e0bc8e91-17500058156970-86a06c2fb7bc4c5810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"MzI5MGZhMmItZDh0ZS00OTNkLTkzZWMtMTRkZmQ5Mjg4YWRiJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414161268-58ab23397c245f9716\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414161268-f782ca8790bff8bb16\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"id": "127",
+							"uri": "https://ants.gouv.fr/nos-missions/les-titres-produits-par-l-ants/les-cartes-agents",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"ODIxNzQwOWYtZDh0ZS00ODdkLWE0M2EtZmJiZTQ5ZjE5YTQ5JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae917501785414161296-a303dd7580a1e91919\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414161296-b4aa9749b63bac0519\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
@@ -1275,44 +1135,44 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"eb7c3c30-76cf-4ccd-8b7b-14de27220b85\";var __uzdbm_2 = \"OTE1ZDYwMGYtY3Nsdi00Yjg0LWFhNGQtNWZmZmNmN2FmYTQ0JDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000c2a20098-01dc-4e55-9f9b-f36fdf8b487117500058151700-b47d70aa749ec2be10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000fb871cd2-6a13-414c-8ded-c994ef7e8b391-17500058151700-0cd62478654855b210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"5763127e-9125-4cdb-ae0b-670d4cef56cf\";var __uzdbm_2 = \"Mjc1MjhjNzAtZDh0ZS00YmExLTk2YjgtODAxNWU2MjA5ZDc3JDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000389fd654-f3df-4028-9265-fef3b532890717501785414140-3a2fc2e09b44955710\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90005cf20199-3336-42ff-8051-c790b936861d1-17501785414140-fd9777f4dafdfef810\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "76",
+							"id": "56",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"YmIxYTVjOTQtY3Nsdi00N2U1LTliM2QtY2ViYzNiNzg5ZTEyJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187457-0c2d43a6a8ace3b213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90004da13211-feec-4607-b33f-7a0a9579730a1-17500058156440-ac90928fe5892ea110\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"Y2FkNTE2YWQtZDh0ZS00NjJmLWJkODUtOTMyZTU4ZDc2NDEyJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416670-a37b970bb4f7edc113\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416670-678c8a575c819fd113\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "124",
+							"id": "64",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"MzQxZWJmNGEtY3Nsdi00ZmEyLTk3ZGUtOTI5ZDZlOTI5YzFkJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187468-515fa0c4675c923213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90005d0dde15-5ce9-4380-bf06-0c3bde392abc1-17500058156550-614a6ad6e302d12d10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"NzNiZjAwNDEtZDh0ZS00OWIwLWJiODUtNzM5MGVkMDI0OTcwJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416677-c5bb6983aba6b1f313\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416677-ad734088a335435813\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "77",
+							"id": "110",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"9f211f85-5bea-4d05-9f21-e0f6aa5b55e6\";var __uzdbm_2 = \"NjIxZjU5ZTMtY3Nsdi00MjBlLTkzMmQtODBhZDk0ZGIzMDJhJDIwLjQyLjE0LjIw\";var __uzdbm_3 = \"7f6000b53a61c1-a6f3-4790-baf0-60a5e546f7211750005815187466-7291947df3eb5d5413\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000325b86ff-50d9-4a2b-a1d8-969cb0b47c081-17500058156530-52e658f8c0fccb9710\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"22ab29f4-9763-4f30-8309-8093ceb4021b\";var __uzdbm_2 = \"OTVjMGU1NDUtZDh0ZS00MmUwLWJkZWMtZjVhZGE1ZjdiMTUxJDIwLjE2OS4xNC40MQ==\";var __uzdbm_3 = \"7f6000a00d0002-5cc3-4e6f-b725-c5687faa6ae91750178541416724-86cb8bb0c27b2eba13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416724-c1db45d46b32e3e013\";var __uzdbm_7 = \"ants.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						}
 					],
-					"count": "12",
+					"count": "13",
 					"solution": "<p>This is an informational alert and so no changes are required.</p>",
 					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10049",
@@ -1325,7 +1185,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "33",
+							"id": "30",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1334,7 +1194,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "95",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -1343,7 +1203,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "112",
+							"id": "72",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "94",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -1352,7 +1221,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "111",
+							"id": "118",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "",
@@ -1361,16 +1230,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "141",
-							"uri": "https://ants.gouv.fr/home/csca-e-id",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "143",
+							"id": "93",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
@@ -1379,7 +1239,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "38",
+							"id": "119",
+							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "36",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1388,7 +1257,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "85",
+							"id": "62",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1397,7 +1266,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
+							"id": "69",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -1406,7 +1275,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "117",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
@@ -1415,13 +1284,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "10",
+					"count": "11",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10015",
@@ -1434,6 +1303,15 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
+							"id": "134",
+							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"id": "5",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
@@ -1443,13 +1321,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "1",
+					"count": "2",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "8"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1462,7 +1340,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "58",
+							"id": "40",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1471,7 +1349,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
+							"id": "45",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1480,7 +1358,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "65",
+							"id": "50",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1495,7 +1373,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "90005",
@@ -1508,7 +1386,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "57",
+							"id": "39",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1517,7 +1395,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "44",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1526,7 +1404,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
+							"id": "49",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1541,7 +1419,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "90005",
@@ -1554,7 +1432,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "55",
+							"id": "38",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1563,7 +1441,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "52",
+							"id": "43",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1572,7 +1450,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
+							"id": "48",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1587,7 +1465,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "90005",
@@ -1600,7 +1478,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "59",
+							"id": "41",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1609,7 +1487,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "56",
+							"id": "46",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1618,7 +1496,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
+							"id": "51",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1633,7 +1511,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "7"
+					"sourceid": "58"
 				},
 				{
 					"pluginid": "10112",
@@ -1646,103 +1524,112 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "0",
+							"id": "2",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzma",
 							"attack": "",
-							"evidence": "9f211f85-5bea-4d05-9f21-e0f6aa5b55e6",
+							"evidence": "a867daf8-cc4f-4c7c-be0f-ea5e3c4c1be6",
 							"otherinfo": "\ncookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "61",
+							"id": "79",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f900059c8ef10-7820-4d39-b404-3ba10c4329a01-17500058156480-a9f1660cc26bb2e210",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416678-69ac736e7d152c3013",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "94",
+							"id": "55",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
+							"method": "GET",
+							"param": "uzmx",
+							"attack": "",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416681-17d57260775fb94a13",
+							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
+						},
+						{
+							"id": "77",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f9000ff124fc7-214c-4894-9df8-0b3fbfe3dae11-17500058156550-a230154988b17e2010",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416686-7bb747cdc6cb309213",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "96",
+							"id": "100",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f90007cfd484b-ef44-4e46-98e9-b1e688d991601-17500058156570-db3ea55d4b60ebf710",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416848-2fa510cf0a14f04a16",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "121",
-							"uri": "https://ants.gouv.fr/home/csca-e-id",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "7f900057082ee9-9fee-44bb-b7fa-1ec24f6075651-17500058160280-aac1309048d48f0310",
-							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "119",
+							"id": "73",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f90007d89c7a0-130c-426c-bd7b-cfd895f6bf771-17500058156560-2c5fe70336f8b95310",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416688-ece2db52767f5de313",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "120",
+							"id": "99",
 							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f900042dc9c1d-9626-4af4-98cd-1d657e0bc8e91-17500058156970-86a06c2fb7bc4c5810",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-17501785414161268-f782ca8790bff8bb16",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "63",
+							"id": "0",
+							"uri": "https://ants.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "__uzma",
+							"attack": "",
+							"evidence": "5763127e-9125-4cdb-ae0b-670d4cef56cf",
+							"otherinfo": "\ncookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
+						},
+						{
+							"id": "47",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f90004da13211-feec-4607-b33f-7a0a9579730a1-17500058156440-ac90928fe5892ea110",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416670-678c8a575c819fd113",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "118",
+							"id": "52",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f90005d0dde15-5ce9-4380-bf06-0c3bde392abc1-17500058156550-614a6ad6e302d12d10",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416677-ad734088a335435813",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "70",
+							"id": "101",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
-							"evidence": "7f9000325b86ff-50d9-4a2b-a1d8-969cb0b47c081-17500058156530-52e658f8c0fccb9710",
+							"evidence": "7f9000c815831a-cdce-4cc9-982a-a766d7eb33b81-1750178541416724-c1db45d46b32e3e013",
 							"otherinfo": "\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						}
 					],
-					"count": "10",
+					"count": "11",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
 					"otherinfo": "<p></p><p>cookie:__uzma</p><p>cookie:uzmx</p><p>cookie:__uzmf</p><p>cookie:__uzmc</p><p>cookie:__uzmb</p><p>cookie:__uzmd</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "7"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10049",
@@ -1755,7 +1642,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "37",
+							"id": "31",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1770,7 +1657,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "8"
+					"sourceid": "7"
 				}
 			]
 		}
