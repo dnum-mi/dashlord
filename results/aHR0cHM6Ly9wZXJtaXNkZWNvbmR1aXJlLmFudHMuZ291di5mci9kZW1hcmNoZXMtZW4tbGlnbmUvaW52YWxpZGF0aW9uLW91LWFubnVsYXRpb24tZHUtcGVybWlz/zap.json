@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 13 Jul 2025 02:59:22",
+	"@generated": "Tue, 15 Jul 2025 02:53:44",
 	"site":[ 
 		{
 			"@name": "https://permisdeconduire.ants.gouv.fr",
@@ -20,45 +20,27 @@
 					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
 					"instances":[ 
 						{
-							"id": "90",
+							"id": "9",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "frame-ancestors 'self'",
-							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "87",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cd22faf5-d3ac-4e81-aca7-3302d4a10669' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
-							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
-						},
-						{
-							"id": "5",
+							"id": "8",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "frame-ancestors 'self'",
-							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
-						},
-						{
-							"id": "2",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-64ef3fc4-f1e7-43a4-b5ec-c88c707df263' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
-							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src."
 						}
 					],
-					"count": "4",
+					"count": "2",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>The directive(s): form-action is/are among the directives that do not fallback to default-src.</p>",
+					"otherinfo": "<p>The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src.</p>",
 					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
@@ -66,54 +48,36 @@
 				},
 				{
 					"pluginid": "10055",
-					"alertRef": "10055-4",
-					"alert": "CSP: Wildcard Directive",
-					"name": "CSP: Wildcard Directive",
+					"alertRef": "10055-10",
+					"alert": "CSP: script-src unsafe-eval",
+					"name": "CSP: script-src unsafe-eval",
 					"riskcode": "2",
 					"confidence": "3",
 					"riskdesc": "Medium (High)",
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "88",
+							"id": "14",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cd22faf5-d3ac-4e81-aca7-3302d4a10669' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "script-src includes unsafe-eval."
 						},
 						{
-							"id": "91",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "frame-ancestors 'self'",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src"
-						},
-						{
-							"id": "3",
+							"id": "15",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-64ef3fc4-f1e7-43a4-b5ec-c88c707df263' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
-						},
-						{
-							"id": "6",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "frame-ancestors 'self'",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src"
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "script-src includes unsafe-eval."
 						}
 					],
-					"count": "4",
+					"count": "2",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:</p><p>img-src</p>",
+					"otherinfo": "<p>script-src includes unsafe-eval.</p>",
 					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
 					"cweid": "693",
 					"wascid": "15",
@@ -130,21 +94,21 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "92",
+							"id": "11",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "frame-ancestors 'self'",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
 							"otherinfo": "script-src includes unsafe-inline."
 						},
 						{
-							"id": "7",
+							"id": "10",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "frame-ancestors 'self'",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
 							"otherinfo": "script-src includes unsafe-inline."
 						}
 					],
@@ -167,43 +131,25 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "89",
+							"id": "13",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-cd22faf5-d3ac-4e81-aca7-3302d4a10669' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "93",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "frame-ancestors 'self'",
-							"otherinfo": "style-src includes unsafe-inline."
-						},
-						{
-							"id": "4",
+							"id": "12",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-script.tolk.ai 'nonce-64ef3fc4-f1e7-43a4-b5ec-c88c707df263' https://captcha.liveidentity.com https://cdn.woopic.com/;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
-							"otherinfo": "style-src includes unsafe-inline."
-						},
-						{
-							"id": "8",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Content-Security-Policy",
-							"attack": "",
-							"evidence": "frame-ancestors 'self'",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
 							"otherinfo": "style-src includes unsafe-inline."
 						}
 					],
-					"count": "4",
+					"count": "2",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
 					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
@@ -212,493 +158,39 @@
 					"sourceid": "4"
 				},
 				{
-					"pluginid": "10098",
-					"alertRef": "10098",
-					"alert": "Cross-Domain Misconfiguration",
-					"name": "Cross-Domain Misconfiguration",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>",
-					"instances":[ 
-						{
-							"id": "62",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "144",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "63",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "113",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "121",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "37",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "128",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "155",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/driving-licence-suspension",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "134",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "156",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "101",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "142",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "34",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						}
-					],
-					"count": "13",
-					"solution": "<p>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</p><p>Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>",
-					"otherinfo": "<p>The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.</p>",
-					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
-					"cweid": "264",
-					"wascid": "14",
-					"sourceid": "13"
-				},
-				{
-					"pluginid": "90003",
-					"alertRef": "90003",
-					"alert": "Sub Resource Integrity Attribute Missing",
-					"name": "Sub Resource Integrity Attribute Missing",
-					"riskcode": "2",
+					"pluginid": "10055",
+					"alertRef": "10055-3",
+					"alert": "CSP: Notices",
+					"name": "CSP: Notices",
+					"riskcode": "1",
 					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
+					"riskdesc": "Low (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "167",
+							"id": "6",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
-							"param": "",
+							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "<script nonce=\"cd22faf5-d3ac-4e81-aca7-3302d4a10669\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
-							"otherinfo": ""
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "Warnings:\nDuplicate source-expression 'self'\n"
 						},
 						{
-							"id": "166",
+							"id": "7",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
-							"param": "",
+							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "<script nonce=\"64ef3fc4-f1e7-43a4-b5ec-c88c707df263\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
-							"otherinfo": ""
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "Warnings:\nDuplicate source-expression 'self'\n"
 						}
 					],
 					"count": "2",
-					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
-					"cweid": "345",
-					"wascid": "15",
-					"sourceid": "4"
-				},
-				{
-					"pluginid": "10044",
-					"alertRef": "10044-1",
-					"alert": "Big Redirect Detected (Potential Sensitive Information Leak)",
-					"name": "Big Redirect Detected (Potential Sensitive Information Leak)",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
-					"instances":[ 
-						{
-							"id": "60",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 811 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=84e58675-5ce9-4f4c-8ebd-2ddb96848096&ssb=82421294578&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=a3e165f4-c34f-4577-923b-e8c1c67a2b49&ssk=support@shieldsquare.com&ssm=63556563298392213106964986423881&ssn=d3555651a7efae3f22fbe1b792cafbae13f3c63f0522-85c0-43b3-859080&sso=d39ccfc7-a6a7fb70bf843d4a3b629993cfb7a19756a69463e3ca3a1d&ssp=95454162211752329541175235104939356&ssq=61673707555330874258875553894649357719438&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDk4ZWJlNTBjLWVlODQtNGFjOS05YTc2LTg3YjJlZTVmYzIzNDEtMTc1MjM3NTU1MzU5MzAtOThkMzBmMzFmZTViZmZhZTEwIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzMC0wMDBmNGUwYmIxYjQ4ODYyN2E1MTAifQ==].\nPredicted response size: 1,111.\nResponse Body Length: 1,488."
-						},
-						{
-							"id": "143",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 858 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=9a7105cc-807c-4821-b024-876dadd12a74&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Faide-et-contact%2Fvisite-medicale-et-commission&ssi=247dab6a-c34f-4050-be1c-953a92ab3c2e&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692a36cf85a460dd5a4c67823bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd721090f425846e6375f3960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwOGUwZDNjYjYtZTI5Zi00NjQ2LTlkNTctZTY3NDRkN2Q2NDhlMS0xNzUyMzc1NTU0MzI5MC1mYTczOWQ0ZDRjOTU3OGNjMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MzYtMDAwYTA5YTMxNGUzY2NlOWI4ZTEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,158.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "61",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 829 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=001a8561-128d-4ac0-a139-89d1d1388b00&ssb=82421294578&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne&ssi=8efa57ff-c34f-40ce-8d86-30e9eca7824a&ssk=support@shieldsquare.com&ssm=63556563298392213106964986423881&ssn=d35556519ee1f446cfaf88e42aecfbae13f371bff89e-e3f2-4eaf-a59080&sso=d39cc117-a9ac2a0f55263d4a3b62988cdadae686cd88dd71e3ca3a1d&ssp=95454162211752329541175235104939356&ssq=61673707555330874258875553894649357719438&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwZDk0YzQxY2EtYjQ0ZS00ZTA2LWI1N2YtMGMzYTMyYTVhOGUyMS0xNzUyMzc1NTUzNjAxMC0zZjcwOTc5MTkxNWFhNmU0MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwNzFiZmY4OWUtZTNmMi00ZWFmLWExMTctYTlhYzJhMGY1NTI2MS0xNzUyMzc1NTUzNjAxMC0wMDBlYzA2YzdkZTIwNTY3M2I1MTAifQ==].\nPredicted response size: 1,129.\nResponse Body Length: 1,488."
-						},
-						{
-							"id": "112",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 856 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=4716f26f-9d43-430a-bb44-10e152753496&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2F-changement-d-etat-civil&ssi=86f5934b-c34f-4e7d-8832-8090808e2a49&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692ad1d655923a67b5d779df3bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd4431d5fa9a4df7de181e960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNjk5YTYzM2QtZmM2MS00NWEwLWI4YzAtNWJmMmViNWJhMzg1MS0xNzUyMzc1NTU0MzE0MC1jYWVhYjUzYTEzMjRiYjYwMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MjEtMDAwZjNmMGZkM2I3MDA3NDM4MDEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,156.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "119",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 864 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=503d6870-c792-448b-a9a0-a9130726e8dc&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fdemander-un-permis-international&ssi=4f64e564-c34f-4d08-a708-faab1bdb7cd6&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692a1acc60b3f0b014049ba43bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd2e50d0ab0a711223e11c960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYWMyYWFjODQtNzRlOC00MjNkLWFkYzctNGE0MTkzMDZmMWIwMS0xNzUyMzc1NTU0MzEzMC04OTA0MjZkNGUxYTFkM2ZmMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MjAtMDAwZDRmNzI3Njc0NTg3YmU4ZjEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,164.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "20",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 868 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=6223163e-ec0e-4c2d-9fae-04fdeb375b76&ssb=82421294578&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Finvalidation-ou-annulation-du-permis&ssi=8b7fba99-c34f-443f-8213-22e4fa5156ca&ssk=support@shieldsquare.com&ssm=63556563298392213106964986423881&ssn=d3555651e9a7e0457c2aca751a71fbae13f32461e840-de28-479d-a59080&sso=d39cc7f0-6234fb0a4cda3d4a3b6203cd9fad393726584aace3ca3a1d&ssp=95454162211752329541175235104939356&ssq=61673707555330874258875553894649357719438&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNmRkNGJmZmQtMzIwNC00NzRmLThkNGItZDBkN2Y2NzE3M2EzMS0xNzUyMzc1NTUzNjAyMC05Njg3Y2E2Zjc2NzMyY2Q3MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjQ2MWU4NDAtZGUyOC00NzlkLWE3ZjAtNjIzNGZiMGE0Y2RhMS0xNzUyMzc1NTUzNjAyMC0wMDA4N2RkMThmZmFmMmNhZDZmMTAifQ==].\nPredicted response size: 1,168.\nResponse Body Length: 1,488."
-						},
-						{
-							"id": "127",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 867 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=6ac66fb7-1b4d-43a2-a06c-a095cdab3d6b&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fvalidation-de-diplome-professionnel&ssi=85c54719-c34f-400e-98c4-b98a4fc309b0&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692aa97d1cc40692bdeb4f6e3bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd74b9f4a8bc686b9287bf960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzNzI4LTAwMGEwZTQ1MThjMWFkMWIzZGExMyIsInV6bXgiOiI3ZjkwMDAwMjhmOGY1Yy1hMmEyLTQ1MzUtODg5ZS00ZWQ2YWI0ZDVhNmYxLTE3NTIzNzU1NTQzMjEwLTVlMTk4YjE5MDA2ZmVhMTcxMCJ9].\nPredicted response size: 1,167.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "154",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/driving-licence-suspension",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 870 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=5a6a5494-bf76-4f07-96d5-ab23f9a1345f&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-online-services%2Fdriving-licence-suspension&ssi=f0229040-c34f-4d23-8dfc-fe7689e7b88f&ssk=support@shieldsquare.com&ssm=10945718461700056160837764006448&ssn=abe4692a3fb97dcebeef9bc9e2f33bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd6fcc3fd96ab00bf953db960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNDk0YTA5NTItNTBmMS00M2YyLTk5NWItODkzNWY5ZGY4MjM4MS0xNzUyMzc1NTU0Nzc1MC1kMDlkMGYyMDczOWEwYzJjMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTMxMTgyLTAwMDI4MDFkZjRjMGFiYTVmZTQxNiIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,170.\nResponse Body Length: 1,491."
-						},
-						{
-							"id": "132",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 869 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=d842153e-5bae-4149-bdd9-636c506e699b&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-online-services%2Fregister-for-the-driving-test&ssi=a818b09d-c34f-4537-a25b-c96ecc2214d4&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692ac2d427a4147fa780b7c23bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd3650a9b74e5b9e8e8ae9960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDUzNTZhMjM1LWQzZDAtNDE0MC04MTU4LWI2OGNkZmVjZWVkNDEtMTc1MjM3NTU1NDMyMDAtZDEwOTlkOWU2OTc4MjA1MjEwIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzNzI3LTAwMDQyZmNhNzYxMmYxOTkzOWUxMyJ9].\nPredicted response size: 1,169.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "153",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 830 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=614ccb9a-5cea-4f70-8ae4-f56cc80e8990&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-the-news&ssi=86d80463-c34f-4e1d-90b0-201b6a262e4d&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692ae218018c66715adc55613bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afd994a521bf1080a549b77960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNTYzZDA1NTQtYjYxMC00MDJhLWI1NGUtOWYzYzZmNzZjMTExMS0xNzUyMzc1NTU0NDAyMC1lZjg5NTIwZDQwNzU1NzMxMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM4MDktMDAwZTgzMDcxYjEyOWEwMThiMjEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,130.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "100",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 828 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=9c008218-1fb1-483e-a53d-5833ee5ec819&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fdisclaimer&ssi=cdeb5966-c34f-4b1d-981e-e0b5715249fb&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692aa5346f5315db524e407a3bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afdc8add5dbed1398fa808c960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMjhmMDZmZTEtMDg2NS00MTRkLTliMjgtMzhmMDU5MDZhYzAwMS0xNzUyMzc1NTU0MzA2MC1iZGFlZWQxMWRlM2VkYjdhMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzNzEzLTAwMGY1NmNmMjk1NjdiNTJkNTgxMyJ9].\nPredicted response size: 1,128.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "141",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 827 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=5a04ef21-2dd2-4544-8c99-6c1004f90111&ssb=42139200795&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fmentions-legales&ssi=402cbfd6-c34f-4dc7-938f-d14a23be3fc3&ssk=support@shieldsquare.com&ssm=10945718461700056130837764006448&ssn=abe4692ad27efe12c4a78081d16e3bd0ee92c63f0522-85c0-43b3-87473f&sso=5938cfc7-a6a7fb70bf84ebc66afdaddd4f3b53293bd6d19a960bfd8d&ssp=72191504441752382090175232345474766&ssq=72062997555465470742975553812924181124423&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYjBhNjQ5YTMtZmQyYy00OGY3LWJlNTAtYThjYmVmOTJmM2YxMS0xNzUyMzc1NTU0MzIxMC02M2EwYWE0YzIwNzRmZGM0MTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MjgtMDAwYTBlNDUxOGMxYWQxYjNkYTEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,127.\nResponse Body Length: 1,490."
-						},
-						{
-							"id": "19",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 821 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=90362356-71e2-4c75-a674-1146662a90a9&ssb=82421294578&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Frobots.txt&ssi=cb477268-c34f-4248-a9a7-c78044f647a9&ssk=support@shieldsquare.com&ssm=63556563298392213106964986423881&ssn=d355565137b21cca6f4a82947deafbae13f3c1314172-9240-43f1-959080&sso=d39ccd65-dd72caebbaec3d4a3b623f296a791eab2a54d934e3ca3a1d&ssp=95454162211752329541175235104939356&ssq=61673707555330874258875553894649357719438&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDJiYWRlOWI5LTI3MWMtNDIyMC1iNWFmLTVmMjk0MDE0M2E3ZTEtMTc1MjM3NTU1MzU5MzAtNjQ0YTcwYmQ4YWQ0YzQ1MDEwIiwiX191em1mIjoiN2Y5MDAwYzEzMTQxNzItOTI0MC00M2YxLTlkNjUtZGQ3MmNhZWJiYWVjMS0xNzUyMzc1NTUzNTkzMC0wMDA2NjYyMTg4ZTRmMzhlYjdmMTAifQ==].\nPredicted response size: 1,121.\nResponse Body Length: 1,488."
-						}
-					],
-					"count": "13",
-					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 811 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=84e58675-5ce9-4f4c-8ebd-2ddb96848096&ssb=82421294578&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=a3e165f4-c34f-4577-923b-e8c1c67a2b49&ssk=support@shieldsquare.com&ssm=63556563298392213106964986423881&ssn=d3555651a7efae3f22fbe1b792cafbae13f3c63f0522-85c0-43b3-859080&sso=d39ccfc7-a6a7fb70bf843d4a3b629993cfb7a19756a69463e3ca3a1d&ssp=95454162211752329541175235104939356&ssq=61673707555330874258875553894649357719438&ssr=MjAuMjUuMTkzLjM=&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDk4ZWJlNTBjLWVlODQtNGFjOS05YTc2LTg3YjJlZTVmYzIzNDEtMTc1MjM3NTU1MzU5MzAtOThkMzBmMzFmZTViZmZhZTEwIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzMC0wMDBmNGUwYmIxYjQ4ODYyN2E1MTAifQ==].</p><p>Predicted response size: 1,111.</p><p>Response Body Length: 1,488.</p>",
-					"reference": "",
-					"cweid": "201",
-					"wascid": "13",
-					"sourceid": "13"
-				},
-				{
-					"pluginid": "10011",
-					"alertRef": "10011",
-					"alert": "Cookie Without Secure Flag",
-					"name": "Cookie Without Secure Flag",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
-					"instances":[ 
-						{
-							"id": "9",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzma",
-							"otherinfo": ""
-						},
-						{
-							"id": "10",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzmb",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmb",
-							"otherinfo": ""
-						},
-						{
-							"id": "12",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzmc",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmc",
-							"otherinfo": ""
-						},
-						{
-							"id": "13",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzmd",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmd",
-							"otherinfo": ""
-						},
-						{
-							"id": "11",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzme",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzme",
-							"otherinfo": ""
-						},
-						{
-							"id": "14",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzmf",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmf",
-							"otherinfo": ""
-						},
-						{
-							"id": "15",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "Set-Cookie: uzmx",
-							"otherinfo": ""
-						},
-						{
-							"id": "21",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzma",
-							"otherinfo": ""
-						},
-						{
-							"id": "22",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzmb",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmb",
-							"otherinfo": ""
-						},
-						{
-							"id": "25",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzmc",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmc",
-							"otherinfo": ""
-						},
-						{
-							"id": "29",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzmd",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmd",
-							"otherinfo": ""
-						},
-						{
-							"id": "24",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzme",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzme",
-							"otherinfo": ""
-						},
-						{
-							"id": "30",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzmf",
-							"attack": "",
-							"evidence": "Set-Cookie: __uzmf",
-							"otherinfo": ""
-						},
-						{
-							"id": "33",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "Set-Cookie: uzmx",
-							"otherinfo": ""
-						}
-					],
-					"count": "14",
-					"solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
-					"cweid": "614",
-					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10017",
-					"alertRef": "10017",
-					"alert": "Cross-Domain JavaScript Source File Inclusion",
-					"name": "Cross-Domain JavaScript Source File Inclusion",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
-					"instances":[ 
-						{
-							"id": "94",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "https://genii-script.tolk.ai/lightchat.js",
-							"attack": "",
-							"evidence": "<script nonce=\"cd22faf5-d3ac-4e81-aca7-3302d4a10669\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
-							"otherinfo": ""
-						},
-						{
-							"id": "16",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "https://genii-script.tolk.ai/lightchat.js",
-							"attack": "",
-							"evidence": "<script nonce=\"64ef3fc4-f1e7-43a4-b5ec-c88c707df263\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
-							"otherinfo": ""
-						}
-					],
-					"count": "2",
-					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
-					"otherinfo": "",
-					"reference": "",
-					"cweid": "829",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>Warnings:</p><p>Duplicate source-expression 'self'</p><p></p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
 					"wascid": "15",
 					"sourceid": "4"
 				},
@@ -713,7 +205,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "163",
+							"id": "34",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -722,7 +214,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "160",
+							"id": "31",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -731,16 +223,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "108",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "164",
+							"id": "35",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -749,7 +232,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "161",
+							"id": "33",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -758,16 +241,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "109",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "165",
+							"id": "36",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -776,17 +250,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "162",
+							"id": "37",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "110",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -794,12 +259,49 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "9",
+					"count": "6",
 					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cross-Origin_Resource_Policy</p>",
 					"cweid": "693",
 					"wascid": "14",
+					"sourceid": "4"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"id": "32",
+							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "30",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
 					"sourceid": "4"
 				},
 				{
@@ -813,7 +315,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "67",
+							"id": "50",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -822,16 +324,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "149",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "66",
+							"id": "38",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
@@ -840,25 +333,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "115",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "123",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "41",
+							"id": "45",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "",
@@ -867,53 +342,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "131",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "157",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/driving-licence-suspension",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "137",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "103",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "146",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "40",
+							"id": "46",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "43",
+							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -921,95 +360,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "12",
+					"count": "5",
 					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "13"
-				},
-				{
-					"pluginid": "10096",
-					"alertRef": "10096",
-					"alert": "Timestamp Disclosure - Unix",
-					"name": "Timestamp Disclosure - Unix",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
-					"instances":[ 
-						{
-							"id": "68",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375553",
-							"otherinfo": "1752375553, which evaluates to: 2025-07-13 02:59:13."
-						},
-						{
-							"id": "70",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375553",
-							"otherinfo": "1752375553, which evaluates to: 2025-07-13 02:59:13."
-						},
-						{
-							"id": "116",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375554",
-							"otherinfo": "1752375554, which evaluates to: 2025-07-13 02:59:14."
-						},
-						{
-							"id": "95",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375550",
-							"otherinfo": "1752375550, which evaluates to: 2025-07-13 02:59:10."
-						},
-						{
-							"id": "42",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375553",
-							"otherinfo": "1752375553, which evaluates to: 2025-07-13 02:59:13."
-						},
-						{
-							"id": "104",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375554",
-							"otherinfo": "1752375554, which evaluates to: 2025-07-13 02:59:14."
-						},
-						{
-							"id": "44",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752375553",
-							"otherinfo": "1752375553, which evaluates to: 2025-07-13 02:59:13."
-						}
-					],
-					"count": "7",
-					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1752375553, which evaluates to: 2025-07-13 02:59:13.</p>",
-					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
-					"cweid": "497",
-					"wascid": "13",
-					"sourceid": "13"
+					"sourceid": "14"
 				},
 				{
 					"pluginid": "10094",
@@ -1022,185 +379,104 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "72",
+							"id": "19",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDk4ZWJlNTBjLWVlODQtNGFjOS05YTc2LTg3YjJlZTVmYzIzNDEtMTc1MjM3NTU1MzU5MzAtOThkMzBmMzFmZTViZmZhZTEwIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzMC0wMDBmNGUwYmIxYjQ4ODYyN2E1MTAifQ==",
-							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f900098ebe50c-ee84-4ac9-9a76-87b2ee5fc2341-17523755535930-98d30f31fe5bffae10\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-17523755535930-000f4e0bb1b488627a510\"}"
+							"evidence": "3Daf5cbab5849d80fe1e1a1670450b8da82f6fd1da4aae4239acbec42c19cd0fa1",
+							"otherinfo": "\uFFFD6\uFFFD\uFFFD\uFFFD\uFFFDo\uFFFD8\uFFFD\uFFFD4}\uFFFD^\u056Dz\uFFFDN9\u047F\\x001dk\u035F\uFFFD\uFFFDuu\uFFFD\\x001ai\uFFFD6\uFFFD\u059Cm\uFFFD8\uFFFD\uFFFD}q\uFFFD\\x001fk"
 						},
 						{
-							"id": "151",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "2Fvisite-medicale-et-commission",
-							"otherinfo": "\uFFFD[\uFFFD+^\uFFFDg\uFFFD\uFFFD\u01A5{\uFFFD\uFFFD\uFFFD&\uFFFD+,\uFFFD\uFFFD"
-						},
-						{
-							"id": "73",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwZDk0YzQxY2EtYjQ0ZS00ZTA2LWI1N2YtMGMzYTMyYTVhOGUyMS0xNzUyMzc1NTUzNjAxMC0zZjcwOTc5MTkxNWFhNmU0MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwNzFiZmY4OWUtZTNmMi00ZWFmLWExMTctYTlhYzJhMGY1NTI2MS0xNzUyMzc1NTUzNjAxMC0wMDBlYzA2YzdkZTIwNTY3M2I1MTAifQ==",
-							"otherinfo": "{\"uzmx\":\"7f9000d94c41ca-b44e-4e06-b57f-0c3a32a5a8e21-17523755536010-3f709791915aa6e410\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f900071bff89e-e3f2-4eaf-a117-a9ac2a0f55261-17523755536010-000ec06c7de205673b510\"}"
-						},
-						{
-							"id": "118",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNjk5YTYzM2QtZmM2MS00NWEwLWI4YzAtNWJmMmViNWJhMzg1MS0xNzUyMzc1NTU0MzE0MC1jYWVhYjUzYTEzMjRiYjYwMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MjEtMDAwZjNmMGZkM2I3MDA3NDM4MDEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9",
-							"otherinfo": "{\"uzmx\":\"7f9000699a633d-fc61-45a0-b8c0-5bf2eb5ba3851-17523755543140-caeab53a1324bb6010\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593721-000f3f0fd3b7007438013\",\"rd\":\"ants-2.gouv.fr\"}"
-						},
-						{
-							"id": "125",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "2Fdemander-un-permis-international",
-							"otherinfo": "\uFFFDW^\uFFFD\uFFFD\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFDh\uFFFD\uFFFD)\uFFFDz\uFFFD\u06B6*'j"
-						},
-						{
-							"id": "47",
+							"id": "18",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "2Finvalidation-ou-annulation-du-permis",
-							"otherinfo": "\uFFFDX\uFFFD\uFFFD\uFFFDbu\uFFFDb\uFFFD\uFFFD\uFFFD\u69DE\uFFFDZ\uFFFD*'\uFFFD\u06FE\uFFFD\uFFFD\uFFFD"
-						},
-						{
-							"id": "133",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzNzI4LTAwMGEwZTQ1MThjMWFkMWIzZGExMyIsInV6bXgiOiI3ZjkwMDAwMjhmOGY1Yy1hMmEyLTQ1MzUtODg5ZS00ZWQ2YWI0ZDVhNmYxLTE3NTIzNzU1NTQzMjEwLTVlMTk4YjE5MDA2ZmVhMTcxMCJ9",
-							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593728-000a0e4518c1ad1b3da13\",\"uzmx\":\"7f9000028f8f5c-a2a2-4535-889e-4ed6ab4d5a6f1-17523755543210-5e198b19006fea1710\"}"
-						},
-						{
-							"id": "158",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/driving-licence-suspension",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNDk0YTA5NTItNTBmMS00M2YyLTk5NWItODkzNWY5ZGY4MjM4MS0xNzUyMzc1NTU0Nzc1MC1kMDlkMGYyMDczOWEwYzJjMTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTMxMTgyLTAwMDI4MDFkZjRjMGFiYTVmZTQxNiIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"uzmx\":\"7f9000494a0952-50f1-43f2-995b-8935f9df82381-17523755547750-d09d0f20739a0c2c10\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-17523755535931182-0002801df4c0aba5fe416\",\"rd\":\"ants-2.gouv.fr\"}"
-						},
-						{
-							"id": "138",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "2Fregister-for-the-driving-test",
-							"otherinfo": "\uFFFDZ\u0782+-z\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uF76E+\uFFFD\\x000f\uFFFDz\uFFFD"
-						},
-						{
-							"id": "105",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwMjhmMDZmZTEtMDg2NS00MTRkLTliMjgtMzhmMDU5MDZhYzAwMS0xNzUyMzc1NTU0MzA2MC1iZGFlZWQxMWRlM2VkYjdhMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYzYzZjA1MjItODVjMC00M2IzLThmYzctYTZhN2ZiNzBiZjg0MS0xNzUyMzc1NTUzNTkzNzEzLTAwMGY1NmNmMjk1NjdiNTJkNTgxMyJ9",
-							"otherinfo": "{\"uzmx\":\"7f900028f06fe1-0865-414d-9b28-38f05906ac001-17523755543060-bdaeed11de3edb7a10\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593713-000f56cf29567b52d5813\"}"
-						},
-						{
-							"id": "148",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwYjBhNjQ5YTMtZmQyYy00OGY3LWJlNTAtYThjYmVmOTJmM2YxMS0xNzUyMzc1NTU0MzIxMC02M2EwYWE0YzIwNzRmZGM0MTAiLCJfX3V6bWYiOiI3ZjkwMDBjNjNmMDUyMi04NWMwLTQzYjMtOGZjNy1hNmE3ZmI3MGJmODQxLTE3NTIzNzU1NTM1OTM3MjgtMDAwYTBlNDUxOGMxYWQxYjNkYTEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9",
-							"otherinfo": "{\"uzmx\":\"7f9000b0a649a3-fd2c-48f7-be50-a8cbef92f3f11-17523755543210-63a0aa4c2074fdc410\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593728-000a0e4518c1ad1b3da13\",\"rd\":\"ants-2.gouv.fr\"}"
-						},
-						{
-							"id": "46",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDJiYWRlOWI5LTI3MWMtNDIyMC1iNWFmLTVmMjk0MDE0M2E3ZTEtMTc1MjM3NTU1MzU5MzAtNjQ0YTcwYmQ4YWQ0YzQ1MDEwIiwiX191em1mIjoiN2Y5MDAwYzEzMTQxNzItOTI0MC00M2YxLTlkNjUtZGQ3MmNhZWJiYWVjMS0xNzUyMzc1NTUzNTkzMC0wMDA2NjYyMTg4ZTRmMzhlYjdmMTAifQ==",
-							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f90002bade9b9-271c-4220-b5af-5f2940143a7e1-17523755535930-644a70bd8ad4c45010\",\"__uzmf\":\"7f9000c1314172-9240-43f1-9d65-dd72caebbaec1-17523755535930-0006662188e4f38eb7f10\"}"
-						}
-					],
-					"count": "12",
-					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f900098ebe50c-ee84-4ac9-9a76-87b2ee5fc2341-17523755535930-98d30f31fe5bffae10\",\"__uzmf\":\"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-17523755535930-000f4e0bb1b488627a510\"}</p>",
-					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
-					"cweid": "319",
-					"wascid": "13",
-					"sourceid": "13"
-				},
-				{
-					"pluginid": "90011",
-					"alertRef": "90011",
-					"alert": "Charset Mismatch ",
-					"name": "Charset Mismatch ",
-					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>This check identifies responses where the HTTP Content-Type header declares a charset different from the charset defined by the body of the HTML or XML. When there's a charset mismatch between the HTTP header and content body Web browsers can be forced into an undesirable content-sniffing mode to determine the content's correct character set.</p><p></p><p>An attacker could manipulate content on the page to be interpreted in an encoding of their choice. For example, if an attacker can control content at the beginning of the page, they could inject script using UTF-7 encoded text and manipulate some browsers into interpreting that text.</p>",
-					"instances":[ 
-						{
-							"id": "99",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "There was a charset mismatch between the HTTP Header and the XML encoding declaration: [utf-8] and [null] do not match."
-						}
-					],
-					"count": "1",
-					"solution": "<p>Force UTF-8 for all text content in both the HTTP header and meta tags in HTML or encoding declarations in XML.</p>",
-					"otherinfo": "<p>There was a charset mismatch between the HTTP Header and the XML encoding declaration: [utf-8] and [null] do not match.</p>",
-					"reference": "<p>https://code.google.com/p/browsersec/wiki/Part2#Character_set_handling_and_detection</p>",
-					"cweid": "436",
-					"wascid": "15",
-					"sourceid": "14"
-				},
-				{
-					"pluginid": "10027",
-					"alertRef": "10027",
-					"alert": "Information Disclosure - Suspicious Comments",
-					"name": "Information Disclosure - Suspicious Comments",
-					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
-					"instances":[ 
-						{
-							"id": "159",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "84",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-\", see evidence field for the suspicious comment/snippet."
+							"evidence": "3Daf5cbab5849d80fe1e1a1670450b8da8a4af49d4b4fcd3351db6080ca9cc2b7e",
+							"otherinfo": "\uFFFD6\uFFFD\uFFFD\uFFFD\uFFFDo\uFFFD8\uFFFD\uFFFD4}\uFFFD^\u056Dz\uFFFDN9\u047F\\x001dk\u01B8i\uFFFD=w\uFFFD\uFFFD}\uFFFDw\u07DD]o\uFFFD<\uFFFD\u01BDq\u035B\uFFFD"
 						}
 					],
 					"count": "2",
-					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
-					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//genii-script.tolk.ai https://fonts.googleapis.com;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr https://genii-\", see evidence field for the suspicious comment/snippet.</p>",
-					"reference": "",
-					"cweid": "615",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>\uFFFD6\uFFFD\uFFFD\uFFFD\uFFFDo\uFFFD8\uFFFD\uFFFD4}\uFFFD^\u056Dz\uFFFDN9\u047F\\x001dk\u035F\uFFFD\uFFFDuu\uFFFD\\x001ai\uFFFD6\uFFFD\u059Cm\uFFFD8\uFFFD\uFFFD}q\uFFFD\\x001fk</p>",
+					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "319",
 					"wascid": "13",
+					"sourceid": "4"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-1",
+					"alert": "CSP: X-Content-Security-Policy",
+					"name": "CSP: X-Content-Security-Policy",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "2",
+							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"method": "GET",
+							"param": "X-Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						},
+						{
+							"id": "3",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+							"method": "GET",
+							"param": "X-Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The header X-Content-Security-Policy was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "4"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-2",
+					"alert": "CSP: X-WebKit-CSP",
+					"name": "CSP: X-WebKit-CSP",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "5",
+							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"method": "GET",
+							"param": "X-WebKit-CSP",
+							"attack": "",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The header X-WebKit-CSP was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						},
+						{
+							"id": "4",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+							"method": "GET",
+							"param": "X-WebKit-CSP",
+							"attack": "",
+							"evidence": "default-src 'self'; script-src 'self' data: 'unsafe-inline' 'unsafe-eval'; object-src 'self' data:; style-src 'self' data: 'unsafe-inline' 'self'; img-src 'self' data:; media-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; connect-src 'self' data:",
+							"otherinfo": "The header X-WebKit-CSP was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>The header X-WebKit-CSP was found on this response. While it is a good sign that CSP is implemented to some degree the policy specified in this header has not been analyzed by ZAP. To ensure full support by modern browsers ensure that the Content-Security-Policy header is defined and attached to responses.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"cweid": "693",
+					"wascid": "15",
 					"sourceid": "4"
 				},
 				{
@@ -1214,121 +490,31 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "65",
+							"id": "16",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"YTNlMTY1ZjQtYzM0Zi00NTc3LTkyM2ItZThjMWM2N2EyYjQ5JDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-17523755535930-000f4e0bb1b488627a510\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900098ebe50c-ee84-4ac9-9a76-87b2ee5fc2341-17523755535930-98d30f31fe5bffae10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+							"evidence": "<a id=\"top\"></a>",
+							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "147",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"MjQ3ZGFiNmEtYzM0Zi00MDUwLWJlMWMtOTUzYTkyYWIzYzJlJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593736-000a09a314e3cce9b8e13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90008e0d3cb6-e29f-4646-9d57-e6744d7d648e1-17523755543290-fa739d4d4c9578cc10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "64",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"71bff89e-e3f2-4eaf-a117-a9ac2a0f5526\";var __uzdbm_2 = \"OGVmYTU3ZmYtYzM0Zi00MGNlLThkODYtMzBlOWVjYTc4MjRhJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f900071bff89e-e3f2-4eaf-a117-a9ac2a0f55261-17523755536010-000ec06c7de205673b510\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000d94c41ca-b44e-4e06-b57f-0c3a32a5a8e21-17523755536010-3f709791915aa6e410\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "114",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"ODZmNTkzNGItYzM0Zi00ZTdkLTg4MzItODA5MDgwOGUyYTQ5JDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593721-000f3f0fd3b7007438013\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000699a633d-fc61-45a0-b8c0-5bf2eb5ba3851-17523755543140-caeab53a1324bb6010\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "122",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"NGY2NGU1NjQtYzM0Zi00ZDA4LWE3MDgtZmFhYjFiZGI3Y2Q2JDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593720-000d4f727674587be8f13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000ac2aac84-74e8-423d-adc7-4a419306f1b01-17523755543130-890426d4e1a1d3ff10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "85",
+							"id": "17",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "39",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"2461e840-de28-479d-a7f0-6234fb0a4cda\";var __uzdbm_2 = \"OGI3ZmJhOTktYzM0Zi00NDNmLTgyMTMtMjJlNGZhNTE1NmNhJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f90002461e840-de28-479d-a7f0-6234fb0a4cda1-17523755536020-00087dd18ffaf2cad6f10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90006dd4bffd-3204-474f-8d4b-d0d7f67173a31-17523755536020-9687ca6f76732cd710\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "129",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"ODVjNTQ3MTktYzM0Zi00MDBlLTk4YzQtYjk4YTRmYzMwOWIwJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593728-000a0e4518c1ad1b3da13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000028f8f5c-a2a2-4535-889e-4ed6ab4d5a6f1-17523755543210-5e198b19006fea1710\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "136",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"YTgxOGIwOWQtYzM0Zi00NTM3LWEyNWItYzk2ZWNjMjIxNGQ0JDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593727-00042fca7612f19939e13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90005356a235-d3d0-4140-8158-b68cdfeceed41-17523755543200-d1099d9e6978205210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "102",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"Y2RlYjU5NjYtYzM0Zi00YjFkLTk4MWUtZTBiNTcxNTI0OWZiJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593713-000f56cf29567b52d5813\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900028f06fe1-0865-414d-9b28-38f05906ac001-17523755543060-bdaeed11de3edb7a10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "145",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c63f0522-85c0-43b3-8fc7-a6a7fb70bf84\";var __uzdbm_2 = \"NDAyY2JmZDYtYzM0Zi00ZGM3LTkzOGYtZDE0YTIzYmUzZmMzJDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c63f0522-85c0-43b3-8fc7-a6a7fb70bf841-1752375553593728-000a0e4518c1ad1b3da13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000b0a649a3-fd2c-48f7-be50-a8cbef92f3f11-17523755543210-63a0aa4c2074fdc410\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "38",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"c1314172-9240-43f1-9d65-dd72caebbaec\";var __uzdbm_2 = \"Y2I0NzcyNjgtYzM0Zi00MjQ4LWE5YTctYzc4MDQ0ZjY0N2E5JDIwLjI1LjE5My4z\";var __uzdbm_3 = \"7f9000c1314172-9240-43f1-9d65-dd72caebbaec1-17523755535930-0006662188e4f38eb7f10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90002bade9b9-271c-4220-b5af-5f2940143a7e1-17523755535930-644a70bd8ad4c45010\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+							"evidence": "<a id=\"top\"></a>",
+							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
 						}
 					],
-					"count": "12",
+					"count": "2",
 					"solution": "<p>This is an informational alert and so no changes are required.</p>",
-					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"otherinfo": "<p>Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application.</p>",
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "13"
+					"sourceid": "4"
 				},
 				{
 					"pluginid": "10049",
@@ -1341,7 +527,16 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "82",
+							"id": "51",
+							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "303",
+							"otherinfo": ""
+						},
+						{
+							"id": "29",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1350,43 +545,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "152",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "83",
+							"id": "44",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "no-store",
+							"evidence": "303",
 							"otherinfo": ""
 						},
 						{
-							"id": "120",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
+							"id": "49",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "no-store",
+							"evidence": "303",
 							"otherinfo": ""
 						},
 						{
-							"id": "126",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "57",
+							"id": "28",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
 							"param": "",
@@ -1395,104 +572,59 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "139",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "106",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "150",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "56",
+							"id": "47",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "no-store",
+							"evidence": "303",
+							"otherinfo": ""
+						},
+						{
+							"id": "48",
+							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "303",
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "7",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "13"
+					"sourceid": "14"
 				},
 				{
-					"pluginid": "10015",
-					"alertRef": "10015",
-					"alert": "Re-examine Cache-control Directives",
-					"name": "Re-examine Cache-control Directives",
+					"pluginid": "10038",
+					"alertRef": "10038-2",
+					"alert": "Obsolete Content Security Policy (CSP) Header Found",
+					"name": "Obsolete Content Security Policy (CSP) Header Found",
 					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>The \"X-Content-Security-Policy\" and \"X-WebKit-CSP\" headers are no longer recommended.</p>",
 					"instances":[ 
-						{
-							"id": "86",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
 						{
 							"id": "1",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
 							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "98",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "cache-control",
+							"param": "",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
-					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
-					"cweid": "525",
-					"wascid": "13",
-					"sourceid": "4"
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1505,7 +637,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "80",
+							"id": "25",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1514,7 +646,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "41",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1523,17 +655,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
+							"id": "24",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Sec-Fetch-Dest",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "51",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1541,13 +664,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "13"
+					"sourceid": "4"
 				},
 				{
 					"pluginid": "90005",
@@ -1560,7 +683,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "79",
+							"id": "23",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1569,7 +692,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
+							"id": "40",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1578,17 +701,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "22",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Sec-Fetch-Mode",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "50",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1596,13 +710,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "13"
+					"sourceid": "4"
 				},
 				{
 					"pluginid": "90005",
@@ -1615,7 +729,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "74",
+							"id": "21",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1624,7 +738,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "39",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1633,17 +747,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "48",
+							"id": "20",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Sec-Fetch-Site",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "49",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1651,13 +756,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "13"
+					"sourceid": "4"
 				},
 				{
 					"pluginid": "90005",
@@ -1670,7 +775,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "81",
+							"id": "27",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1679,7 +784,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "42",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1688,17 +793,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "55",
+							"id": "26",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "Sec-Fetch-User",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "52",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -1706,150 +802,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "13"
-				},
-				{
-					"pluginid": "10112",
-					"alertRef": "10112",
-					"alert": "Session Management Response Identified",
-					"name": "Session Management Response Identified",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
-					"instances":[ 
-						{
-							"id": "23",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "__uzma",
-							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
-						},
-						{
-							"id": "59",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "__uzma",
-							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
-						},
-						{
-							"id": "111",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "117",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "0",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "__uzma",
-							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
-						},
-						{
-							"id": "124",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "130",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "97",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "140",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "17",
-							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "__uzma",
-							"attack": "",
-							"evidence": "__uzma",
-							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
-						}
-					],
-					"count": "10",
-					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
-					"otherinfo": "<p>cookie:__uzma</p><p>cookie:uzmx</p><p>cookie:__uzmf</p><p>cookie:__uzmc</p><p>cookie:__uzmb</p><p>cookie:__uzmd</p>",
-					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
-					"cweid": "-1",
-					"wascid": "-1",
 					"sourceid": "4"
-				},
-				{
-					"pluginid": "10049",
-					"alertRef": "10049",
-					"alert": "Storable and Cacheable Content",
-					"name": "Storable and Cacheable Content",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
-					"instances":[ 
-						{
-							"id": "107",
-							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						}
-					],
-					"count": "1",
-					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
-					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
-					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
-					"cweid": "524",
-					"wascid": "13",
-					"sourceid": "14"
 				}
 			]
 		}
