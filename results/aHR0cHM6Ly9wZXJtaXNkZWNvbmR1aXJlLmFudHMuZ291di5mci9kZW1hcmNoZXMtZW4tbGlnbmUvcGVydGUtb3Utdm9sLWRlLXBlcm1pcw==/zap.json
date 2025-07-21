@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sat, 19 Jul 2025 03:10:39",
+	"@generated": "Mon, 21 Jul 2025 03:04:12",
 	"site":[ 
 		{
 			"@name": "https://permisdeconduire.ants.gouv.fr",
@@ -9,6 +9,34 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10062",
+					"alertRef": "10062",
+					"alert": "PII Disclosure",
+					"name": "PII Disclosure",
+					"riskcode": "3",
+					"confidence": "3",
+					"riskdesc": "High (High)",
+					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
+					"instances":[ 
+						{
+							"id": "96",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "5640798108401",
+							"otherinfo": "Credit Card Type detected: Maestro\nBank Identification Number: 564079\nBrand: MAESTRO\nCategory: \nIssuer: "
+						}
+					],
+					"count": "1",
+					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
+					"otherinfo": "<p>Credit Card Type detected: Maestro</p><p>Bank Identification Number: 564079</p><p>Brand: MAESTRO</p><p>Category: </p><p>Issuer: </p>",
+					"reference": "",
+					"cweid": "359",
+					"wascid": "13",
+					"sourceid": "12"
+				},
 				{
 					"pluginid": "10055",
 					"alertRef": "10055-13",
@@ -20,7 +48,7 @@
 					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
 					"instances":[ 
 						{
-							"id": "82",
+							"id": "89",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -29,16 +57,16 @@
 							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "74",
+							"id": "86",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-8a460f6b-0dfb-4153-a69f-66ea70307c3e' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-9e0f6e23-33a8-46a3-9310-823a72485c88' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "78",
+							"id": "5",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -47,12 +75,12 @@
 							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "72",
+							"id": "2",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-69f1cf70-42f3-496e-b878-fcea97125084' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-551d9f27-a14c-4b93-bcb9-38d1a43ce135' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						}
 					],
@@ -75,16 +103,16 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "76",
+							"id": "87",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-8a460f6b-0dfb-4153-a69f-66ea70307c3e' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-9e0f6e23-33a8-46a3-9310-823a72485c88' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
-							"id": "83",
+							"id": "90",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -93,16 +121,16 @@
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src"
 						},
 						{
-							"id": "73",
+							"id": "3",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-69f1cf70-42f3-496e-b878-fcea97125084' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-551d9f27-a14c-4b93-bcb9-38d1a43ce135' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
-							"id": "79",
+							"id": "6",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -130,7 +158,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "84",
+							"id": "91",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -139,7 +167,7 @@
 							"otherinfo": "script-src includes unsafe-inline."
 						},
 						{
-							"id": "80",
+							"id": "7",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -167,16 +195,16 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "77",
+							"id": "88",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-8a460f6b-0dfb-4153-a69f-66ea70307c3e' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-9e0f6e23-33a8-46a3-9310-823a72485c88' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "85",
+							"id": "92",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -185,16 +213,16 @@
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "75",
+							"id": "4",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-69f1cf70-42f3-496e-b878-fcea97125084' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-551d9f27-a14c-4b93-bcb9-38d1a43ce135' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "81",
+							"id": "8",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -222,7 +250,7 @@
 					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>",
 					"instances":[ 
 						{
-							"id": "19",
+							"id": "67",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -231,7 +259,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "126",
+							"id": "147",
 							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
 							"method": "GET",
 							"param": "",
@@ -240,7 +268,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "45",
+							"id": "42",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
@@ -249,7 +277,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "136",
+							"id": "137",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
 							"method": "GET",
 							"param": "",
@@ -258,7 +286,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "124",
+							"id": "106",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
@@ -267,7 +295,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "48",
+							"id": "66",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
@@ -276,7 +304,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "109",
+							"id": "122",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
@@ -285,7 +313,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "92",
+							"id": "136",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
@@ -294,7 +322,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "138",
+							"id": "152",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
 							"method": "GET",
 							"param": "",
@@ -303,7 +331,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "93",
+							"id": "108",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -312,7 +340,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "108",
+							"id": "123",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -321,7 +349,7 @@
 							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
 						},
 						{
-							"id": "18",
+							"id": "37",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -336,7 +364,7 @@
 					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
 					"cweid": "264",
 					"wascid": "14",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "90003",
@@ -349,21 +377,21 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
 					"instances":[ 
 						{
-							"id": "153",
+							"id": "162",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script nonce=\"8a460f6b-0dfb-4153-a69f-66ea70307c3e\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
+							"evidence": "<script nonce=\"9e0f6e23-33a8-46a3-9310-823a72485c88\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
 							"otherinfo": ""
 						},
 						{
-							"id": "154",
+							"id": "161",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script nonce=\"69f1cf70-42f3-496e-b878-fcea97125084\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
+							"evidence": "<script nonce=\"551d9f27-a14c-4b93-bcb9-38d1a43ce135\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
 							"otherinfo": ""
 						}
 					],
@@ -386,31 +414,31 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "2",
+							"id": "64",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 815 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=37bfc687-b96b-4a47-9a8b-e01fc79a5306&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=1232a689-c34f-474c-ba30-43530fe12988&ssk=support@shieldsquare.com&ssm=36712862529488748102008126734657&ssn=d86ee63f0f9f686f172d798fad2b1ba986925ec3067f-ac29-4c08-b2d2ec&sso=4a39dc63-91a702490b12e1395136d710cb54d4581248dad361f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMjI4Nzg1MTktNTUwZC00ZDYyLTg1YmEtMTljMzJiYzQ3MmRkMS0xNzUyODk0NjI5MTY4MC01N2E1ZjY2MzYwMGI3NTU3MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwNWVjMzA2N2YtYWMyOS00YzA4LWJjNjMtOTFhNzAyNDkwYjEyMS0xNzUyODk0NjI5MTY4MC0wMDA2Y2I1NTg4OThlZTQ5YWZlMTAifQ==].\nPredicted response size: 1,115.\nResponse Body Length: 1,496."
+							"otherinfo": "Location header URI length: 815 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=304489f6-25b5-4742-9eeb-dadd779bf2b3&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=c169fa6f-c34f-4539-af88-28095cf93b41&ssk=support@shieldsquare.com&ssm=22368697993284290108042351255805&ssn=d07fbb1d8e21848185937f39d5db745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4be937f35bb684758e18273823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjkwLTAwMGFhZDJmYTllYTc4MjMzMDAxMCIsInV6bXgiOiI3ZjkwMDAwZDZkYjc3Ni1mYmViLTQwZjQtYTk2OC0wNTQ0ZTU4ZGU3YTcxLTE3NTMwNjcwNDIxNjkwLWYxMjM5NmViZjFjM2ZiYjExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,115.\nResponse Body Length: 1,496."
 						},
 						{
-							"id": "123",
+							"id": "146",
 							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 862 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=89789045-c23b-4f9d-8fea-6a628fe9ff62&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Faide-et-contact%2Fvisite-medicale-et-commission&ssi=713660a2-c34f-4077-9b81-3c22fd0ae2a2&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63f872e15a215bcd4103a511ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e139513666a8aea8f4dd1b87a57361f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NjgtMDAwMjAxMGRmZjIyN2VmMWZjNTEzIiwidXpteCI6IjdmOTAwMGExZTg1ZjM2LTQ4NDAtNDdkOS1hNmY5LTAyNzJhYmZkZmViMTEtMTc1Mjg5NDYyOTgzNjAtZGFiYzg2NGEzOGViZGQxODEwIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,162.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 862 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=b788cbe8-fecd-4206-9f57-124a41b2bd98&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Faide-et-contact%2Fvisite-medicale-et-commission&ssi=471bab68-c34f-4e72-952c-381a0b095ac9&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d0c6418b60792bca13fe7745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b71e16a072e681d3fa9933823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYTg2MjRlZjEtZDM4ZS00NjZkLWE0OTEtYmNjYjFkOTIyNDUwMS0xNzUzMDY3MDQyNzgyMC0xYzNlMmVhNmRjZDZhNWU5MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjEzLTAwMGQ3OTIyZTZkZmJhMWUzMjIxMyJ9].\nPredicted response size: 1,162.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "44",
+							"id": "24",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 833 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=353d8ac2-7fa5-4993-a355-df15758bfc36&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne&ssi=457ff11f-c34f-4a57-b7ae-31dae122431f&ssk=support@shieldsquare.com&ssm=36712862529488748102008126734657&ssn=d86ee63f788af502cdae899c42c11ba986927a45efb8-6cea-46c6-82d2ec&sso=4a39d56a-bdf69317badfe1395136a05f3a99ad7d182dd15561f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwODY1YWE0NmMtMGFkNC00OTUzLTliYWMtZmY2YmU0MWRjYmVjMS0xNzUyODk0NjI5MTY5MC04NGI0NmUzNmNmYzA0MWNiMTAiLCJfX3V6bWYiOiI3ZjkwMDA3YTQ1ZWZiOC02Y2VhLTQ2YzYtODU2YS1iZGY2OTMxN2JhZGYxLTE3NTI4OTQ2MjkxNjkwLTAwMDhiMWI3NzM3MzJkZTg5MDExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,133.\nResponse Body Length: 1,496."
+							"otherinfo": "Location header URI length: 833 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=64f1b4fb-f543-435f-a0c0-e495481aa53e&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne&ssi=38f4da74-c34f-4bd7-9898-181247b24734&ssk=support@shieldsquare.com&ssm=22368697993284290108042351255805&ssn=d07fbb1d5caf89e24f11757854ca745983a619472af7-9665-4d6e-8c23a4&sso=55124566-2249ea661bd4ae57ae4b94072ac6668ae2115ac03823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDAxOTQ3MmFmNy05NjY1LTRkNmUtODU2Ni0yMjQ5ZWE2NjFiZDQxLTE3NTMwNjcwNDIxNjkwLTAwMGMzYWE4Mjg2Y2VkMTYyYTcxMCIsInV6bXgiOiI3ZjkwMDBjZjQ0OGYxYS1hNThkLTQyOGEtODI1NC1kZTBhODNmNmMxNmUxLTE3NTMwNjcwNDIxNjkwLWJlOTU3NjM0YmE5MDEzOWQxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,133.\nResponse Body Length: 1,496."
 						},
 						{
 							"id": "134",
@@ -419,88 +447,88 @@
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 860 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=5b583b34-158e-4164-8c50-66de42314a60&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2F-changement-d-etat-civil&ssi=526b6e2b-c34f-43e8-aae4-f79b86bbfdfc&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63f57b888bc19895553c5a81ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e1395136a518da1cce66437d78ae61f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwYTczNmE1ZjQtNjgzZi00YWU5LTkxMmEtY2JkMTNhYTVjNDFjMS0xNzUyODk0NjI5ODM3MC1mOGJiMzBlMDljZmJmOWZlMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NjY5LTAwMDg4MTNlMWFiMThiOTk1MTkxMyJ9].\nPredicted response size: 1,160.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 860 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=36c94321-e709-45bc-931e-c33df05b7f5d&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2F-changement-d-etat-civil&ssi=cbe74bde-c34f-4e1c-ae7c-2beffada128f&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d26d23a2236cac900e4a0745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b1815843596bbc59d3bf03823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDhiMDhiODY5LTgzNDAtNGUwYS05MzUyLWQyMGI2ODRmNmUyNzEtMTc1MzA2NzA0Mjc4MjAtNjlhM2JlMDVlNmYwYzVkZTEwIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjEzLTAwMGQ3OTIyZTZkZmJhMWUzMjIxMyJ9].\nPredicted response size: 1,160.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "122",
+							"id": "104",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 868 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=89b6242f-e123-46e7-9ecf-6d0bcaaae5ce&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fdemander-un-permis-international&ssi=98883d04-c34f-4dfb-a94e-7e18e694eaf8&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63f1e9bbefb3067cb472f5b1ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e1395136d3901ea85221b16e717361f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NTctMDAwNDVjNTZhZDgwNjJhMGQwMDEzIiwidXpteCI6IjdmOTAwMDhhMjBkOGMwLTA0YmUtNGY1Ni04NjVhLTNlZTI3NTU0MDBiNjEtMTc1Mjg5NDYyOTgyNTAtODdhYzRjNGIxNGNhM2UwYjEwIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,168.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 868 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=e3865eb0-0b5d-48e3-b8f2-bb68474a8359&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fdemander-un-permis-international&ssi=7bfa037a-c34f-404c-821a-343ade31fc46&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d5b202625aec29577429d745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b56586d0ec420a8fefac03823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2MDgtMDAwODY3YWQ3YTlmOGVhOTlmMDEzIiwidXpteCI6IjdmOTAwMDJiZGNhMjI1LWE4ZWYtNDJjMC1iMDg1LWY4YzczMjk2YjkzMDEtMTc1MzA2NzA0Mjc3NzAtZmU4ZDRhYTQwMzRhMDM3MjEwIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,168.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "46",
+							"id": "65",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 858 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=3702181e-8985-4fdc-9af0-c283eddb213e&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fperte-ou-vol-de-permis&ssi=3acffb02-c34f-41b7-b7ee-48c67eb545f9&ssk=support@shieldsquare.com&ssm=36712862529488748102008126734657&ssn=d86ee63f7ec89f124027be9a70961ba986927cfa4a80-f7db-4c0e-a2d2ec&sso=4a39d90c-c80d1715d3b0e1395136e568ccfdc71bc51a15e961f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDA3Y2ZhNGE4MC1mN2RiLTRjMGUtYTkwYy1jODBkMTcxNWQzYjAxLTE3NTI4OTQ2MjkxNjgwLTAwMDRhMmMxYTBkNDk1OGQ5N2UxMCIsInV6bXgiOiI3ZjkwMDAzMTEyNmRmNy04NjgwLTRhNGQtOGQxNC0wYTgxOGNhZmY2NDYxLTE3NTI4OTQ2MjkxNjgwLWQzZGQ3ZGFiNjYzNDVmY2UxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,158.\nResponse Body Length: 1,496."
+							"otherinfo": "Location header URI length: 858 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=384996f7-4a5c-40eb-96e5-d090931a9233&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fperte-ou-vol-de-permis&ssi=8cd29cb4-c34f-4192-a1d1-5c8642532f80&ssk=support@shieldsquare.com&ssm=22368697993284290108042351255805&ssn=d07fbb1d5e8d9a96c2d69bab579c745983a6aa2acde5-d71c-49da-bc23a4&sso=55124cb6-7f6f619c6d96ae57ae4b2780c22f956dee321f103823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMDFiZTZhZjMtNGRkZi00ZmM2LWE2M2MtNTY0MDc5ODEwODQwMS0xNzUzMDY3MDQyMTY3MC01MTNjYTExZDIzMDIxODEzMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYWEyYWNkZTUtZDcxYy00OWRhLWJjYjYtN2Y2ZjYxOWM2ZDk2MS0xNzUzMDY3MDQyMTY3MC0wMDBhMjc0ZTM2MWQ4YTRiYWE4MTAifQ==].\nPredicted response size: 1,158.\nResponse Body Length: 1,496."
 						},
 						{
-							"id": "106",
+							"id": "120",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 871 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=0607ee05-7c81-42cc-acc2-4a60fb6b6c11&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fvalidation-de-diplome-professionnel&ssi=7c46ac66-c34f-41b2-a1fb-e7d2349e49df&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63fc24064f654069a8ba3291ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e1395136922f62db72ed2c772aa861f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NjItMDAwMWZmZTA4Nzc0Yzg4MmI2YjEzIiwicmQiOiJhbnRzLTIuZ291di5mciIsInV6bXgiOiI3ZjkwMDA4ZTQ0OGZkNi1iOTgwLTRiNGUtYTM3ZC03MGMxZDgwYjQ3OTAxLTE3NTI4OTQ2Mjk4MzAwLTAzOTkxNGY2MWFiZjQ2YjQxMCJ9].\nPredicted response size: 1,171.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 871 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=07159fbb-8d85-4a13-91cb-7a5b9c779b80&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Fvalidation-de-diplome-professionnel&ssi=1866e71c-c34f-475c-9514-7e1c5d48fe34&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d58e8486331d10ddf3bae745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4bc62c262c5e2791343f723823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2MDctMDAwYmQ5MjhjMDllNGU1YWJhYjEzIiwicmQiOiJhbnRzLTIuZ291di5mciIsInV6bXgiOiI3ZjkwMDA1NzAwYzVkMy1jYjNmLTQ1ZmYtOTI4Yi1lZjA2NWMxNDNmMmExLTE3NTMwNjcwNDI3NzYwLTFmODVkOGJhM2Y1ZjVhMzIxMCJ9].\nPredicted response size: 1,171.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "91",
+							"id": "135",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 873 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=f970e19a-2b10-4e83-9016-4c18ca28491b&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-online-services%2Fregister-for-the-driving-test&ssi=aa8672e8-c34f-4fbb-a75c-c852c948c604&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63fae7a7aeb745ac996d8ee1ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e1395136ca4d8335e719d252bfb461f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwY2I3YjE5YTYtNzcyOS00YzAxLTk2MDktZDc0Yzk1YjhjNjU3MS0xNzUyODk0NjI5ODIyMC0xM2NkMWE4MjM0NWFhYmExMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NjU0LTAwMDZjODMxOGQ3MDc3ZjQ4MWYxMyJ9].\nPredicted response size: 1,173.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 873 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=2ef48238-232b-411b-86a3-755de0c5e1cf&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-online-services%2Fregister-for-the-driving-test&ssi=86ee2a1f-c34f-4a10-b187-015a6c29fa72&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d00fa0c8016c58b53c68c745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b01c071054bfb1b7e5f523823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDkyOTQ1NDg1LTQ2MTEtNDA0Yy04YmFhLWYyZDE4M2IxNGI5YTEtMTc1MzA2NzA0Mjc3NTAtMTI0ZjU3NmQ0Y2U1Yzk2MjEwIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjA2LTAwMGQzYWE2NjcxNWQwYTZjNTMxMyJ9].\nPredicted response size: 1,173.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "135",
+							"id": "148",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 834 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=9c9e27c9-d6e6-4778-8bb4-3a5e47f19904&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-the-news&ssi=cb60bd5c-c34f-4b5f-926e-6ad3f9903fb9&ssk=support@shieldsquare.com&ssm=36712862529488748162008126734657&ssn=d86ee63fe23a14f56cf3b3e107d31ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e13951369e5d06893d4f305d614a61f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NzkzLTAwMDIzZWFmNzM4ZTdiMjllNmYxNiIsInV6bXgiOiI3ZjkwMDBlOWM3ZTJmMy1kNWQ2LTRhMjgtYTI5Ni1kODMzZWQ5M2UxNTkxLTE3NTI4OTQ2Mjk5NjEwLTNhNGQxZGIxMjYyZWUyYjgxMCJ9].\nPredicted response size: 1,134.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 834 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=d281911b-8d3e-461d-a1e1-836d83cac2a3&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fall-the-news&ssi=b6403d25-c34f-455a-9296-68111fc54a63&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d45cf11732e1af8c98b44745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b077eaf2b5ee58ef7f5ce3823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2NTEtMDAwODZlMTJkYzU4Y2NkNWNjMzEzIiwidXpteCI6IjdmOTAwMDYzMjZmODI2LTRlMTMtNDMwMS1hMzgyLTQ3N2Y5YzBkNzZiOTEtMTc1MzA2NzA0MjgyMDAtMjBhNTE0ZTVkNWFhNDYyNTEwIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,134.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "90",
+							"id": "105",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 832 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=0350cb9d-930a-4715-a237-25ff9b7f631f&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fdisclaimer&ssi=d2792ada-c34f-4693-8a42-8983450bef7c&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63fb24e8086780758663a9a1ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e13951366eabf16328d478fb24ed61f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNDMwZmU0MzUtMjk0My00Zjk5LWE4ZDUtY2E0NmU0ODY4Nzk4MS0xNzUyODk0NjI5ODMyMC05ZjkyMWJmODY2ODgxODQ2MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NjY0LTAwMGExY2M4OGY3MmVjMDM4YTUxMyJ9].\nPredicted response size: 1,132.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 832 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=0c76a6c9-c649-4a95-9a44-9fecdec01cde&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fhome%2Fdisclaimer&ssi=1db8400c-c34f-4165-a22c-221d9c8d2cae&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1d3cccc7ee1be24bfb506c745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4b718b990a462ff6cff60d3823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMjk4ZWNlOTktNmY5MS00YTU2LThlMzEtNTdkNGNhMGI1MmU3MS0xNzUzMDY3MDQyNzc0MC0yNDE5OTlkZTBkYjI5MTlhMTAiLCJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2MDUtMDAwMTg2ZTQzM2ZiZTU1NmU5YjEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,132.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "107",
+							"id": "121",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 831 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=bd49a3ae-e0a5-430a-969e-2077f7639406&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fmentions-legales&ssi=f432f111-c34f-41a7-9143-04f5768258c3&ssk=support@shieldsquare.com&ssm=36712862529488748132008126734657&ssn=d86ee63f7199abe1527f297273221ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e1395136bfaa0a17dfa5bbf0299961f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNWIyZTY3OWEtMzQyMC00YzAzLTgyZDktOWQ1MzMwNDVlYjM0MS0xNzUyODk0NjI5ODM3MC03OTI1NjdmOGI1YTFkOTYwMTAiLCJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NjktMDAwODgxM2UxYWIxOGI5OTUxOTEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9].\nPredicted response size: 1,131.\nResponse Body Length: 1,498."
+							"otherinfo": "Location header URI length: 831 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=e4583423-68b6-49a0-a4f3-756deaf0ff1f&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fmentions-legales&ssi=c7be1b6b-c34f-4823-b770-b29f5bde6bf8&ssk=support@shieldsquare.com&ssm=22368697993284290138042351255805&ssn=d07fbb1db207617b2568fdc9266c745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4bc932fb906b9f0a0e824e3823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDA4MzcyMTNjLTI2MWYtNGQ0Yi04OWFjLWQ5ZjlkYzA0YzU2MjEtMTc1MzA2NzA0Mjc4NTAtNzRiNTlhNTg4ZDBhMTg4ODEwIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjE2LTAwMGE1NDZlYjgzY2NmMmY0YWMxMyJ9].\nPredicted response size: 1,131.\nResponse Body Length: 1,498."
 						},
 						{
-							"id": "3",
+							"id": "23",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 825 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=e79ce8bf-58f9-43f3-a4f2-1cec8c1cf468&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Frobots.txt&ssi=6f9ba87a-c34f-4f73-bd36-bc81a8df8435&ssk=support@shieldsquare.com&ssm=36712862529488748102008126734657&ssn=d86ee63f5b4dcf98649b72e909471ba9869229f88fbf-d292-4936-a2d2ec&sso=4a39d32d-f5371a99acb4e139513688ffa9dc43e0cfad117361f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNTEyNjQ5Y2QtMTExMC00YmJmLTkzN2UtYWQ1YzAzYTI2YzUxMS0xNzUyODk0NjI5MTY4MC03OGQwMDZlODk1ZmY5MjI4MTAiLCJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjgwLTAwMGMyM2Q5ODliMDg0NDJiNjAxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].\nPredicted response size: 1,125.\nResponse Body Length: 1,496."
+							"otherinfo": "Location header URI length: 825 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=d8c8f24e-d4d2-4a12-9f38-e423455b5a20&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Frobots.txt&ssi=a3235005-c34f-4b25-aee5-ba0c5951d929&ssk=support@shieldsquare.com&ssm=22368697993284290108042351255805&ssn=d07fbb1d6d8076d09a8177da82c9745983a67962580e-7abf-4683-8c23a4&sso=5512488b-74ab5fb45f80ae57ae4bdf07b88ed3fcdd54ad693823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMGE3OGI2MzIxLTM2ZTctNGMyOC05ZWUzLTk3NTk3NWVlZDRhNzEtMTc1MzA2NzA0MjE3MDAtOTUzMDk4ZGQ5MDNkMDI1YjEwIiwiX191em1mIjoiN2Y5MDAwNzk2MjU4MGUtN2FiZi00NjgzLTg4OGItNzRhYjVmYjQ1ZjgwMS0xNzUzMDY3MDQyMTcwMC0wMDA5OWMxMGU4NWFiNjA4NzM0MTAifQ==].\nPredicted response size: 1,125.\nResponse Body Length: 1,496."
 						}
 					],
 					"count": "12",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 815 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=37bfc687-b96b-4a47-9a8b-e01fc79a5306&ssb=00100291954&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=1232a689-c34f-474c-ba30-43530fe12988&ssk=support@shieldsquare.com&ssm=36712862529488748102008126734657&ssn=d86ee63f0f9f686f172d798fad2b1ba986925ec3067f-ac29-4c08-b2d2ec&sso=4a39dc63-91a702490b12e1395136d710cb54d4581248dad361f70670&ssp=42850758911752824173175288394686490&ssq=69618829462966395011994629533132355436457&ssr=MTcyLjE3NC4yMjMuMjQy&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwMjI4Nzg1MTktNTUwZC00ZDYyLTg1YmEtMTljMzJiYzQ3MmRkMS0xNzUyODk0NjI5MTY4MC01N2E1ZjY2MzYwMGI3NTU3MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwNWVjMzA2N2YtYWMyOS00YzA4LWJjNjMtOTFhNzAyNDkwYjEyMS0xNzUyODk0NjI5MTY4MC0wMDA2Y2I1NTg4OThlZTQ5YWZlMTAifQ==].</p><p>Predicted response size: 1,115.</p><p>Response Body Length: 1,496.</p>",
+					"otherinfo": "<p>Location header URI length: 815 [https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=304489f6-25b5-4742-9eeb-dadd779bf2b3&ssb=83930260092&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2F&ssi=c169fa6f-c34f-4539-af88-28095cf93b41&ssk=support@shieldsquare.com&ssm=22368697993284290108042351255805&ssn=d07fbb1d8e21848185937f39d5db745983a6ddc23c90-eb64-4702-9c23a4&sso=55124f79-8806040d3a1eae57ae4be937f35bb684758e18273823c808&ssp=18396885441753047834175309668913579&ssq=69805176704283799735967042248867829562997&ssr=MTcyLjE3NC4yMjEuMjI1&sst=&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjkwLTAwMGFhZDJmYTllYTc4MjMzMDAxMCIsInV6bXgiOiI3ZjkwMDAwZDZkYjc3Ni1mYmViLTQwZjQtYTk2OC0wNTQ0ZTU4ZGU3YTcxLTE3NTMwNjcwNDIxNjkwLWYxMjM5NmViZjFjM2ZiYjExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==].</p><p>Predicted response size: 1,115.</p><p>Response Body Length: 1,496.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10011",
@@ -513,8 +541,8 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "4",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "31",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzma",
 							"attack": "",
@@ -522,8 +550,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "33",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzmb",
 							"attack": "",
@@ -531,8 +559,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "36",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzmc",
 							"attack": "",
@@ -540,8 +568,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "14",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "38",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzmd",
 							"attack": "",
@@ -549,8 +577,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "10",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "34",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzme",
 							"attack": "",
@@ -558,8 +586,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "15",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "39",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzmf",
 							"attack": "",
@@ -567,8 +595,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "17",
-							"uri": "https://permisdeconduire.ants.gouv.fr/",
+							"id": "41",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
@@ -576,7 +604,70 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "9",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzma",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzma",
+							"otherinfo": ""
+						},
+						{
+							"id": "10",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzmb",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzmb",
+							"otherinfo": ""
+						},
+						{
+							"id": "12",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzmc",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzmc",
+							"otherinfo": ""
+						},
+						{
+							"id": "13",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzmd",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzmd",
+							"otherinfo": ""
+						},
+						{
+							"id": "11",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzme",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzme",
+							"otherinfo": ""
+						},
+						{
+							"id": "14",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "__uzmf",
+							"attack": "",
+							"evidence": "Set-Cookie: __uzmf",
+							"otherinfo": ""
+						},
+						{
+							"id": "15",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "uzmx",
+							"attack": "",
+							"evidence": "Set-Cookie: uzmx",
+							"otherinfo": ""
+						},
+						{
+							"id": "25",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzma",
@@ -585,7 +676,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "6",
+							"id": "26",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmb",
@@ -594,7 +685,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
+							"id": "29",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmc",
@@ -603,7 +694,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "12",
+							"id": "30",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmd",
@@ -612,7 +703,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
+							"id": "28",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzme",
@@ -621,7 +712,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "32",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "__uzmf",
@@ -630,7 +721,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "16",
+							"id": "35",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "uzmx",
@@ -639,13 +730,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "14",
+					"count": "21",
 					"solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "10"
+					"sourceid": "11"
 				},
 				{
 					"pluginid": "10017",
@@ -658,21 +749,21 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"id": "87",
+							"id": "93",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "https://genii-script.tolk.ai/lightchat.js",
 							"attack": "",
-							"evidence": "<script nonce=\"8a460f6b-0dfb-4153-a69f-66ea70307c3e\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
+							"evidence": "<script nonce=\"9e0f6e23-33a8-46a3-9310-823a72485c88\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "16",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "https://genii-script.tolk.ai/lightchat.js",
 							"attack": "",
-							"evidence": "<script nonce=\"69f1cf70-42f3-496e-b878-fcea97125084\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
+							"evidence": "<script nonce=\"551d9f27-a14c-4b93-bcb9-38d1a43ce135\" type=\"module\" project-id=5e05e2c5-2a6c-401f-b529-77b6aeeb5435 template=\"widget\" src=\"https://genii-script.tolk.ai/lightchat.js\" id=\"lightchat-bot\">\n              </script>",
 							"otherinfo": ""
 						}
 					],
@@ -695,7 +786,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "150",
+							"id": "158",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -704,7 +795,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "147",
+							"id": "154",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -713,7 +804,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "67",
+							"id": "82",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -722,7 +813,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "151",
+							"id": "159",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -731,7 +822,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "148",
+							"id": "155",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -740,7 +831,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
+							"id": "83",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -749,7 +840,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "152",
+							"id": "160",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -758,7 +849,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "149",
+							"id": "156",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -767,7 +858,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
+							"id": "84",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -795,7 +886,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "22",
+							"id": "70",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -804,7 +895,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "130",
+							"id": "150",
 							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
 							"method": "GET",
 							"param": "",
@@ -813,7 +904,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "49",
+							"id": "47",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
@@ -822,7 +913,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "139",
+							"id": "140",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
 							"method": "GET",
 							"param": "",
@@ -831,7 +922,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
+							"id": "109",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
@@ -840,7 +931,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
+							"id": "97",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
@@ -849,7 +940,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "114",
+							"id": "127",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
@@ -858,7 +949,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
+							"id": "141",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
@@ -867,7 +958,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "142",
+							"id": "153",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
 							"method": "GET",
 							"param": "",
@@ -876,7 +967,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
+							"id": "112",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -885,7 +976,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "112",
+							"id": "126",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -894,7 +985,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "23",
+							"id": "43",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -909,7 +1000,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10096",
@@ -922,13 +1013,13 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "71",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
 						},
 						{
 							"id": "50",
@@ -936,71 +1027,62 @@
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
 						},
 						{
-							"id": "55",
+							"id": "111",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
+							"method": "GET",
+							"param": "Set-Cookie",
+							"attack": "",
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
+						},
+						{
+							"id": "19",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067037",
+							"otherinfo": "1753067037, which evaluates to: 2025-07-21 03:03:57."
 						},
 						{
-							"id": "115",
-							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
+							"id": "98",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
 						},
 						{
-							"id": "97",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
-						},
-						{
-							"id": "99",
+							"id": "113",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
 						},
 						{
-							"id": "113",
-							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "Set-Cookie",
-							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
-						},
-						{
-							"id": "25",
+							"id": "44",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1752894629",
-							"otherinfo": "1752894629, which evaluates to: 2025-07-19 03:10:29."
+							"evidence": "1753067042",
+							"otherinfo": "1753067042, which evaluates to: 2025-07-21 03:04:02."
 						}
 					],
-					"count": "8",
+					"count": "7",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1752894629, which evaluates to: 2025-07-19 03:10:29.</p>",
+					"otherinfo": "<p>1753067042, which evaluates to: 2025-07-21 03:04:02.</p>",
 					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10094",
@@ -1013,16 +1095,16 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "30",
+							"id": "73",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwMjI4Nzg1MTktNTUwZC00ZDYyLTg1YmEtMTljMzJiYzQ3MmRkMS0xNzUyODk0NjI5MTY4MC01N2E1ZjY2MzYwMGI3NTU3MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwNWVjMzA2N2YtYWMyOS00YzA4LWJjNjMtOTFhNzAyNDkwYjEyMS0xNzUyODk0NjI5MTY4MC0wMDA2Y2I1NTg4OThlZTQ5YWZlMTAifQ==",
-							"otherinfo": "{\"uzmx\":\"7f900022878519-550d-4d62-85ba-19c32bc472dd1-17528946291680-57a5f663600b755710\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f90005ec3067f-ac29-4c08-bc63-91a702490b121-17528946291680-0006cb558898ee49afe10\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjkwLTAwMGFhZDJmYTllYTc4MjMzMDAxMCIsInV6bXgiOiI3ZjkwMDAwZDZkYjc3Ni1mYmViLTQwZjQtYTk2OC0wNTQ0ZTU4ZGU3YTcxLTE3NTMwNjcwNDIxNjkwLWYxMjM5NmViZjFjM2ZiYjExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
+							"otherinfo": "{\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-17530670421690-000aad2fa9ea782330010\",\"uzmx\":\"7f90000d6db776-fbeb-40f4-a968-0544e58de7a71-17530670421690-f12396ebf1c3fbb110\",\"rd\":\"ants-2.gouv.fr\"}"
 						},
 						{
-							"id": "131",
+							"id": "151",
 							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
 							"method": "GET",
 							"param": "",
@@ -1031,25 +1113,25 @@
 							"otherinfo": "\uFFFD[\uFFFD+^\uFFFDg\uFFFD\uFFFD\u01A5{\uFFFD\uFFFD\uFFFD&\uFFFD+,\uFFFD\uFFFD"
 						},
 						{
-							"id": "53",
+							"id": "52",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwODY1YWE0NmMtMGFkNC00OTUzLTliYWMtZmY2YmU0MWRjYmVjMS0xNzUyODk0NjI5MTY5MC04NGI0NmUzNmNmYzA0MWNiMTAiLCJfX3V6bWYiOiI3ZjkwMDA3YTQ1ZWZiOC02Y2VhLTQ2YzYtODU2YS1iZGY2OTMxN2JhZGYxLTE3NTI4OTQ2MjkxNjkwLTAwMDhiMWI3NzM3MzJkZTg5MDExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"uzmx\":\"7f9000865aa46c-0ad4-4953-9bac-ff6be41dcbec1-17528946291690-84b46e36cfc041cb10\",\"__uzmf\":\"7f90007a45efb8-6cea-46c6-856a-bdf69317badf1-17528946291690-0008b1b773732de890110\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjkwMDAxOTQ3MmFmNy05NjY1LTRkNmUtODU2Ni0yMjQ5ZWE2NjFiZDQxLTE3NTMwNjcwNDIxNjkwLTAwMGMzYWE4Mjg2Y2VkMTYyYTcxMCIsInV6bXgiOiI3ZjkwMDBjZjQ0OGYxYS1hNThkLTQyOGEtODI1NC1kZTBhODNmNmMxNmUxLTE3NTMwNjcwNDIxNjkwLWJlOTU3NjM0YmE5MDEzOWQxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
+							"otherinfo": "{\"__uzmf\":\"7f900019472af7-9665-4d6e-8566-2249ea661bd41-17530670421690-000c3aa8286ced162a710\",\"uzmx\":\"7f9000cf448f1a-a58d-428a-8254-de0a83f6c16e1-17530670421690-be957634ba90139d10\",\"rd\":\"ants-2.gouv.fr\"}"
 						},
 						{
-							"id": "141",
+							"id": "142",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwYTczNmE1ZjQtNjgzZi00YWU5LTkxMmEtY2JkMTNhYTVjNDFjMS0xNzUyODk0NjI5ODM3MC1mOGJiMzBlMDljZmJmOWZlMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NjY5LTAwMDg4MTNlMWFiMThiOTk1MTkxMyJ9",
-							"otherinfo": "{\"uzmx\":\"7f9000a736a5f4-683f-4ae9-912a-cbd13aa5c41c1-17528946298370-f8bb30e09cfbf9fe10\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168669-0008813e1ab18b9951913\"}"
+							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDhiMDhiODY5LTgzNDAtNGUwYS05MzUyLWQyMGI2ODRmNmUyNzEtMTc1MzA2NzA0Mjc4MjAtNjlhM2JlMDVlNmYwYzVkZTEwIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjEzLTAwMGQ3OTIyZTZkZmJhMWUzMjIxMyJ9",
+							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f90008b08b869-8340-4e0a-9352-d20b684f6e271-17530670427820-69a3be05e6f0c5de10\",\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169613-000d7922e6dfba1e32213\"}"
 						},
 						{
-							"id": "129",
+							"id": "114",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
@@ -1058,25 +1140,34 @@
 							"otherinfo": "\uFFFDW^\uFFFD\uFFFD\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFDh\uFFFD\uFFFD)\uFFFDz\uFFFD\u06B6*'j"
 						},
 						{
-							"id": "61",
+							"id": "94",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjkwMDA3Y2ZhNGE4MC1mN2RiLTRjMGUtYTkwYy1jODBkMTcxNWQzYjAxLTE3NTI4OTQ2MjkxNjgwLTAwMDRhMmMxYTBkNDk1OGQ5N2UxMCIsInV6bXgiOiI3ZjkwMDAzMTEyNmRmNy04NjgwLTRhNGQtOGQxNC0wYTgxOGNhZmY2NDYxLTE3NTI4OTQ2MjkxNjgwLWQzZGQ3ZGFiNjYzNDVmY2UxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"__uzmf\":\"7f90007cfa4a80-f7db-4c0e-a90c-c80d1715d3b01-17528946291680-0004a2c1a0d4958d97e10\",\"uzmx\":\"7f900031126df7-8680-4a4d-8d14-0a818caff6461-17528946291680-d3dd7dab66345fce10\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "MGZmNGFhMWQtYzM0Zi00YWZkLTg2YWItYmZlZTExNGU3ODk5JDE3Mi4xNzQuMjIxLjIyNQ==",
+							"otherinfo": "0ff4aa1d-c34f-4afd-86ab-bfee114e7899$172.174.221.225"
 						},
 						{
-							"id": "117",
+							"id": "100",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eyJ1em14IjoiN2Y5MDAwMDFiZTZhZjMtNGRkZi00ZmM2LWE2M2MtNTY0MDc5ODEwODQwMS0xNzUzMDY3MDQyMTY3MC01MTNjYTExZDIzMDIxODEzMTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwYWEyYWNkZTUtZDcxYy00OWRhLWJjYjYtN2Y2ZjYxOWM2ZDk2MS0xNzUzMDY3MDQyMTY3MC0wMDBhMjc0ZTM2MWQ4YTRiYWE4MTAifQ==",
+							"otherinfo": "{\"uzmx\":\"7f900001be6af3-4ddf-4fc6-a63c-5640798108401-17530670421670-513ca11d2302181310\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f9000aa2acde5-d71c-49da-bcb6-7f6f619c6d961-17530670421670-000a274e361d8a4baa810\"}"
+						},
+						{
+							"id": "128",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NjItMDAwMWZmZTA4Nzc0Yzg4MmI2YjEzIiwicmQiOiJhbnRzLTIuZ291di5mciIsInV6bXgiOiI3ZjkwMDA4ZTQ0OGZkNi1iOTgwLTRiNGUtYTM3ZC03MGMxZDgwYjQ3OTAxLTE3NTI4OTQ2Mjk4MzAwLTAzOTkxNGY2MWFiZjQ2YjQxMCJ9",
-							"otherinfo": "{\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168662-0001ffe08774c882b6b13\",\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f90008e448fd6-b980-4b4e-a37d-70c1d80b47901-17528946298300-039914f61abf46b410\"}"
+							"evidence": "eyJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2MDctMDAwYmQ5MjhjMDllNGU1YWJhYjEzIiwicmQiOiJhbnRzLTIuZ291di5mciIsInV6bXgiOiI3ZjkwMDA1NzAwYzVkMy1jYjNmLTQ1ZmYtOTI4Yi1lZjA2NWMxNDNmMmExLTE3NTMwNjcwNDI3NzYwLTFmODVkOGJhM2Y1ZjVhMzIxMCJ9",
+							"otherinfo": "{\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169607-000bd928c09e4e5abab13\",\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f90005700c5d3-cb3f-45ff-928b-ef065c143f2a1-17530670427760-1f85d8ba3f5f5a3210\"}"
 						},
 						{
-							"id": "100",
+							"id": "143",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
@@ -1085,49 +1176,40 @@
 							"otherinfo": "\uFFFDZ\u0782+-z\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uF76E+\uFFFD\\x000f\uFFFDz\uFFFD"
 						},
 						{
-							"id": "144",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NzkzLTAwMDIzZWFmNzM4ZTdiMjllNmYxNiIsInV6bXgiOiI3ZjkwMDBlOWM3ZTJmMy1kNWQ2LTRhMjgtYTI5Ni1kODMzZWQ5M2UxNTkxLTE3NTI4OTQ2Mjk5NjEwLTNhNGQxZGIxMjYyZWUyYjgxMCJ9",
-							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168793-00023eaf738e7b29e6f16\",\"uzmx\":\"7f9000e9c7e2f3-d5d6-4a28-a296-d833ed93e1591-17528946299610-3a4d1db1262ee2b810\"}"
-						},
-						{
-							"id": "101",
+							"id": "115",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNDMwZmU0MzUtMjk0My00Zjk5LWE4ZDUtY2E0NmU0ODY4Nzk4MS0xNzUyODk0NjI5ODMyMC05ZjkyMWJmODY2ODgxODQ2MTAiLCJyZCI6ImFudHMtMi5nb3V2LmZyIiwiX191em1mIjoiN2Y5MDAwMjlmODhmYmYtZDI5Mi00OTM2LWEzMmQtZjUzNzFhOTlhY2I0MS0xNzUyODk0NjI5MTY4NjY0LTAwMGExY2M4OGY3MmVjMDM4YTUxMyJ9",
-							"otherinfo": "{\"uzmx\":\"7f9000430fe435-2943-4f99-a8d5-ca46e48687981-17528946298320-9f921bf86688184610\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168664-000a1cc88f72ec038a513\"}"
+							"evidence": "eyJ1em14IjoiN2Y5MDAwMjk4ZWNlOTktNmY5MS00YTU2LThlMzEtNTdkNGNhMGI1MmU3MS0xNzUzMDY3MDQyNzc0MC0yNDE5OTlkZTBkYjI5MTlhMTAiLCJfX3V6bWYiOiI3ZjkwMDBkZGMyM2M5MC1lYjY0LTQ3MDItOWY3OS04ODA2MDQwZDNhMWUxLTE3NTMwNjcwNDIxNjk2MDUtMDAwMTg2ZTQzM2ZiZTU1NmU5YjEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9",
+							"otherinfo": "{\"uzmx\":\"7f9000298ece99-6f91-4a56-8e31-57d4ca0b52e71-17530670427740-241999de0db2919a10\",\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169605-000186e433fbe556e9b13\",\"rd\":\"ants-2.gouv.fr\"}"
 						},
 						{
-							"id": "116",
+							"id": "129",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNWIyZTY3OWEtMzQyMC00YzAzLTgyZDktOWQ1MzMwNDVlYjM0MS0xNzUyODk0NjI5ODM3MC03OTI1NjdmOGI1YTFkOTYwMTAiLCJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjg2NjktMDAwODgxM2UxYWIxOGI5OTUxOTEzIiwicmQiOiJhbnRzLTIuZ291di5mciJ9",
-							"otherinfo": "{\"uzmx\":\"7f90005b2e679a-3420-4c03-82d9-9d533045eb341-17528946298370-792567f8b5a1d96010\",\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168669-0008813e1ab18b9951913\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMDA4MzcyMTNjLTI2MWYtNGQ0Yi04OWFjLWQ5ZjlkYzA0YzU2MjEtMTc1MzA2NzA0Mjc4NTAtNzRiNTlhNTg4ZDBhMTg4ODEwIiwiX191em1mIjoiN2Y5MDAwZGRjMjNjOTAtZWI2NC00NzAyLTlmNzktODgwNjA0MGQzYTFlMS0xNzUzMDY3MDQyMTY5NjE2LTAwMGE1NDZlYjgzY2NmMmY0YWMxMyJ9",
+							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f90000837213c-261f-4d4b-89ac-d9f9dc04c5621-17530670427850-74b59a588d0a188810\",\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169616-000a546eb83ccf2f4ac13\"}"
 						},
 						{
-							"id": "31",
+							"id": "48",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJ1em14IjoiN2Y5MDAwNTEyNjQ5Y2QtMTExMC00YmJmLTkzN2UtYWQ1YzAzYTI2YzUxMS0xNzUyODk0NjI5MTY4MC03OGQwMDZlODk1ZmY5MjI4MTAiLCJfX3V6bWYiOiI3ZjkwMDAyOWY4OGZiZi1kMjkyLTQ5MzYtYTMyZC1mNTM3MWE5OWFjYjQxLTE3NTI4OTQ2MjkxNjgwLTAwMGMyM2Q5ODliMDg0NDJiNjAxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==",
-							"otherinfo": "{\"uzmx\":\"7f9000512649cd-1110-4bbf-937e-ad5c03a26c511-17528946291680-78d006e895ff922810\",\"__uzmf\":\"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-17528946291680-000c23d989b08442b6010\",\"rd\":\"ants-2.gouv.fr\"}"
+							"evidence": "eyJyZCI6ImFudHMtMi5nb3V2LmZyIiwidXpteCI6IjdmOTAwMGE3OGI2MzIxLTM2ZTctNGMyOC05ZWUzLTk3NTk3NWVlZDRhNzEtMTc1MzA2NzA0MjE3MDAtOTUzMDk4ZGQ5MDNkMDI1YjEwIiwiX191em1mIjoiN2Y5MDAwNzk2MjU4MGUtN2FiZi00NjgzLTg4OGItNzRhYjVmYjQ1ZjgwMS0xNzUzMDY3MDQyMTcwMC0wMDA5OWMxMGU4NWFiNjA4NzM0MTAifQ==",
+							"otherinfo": "{\"rd\":\"ants-2.gouv.fr\",\"uzmx\":\"7f9000a78b6321-36e7-4c28-9ee3-975975eed4a71-17530670421700-953098dd903d025b10\",\"__uzmf\":\"7f90007962580e-7abf-4683-888b-74ab5fb45f801-17530670421700-00099c10e85ab60873410\"}"
 						}
 					],
 					"count": "12",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>{\"uzmx\":\"7f900022878519-550d-4d62-85ba-19c32bc472dd1-17528946291680-57a5f663600b755710\",\"rd\":\"ants-2.gouv.fr\",\"__uzmf\":\"7f90005ec3067f-ac29-4c08-bc63-91a702490b121-17528946291680-0006cb558898ee49afe10\"}</p>",
+					"otherinfo": "<p>{\"__uzmf\":\"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-17530670421690-000aad2fa9ea782330010\",\"uzmx\":\"7f90000d6db776-fbeb-40f4-a968-0544e58de7a71-17530670421690-f12396ebf1c3fbb110\",\"rd\":\"ants-2.gouv.fr\"}</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "90011",
@@ -1140,7 +1222,7 @@
 					"desc": "<p>This check identifies responses where the HTTP Content-Type header declares a charset different from the charset defined by the body of the HTML or XML. When there's a charset mismatch between the HTTP header and content body Web browsers can be forced into an undesirable content-sniffing mode to determine the content's correct character set.</p><p></p><p>An attacker could manipulate content on the page to be interpreted in an encoding of their choice. For example, if an attacker can control content at the beginning of the page, they could inject script using UTF-7 encoded text and manipulate some browsers into interpreting that text.</p>",
 					"instances":[ 
 						{
-							"id": "65",
+							"id": "80",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1168,7 +1250,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "145",
+							"id": "157",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1177,7 +1259,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "146",
+							"id": "17",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
@@ -1205,111 +1287,111 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "20",
+							"id": "69",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"5ec3067f-ac29-4c08-bc63-91a702490b12\";var __uzdbm_2 = \"MTIzMmE2ODktYzM0Zi00NzRjLWJhMzAtNDM1MzBmZTEyOTg4JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f90005ec3067f-ac29-4c08-bc63-91a702490b121-17528946291680-0006cb558898ee49afe10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900022878519-550d-4d62-85ba-19c32bc472dd1-17528946291680-57a5f663600b755710\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"YzE2OWZhNmYtYzM0Zi00NTM5LWFmODgtMjgwOTVjZjkzYjQxJDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-17530670421690-000aad2fa9ea782330010\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90000d6db776-fbeb-40f4-a968-0544e58de7a71-17530670421690-f12396ebf1c3fbb110\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "128",
+							"id": "149",
 							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"NzEzNjYwYTItYzM0Zi00MDc3LTliODEtM2MyMmZkMGFlMmEyJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168668-0002010dff227ef1fc513\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000a1e85f36-4840-47d9-a6f9-0272abfdfeb11-17528946298360-dabc864a38ebdd1810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"NDcxYmFiNjgtYzM0Zi00ZTcyLTk1MmMtMzgxYTBiMDk1YWM5JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169613-000d7922e6dfba1e32213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000a8624ef1-d38e-466d-a491-bccb1d9224501-17530670427820-1c3e2ea6dcd6a5e910\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "47",
+							"id": "46",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"7a45efb8-6cea-46c6-856a-bdf69317badf\";var __uzdbm_2 = \"NDU3ZmYxMWYtYzM0Zi00YTU3LWI3YWUtMzFkYWUxMjI0MzFmJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f90007a45efb8-6cea-46c6-856a-bdf69317badf1-17528946291690-0008b1b773732de890110\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000865aa46c-0ad4-4953-9bac-ff6be41dcbec1-17528946291690-84b46e36cfc041cb10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"19472af7-9665-4d6e-8566-2249ea661bd4\";var __uzdbm_2 = \"MzhmNGRhNzQtYzM0Zi00YmQ3LTk4OTgtMTgxMjQ3YjI0NzM0JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f900019472af7-9665-4d6e-8566-2249ea661bd41-17530670421690-000c3aa8286ced162a710\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000cf448f1a-a58d-428a-8254-de0a83f6c16e1-17530670421690-be957634ba90139d10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "137",
+							"id": "139",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"NTI2YjZlMmItYzM0Zi00M2U4LWFhZTQtZjc5Yjg2YmJmZGZjJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168669-0008813e1ab18b9951913\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000a736a5f4-683f-4ae9-912a-cbd13aa5c41c1-17528946298370-f8bb30e09cfbf9fe10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"Y2JlNzRiZGUtYzM0Zi00ZTFjLWFlN2MtMmJlZmZhZGExMjhmJDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169613-000d7922e6dfba1e32213\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90008b08b869-8340-4e0a-9352-d20b684f6e271-17530670427820-69a3be05e6f0c5de10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "125",
+							"id": "107",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"OTg4ODNkMDQtYzM0Zi00ZGZiLWE5NGUtN2UxOGU2OTRlYWY4JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168657-00045c56ad8062a0d0013\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90008a20d8c0-04be-4f56-865a-3ee2755400b61-17528946298250-87ac4c4b14ca3e0b10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"N2JmYTAzN2EtYzM0Zi00MDRjLTgyMWEtMzQzYWRlMzFmYzQ2JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169608-000867ad7a9f8ea99f013\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90002bdca225-a8ef-42c0-b085-f8c73296b9301-17530670427770-fe8d4aa4034a037210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "52",
+							"id": "18",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"7cfa4a80-f7db-4c0e-a90c-c80d1715d3b0\";var __uzdbm_2 = \"M2FjZmZiMDItYzM0Zi00MWI3LWI3ZWUtNDhjNjdlYjU0NWY5JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f90007cfa4a80-f7db-4c0e-a90c-c80d1715d3b01-17528946291680-0004a2c1a0d4958d97e10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900031126df7-8680-4a4d-8d14-0a818caff6461-17528946291680-d3dd7dab66345fce10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "68",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>var __uzdbm_1 = \"aa2acde5-d71c-49da-bcb6-7f6f619c6d96\";var __uzdbm_2 = \"OGNkMjljYjQtYzM0Zi00MTkyLWExZDEtNWM4NjQyNTMyZjgwJDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000aa2acde5-d71c-49da-bcb6-7f6f619c6d961-17530670421670-000a274e361d8a4baa810\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900001be6af3-4ddf-4fc6-a63c-5640798108401-17530670421670-513ca11d2302181310\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "111",
+							"id": "125",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"N2M0NmFjNjYtYzM0Zi00MWIyLWExZmItZTdkMjM0OWU0OWRmJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168662-0001ffe08774c882b6b13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90008e448fd6-b980-4b4e-a37d-70c1d80b47901-17528946298300-039914f61abf46b410\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"MTg2NmU3MWMtYzM0Zi00NzVjLTk1MTQtN2UxYzVkNDhmZTM0JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169607-000bd928c09e4e5abab13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90005700c5d3-cb3f-45ff-928b-ef065c143f2a1-17530670427760-1f85d8ba3f5f5a3210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "94",
+							"id": "138",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"YWE4NjcyZTgtYzM0Zi00ZmJiLWE3NWMtYzg1MmM5NDhjNjA0JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168654-0006c8318d7077f481f13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000cb7b19a6-7729-4c01-9609-d74c95b8c6571-17528946298220-13cd1a82345aaba110\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "140",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-the-news",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"Y2I2MGJkNWMtYzM0Zi00YjVmLTkyNmUtNmFkM2Y5OTAzZmI5JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168793-00023eaf738e7b29e6f16\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000e9c7e2f3-d5d6-4a28-a296-d833ed93e1591-17528946299610-3a4d1db1262ee2b810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
-							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
-						},
-						{
-							"id": "95",
-							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"ZDI3OTJhZGEtYzM0Zi00NjkzLThhNDItODk4MzQ1MGJlZjdjJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168664-000a1cc88f72ec038a513\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000430fe435-2943-4f99-a8d5-ca46e48687981-17528946298320-9f921bf86688184610\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"ODZlZTJhMWYtYzM0Zi00YTEwLWIxODctMDE1YTZjMjlmYTcyJDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169606-000d3aa66715d0a6c5313\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f900092945485-4611-404c-8baa-f2d183b14b9a1-17530670427750-124f576d4ce5c96210\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
 							"id": "110",
+							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"MWRiODQwMGMtYzM0Zi00MTY1LWEyMmMtMjIxZDljOGQyY2FlJDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169605-000186e433fbe556e9b13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000298ece99-6f91-4a56-8e31-57d4ca0b52e71-17530670427740-241999de0db2919a10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"id": "124",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"ZjQzMmYxMTEtYzM0Zi00MWE3LTkxNDMtMDRmNTc2ODI1OGMzJDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-1752894629168669-0008813e1ab18b9951913\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90005b2e679a-3420-4c03-82d9-9d533045eb341-17528946298370-792567f8b5a1d96010\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"ddc23c90-eb64-4702-9f79-8806040d3a1e\";var __uzdbm_2 = \"YzdiZTFiNmItYzM0Zi00ODIzLWI3NzAtYjI5ZjViZGU2YmY4JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f9000ddc23c90-eb64-4702-9f79-8806040d3a1e1-1753067042169616-000a546eb83ccf2f4ac13\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90000837213c-261f-4d4b-89ac-d9f9dc04c5621-17530670427850-74b59a588d0a188810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						},
 						{
-							"id": "21",
+							"id": "40",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<script>var __uzdbm_1 = \"29f88fbf-d292-4936-a32d-f5371a99acb4\";var __uzdbm_2 = \"NmY5YmE4N2EtYzM0Zi00ZjczLWJkMzYtYmM4MWE4ZGY4NDM1JDE3Mi4xNzQuMjIzLjI0Mg==\";var __uzdbm_3 = \"7f900029f88fbf-d292-4936-a32d-f5371a99acb41-17528946291680-000c23d989b08442b6010\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000512649cd-1110-4bbf-937e-ad5c03a26c511-17528946291680-78d006e895ff922810\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
+							"evidence": "<script>var __uzdbm_1 = \"7962580e-7abf-4683-888b-74ab5fb45f80\";var __uzdbm_2 = \"YTMyMzUwMDUtYzM0Zi00YjI1LWFlZTUtYmEwYzU5NTFkOTI5JDE3Mi4xNzQuMjIxLjIyNQ==\";var __uzdbm_3 = \"7f90007962580e-7abf-4683-888b-74ab5fb45f801-17530670421700-00099c10e85ab60873410\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000a78b6321-36e7-4c28-9ee3-975975eed4a71-17530670421700-953098dd903d025b10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script>",
 							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
 						}
 					],
@@ -1319,7 +1401,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10049",
@@ -1332,7 +1414,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "40",
+							"id": "78",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1341,16 +1423,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "62",
+							"id": "61",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "",
@@ -1359,7 +1432,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "143",
+							"id": "144",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
 							"method": "GET",
 							"param": "",
@@ -1368,7 +1441,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "132",
+							"id": "117",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "",
@@ -1377,7 +1450,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
+							"id": "101",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "",
@@ -1386,7 +1459,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "119",
+							"id": "130",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "",
@@ -1395,7 +1468,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "103",
+							"id": "145",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "",
@@ -1404,7 +1477,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "102",
+							"id": "116",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -1413,7 +1486,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "118",
+							"id": "131",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -1422,7 +1495,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "41",
+							"id": "60",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1431,13 +1504,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "10",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10015",
@@ -1450,7 +1523,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "71",
+							"id": "85",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1459,7 +1532,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "1",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "cache-control",
@@ -1468,7 +1541,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
+							"id": "79",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "cache-control",
@@ -1496,7 +1569,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "35",
+							"id": "76",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1514,7 +1587,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "37",
+							"id": "54",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1529,7 +1602,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "90005",
@@ -1542,7 +1615,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "34",
+							"id": "75",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1560,7 +1633,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "36",
+							"id": "53",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1575,7 +1648,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "90005",
@@ -1588,7 +1661,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "33",
+							"id": "74",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1606,7 +1679,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "32",
+							"id": "49",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1621,7 +1694,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "90005",
@@ -1634,7 +1707,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "39",
+							"id": "77",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1652,7 +1725,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "38",
+							"id": "55",
 							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1667,7 +1740,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "10"
+					"sourceid": "13"
 				},
 				{
 					"pluginid": "10112",
@@ -1680,7 +1753,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "1",
+							"id": "27",
 							"uri": "https://permisdeconduire.ants.gouv.fr/",
 							"method": "GET",
 							"param": "__uzma",
@@ -1689,16 +1762,7 @@
 							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "121",
-							"uri": "https://permisdeconduire.ants.gouv.fr/aide-et-contact/visite-medicale-et-commission",
-							"method": "GET",
-							"param": "uzmx",
-							"attack": "",
-							"evidence": "uzmx",
-							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "42",
+							"id": "22",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne",
 							"method": "GET",
 							"param": "__uzma",
@@ -1707,7 +1771,16 @@
 							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "120",
+							"id": "132",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
+							"method": "GET",
+							"param": "uzmx",
+							"attack": "",
+							"evidence": "uzmx",
+							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
+						},
+						{
+							"id": "102",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international",
 							"method": "GET",
 							"param": "uzmx",
@@ -1716,7 +1789,7 @@
 							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "24",
+							"id": "0",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
 							"method": "GET",
 							"param": "__uzma",
@@ -1725,7 +1798,7 @@
 							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "104",
+							"id": "118",
 							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel",
 							"method": "GET",
 							"param": "uzmx",
@@ -1734,7 +1807,7 @@
 							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "89",
+							"id": "133",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/all-online-services/register-for-the-driving-test",
 							"method": "GET",
 							"param": "uzmx",
@@ -1743,7 +1816,7 @@
 							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "88",
+							"id": "103",
 							"uri": "https://permisdeconduire.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "uzmx",
@@ -1752,22 +1825,31 @@
 							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "105",
+							"id": "119",
 							"uri": "https://permisdeconduire.ants.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "uzmx",
 							"attack": "",
 							"evidence": "uzmx",
 							"otherinfo": "cookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmd"
+						},
+						{
+							"id": "21",
+							"uri": "https://permisdeconduire.ants.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "__uzma",
+							"attack": "",
+							"evidence": "__uzma",
+							"otherinfo": "cookie:__uzma\ncookie:uzmx\ncookie:__uzmf\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						}
 					],
-					"count": "9",
+					"count": "10",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
 					"otherinfo": "<p>cookie:__uzma</p><p>cookie:uzmx</p><p>cookie:__uzmf</p><p>cookie:__uzmc</p><p>cookie:__uzmb</p><p>cookie:__uzmd</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "10"
+					"sourceid": "4"
 				},
 				{
 					"pluginid": "10049",
@@ -1780,7 +1862,16 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "66",
+							"id": "95",
+							"uri": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"id": "81",
 							"uri": "https://permisdeconduire.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1789,13 +1880,13 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						}
 					],
-					"count": "1",
+					"count": "2",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "14"
+					"sourceid": "1"
 				}
 			]
 		}
