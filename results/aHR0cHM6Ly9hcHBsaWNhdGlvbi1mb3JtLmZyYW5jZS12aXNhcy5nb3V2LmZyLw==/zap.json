@@ -1,7 +1,7 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 31 Aug 2025 01:02:25",
+	"@generated": "Mon, 1 Sept 2025 01:07:55",
 	"site":[ 
 		{
 			"@name": "https://application-form.france-visas.gouv.fr",
@@ -10,259 +10,47 @@
 			"@ssl": "true",
 			"alerts": [ 
 				{
-					"pluginid": "10202",
-					"alertRef": "10202",
-					"alert": "Absence of Anti-CSRF Tokens",
-					"name": "Absence of Anti-CSRF Tokens",
+					"pluginid": "10038",
+					"alertRef": "10038-1",
+					"alert": "Content Security Policy (CSP) Header Not Set",
+					"name": "Content Security Policy (CSP) Header Not Set",
 					"riskcode": "2",
-					"confidence": "1",
-					"riskdesc": "Medium (Low)",
-					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "33",
+							"id": "0",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form id=\"kc-form-login\" class=\"form\" onsubmit=\"return true;\" action=\"https://connect.france-visas.gouv.fr/realms/usager/login-actions/authenticate?session_code=XPc6FteSM2_3uewy_KJfjOLDCVfLpb1sj7RO2i_dCVA&amp;execution=956d55c0-c1b6-461a-9715-f558e48db6f5&amp;client_id=fv-fo-keycloak-web&amp;tab_id=M1XcTueqLEw\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"cb_show_password\" \"password\" \"username\" ]."
-						}
-					],
-					"count": "1",
-					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"cb_show_password\" \"password\" \"username\" ].</p>",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
-					"cweid": "352",
-					"wascid": "9",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10055",
-					"alertRef": "10055-13",
-					"alert": "CSP: Failure to Define Directive with No Fallback",
-					"name": "CSP: Failure to Define Directive with No Fallback",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
-					"instances":[ 
-						{
-							"id": "17",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src."
+							"evidence": "",
+							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "1",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
-							"param": "content-security-policy",
+							"param": "",
 							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src."
+							"evidence": "",
+							"otherinfo": ""
 						},
 						{
-							"id": "49",
+							"id": "26",
 							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
-							"param": "content-security-policy",
+							"param": "",
 							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src."
+							"evidence": "",
+							"otherinfo": ""
 						}
 					],
 					"count": "3",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src.</p>",
-					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10055",
-					"alertRef": "10055-4",
-					"alert": "CSP: Wildcard Directive",
-					"name": "CSP: Wildcard Directive",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
-					"instances":[ 
-						{
-							"id": "18",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, manifest-src"
-						},
-						{
-							"id": "6",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, manifest-src"
-						},
-						{
-							"id": "50",
-							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, manifest-src"
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:</p><p>style-src, img-src, connect-src, frame-src, font-src, media-src, manifest-src</p>",
-					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10055",
-					"alertRef": "10055-10",
-					"alert": "CSP: script-src unsafe-eval",
-					"name": "CSP: script-src unsafe-eval",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
-					"instances":[ 
-						{
-							"id": "22",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-eval."
-						},
-						{
-							"id": "13",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-eval."
-						},
-						{
-							"id": "58",
-							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-eval."
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>script-src includes unsafe-eval.</p>",
-					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10055",
-					"alertRef": "10055-5",
-					"alert": "CSP: script-src unsafe-inline",
-					"name": "CSP: script-src unsafe-inline",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
-					"instances":[ 
-						{
-							"id": "19",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-inline."
-						},
-						{
-							"id": "9",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-inline."
-						},
-						{
-							"id": "51",
-							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "script-src includes unsafe-inline."
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>script-src includes unsafe-inline.</p>",
-					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10055",
-					"alertRef": "10055-6",
-					"alert": "CSP: style-src unsafe-inline",
-					"name": "CSP: style-src unsafe-inline",
-					"riskcode": "2",
-					"confidence": "3",
-					"riskdesc": "Medium (High)",
-					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
-					"instances":[ 
-						{
-							"id": "21",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "style-src includes unsafe-inline."
-						},
-						{
-							"id": "12",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "style-src includes unsafe-inline."
-						},
-						{
-							"id": "56",
-							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "content-security-policy",
-							"attack": "",
-							"evidence": "script-src 'unsafe-inline' 'unsafe-eval' *.france-visas.interieur.rie.gouv.fr *.france-visas.gouv.fr france-visas.gouv.fr static.cloudflareinsights.com;object-src 'none';",
-							"otherinfo": "style-src includes unsafe-inline."
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
-					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
 					"sourceid": "1"
@@ -278,35 +66,8 @@
 					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
 					"instances":[ 
 						{
-							"id": "24",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "ROUTEKCKUSAID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTEKCKUSAID",
-							"otherinfo": ""
-						},
-						{
-							"id": "1",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "Set-Cookie: YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": ""
-						},
-						{
-							"id": "0",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "ROUTETOMIHMDDEID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTETOMIHMDDEID",
-							"otherinfo": ""
-						},
-						{
 							"id": "2",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
+							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
@@ -314,25 +75,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "Set-Cookie: YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": ""
-						},
-						{
-							"id": "14",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "ROUTETOMIHMDDEID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTETOMIHMDDEID",
-							"otherinfo": ""
-						},
-						{
-							"id": "16",
+							"id": "3",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -341,7 +84,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
+							"id": "30",
 							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -350,7 +93,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "8",
+					"count": "3",
 					"solution": "<p>Ensure that the HttpOnly flag is set for all cookies.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
@@ -369,7 +112,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "8",
+							"id": "6",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -378,25 +121,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "Set-Cookie: YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": ""
-						},
-						{
-							"id": "60",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "Set-Cookie: YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": ""
-						},
-						{
-							"id": "25",
+							"id": "7",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -405,7 +130,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "65",
+							"id": "33",
 							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -414,39 +139,11 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "5",
+					"count": "3",
 					"solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
-					"wascid": "13",
-					"sourceid": "6"
-				},
-				{
-					"pluginid": "10054",
-					"alertRef": "10054-2",
-					"alert": "Cookie with SameSite Attribute None",
-					"name": "Cookie with SameSite Attribute None",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>A cookie has been set with its SameSite attribute set to \"none\", which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
-					"instances":[ 
-						{
-							"id": "27",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "AUTH_SESSION_ID",
-							"attack": "",
-							"evidence": "Set-Cookie: AUTH_SESSION_ID",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
-					"cweid": "1275",
 					"wascid": "13",
 					"sourceid": "1"
 				},
@@ -461,34 +158,7 @@
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
 						{
-							"id": "28",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "AUTH_SESSION_ID_LEGACY",
-							"attack": "",
-							"evidence": "Set-Cookie: AUTH_SESSION_ID_LEGACY",
-							"otherinfo": ""
-						},
-						{
-							"id": "29",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "KC_RESTART",
-							"attack": "",
-							"evidence": "Set-Cookie: KC_RESTART",
-							"otherinfo": ""
-						},
-						{
-							"id": "30",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "ROUTEKCKUSAID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTEKCKUSAID",
-							"otherinfo": ""
-						},
-						{
-							"id": "3",
+							"id": "4",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -498,25 +168,7 @@
 						},
 						{
 							"id": "5",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "JSESSIONID",
-							"attack": "",
-							"evidence": "Set-Cookie: JSESSIONID",
-							"otherinfo": ""
-						},
-						{
-							"id": "7",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "ROUTETOMIHMDDEID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTETOMIHMDDEID",
-							"otherinfo": ""
-						},
-						{
-							"id": "10",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
+							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
@@ -524,26 +176,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "Set-Cookie: YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": ""
-						},
-						{
-							"id": "20",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "ROUTETOMIHMDDEID",
-							"attack": "",
-							"evidence": "Set-Cookie: ROUTETOMIHMDDEID",
-							"otherinfo": ""
-						},
-						{
-							"id": "23",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
+							"id": "32",
+							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
 							"attack": "",
@@ -551,58 +185,12 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "10",
+					"count": "3",
 					"solution": "<p>Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "90004",
-					"alertRef": "90004-1",
-					"alert": "Insufficient Site Isolation Against Spectre Vulnerability",
-					"name": "Insufficient Site Isolation Against Spectre Vulnerability",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
-					"instances":[ 
-						{
-							"id": "73",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "74",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "75",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cross-Origin_Resource_Policy</p>",
-					"cweid": "693",
-					"wascid": "14",
 					"sourceid": "1"
 				},
 				{
@@ -616,7 +204,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "72",
+							"id": "12",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -625,7 +213,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "52",
+							"id": "20",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -634,7 +222,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
+							"id": "41",
 							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -652,6 +240,52 @@
 					"sourceid": "1"
 				},
 				{
+					"pluginid": "10035",
+					"alertRef": "10035-1",
+					"alert": "Strict-Transport-Security Header Not Set",
+					"name": "Strict-Transport-Security Header Not Set",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "Low (High)",
+					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
+					"instances":[ 
+						{
+							"id": "8",
+							"uri": "https://application-form.france-visas.gouv.fr/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "9",
+							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "35",
+							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
+					"cweid": "319",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
 					"pluginid": "10094",
 					"alertRef": "10094-3",
 					"alert": "Base64 Disclosure",
@@ -662,58 +296,39 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "76",
+							"id": "13",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0",
-							"otherinfo": "{\"alg\":\"dir\",\"enc\":\"A128CBC-HS256\"}"
+							"evidence": "PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjA4MzMgMTEuMDgzM0gyLjkxNjY3VjIuOTE2NjdIN1YxLjc1SDIuOTE2NjdDMi4yNjkxNyAxLjc1IDEuNzUgMi4yNzUgMS43NSAyLjkxNjY3VjExLjA4MzNDMS43NSAxMS43MjUgMi4yNjkxNyAxMi4yNSAyLjkxNjY3IDEyLjI1SDExLjA4MzNDMTEuNzI1IDEyLjI1IDEyLjI1IDExLjcyNSAxMi4yNSAxMS4wODMzVjdIMTEuMDgzM1YxMS4wODMzWk04LjE2NjY3IDEuNzVWMi45MTY2N0gxMC4yNjA4TDQuNTI2NjcgOC42NTA4M0w1LjM0OTE3IDkuNDczMzNMMTEuMDgzMyAzLjczOTE3VjUuODMzMzNIMTIuMjVWMS43NUg4LjE2NjY3WiIgZmlsbD0iIzI4NUFFNiIvPgo8L3N2Zz4K",
+							"otherinfo": "<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.0833 11.0833H2.91667V2.91667H7V1.75H2.91667C2.26917 1.75 1.75 2.275 1.75 2.91667V11.0833C1.75 11.725 2.26917 12.25 2.91667 12.25H11.0833C11.725 12.25 12.25 11.725 12.25 11.0833V7H11.0833V11.0833ZM8.16667 1.75V2.91667H10.2608L4.52667 8.65083L5.34917 9.47333L11.0833 3.73917V5.83333H12.25V1.75H8.16667Z\" fill=\"#285AE6\"/>\n</svg>\n"
 						},
 						{
-							"id": "66",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
+							"id": "21",
+							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "V_vqO1OWsGHKxqOLXptMCO_n3ebHcZCFm81nSlvE5qc",
-							"otherinfo": "W\uFFFD\uFFFD;S\uFFFD\uFFFDa\uFFFD\u01A3\uFFFD^\uFFFDL\\x0008\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDq\uFFFD\uFFFD\uFFFD\uFFFDgJ[\uFFFD\uFFFD"
+							"evidence": "PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjA4MzMgMTEuMDgzM0gyLjkxNjY3VjIuOTE2NjdIN1YxLjc1SDIuOTE2NjdDMi4yNjkxNyAxLjc1IDEuNzUgMi4yNzUgMS43NSAyLjkxNjY3VjExLjA4MzNDMS43NSAxMS43MjUgMi4yNjkxNyAxMi4yNSAyLjkxNjY3IDEyLjI1SDExLjA4MzNDMTEuNzI1IDEyLjI1IDEyLjI1IDExLjcyNSAxMi4yNSAxMS4wODMzVjdIMTEuMDgzM1YxMS4wODMzWk04LjE2NjY3IDEuNzVWMi45MTY2N0gxMC4yNjA4TDQuNTI2NjcgOC42NTA4M0w1LjM0OTE3IDkuNDczMzNMMTEuMDgzMyAzLjczOTE3VjUuODMzMzNIMTIuMjVWMS43NUg4LjE2NjY3WiIgZmlsbD0iIzI4NUFFNiIvPgo8L3N2Zz4K",
+							"otherinfo": "<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.0833 11.0833H2.91667V2.91667H7V1.75H2.91667C2.26917 1.75 1.75 2.275 1.75 2.91667V11.0833C1.75 11.725 2.26917 12.25 2.91667 12.25H11.0833C11.725 12.25 12.25 11.725 12.25 11.0833V7H11.0833V11.0833ZM8.16667 1.75V2.91667H10.2608L4.52667 8.65083L5.34917 9.47333L11.0833 3.73917V5.83333H12.25V1.75H8.16667Z\" fill=\"#285AE6\"/>\n</svg>\n"
+						},
+						{
+							"id": "47",
+							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjA4MzMgMTEuMDgzM0gyLjkxNjY3VjIuOTE2NjdIN1YxLjc1SDIuOTE2NjdDMi4yNjkxNyAxLjc1IDEuNzUgMi4yNzUgMS43NSAyLjkxNjY3VjExLjA4MzNDMS43NSAxMS43MjUgMi4yNjkxNyAxMi4yNSAyLjkxNjY3IDEyLjI1SDExLjA4MzNDMTEuNzI1IDEyLjI1IDEyLjI1IDExLjcyNSAxMi4yNSAxMS4wODMzVjdIMTEuMDgzM1YxMS4wODMzWk04LjE2NjY3IDEuNzVWMi45MTY2N0gxMC4yNjA4TDQuNTI2NjcgOC42NTA4M0w1LjM0OTE3IDkuNDczMzNMMTEuMDgzMyAzLjczOTE3VjUuODMzMzNIMTIuMjVWMS43NUg4LjE2NjY3WiIgZmlsbD0iIzI4NUFFNiIvPgo8L3N2Zz4K",
+							"otherinfo": "<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.0833 11.0833H2.91667V2.91667H7V1.75H2.91667C2.26917 1.75 1.75 2.275 1.75 2.91667V11.0833C1.75 11.725 2.26917 12.25 2.91667 12.25H11.0833C11.725 12.25 12.25 11.725 12.25 11.0833V7H11.0833V11.0833ZM8.16667 1.75V2.91667H10.2608L4.52667 8.65083L5.34917 9.47333L11.0833 3.73917V5.83333H12.25V1.75H8.16667Z\" fill=\"#285AE6\"/>\n</svg>\n"
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>{\"alg\":\"dir\",\"enc\":\"A128CBC-HS256\"}</p>",
+					"otherinfo": "<p><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"></p><p><path d=\"M11.0833 11.0833H2.91667V2.91667H7V1.75H2.91667C2.26917 1.75 1.75 2.275 1.75 2.91667V11.0833C1.75 11.725 2.26917 12.25 2.91667 12.25H11.0833C11.725 12.25 12.25 11.725 12.25 11.0833V7H11.0833V11.0833ZM8.16667 1.75V2.91667H10.2608L4.52667 8.65083L5.34917 9.47333L11.0833 3.73917V5.83333H12.25V1.75H8.16667Z\" fill=\"#285AE6\"/></p><p></svg></p><p></p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10109",
-					"alertRef": "10109",
-					"alert": "Modern Web Application",
-					"name": "Modern Web Application",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
-					"instances":[ 
-						{
-							"id": "34",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"fr-footer__bottom-link custom-no-link\">\u00A9 2023 Portail France-Visas</a>",
-							"otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
-						}
-					],
-					"count": "1",
-					"solution": "<p>This is an informational alert and so no changes are required.</p>",
-					"otherinfo": "<p>Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application.</p>",
-					"reference": "",
-					"cweid": "-1",
-					"wascid": "-1",
 					"sourceid": "1"
 				},
 				{
@@ -727,75 +342,38 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "38",
+							"id": "11",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "302",
+							"evidence": "503",
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
-							"uri": "https://application-form.france-visas.gouv.fr/",
+							"id": "19",
+							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "no-store",
+							"evidence": "503",
 							"otherinfo": ""
 						},
 						{
-							"id": "37",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
+							"id": "40",
+							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "no-store",
-							"otherinfo": ""
-						},
-						{
-							"id": "64",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-store",
+							"evidence": "503",
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
-					"wascid": "13",
-					"sourceid": "6"
-				},
-				{
-					"pluginid": "10015",
-					"alertRef": "10015",
-					"alert": "Re-examine Cache-control Directives",
-					"name": "Re-examine Cache-control Directives",
-					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
-					"instances":[ 
-						{
-							"id": "15",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "no-store, must-revalidate, max-age=0",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
-					"otherinfo": "",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
-					"cweid": "525",
 					"wascid": "13",
 					"sourceid": "1"
 				},
@@ -810,7 +388,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "44",
+							"id": "16",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -819,16 +397,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "43",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "Sec-Fetch-Dest",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "59",
+							"id": "24",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -837,13 +406,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -856,7 +425,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "41",
+							"id": "15",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -865,16 +434,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "42",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "Sec-Fetch-Mode",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "57",
+							"id": "23",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -883,13 +443,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -902,7 +462,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "39",
+							"id": "14",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -911,16 +471,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "40",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "Sec-Fetch-Site",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "55",
+							"id": "22",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -929,13 +480,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -948,7 +499,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "45",
+							"id": "17",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -957,16 +508,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "46",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "Sec-Fetch-User",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "61",
+							"id": "25",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -975,13 +517,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10112",
@@ -994,16 +536,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "70",
-							"uri": "https://application-form.france-visas.gouv.fr/",
-							"method": "GET",
-							"param": "AUTH_SESSION_ID_LEGACY",
-							"attack": "",
-							"evidence": "AUTH_SESSION_ID_LEGACY",
-							"otherinfo": "cookie:AUTH_SESSION_ID_LEGACY\ncookie:YOMe1h3tgHKNQxhV6V7n5g__\ncookie:KC_RESTART\ncookie:AUTH_SESSION_ID"
-						},
-						{
-							"id": "36",
+							"id": "10",
 							"uri": "https://application-form.france-visas.gouv.fr/",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -1012,25 +545,7 @@
 							"otherinfo": "cookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
-							"id": "35",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": "cookie:YOMe1h3tgHKNQxhV6V7n5g__\ncookie:JSESSIONID"
-						},
-						{
-							"id": "63",
-							"uri": "https://application-form.france-visas.gouv.fr/fv-fo-dde/oauth2/authorization/keycloak",
-							"method": "GET",
-							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"attack": "",
-							"evidence": "YOMe1h3tgHKNQxhV6V7n5g__",
-							"otherinfo": "cookie:YOMe1h3tgHKNQxhV6V7n5g__"
-						},
-						{
-							"id": "47",
+							"id": "18",
 							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -1039,7 +554,7 @@
 							"otherinfo": "cookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						},
 						{
-							"id": "67",
+							"id": "39",
 							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "YOMe1h3tgHKNQxhV6V7n5g__",
@@ -1048,50 +563,13 @@
 							"otherinfo": "cookie:YOMe1h3tgHKNQxhV6V7n5g__"
 						}
 					],
-					"count": "6",
+					"count": "3",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
-					"otherinfo": "<p>cookie:AUTH_SESSION_ID_LEGACY</p><p>cookie:YOMe1h3tgHKNQxhV6V7n5g__</p><p>cookie:KC_RESTART</p><p>cookie:AUTH_SESSION_ID</p>",
+					"otherinfo": "<p>cookie:YOMe1h3tgHKNQxhV6V7n5g__</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
 					"sourceid": "1"
-				},
-				{
-					"pluginid": "10049",
-					"alertRef": "10049",
-					"alert": "Storable and Cacheable Content",
-					"name": "Storable and Cacheable Content",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
-					"instances":[ 
-						{
-							"id": "48",
-							"uri": "https://application-form.france-visas.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						},
-						{
-							"id": "68",
-							"uri": "https://application-form.france-visas.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						}
-					],
-					"count": "2",
-					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
-					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
-					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
-					"cweid": "524",
-					"wascid": "13",
-					"sourceid": "11"
 				}
 			]
 		}
