@@ -1,7 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Mon, 1 Sept 2025 09:07:42",
+	"@generated": "Fri, 5 Sept 2025 09:00:31",
+	"created": "2025-09-05T09:00:31.675756883Z",
 	"site":[ 
 		{
 			"@name": "https://www.manche.gouv.fr",
@@ -9,43 +10,6 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
-				{
-					"pluginid": "10202",
-					"alertRef": "10202",
-					"alert": "Absence of Anti-CSRF Tokens",
-					"name": "Absence of Anti-CSRF Tokens",
-					"riskcode": "2",
-					"confidence": "1",
-					"riskdesc": "Medium (Low)",
-					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
-					"instances":[ 
-						{
-							"id": "202",
-							"uri": "https://www.manche.gouv.fr/Nous-contacter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"Adressepostale-theme\" \"c24286009cfbb9b98cbccedac2d464bb\" \"Codepostal-theme\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_85848\" \"ContentObjectID\" \"dob-theme\" \"email-theme\" \"ezcoa-85860_captcha_theme\" \"nom-theme\" \"prenom-theme\" \"reglement-theme\" \"telephone-theme\" \"theme-0\" \"theme-1\" \"theme-2\" \"theme-3\" \"ViewMode\" \"Ville-theme\" \"votresujet-theme\" ]."
-						},
-						{
-							"id": "203",
-							"uri": "https://www.manche.gouv.fr/Nous-contacter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 3: \"259703c537d10febe37e23f066fd8c9d\" \"Adressepostale-service\" \"Codepostal-service\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_85864\" \"ContentObjectID\" \"dob-service\" \"email-service\" \"ezcoa-85876_captcha_service\" \"nom-service\" \"prenom-service\" \"reglement-service\" \"service-0\" \"service-1\" \"service-2\" \"service-3\" \"telephone-service\" \"ViewMode\" \"Ville-service\" \"votresujet-service\" ]."
-						}
-					],
-					"count": "2",
-					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"Adressepostale-theme\" \"c24286009cfbb9b98cbccedac2d464bb\" \"Codepostal-theme\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_85848\" \"ContentObjectID\" \"dob-theme\" \"email-theme\" \"ezcoa-85860_captcha_theme\" \"nom-theme\" \"prenom-theme\" \"reglement-theme\" \"telephone-theme\" \"theme-0\" \"theme-1\" \"theme-2\" \"theme-3\" \"ViewMode\" \"Ville-theme\" \"votresujet-theme\" ].</p>",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
-					"cweid": "352",
-					"wascid": "9",
-					"sourceid": "1068"
-				},
 				{
 					"pluginid": "10038",
 					"alertRef": "10038-1",
@@ -57,7 +21,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "14",
+							"id": "17",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -66,8 +30,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
-							"uri": "https://www.manche.gouv.fr/",
+							"id": "127",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -75,16 +39,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "108",
+							"id": "131",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -93,8 +48,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "144",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
+							"id": "129",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -102,7 +57,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
+							"id": "90",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -111,7 +66,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
+							"id": "62",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -120,7 +75,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "124",
+							"id": "74",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "110",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -129,7 +93,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "92",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -138,7 +102,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "0",
+							"id": "1",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -153,7 +117,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10020",
@@ -166,7 +130,7 @@
 					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
 					"instances":[ 
 						{
-							"id": "12",
+							"id": "9",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -175,7 +139,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "43",
+							"id": "157",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -184,44 +148,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "79",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "142",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "151",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "152",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
+							"id": "123",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -230,6 +158,33 @@
 						},
 						{
 							"id": "122",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "124",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "125",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "83",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -238,7 +193,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "59",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -247,7 +202,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "120",
+							"id": "60",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "108",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -256,7 +220,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "88",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -284,7 +248,7 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
 					"instances":[ 
 						{
-							"id": "178",
+							"id": "185",
 							"uri": "https://www.manche.gouv.fr/Demarches/Associations",
 							"method": "GET",
 							"param": "",
@@ -293,7 +257,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "168",
+							"id": "169",
 							"uri": "https://www.manche.gouv.fr/Demarches/Certificat-de-non-gage",
 							"method": "GET",
 							"param": "",
@@ -302,7 +266,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "176",
+							"id": "174",
 							"uri": "https://www.manche.gouv.fr/Demarches/Elections",
 							"method": "GET",
 							"param": "",
@@ -311,7 +275,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "185",
+							"id": "177",
 							"uri": "https://www.manche.gouv.fr/Demarches/Formation-travail",
 							"method": "GET",
 							"param": "",
@@ -320,7 +284,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "179",
+							"id": "181",
 							"uri": "https://www.manche.gouv.fr/Demarches/Infractions-aux-regles-de-securite-routiere",
 							"method": "GET",
 							"param": "",
@@ -329,7 +293,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "169",
+							"id": "183",
 							"uri": "https://www.manche.gouv.fr/Demarches/Passeport",
 							"method": "GET",
 							"param": "",
@@ -344,35 +308,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "837"
-				},
-				{
-					"pluginid": "10003",
-					"alertRef": "10003",
-					"alert": "Vulnerable JS Library",
-					"name": "Vulnerable JS Library",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The identified library appears to be vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "190",
-							"uri": "https://www.manche.gouv.fr/var/ezwebin_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1726575089.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
-							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						}
-					],
-					"count": "1",
-					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
-					"otherinfo": "<p>The identified library jquery, version 3.4.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
-					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
-					"cweid": "1395",
-					"wascid": "-1",
-					"sourceid": "987"
+					"sourceid": "880"
 				},
 				{
 					"pluginid": "10044",
@@ -385,15 +321,6 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "189",
-							"uri": "https://www.manche.gouv.fr/accessibilite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 47 [https://www.manche.gouv.fr/Outils/Accessibilite].\nPredicted response size: 347.\nResponse Body Length: 432."
-						},
-						{
 							"id": "182",
 							"uri": "https://www.manche.gouv.fr/actualites",
 							"method": "GET",
@@ -403,7 +330,7 @@
 							"otherinfo": "Location header URI length: 37 [https://www.manche.gouv.fr/Actualites].\nPredicted response size: 337.\nResponse Body Length: 392."
 						},
 						{
-							"id": "181",
+							"id": "175",
 							"uri": "https://www.manche.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -412,16 +339,7 @@
 							"otherinfo": "Location header URI length: 63 [https://www.manche.gouv.fr/Demarches/Carte-nationale-d-identite].\nPredicted response size: 363.\nResponse Body Length: 496."
 						},
 						{
-							"id": "204",
-							"uri": "https://www.manche.gouv.fr/contenu/action?SearchText=ZAP",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 96 [https://www.manche.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/2001599282?SearchText=ZAP].\nPredicted response size: 396.\nResponse Body Length: 628."
-						},
-						{
-							"id": "180",
+							"id": "171",
 							"uri": "https://www.manche.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -430,7 +348,7 @@
 							"otherinfo": "Location header URI length: 36 [https://www.manche.gouv.fr/Demarches].\nPredicted response size: 336.\nResponse Body Length: 388."
 						},
 						{
-							"id": "183",
+							"id": "179",
 							"uri": "https://www.manche.gouv.fr/Demarches/Demarches-Etrangers-dans-le-departement-de-la-Manche",
 							"method": "GET",
 							"param": "",
@@ -439,7 +357,7 @@
 							"otherinfo": "Location header URI length: 73 [https://www.manche.gouv.fr/Demarches/Accueil-des-etrangers-dans-la-Manche].\nPredicted response size: 373.\nResponse Body Length: 536."
 						},
 						{
-							"id": "171",
+							"id": "168",
 							"uri": "https://www.manche.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -448,16 +366,7 @@
 							"otherinfo": "Location header URI length: 69 [https://www.manche.gouv.fr/Services-de-l-Etat/Horaires-et-coordonnees].\nPredicted response size: 369.\nResponse Body Length: 520."
 						},
 						{
-							"id": "187",
-							"uri": "https://www.manche.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 50 [https://www.manche.gouv.fr/Outils/Mentions-legales].\nPredicted response size: 350.\nResponse Body Length: 444."
-						},
-						{
-							"id": "41",
+							"id": "52",
 							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -466,7 +375,7 @@
 							"otherinfo": "Location header URI length: 41 [https://www.manche.gouv.fr/Nous-contacter].\nPredicted response size: 341.\nResponse Body Length: 408."
 						},
 						{
-							"id": "177",
+							"id": "176",
 							"uri": "https://www.manche.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -475,7 +384,7 @@
 							"otherinfo": "Location header URI length: 46 [https://www.manche.gouv.fr/Demarches/Passeport].\nPredicted response size: 346.\nResponse Body Length: 428."
 						},
 						{
-							"id": "173",
+							"id": "178",
 							"uri": "https://www.manche.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -484,7 +393,7 @@
 							"otherinfo": "Location header URI length: 55 [https://www.manche.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 355.\nResponse Body Length: 464."
 						},
 						{
-							"id": "172",
+							"id": "170",
 							"uri": "https://www.manche.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -493,13 +402,13 @@
 							"otherinfo": "Location header URI length: 50 [https://www.manche.gouv.fr/Demarches/Cartes-grises].\nPredicted response size: 350.\nResponse Body Length: 444."
 						}
 					],
-					"count": "12",
+					"count": "9",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 47 [https://www.manche.gouv.fr/Outils/Accessibilite].</p><p>Predicted response size: 347.</p><p>Response Body Length: 432.</p>",
+					"otherinfo": "<p>Location header URI length: 37 [https://www.manche.gouv.fr/Actualites].</p><p>Predicted response size: 337.</p><p>Response Body Length: 392.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "982"
+					"sourceid": "869"
 				},
 				{
 					"pluginid": "10010",
@@ -512,7 +421,7 @@
 					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
 					"instances":[ 
 						{
-							"id": "15",
+							"id": "18",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -527,7 +436,7 @@
 					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
 					"cweid": "1004",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10011",
@@ -540,7 +449,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "17",
+							"id": "21",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -555,7 +464,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10054",
@@ -568,7 +477,7 @@
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
 						{
-							"id": "16",
+							"id": "20",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -583,7 +492,7 @@
 					"reference": "<p>https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</p>",
 					"cweid": "1275",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10017",
@@ -596,7 +505,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"id": "175",
+							"id": "184",
 							"uri": "https://www.manche.gouv.fr/Demarches/Associations",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=4lksqnhy01xovdugtrj3zcbmwpfeia8&callback=initWidget",
@@ -614,7 +523,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "170",
+							"id": "167",
 							"uri": "https://www.manche.gouv.fr/Demarches/Elections",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=4lksqnhy01xovdugtrj3zcbmwpfeia8&callback=initWidget",
@@ -623,7 +532,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "184",
+							"id": "172",
 							"uri": "https://www.manche.gouv.fr/Demarches/Formation-travail",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=4lksqnhy01xovdugtrj3zcbmwpfeia8&callback=initWidget",
@@ -632,7 +541,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "174",
+							"id": "173",
 							"uri": "https://www.manche.gouv.fr/Demarches/Infractions-aux-regles-de-securite-routiere",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=4lksqnhy01xovdugtrj3zcbmwpfeia8&callback=initWidget",
@@ -641,7 +550,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "167",
+							"id": "180",
 							"uri": "https://www.manche.gouv.fr/Demarches/Passeport",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=4lksqnhy01xovdugtrj3zcbmwpfeia8&callback=initWidget",
@@ -656,35 +565,7 @@
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "837"
-				},
-				{
-					"pluginid": "10110",
-					"alertRef": "10110",
-					"alert": "Dangerous JS Functions",
-					"name": "Dangerous JS Functions",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "193",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval(",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>See the references for security advice on the use of these functions.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://angular.io/guide/security</p>",
-					"cweid": "749",
-					"wascid": "-1",
-					"sourceid": "994"
+					"sourceid": "880"
 				},
 				{
 					"pluginid": "110009",
@@ -697,51 +578,6 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"id": "201",
-							"uri": "https://www.manche.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "205",
-							"uri": "https://www.manche.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "199",
-							"uri": "https://www.manche.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.slug.replace(%22article%22,%22actualite%22)%20+",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "195",
-							"uri": "https://www.manche.gouv.fr/donnees-personnelles-et-cookies",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "198",
-							"uri": "https://www.manche.gouv.fr/rss/feed/my_feed",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
 							"id": "186",
 							"uri": "https://www.manche.gouv.fr/tags/view/Accueil+et+dossier/Grands+dossiers/Services+Publics+%2B",
 							"method": "GET",
@@ -751,13 +587,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "6",
+					"count": "1",
 					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "1066"
+					"sourceid": "931"
 				},
 				{
 					"pluginid": "90004",
@@ -770,62 +606,71 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "39",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "70",
+							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "85",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "40",
+							"uri": "https://www.manche.gouv.fr",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
 							"id": "71",
-							"uri": "https://www.manche.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "94",
-							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "27",
-							"uri": "https://www.manche.gouv.fr",
+							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "86",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "41",
+							"uri": "https://www.manche.gouv.fr",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
 							"id": "72",
-							"uri": "https://www.manche.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "95",
-							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "28",
-							"uri": "https://www.manche.gouv.fr",
+							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -833,17 +678,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
-							"uri": "https://www.manche.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "96",
-							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
+							"id": "87",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -870,7 +706,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "36",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -879,8 +715,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
-							"uri": "https://www.manche.gouv.fr/",
+							"id": "139",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -888,16 +724,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "106",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "118",
+							"id": "152",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -907,7 +734,7 @@
 						},
 						{
 							"id": "154",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -915,7 +742,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "140",
+							"id": "100",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -924,7 +751,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "111",
+							"id": "69",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -933,7 +760,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "131",
+							"id": "84",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "118",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -942,7 +778,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "93",
+							"id": "106",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -951,7 +787,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "47",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -960,7 +796,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "30",
+							"id": "11",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -988,7 +824,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "20",
+							"id": "29",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -997,8 +833,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
-							"uri": "https://www.manche.gouv.fr/",
+							"id": "134",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1006,16 +842,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "114",
+							"id": "145",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -1024,8 +851,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "147",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
+							"id": "144",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1033,7 +860,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "136",
+							"id": "95",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1042,7 +869,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "102",
+							"id": "65",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1051,7 +878,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
+							"id": "78",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "114",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -1060,7 +896,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "102",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1078,7 +914,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "7",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1106,7 +942,7 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "21",
+							"id": "30",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1115,7 +951,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "67",
+							"id": "160",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1124,8 +960,8 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "100",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "135",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1133,7 +969,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "115",
+							"id": "146",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -1143,6 +979,15 @@
 						},
 						{
 							"id": "148",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734987600",
+							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
+						},
+						{
+							"id": "149",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
 							"method": "GET",
 							"param": "",
@@ -1151,25 +996,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "160",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734987600",
-							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
-						},
-						{
-							"id": "159",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734987600",
-							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
-						},
-						{
-							"id": "137",
+							"id": "96",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1178,7 +1005,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "103",
+							"id": "66",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1187,7 +1014,16 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "128",
+							"id": "79",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734987600",
+							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
+						},
+						{
+							"id": "115",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -1196,7 +1032,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "87",
+							"id": "103",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1224,7 +1060,7 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"id": "22",
+							"id": "34",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1233,7 +1069,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "68",
+							"id": "161",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1242,8 +1078,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "104",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "137",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1251,7 +1087,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "116",
+							"id": "150",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1261,6 +1097,15 @@
 						},
 						{
 							"id": "153",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "155",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1269,25 +1114,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "162",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "161",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "138",
+							"id": "98",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1296,7 +1123,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "109",
+							"id": "67",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1305,7 +1132,16 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "129",
+							"id": "81",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "116",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1314,7 +1150,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "91",
+							"id": "104",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1342,7 +1178,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "35",
+							"id": "76",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1351,7 +1187,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u011E\uFFFD\uFFFD\uFFFDy\u0799\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u05DC\uFFFDz%\uFFFD\\x0008\uFFFD\uFFFD\uFFFD?\\x0011\uFFFD\uFFFD\uFFFD\uFFFDZnW\uFFFDz\u07DA\uFFFD\u01A2\uFFFD+,zg\uFFFD\uFFFD\uFFFD%z\uFFFD^\uFFFD\u01DC\uFFFD\uFFFD\u07B2\u01FE\uFFFDM\uFFFD"
 						},
 						{
-							"id": "75",
+							"id": "165",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1360,22 +1196,31 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u011E\uFFFD\uFFFD\uFFFDy\u0799\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u05DC\uFFFDz%\uFFFD\\x0008\uFFFD\uFFFD\uFFFD?\\x0011\uFFFD\uFFFD\uFFFD\uFFFDZnW\uFFFDz\u07DA\uFFFD\u01A2\uFFFD+,zg\uFFFD\uFFFD\uFFFD%z\uFFFD^\uFFFD\u01DC\uFFFD\uFFFD\u07B2\u01FE\uFFFDM\uFFFD"
 						},
 						{
-							"id": "141",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "156",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/Actions-de-l-Etat/Agriculture/Campagne-de-remboursement-TICPE-2025",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uFFFD\uFFFDjjZ\uFFFDw\uFFFDu\uFFFDzf\u8EBB\\x001e\uFFFD\uFFFD\uFFFD\uFFFD2\\x0002<O\uFFFD\uFFFDn"
+							"evidence": "fet-de-la-Manche/271632596203180",
+							"otherinfo": "}\uFFFD~u\uFFFDk\uFFFD\\x001a\uFFFD\uFFFD^\uFFFDn\uFFFD\uFFFD}\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_4"
 						},
 						{
-							"id": "150",
+							"id": "162",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/amenagement-territoire-energie/1711-22-fre-FR/Amenagement-territoire-energie",
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?jg\uFFFDj\\x0007\uFFFDz{~\uFFFD\uFFFD\uFFFD\uFFFD\"\uFFFD\uF79D\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD]~\uFFFDo\uFFFD\uFFFD\uFFFDG\uFFFD&zv\uFFFDzg\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD*\uFFFD\uFFFD\uFFFD\u07AE\\x0008\uFFFD"
+						},
+						{
+							"id": "164",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/cohesion-sociale-et-solidarites/73911-8-fre-FR/Cohesion-sociale-et-Solidarites",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?r\uFFFD^\uFFFD*'\uFFFD\uFFFD\\x001c\uFFFD\uFFFD^\uFFFD\uFFFD~\uFFFD\uFFFDbu\uFFFD\uFFFD\uFFFD?\uFFFDu\uFFFD\uFFFD>~\uFFFD\uFFFD\\x0015\\x001f\u00A2\\x0017\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\"jW\uFFFDz\u07D2\uFFFDX\uFFFDj\uFFFD\uFFFDz"
 						},
 						{
 							"id": "163",
@@ -1387,25 +1232,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDz\u03DAr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFDj\u0628\uFFFD\u694Ag\uFFFD\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFDm>\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFD*'\uFFFD\uFFFD\uFFFDj\u0628\uFFFD\uFFFD%\uFFFDg\uFFFD\uFFFD\uFFFDb\uFFFD"
 						},
 						{
-							"id": "164",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/education-et-formation/1713-12-fre-FR/Education-et-formation",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?y\u06DCj\u0628\uFFFD\uFFFD\uFFFD\uFFFD+\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFD]\uFFFD\uFFFDo\uFFFD\uFFFD\uFFFDG\uFFFD\\x001d\uFFFD\u01AD\uFFFD\uFFFD\uFFFDz\u07DF\uFFFD\uFFFD\uFFFD\uFFFD*'"
-						},
-						{
-							"id": "165",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/Agriculture/Campagne-de-remboursement-TICPE-2025",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uFFFD\uFFFDjjZ\uFFFDw\uFFFDu\uFFFDzf\u8EBB\\x001e\uFFFD\uFFFD\uFFFD\uFFFD2\\x0002<O\uFFFD\uFFFDn"
-						},
-						{
-							"id": "149",
+							"id": "119",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1414,7 +1241,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFDb\uFFFD\uFFFD?B\u6AF6'\uFFFD\uFFFD\uFFFD~z\u05FE\uFFFDM\uFFFD"
 						},
 						{
-							"id": "121",
+							"id": "107",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1423,16 +1250,25 @@
 							"otherinfo": "}\uFFFD~u\uFFFDk\uFFFD\\x001a\uFFFD\uFFFD^\uFFFDn\uFFFD\uFFFD}\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_4"
 						},
 						{
-							"id": "146",
+							"id": "112",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fet-de-la-Manche/271632596203180",
+							"otherinfo": "}\uFFFD~u\uFFFDk\uFFFD\\x001a\uFFFD\uFFFD^\uFFFDn\uFFFD\uFFFD}\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_4"
+						},
+						{
+							"id": "121",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/contenu/telechargement/22914/147123/file/Charte",
-							"otherinfo": "\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFD\uFFFD\u05E5y\uFFFDZ\uFFFD\\x0007\uFFFDz{\uFFFDou\uFFFD\uFFFDx\uFFFD]\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDj\uFFFD^"
+							"evidence": "php/Services-de-l-Etat/Securite-et-protection-des-personnes2",
+							"otherinfo": "\uFFFD\\x001aI\uFFFD\uFFFD\u01EC\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFDy\u02EB\uFFFD\u05FEz\u07E9\uFFFD\uFFFD^r\u0628\uFFFD\uFFFD^\uFFFD\uFFFD^\uFFFD\uFFFD'\uFFFD\uFFFD6"
 						},
 						{
-							"id": "119",
+							"id": "120",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1447,108 +1283,7 @@
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10019",
-					"alertRef": "10019-1",
-					"alert": "Content-Type Header Missing",
-					"name": "Content-Type Header Missing",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The Content-Type header was either missing or empty.</p>",
-					"instances":[ 
-						{
-							"id": "188",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
-							"method": "GET",
-							"param": "content-type",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure each page is setting the specific and appropriate content-type value for the content being delivered.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
-					"cweid": "345",
-					"wascid": "12",
-					"sourceid": "981"
-				},
-				{
-					"pluginid": "10027",
-					"alertRef": "10027",
-					"alert": "Information Disclosure - Suspicious Comments",
-					"name": "Information Disclosure - Suspicious Comments",
-					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
-					"instances":[ 
-						{
-							"id": "194",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "197",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "196",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "query",
-							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "200",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "query",
-							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "192",
-							"uri": "https://www.manche.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "from",
-							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "191",
-							"uri": "https://www.manche.gouv.fr/var/ezwebin_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1726575089.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username",
-							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
-						}
-					],
-					"count": "6",
-					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
-					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet.</p>",
-					"reference": "",
-					"cweid": "615",
-					"wascid": "13",
-					"sourceid": "1001"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10109",
@@ -1561,7 +1296,7 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "18",
+							"id": "26",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1570,7 +1305,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "64",
+							"id": "159",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1579,8 +1314,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "90",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "132",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1588,7 +1323,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "112",
+							"id": "140",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -1597,7 +1332,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "145",
+							"id": "141",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"9d60bf504b734e1eae7677aa582cbdbf\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Toute-l-actualite\">\n                                Toute l'actualit\u00E9\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "147",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
 							"method": "GET",
 							"param": "",
@@ -1606,25 +1350,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "158",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"9d60bf504b734e1eae7677aa582cbdbf\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Toute-l-actualite\">\n                                Toute l'actualit\u00E9\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "157",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"9d60bf504b734e1eae7677aa582cbdbf\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Toute-l-actualite\">\n                                Toute l'actualit\u00E9\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "134",
+							"id": "93",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1633,7 +1359,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "99",
+							"id": "63",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1642,8 +1368,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "125",
-							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
+							"id": "75",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1651,7 +1377,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "84",
+							"id": "111",
+							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"9d60bf504b734e1eae7677aa582cbdbf\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Toute-l-actualite\">\n                                Toute l'actualit\u00E9\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "97",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1679,7 +1414,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "24",
+							"id": "35",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1688,8 +1423,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
-							"uri": "https://www.manche.gouv.fr/",
+							"id": "138",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1697,16 +1432,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "105",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "117",
+							"id": "151",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -1715,7 +1441,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "139",
+							"id": "99",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1724,7 +1450,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "68",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1733,7 +1459,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "130",
+							"id": "82",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "117",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -1742,7 +1477,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "105",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1751,7 +1486,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "45",
+							"id": "54",
 							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1779,7 +1514,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "13",
+							"id": "16",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "cache-control",
@@ -1788,7 +1523,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "52",
+							"id": "158",
 							"uri": "https://www.manche.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1797,8 +1532,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"id": "126",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1806,7 +1541,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "130",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "cache-control",
@@ -1815,7 +1550,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "143",
+							"id": "128",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "136",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Consommation-Alimentation",
 							"method": "GET",
 							"param": "cache-control",
@@ -1824,25 +1568,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "156",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Education-et-formation",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "155",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Entreprises-economie-emploi-finances-publiques",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "132",
+							"id": "89",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1851,7 +1577,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "88",
+							"id": "61",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "cache-control",
@@ -1860,7 +1586,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "123",
+							"id": "73",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "109",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "cache-control",
@@ -1869,7 +1604,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "80",
+							"id": "91",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "cache-control",
@@ -1884,7 +1619,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10050",
@@ -1897,7 +1632,7 @@
 					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "19",
+							"id": "28",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1906,8 +1641,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "65",
-							"uri": "https://www.manche.gouv.fr/",
+							"id": "133",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1915,16 +1650,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "97",
-							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Agriculture",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "113",
+							"id": "143",
 							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Amenagement-territoire-energie",
 							"method": "GET",
 							"param": "",
@@ -1933,7 +1659,16 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "135",
+							"id": "142",
+							"uri": "https://www.manche.gouv.fr/Actions-de-l-Etat/Cohesion-sociale-et-Solidarites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "94",
 							"uri": "https://www.manche.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1942,7 +1677,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "101",
+							"id": "64",
 							"uri": "https://www.manche.gouv.fr/Actualites/Espace-Presse",
 							"method": "GET",
 							"param": "",
@@ -1951,7 +1686,16 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "126",
+							"id": "77",
+							"uri": "https://www.manche.gouv.fr/Actualites/L-Etat-recrute-nous-rejoindre",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "113",
 							"uri": "https://www.manche.gouv.fr/Actualites/Nous-suivre-sur-les-reseaux-sociaux",
 							"method": "GET",
 							"param": "",
@@ -1960,7 +1704,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "85",
+							"id": "101",
 							"uri": "https://www.manche.gouv.fr/Actualites/Toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1969,7 +1713,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "42",
+							"id": "53",
 							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1996,7 +1740,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.</p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html</p>",
@@ -2015,8 +1759,8 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "38",
-							"uri": "https://www.manche.gouv.fr",
+							"id": "57",
+							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -2024,7 +1768,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "10",
+							"id": "50",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -2033,7 +1777,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "14",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -2048,7 +1792,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "139"
 				},
 				{
 					"pluginid": "90005",
@@ -2061,8 +1805,8 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "37",
-							"uri": "https://www.manche.gouv.fr",
+							"id": "56",
+							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -2070,7 +1814,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
+							"id": "49",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -2079,7 +1823,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "32",
+							"id": "13",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -2094,7 +1838,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "139"
 				},
 				{
 					"pluginid": "90005",
@@ -2107,8 +1851,8 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "36",
-							"uri": "https://www.manche.gouv.fr",
+							"id": "55",
+							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -2116,7 +1860,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
+							"id": "48",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2125,7 +1869,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "31",
+							"id": "12",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2140,7 +1884,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "139"
 				},
 				{
 					"pluginid": "90005",
@@ -2153,8 +1897,8 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "39",
-							"uri": "https://www.manche.gouv.fr",
+							"id": "58",
+							"uri": "https://www.manche.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -2162,7 +1906,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
+							"id": "51",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2171,7 +1915,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "34",
+							"id": "15",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2186,7 +1930,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "139"
 				},
 				{
 					"pluginid": "10112",
@@ -2199,16 +1943,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "23",
-							"uri": "https://www.manche.gouv.fr",
-							"method": "GET",
-							"param": "eZSESSID",
-							"attack": "",
-							"evidence": "eZSESSID",
-							"otherinfo": "cookie:eZSESSID"
-						},
-						{
-							"id": "44",
+							"id": "4",
 							"uri": "https://www.manche.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -2217,13 +1952,13 @@
 							"otherinfo": "cookie:eZSESSID"
 						}
 					],
-					"count": "2",
+					"count": "1",
 					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
 					"otherinfo": "<p>cookie:eZSESSID</p>",
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -2236,7 +1971,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "6",
+							"id": "46",
 							"uri": "https://www.manche.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -2245,7 +1980,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "29",
+							"id": "10",
 							"uri": "https://www.manche.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
