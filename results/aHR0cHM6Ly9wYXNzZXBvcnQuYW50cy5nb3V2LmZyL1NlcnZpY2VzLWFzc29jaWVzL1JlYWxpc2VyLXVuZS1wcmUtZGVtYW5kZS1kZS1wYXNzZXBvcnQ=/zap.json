@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Fri, 5 Sept 2025 01:28:02",
-	"created": "2025-09-05T01:28:02.222177949Z",
+	"@generated": "Sun, 7 Sept 2025 01:29:41",
+	"created": "2025-09-07T01:29:41.596650136Z",
 	"site":[ 
 		{
 			"@name": "https://passeport.ants.gouv.fr",
@@ -21,7 +21,7 @@
 					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
 					"instances":[ 
 						{
-							"id": "282",
+							"id": "301",
 							"uri": "https://passeport.ants.gouv.fr/aide-et-contact",
 							"method": "GET",
 							"param": "",
@@ -30,17 +30,8 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ]."
 						},
 						{
-							"id": "271",
+							"id": "290",
 							"uri": "https://passeport.ants.gouv.fr/aide-et-contact?lang=fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"MuiBox-root css-13o7eu2\" action=\"/\" method=\"POST\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ]."
-						},
-						{
-							"id": "280",
-							"uri": "https://passeport.ants.gouv.fr/home/help-contact?lang=fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -48,13 +39,13 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ]."
 						}
 					],
-					"count": "3",
+					"count": "2",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ].</p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "288"
+					"sourceid": "286"
 				},
 				{
 					"pluginid": "10055",
@@ -81,12 +72,12 @@
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-36bdb384-9e2a-4a2b-892b-8d33b38649fe' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-0fd19abf-5e62-47b0-acdf-bb557f43e9ea' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "12",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "25",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -94,12 +85,12 @@
 							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "9",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "22",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-addbb595-d453-42f7-bba8-0cff687a1ff8' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f404bee4-959b-434f-abe1-5598c101fa50' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						}
 					],
@@ -127,7 +118,7 @@
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-36bdb384-9e2a-4a2b-892b-8d33b38649fe' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-0fd19abf-5e62-47b0-acdf-bb557f43e9ea' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
@@ -140,17 +131,17 @@
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src"
 						},
 						{
-							"id": "10",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "23",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-addbb595-d453-42f7-bba8-0cff687a1ff8' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f404bee4-959b-434f-abe1-5598c101fa50' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
-							"id": "13",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "26",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -186,8 +177,8 @@
 							"otherinfo": "script-src includes unsafe-inline."
 						},
 						{
-							"id": "14",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "27",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -219,7 +210,7 @@
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-36bdb384-9e2a-4a2b-892b-8d33b38649fe' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-0fd19abf-5e62-47b0-acdf-bb557f43e9ea' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
@@ -232,17 +223,17 @@
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "11",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "24",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-addbb595-d453-42f7-bba8-0cff687a1ff8' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f404bee4-959b-434f-abe1-5598c101fa50' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "15",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"id": "28",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
@@ -269,7 +260,7 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"id": "283",
+							"id": "302",
 							"uri": "https://passeport.ants.gouv.fr/aide-et-contact/utilisation-du-site",
 							"method": "GET",
 							"param": "",
@@ -278,16 +269,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "281",
-							"uri": "https://passeport.ants.gouv.fr/conditions-generales-d-utilisation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/home/",
-							"otherinfo": ""
-						},
-						{
-							"id": "273",
+							"id": "292",
 							"uri": "https://passeport.ants.gouv.fr/conditions-generales-d-utilisation?lang=fr",
 							"method": "GET",
 							"param": "",
@@ -296,7 +278,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "279",
+							"id": "293",
 							"uri": "https://passeport.ants.gouv.fr/contactez-nous?lang=fr",
 							"method": "GET",
 							"param": "",
@@ -305,7 +287,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "284",
+							"id": "303",
 							"uri": "https://passeport.ants.gouv.fr/dqsdsqd",
 							"method": "GET",
 							"param": "",
@@ -314,7 +296,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
+							"id": "87",
 							"uri": "https://passeport.ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -323,7 +305,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "286",
+							"id": "305",
 							"uri": "https://passeport.ants.gouv.fr/rechercher?q=passeport",
 							"method": "GET",
 							"param": "",
@@ -332,7 +314,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "61",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "",
@@ -341,13 +323,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "8",
+					"count": "7",
 					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "323"
+					"sourceid": "320"
 				},
 				{
 					"pluginid": "90004",
@@ -360,7 +342,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "49",
+							"id": "54",
 							"uri": "https://passeport.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -369,7 +351,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "25",
+							"id": "4",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -378,52 +360,52 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "41",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "17",
-							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "50",
-							"uri": "https://passeport.ants.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "42",
-							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "18",
-							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
 							"id": "51",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "10",
+							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "55",
+							"uri": "https://passeport.ants.gouv.fr/",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "52",
+							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "11",
+							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "56",
 							"uri": "https://passeport.ants.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -432,7 +414,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "43",
+							"id": "53",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -441,7 +423,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "19",
+							"id": "13",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -469,7 +451,7 @@
 					"desc": "<p>A private IP (such as 10.x.x.x, 172.x.x.x, 192.168.x.x) or an Amazon EC2 private hostname (for example, ip-10-0-56-78) has been found in the HTTP response body. This information might be helpful for further attacks targeting internal systems.</p>",
 					"instances":[ 
 						{
-							"id": "285",
+							"id": "304",
 							"uri": "https://passeport.ants.gouv.fr/accessibilite",
 							"method": "GET",
 							"param": "",
@@ -478,7 +460,7 @@
 							"otherinfo": "10.2.01.10\n"
 						},
 						{
-							"id": "272",
+							"id": "291",
 							"uri": "https://passeport.ants.gouv.fr/accessibilite?lang=fr",
 							"method": "GET",
 							"param": "",
@@ -487,7 +469,7 @@
 							"otherinfo": "10.2.01.10\n"
 						},
 						{
-							"id": "102",
+							"id": "101",
 							"uri": "https://passeport.ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
@@ -502,7 +484,44 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc1918</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "350"
+					"sourceid": "348"
+				},
+				{
+					"pluginid": "10035",
+					"alertRef": "10035-1",
+					"alert": "Strict-Transport-Security Header Not Set",
+					"name": "Strict-Transport-Security Header Not Set",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "Low (High)",
+					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
+					"instances":[ 
+						{
+							"id": "295",
+							"uri": "https://passeport.ants.gouv.fr/conditions-generales-d-utilisation",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "294",
+							"uri": "https://passeport.ants.gouv.fr/home/help-contact?lang=fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
+					"cweid": "319",
+					"wascid": "15",
+					"sourceid": "271"
 				},
 				{
 					"pluginid": "10096",
@@ -515,7 +534,7 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "274",
+							"id": "296",
 							"uri": "https://passeport.ants.gouv.fr/js/bundle.f3993fdd9bbcf281f35a.js",
 							"method": "GET",
 							"param": "",
@@ -543,7 +562,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "61",
+							"id": "62",
 							"uri": "https://passeport.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -552,16 +571,7 @@
 							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "82",
-							"uri": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "fr/loda/id/JORFTEXT000025705936",
-							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
-						},
-						{
-							"id": "97",
+							"id": "99",
 							"uri": "https://passeport.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -570,7 +580,7 @@
 							"otherinfo": "\uFFFDZh\uFFFD+b\uFFFD\uFFFDu\uF722w\uFFFDu\uFFFD\uD269b\uFFFD"
 						},
 						{
-							"id": "67",
+							"id": "100",
 							"uri": "https://passeport.ants.gouv.fr/home/help-contact/i-no-longer-have-all-or-some-of-my-papers",
 							"method": "GET",
 							"param": "",
@@ -579,7 +589,7 @@
 							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "99",
+							"id": "86",
 							"uri": "https://passeport.ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -588,7 +598,7 @@
 							"otherinfo": "\uFFFDX\\x001e\uFFFDZ\\x001cjX\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFDj*\uFFFD{\uFFFDZn)b\uFFFD\uFFFD"
 						},
 						{
-							"id": "80",
+							"id": "60",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "",
@@ -597,7 +607,7 @@
 							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "62",
+							"id": "64",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "",
@@ -606,16 +616,25 @@
 							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "88",
+							"id": "102",
+							"uri": "https://passeport.ants.gouv.fr/services/geolocaliser-les-photographes-habilites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/loda/id/JORFTEXT000025705936",
+							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
+						},
+						{
+							"id": "81",
 							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "2Fpolitique-de-confidentialite",
-							"otherinfo": "\uFFFDZh\uFFFD+b\uFFFD\uFFFDu\uF722w\uFFFDu\uFFFD\uD269b\uFFFD"
+							"evidence": "fr/loda/id/JORFTEXT000025705936",
+							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "98",
+							"id": "82",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -624,7 +643,7 @@
 							"otherinfo": "~\uFFFD\uFFFD\u05BF\uFFFD\uFFFD\uFFFD9\\x0011S\\x0011t\uFFFD\uFFFDM6\uFFFD9\uFFFD~"
 						},
 						{
-							"id": "101",
+							"id": "98",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
 							"method": "GET",
 							"param": "",
@@ -633,7 +652,7 @@
 							"otherinfo": "\uFFFDW\uFFFDjw\\x001e\uFFFD'^\uFFFD\u062D{\uFFFD^\uFFFD'\uFFFD\uFFFD\uFFFD\u8EB9\uFFFD\u01EE\uFFFD\uFFFD"
 						},
 						{
-							"id": "87",
+							"id": "80",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/lants-devient-france-titres",
 							"method": "GET",
 							"param": "",
@@ -661,7 +680,7 @@
 					"desc": "<p>This check identifies responses where the HTTP Content-Type header declares a charset different from the charset defined by the body of the HTML or XML. When there's a charset mismatch between the HTTP header and content body Web browsers can be forced into an undesirable content-sniffing mode to determine the content's correct character set.</p><p></p><p>An attacker could manipulate content on the page to be interpreted in an encoding of their choice. For example, if an attacker can control content at the beginning of the page, they could inject script using UTF-7 encoded text and manipulate some browsers into interpreting that text.</p>",
 					"instances":[ 
 						{
-							"id": "7",
+							"id": "2",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -676,7 +695,7 @@
 					"reference": "<p>https://code.google.com/p/browsersec/wiki/Part2#Character_set_handling_and_detection</p>",
 					"cweid": "436",
 					"wascid": "15",
-					"sourceid": "14"
+					"sourceid": "12"
 				},
 				{
 					"pluginid": "10027",
@@ -689,7 +708,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "46",
+							"id": "44",
 							"uri": "https://passeport.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -698,16 +717,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "69",
-							"uri": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "89",
+							"id": "88",
 							"uri": "https://passeport.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -716,7 +726,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "54",
+							"id": "93",
 							"uri": "https://passeport.ants.gouv.fr/home/help-contact/i-no-longer-have-all-or-some-of-my-papers",
 							"method": "GET",
 							"param": "",
@@ -725,7 +735,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "83",
+							"id": "70",
 							"uri": "https://passeport.ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -734,7 +744,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "63",
+							"id": "29",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "",
@@ -743,7 +753,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "30",
+							"id": "42",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "",
@@ -752,26 +762,8 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "76",
-							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "93",
-							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "95",
-							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
+							"id": "96",
+							"uri": "https://passeport.ants.gouv.fr/services/geolocaliser-les-photographes-habilites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -780,6 +772,33 @@
 						},
 						{
 							"id": "74",
+							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "77",
+							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "90",
+							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "66",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/lants-devient-france-titres",
 							"method": "GET",
 							"param": "",
@@ -807,7 +826,7 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "47",
+							"id": "45",
 							"uri": "https://passeport.ants.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -816,16 +835,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "70",
-							"uri": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "90",
+							"id": "89",
 							"uri": "https://passeport.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
@@ -834,7 +844,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "55",
+							"id": "94",
 							"uri": "https://passeport.ants.gouv.fr/home/help-contact/i-no-longer-have-all-or-some-of-my-papers",
 							"method": "GET",
 							"param": "",
@@ -843,7 +853,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "84",
+							"id": "71",
 							"uri": "https://passeport.ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -852,7 +862,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "64",
+							"id": "30",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "",
@@ -861,7 +871,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "31",
+							"id": "43",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "",
@@ -870,26 +880,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "77",
-							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "94",
-							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "96",
-							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
+							"id": "97",
+							"uri": "https://passeport.ants.gouv.fr/services/geolocaliser-les-photographes-habilites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -898,6 +890,33 @@
 						},
 						{
 							"id": "75",
+							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "78",
+							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "91",
+							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "67",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/lants-devient-france-titres",
 							"method": "GET",
 							"param": "",
@@ -934,16 +953,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
-							"uri": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "86",
+							"id": "83",
 							"uri": "https://passeport.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "cache-control",
@@ -952,7 +962,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "45",
+							"id": "85",
 							"uri": "https://passeport.ants.gouv.fr/home/help-contact/i-no-longer-have-all-or-some-of-my-papers",
 							"method": "GET",
 							"param": "cache-control",
@@ -970,7 +980,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
+							"id": "40",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "cache-control",
@@ -979,7 +989,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
+							"id": "95",
+							"uri": "https://passeport.ants.gouv.fr/services/geolocaliser-les-photographes-habilites",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "68",
 							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
 							"method": "GET",
 							"param": "cache-control",
@@ -988,7 +1007,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "6",
+							"id": "1",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "cache-control",
@@ -997,7 +1016,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
+							"id": "72",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "cache-control",
@@ -1006,7 +1025,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "84",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/generalisation-de-france-identite-et-arrivee-du-permis-de-conduire-numerique",
 							"method": "GET",
 							"param": "cache-control",
@@ -1015,7 +1034,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
+							"id": "65",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/lants-devient-france-titres",
 							"method": "GET",
 							"param": "cache-control",
@@ -1043,7 +1062,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "28",
+							"id": "7",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1052,7 +1071,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "16",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1061,7 +1080,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "20",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1089,7 +1108,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "27",
+							"id": "6",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1098,7 +1117,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "3",
+							"id": "15",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1107,7 +1126,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
+							"id": "19",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1135,7 +1154,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "5",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1144,7 +1163,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "2",
+							"id": "14",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1153,7 +1172,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "20",
+							"id": "18",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1181,7 +1200,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "29",
+							"id": "8",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1190,7 +1209,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "17",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1199,7 +1218,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "23",
+							"id": "21",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1236,8 +1255,8 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "72",
-							"uri": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport",
+							"id": "92",
+							"uri": "https://passeport.ants.gouv.fr/home/disclaimer",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1245,16 +1264,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "57",
-							"uri": "https://passeport.ants.gouv.fr/home/help-contact/i-no-longer-have-all-or-some-of-my-papers",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
-						},
-						{
-							"id": "85",
+							"id": "73",
 							"uri": "https://passeport.ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -1263,7 +1273,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "24",
+							"id": "3",
 							"uri": "https://passeport.ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1272,7 +1282,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "65",
+							"id": "31",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes",
 							"method": "GET",
 							"param": "",
@@ -1281,7 +1291,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "1",
+							"id": "12",
 							"uri": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
 							"method": "GET",
 							"param": "",
@@ -1290,7 +1300,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "79",
+							"id": "76",
 							"uri": "https://passeport.ants.gouv.fr/services/villes-adherentes-a-la-dematerialisation",
 							"method": "GET",
 							"param": "",
@@ -1299,7 +1309,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "16",
+							"id": "9",
 							"uri": "https://passeport.ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1308,7 +1318,16 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "78",
+							"id": "79",
+							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"id": "69",
 							"uri": "https://passeport.ants.gouv.fr/toute-l-actualite/lants-devient-france-titres",
 							"method": "GET",
 							"param": "",
@@ -1336,747 +1355,810 @@
 					"desc": "<p>This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.</p>",
 					"instances":[ 
 						{
-							"id": "155",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-breadcrumb__link"
-						},
-						{
-							"id": "154",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-breadcrumb__link muibox-root css-4g6ai3"
-						},
-						{
 							"id": "122",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-btn--tertiary fr-icon-account-circle-fill muibox-root css-16u6p3i"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-btn--tertiary fr-icon-account-circle-fill muibox-root css-16u6p3i"
 						},
 						{
 							"id": "121",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-icon-information-line muibox-root css-1u6gfcs"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-icon-information-line muibox-root css-1u6gfcs"
 						},
 						{
-							"id": "267",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "286",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link fr-link fr-link--md muibox-root css-4g6ai3"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link fr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "255",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "274",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link muibox-root css-4g6ai3"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link muibox-root css-4g6ai3"
 						},
 						{
-							"id": "239",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "258",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc fr-link fr-link--md muibox-root css-cxkilz"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc fr-link fr-link--md muibox-root css-cxkilz"
 						},
 						{
-							"id": "242",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "261",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-link fr-link fr-link--md muibox-root css-4g6ai3"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-link fr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "212",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "231",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-link muibox-root css-4g6ai3"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-link muibox-root css-4g6ai3"
 						},
 						{
-							"id": "185",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "204",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-icon-arrow-up-fill fr-link--icon-left"
-						},
-						{
-							"id": "235",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-13kvmyv"
-						},
-						{
-							"id": "251",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-6e42ug"
-						},
-						{
-							"id": "193",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-j4cs1q"
-						},
-						{
-							"id": "138",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__link fr-nav__link__item fr-link fr-link--md muibox-root css-a9601i"
-						},
-						{
-							"id": "152",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-breadcrumb__button muibox-root css-8k0yvi"
-						},
-						{
-							"id": "130",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn"
-						},
-						{
-							"id": "133",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--close fr-btn"
-						},
-						{
-							"id": "117",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--menu fr-btn"
-						},
-						{
-							"id": "116",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--search fr-btn"
-						},
-						{
-							"id": "125",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link--close fr-link"
-						},
-						{
-							"id": "142",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__btn fr-nav__link muibox-root css-7h60dm"
-						},
-						{
-							"id": "156",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card fr-enlarge-link"
-						},
-						{
-							"id": "157",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__body"
-						},
-						{
-							"id": "158",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__content"
-						},
-						{
-							"id": "189",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12"
-						},
-						{
-							"id": "209",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12 fr-col-sm-6 fr-col-md-4"
-						},
-						{
-							"id": "108",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container"
-						},
-						{
-							"id": "124",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid"
-						},
-						{
-							"id": "126",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid muibox-root css-1ezom6z"
-						},
-						{
-							"id": "186",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow"
-						},
-						{
-							"id": "190",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow__social"
-						},
-						{
-							"id": "233",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__body"
-						},
-						{
-							"id": "249",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom"
-						},
-						{
-							"id": "270",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-copy"
-						},
-						{
-							"id": "234",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__brand fr-enlarge-link"
-						},
-						{
-							"id": "237",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content"
-						},
-						{
-							"id": "206",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top"
-						},
-						{
-							"id": "188",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row"
-						},
-						{
-							"id": "184",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--right fr-pt-20v muibox-root css-1ju56tr"
-						},
-						{
-							"id": "208",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--start fr-grid-row--gutters"
-						},
-						{
-							"id": "107",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body muibox-root css-79elbk"
-						},
-						{
-							"id": "109",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body-row"
-						},
-						{
-							"id": "110",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand fr-enlarge-link"
-						},
-						{
-							"id": "111",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand-top"
-						},
-						{
-							"id": "112",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo"
-						},
-						{
-							"id": "114",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo muibox-root css-old1by"
-						},
-						{
-							"id": "131",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu fr-menu fr-modal muibox-root css-1bncnpf"
-						},
-						{
-							"id": "134",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu-links muibox-root css-yldbz2"
-						},
-						{
-							"id": "115",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__navbar"
-						},
-						{
-							"id": "123",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__search fr-modal muibox-root css-1bncnpf"
-						},
-						{
-							"id": "118",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools"
-						},
-						{
-							"id": "119",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools-links"
-						},
-						{
-							"id": "127",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-search-bar muibox-root css-1fk9sxm"
-						},
-						{
-							"id": "205",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [footer] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer"
-						},
-						{
-							"id": "191",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [h2] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-h5"
-						},
-						{
-							"id": "210",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-cat"
-						},
-						{
-							"id": "250",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--sm fr-text--regular fr-m-0"
-						},
-						{
-							"id": "159",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [h4] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__title"
-						},
-						{
-							"id": "106",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [header] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header muibox-root css-1nvar7l"
-						},
-						{
-							"id": "103",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [html] tag [lang] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr"
-						},
-						{
-							"id": "129",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [input] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-input"
-						},
-						{
-							"id": "128",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
-							"method": "GET",
-							"param": "lang",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [label] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-label"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-icon-arrow-up-fill fr-link--icon-left"
 						},
 						{
 							"id": "254",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-item"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-13kvmyv"
 						},
 						{
-							"id": "241",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "190",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-item"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "137",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "270",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-6e42ug"
 						},
 						{
-							"id": "143",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "212",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item fr-nav__item--active"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-j4cs1q"
 						},
 						{
-							"id": "141",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "168",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item muibox-root css-79elbk"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-yl8thv"
 						},
 						{
-							"id": "151",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "138",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [nav] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-breadcrumb"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__link fr-nav__link__item fr-link fr-link--md muibox-root css-a9601i"
 						},
 						{
-							"id": "135",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "130",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [nav] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn"
 						},
 						{
-							"id": "153",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "133",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ol] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-breadcrumb__list muibox-root css-h9r63z"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--close fr-btn"
 						},
 						{
-							"id": "238",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "117",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--menu fr-btn"
 						},
 						{
-							"id": "113",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "116",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-logo"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--search fr-btn"
 						},
 						{
-							"id": "195",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "125",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-sr-only"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link--close fr-link"
 						},
 						{
-							"id": "104",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "142",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-0"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__btn fr-nav__link muibox-root css-7h60dm"
 						},
 						{
-							"id": "105",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "170",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-qb1bii"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card fr-enlarge-link"
 						},
 						{
-							"id": "194",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "171",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-twitter-x-fill muibox-root css-0"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__body"
 						},
 						{
-							"id": "203",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "172",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-vimeo-fill muibox-root css-0"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__content"
 						},
 						{
-							"id": "120",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "174",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btns-group"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__start"
+						},
+						{
+							"id": "208",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12"
+						},
+						{
+							"id": "228",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12 fr-col-sm-6 fr-col-md-4"
+						},
+						{
+							"id": "108",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container"
+						},
+						{
+							"id": "124",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid"
+						},
+						{
+							"id": "126",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid muibox-root css-1ezom6z"
+						},
+						{
+							"id": "205",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow"
+						},
+						{
+							"id": "209",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow__social"
+						},
+						{
+							"id": "252",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__body"
+						},
+						{
+							"id": "268",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom"
+						},
+						{
+							"id": "289",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-copy"
 						},
 						{
 							"id": "253",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-list"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__brand fr-enlarge-link"
 						},
 						{
-							"id": "240",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "256",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-list"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content"
 						},
 						{
-							"id": "211",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"id": "225",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-list"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top"
+						},
+						{
+							"id": "207",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row"
+						},
+						{
+							"id": "203",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--right fr-pt-20v muibox-root css-1ju56tr"
+						},
+						{
+							"id": "227",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--start fr-grid-row--gutters"
+						},
+						{
+							"id": "107",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body muibox-root css-79elbk"
+						},
+						{
+							"id": "109",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body-row"
+						},
+						{
+							"id": "110",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand fr-enlarge-link"
+						},
+						{
+							"id": "111",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand-top"
+						},
+						{
+							"id": "112",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo"
+						},
+						{
+							"id": "114",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo muibox-root css-old1by"
+						},
+						{
+							"id": "131",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu fr-menu fr-modal muibox-root css-1bncnpf"
+						},
+						{
+							"id": "134",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu-links muibox-root css-yldbz2"
+						},
+						{
+							"id": "115",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__navbar"
+						},
+						{
+							"id": "123",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__search fr-modal muibox-root css-1bncnpf"
+						},
+						{
+							"id": "118",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools"
+						},
+						{
+							"id": "119",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools-links"
+						},
+						{
+							"id": "127",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-search-bar muibox-root css-1fk9sxm"
+						},
+						{
+							"id": "152",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile fr-enlarge-link muibox-root css-msi4iw"
+						},
+						{
+							"id": "164",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile fr-tile--horizontal fr-enlarge-link muibox-root css-53xqfr"
+						},
+						{
+							"id": "153",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__body"
+						},
+						{
+							"id": "154",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__content"
+						},
+						{
+							"id": "156",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__img"
+						},
+						{
+							"id": "224",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [footer] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer"
+						},
+						{
+							"id": "210",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h2] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-h5"
+						},
+						{
+							"id": "229",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-cat"
+						},
+						{
+							"id": "269",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--sm fr-text--regular fr-m-0"
+						},
+						{
+							"id": "173",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h4] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__title"
+						},
+						{
+							"id": "155",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h6] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__title"
+						},
+						{
+							"id": "106",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [header] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header muibox-root css-1nvar7l"
+						},
+						{
+							"id": "103",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [html] tag [lang] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr"
+						},
+						{
+							"id": "157",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [img] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-responsive-img"
+						},
+						{
+							"id": "129",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [input] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-input"
+						},
+						{
+							"id": "128",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [label] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-label"
+						},
+						{
+							"id": "273",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-item"
+						},
+						{
+							"id": "260",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-item"
+						},
+						{
+							"id": "139",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item"
+						},
+						{
+							"id": "137",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item fr-nav__item--active"
+						},
+						{
+							"id": "141",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item muibox-root css-79elbk"
+						},
+						{
+							"id": "135",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [nav] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav"
+						},
+						{
+							"id": "257",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc"
+						},
+						{
+							"id": "113",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-logo"
+						},
+						{
+							"id": "214",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-sr-only"
+						},
+						{
+							"id": "151",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--xl"
+						},
+						{
+							"id": "104",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-0"
+						},
+						{
+							"id": "105",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-qb1bii"
+						},
+						{
+							"id": "169",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-right-line muibox-root css-1oxkki0"
+						},
+						{
+							"id": "213",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-twitter-x-fill muibox-root css-0"
+						},
+						{
+							"id": "222",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-vimeo-fill muibox-root css-0"
+						},
+						{
+							"id": "120",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btns-group"
+						},
+						{
+							"id": "272",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-list"
+						},
+						{
+							"id": "259",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-list"
+						},
+						{
+							"id": "230",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
+							"method": "GET",
+							"param": "lang",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-list"
 						},
 						{
 							"id": "136",
-							"uri": "https://passeport.ants.gouv.fr/services?lang=fr",
+							"uri": "https://passeport.ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/services?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__list"
+							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://passeport.ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__list"
 						}
 					],
-					"count": "82",
+					"count": "89",
 					"solution": "<p>Validate all input and sanitize output it before writing to any HTML attributes.</p>",
-					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://passeport.ants.gouv.fr/services?lang=fr</p><p></p><p>appears to include user input in:</p><p>a(n) [a] tag [class] attribute</p><p></p><p>The user input found was:</p><p>lang=fr</p><p></p><p>The user-controlled value was:</p><p>fr-breadcrumb__link</p>",
+					"otherinfo": "<p>User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:</p><p></p><p>https://passeport.ants.gouv.fr/?lang=fr</p><p></p><p>appears to include user input in:</p><p>a(n) [a] tag [class] attribute</p><p></p><p>The user input found was:</p><p>lang=fr</p><p></p><p>The user-controlled value was:</p><p>fr-btn fr-btn--tertiary fr-icon-account-circle-fill muibox-root css-16u6p3i</p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html</p>",
 					"cweid": "20",
 					"wascid": "20",
