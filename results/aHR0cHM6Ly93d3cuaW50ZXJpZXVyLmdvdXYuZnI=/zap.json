@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 7 Sept 2025 03:52:13",
-	"created": "2025-09-07T03:52:13.014165298Z",
+	"@generated": "Tue, 9 Sept 2025 03:38:07",
+	"created": "2025-09-09T03:38:07.420800660Z",
 	"site":[ 
 		{
 			"@name": "https://www.interieur.gouv.fr",
@@ -21,7 +21,16 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "61",
+							"id": "1",
+							"uri": "https://www.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "43",
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -30,7 +39,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "3",
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "",
@@ -39,7 +48,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
+							"id": "49",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -48,7 +57,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
+							"id": "87",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -57,7 +66,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "58",
+							"id": "54",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -66,7 +75,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "94",
+							"id": "50",
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
@@ -75,7 +84,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "46",
+							"id": "35",
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
@@ -84,8 +93,482 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
+							"id": "37",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "67",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "34",
+							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "29"
+				},
+				{
+					"pluginid": "10098",
+					"alertRef": "10098",
+					"alert": "Cross-Domain Misconfiguration",
+					"name": "Cross-Domain Misconfiguration",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>",
+					"instances":[ 
+						{
+							"id": "44",
+							"uri": "https://www.interieur.gouv.fr/core/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "52",
+							"uri": "https://www.interieur.gouv.fr/core/*.gif",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "88",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "55",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "53",
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "97",
 							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "95",
+							"uri": "https://www.interieur.gouv.fr/core/*.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "96",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "114",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "118",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "112",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"id": "113",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						}
+					],
+					"count": "12",
+					"solution": "<p>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</p><p>Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>",
+					"otherinfo": "<p>The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.</p>",
+					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
+					"cweid": "264",
+					"wascid": "14",
+					"sourceid": "81"
+				},
+				{
+					"pluginid": "10003",
+					"alertRef": "10003",
+					"alert": "Vulnerable JS Library",
+					"name": "Vulnerable JS Library",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>The identified library appears to be vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "136",
+							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/7c90d87f9428a2056bc8cda2ebfdfd53.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "* jQuery JavaScript Library v1.10.1",
+							"otherinfo": "The identified library jquery, version 1.10.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nCVE-2015-9251\nCVE-2019-11358\nhttps://github.com/jquery/jquery/issues/2432\nhttp://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/\nhttp://research.insecurelabs.org/jquery/test/\nhttps://blog.jquery.com/2019/04/10/jquery-3-4-0-released/\nhttps://nvd.nist.gov/vuln/detail/CVE-2019-11358\nhttps://github.com/advisories/GHSA-rmxg-73gg-4p98\nhttps://nvd.nist.gov/vuln/detail/CVE-2015-9251\nhttps://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b\nhttps://bugs.jquery.com/ticket/11974\nhttps://github.com/jquery/jquery.com/issues/162\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
+					"otherinfo": "<p>The identified library jquery, version 1.10.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>CVE-2015-9251</p><p>CVE-2019-11358</p><p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://github.com/advisories/GHSA-rmxg-73gg-4p98</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://github.com/jquery/jquery.com/issues/162</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
+					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
+					"cweid": "1395",
+					"wascid": "-1",
+					"sourceid": "339"
+				},
+				{
+					"pluginid": "10110",
+					"alertRef": "10110",
+					"alert": "Dangerous JS Functions",
+					"name": "Dangerous JS Functions",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "146",
+							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/javascript/tarteaucitron/tarteaucitron.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval(",
+							"otherinfo": ""
+						},
+						{
+							"id": "147",
+							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/15d5563421a5eb528eec66ef8bb834c2.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval(",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"solution": "<p>See the references for security advice on the use of these functions.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://angular.io/guide/security</p>",
+					"cweid": "749",
+					"wascid": "-1",
+					"sourceid": "347"
+				},
+				{
+					"pluginid": "110009",
+					"alertRef": "110009",
+					"alert": "Full Path Disclosure",
+					"name": "Full Path Disclosure",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
+					"instances":[ 
+						{
+							"id": "63",
+							"uri": "https://www.interieur.gouv.fr/core/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "85",
+							"uri": "https://www.interieur.gouv.fr/core/*.gif",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "94",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "82",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "86",
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "110",
+							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "105",
+							"uri": "https://www.interieur.gouv.fr/core/*.svg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "111",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "129",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "133",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "122",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "126",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						}
+					],
+					"count": "12",
+					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
+					"cweid": "209",
+					"wascid": "13",
+					"sourceid": "81"
+				},
+				{
+					"pluginid": "90004",
+					"alertRef": "90004-1",
+					"alert": "Insufficient Site Isolation Against Spectre Vulnerability",
+					"name": "Insufficient Site Isolation Against Spectre Vulnerability",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
+					"instances":[ 
+						{
+							"id": "98",
+							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.css",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "101",
+							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "14",
+							"uri": "https://www.interieur.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cross-Origin_Resource_Policy</p>",
+					"cweid": "693",
+					"wascid": "14",
+					"sourceid": "169"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"id": "15",
+							"uri": "https://www.interieur.gouv.fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "59",
+							"uri": "https://www.interieur.gouv.fr/core/*.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "17",
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "80",
+							"uri": "https://www.interieur.gouv.fr/core/*.gif",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "92",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "76",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "83",
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "42",
+							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -102,481 +585,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "1",
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "10",
-					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
-					"cweid": "693",
-					"wascid": "15",
-					"sourceid": "167"
-				},
-				{
-					"pluginid": "10098",
-					"alertRef": "10098",
-					"alert": "Cross-Domain Misconfiguration",
-					"name": "Cross-Domain Misconfiguration",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>",
-					"instances":[ 
-						{
-							"id": "62",
-							"uri": "https://www.interieur.gouv.fr/core/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "63",
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "92",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "59",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "96",
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "57",
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "114",
-							"uri": "https://www.interieur.gouv.fr/core/*.svg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "97",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "116",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "117",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "113",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						},
-						{
-							"id": "122",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Access-Control-Allow-Origin: *",
-							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
-						}
-					],
-					"count": "12",
-					"solution": "<p>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</p><p>Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>",
-					"otherinfo": "<p>The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.</p>",
-					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
-					"cweid": "264",
-					"wascid": "14",
-					"sourceid": "167"
-				},
-				{
-					"pluginid": "10003",
-					"alertRef": "10003",
-					"alert": "Vulnerable JS Library",
-					"name": "Vulnerable JS Library",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The identified library appears to be vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "144",
-							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/7c90d87f9428a2056bc8cda2ebfdfd53.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "* jQuery JavaScript Library v1.10.1",
-							"otherinfo": "The identified library jquery, version 1.10.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nCVE-2015-9251\nCVE-2019-11358\nhttps://github.com/jquery/jquery/issues/2432\nhttp://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/\nhttp://research.insecurelabs.org/jquery/test/\nhttps://blog.jquery.com/2019/04/10/jquery-3-4-0-released/\nhttps://nvd.nist.gov/vuln/detail/CVE-2019-11358\nhttps://github.com/advisories/GHSA-rmxg-73gg-4p98\nhttps://nvd.nist.gov/vuln/detail/CVE-2015-9251\nhttps://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b\nhttps://bugs.jquery.com/ticket/11974\nhttps://github.com/jquery/jquery.com/issues/162\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						}
-					],
-					"count": "1",
-					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
-					"otherinfo": "<p>The identified library jquery, version 1.10.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>CVE-2015-9251</p><p>CVE-2019-11358</p><p>https://github.com/jquery/jquery/issues/2432</p><p>http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/</p><p>http://research.insecurelabs.org/jquery/test/</p><p>https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/</p><p>https://nvd.nist.gov/vuln/detail/CVE-2019-11358</p><p>https://github.com/advisories/GHSA-rmxg-73gg-4p98</p><p>https://nvd.nist.gov/vuln/detail/CVE-2015-9251</p><p>https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b</p><p>https://bugs.jquery.com/ticket/11974</p><p>https://github.com/jquery/jquery.com/issues/162</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
-					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
-					"cweid": "1395",
-					"wascid": "-1",
-					"sourceid": "359"
-				},
-				{
-					"pluginid": "10110",
-					"alertRef": "10110",
-					"alert": "Dangerous JS Functions",
-					"name": "Dangerous JS Functions",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "153",
-							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/javascript/tarteaucitron/tarteaucitron.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval(",
-							"otherinfo": ""
-						},
-						{
-							"id": "154",
-							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/15d5563421a5eb528eec66ef8bb834c2.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval(",
-							"otherinfo": ""
-						}
-					],
-					"count": "2",
-					"solution": "<p>See the references for security advice on the use of these functions.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://angular.io/guide/security</p>",
-					"cweid": "749",
-					"wascid": "-1",
-					"sourceid": "355"
-				},
-				{
-					"pluginid": "110009",
-					"alertRef": "110009",
-					"alert": "Full Path Disclosure",
-					"name": "Full Path Disclosure",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
-					"instances":[ 
-						{
-							"id": "95",
-							"uri": "https://www.interieur.gouv.fr/core/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "90",
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "108",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "88",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "112",
-							"uri": "https://www.interieur.gouv.fr/core/*.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "87",
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "121",
-							"uri": "https://www.interieur.gouv.fr/core/*.svg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "110",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "138",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "135",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "131",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "128",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						}
-					],
-					"count": "12",
-					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
-					"cweid": "209",
-					"wascid": "13",
-					"sourceid": "167"
-				},
-				{
-					"pluginid": "90004",
-					"alertRef": "90004-1",
-					"alert": "Insufficient Site Isolation Against Spectre Vulnerability",
-					"name": "Insufficient Site Isolation Against Spectre Vulnerability",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
-					"instances":[ 
-						{
-							"id": "51",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.css",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "8",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "24",
-							"uri": "https://www.interieur.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "3",
-					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
-					"otherinfo": "",
-					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cross-Origin_Resource_Policy</p>",
-					"cweid": "693",
-					"wascid": "14",
-					"sourceid": "31"
-				},
-				{
-					"pluginid": "10063",
-					"alertRef": "10063-1",
-					"alert": "Permissions Policy Header Not Set",
-					"name": "Permissions Policy Header Not Set",
-					"riskcode": "1",
-					"confidence": "2",
-					"riskdesc": "Low (Medium)",
-					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
-					"instances":[ 
-						{
-							"id": "16",
-							"uri": "https://www.interieur.gouv.fr",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "89",
-							"uri": "https://www.interieur.gouv.fr/core/*.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "44",
-							"uri": "https://www.interieur.gouv.fr/core/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "83",
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "104",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "81",
-							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "52",
-							"uri": "https://www.interieur.gouv.fr/core/*.js$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "80",
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "56",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "98",
+							"id": "75",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
 							"method": "GET",
 							"param": "",
@@ -585,7 +594,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "14",
+							"id": "40",
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -613,7 +622,7 @@
 					"desc": "<p>The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>",
 					"instances":[ 
 						{
-							"id": "84",
+							"id": "56",
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -622,7 +631,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "72",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -631,7 +640,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "101",
+							"id": "91",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -640,7 +649,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "70",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -649,7 +658,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "105",
+							"id": "77",
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
@@ -658,7 +667,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "106",
 							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
@@ -667,7 +676,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "119",
+							"id": "100",
 							"uri": "https://www.interieur.gouv.fr/core/*.svg",
 							"method": "GET",
 							"param": "",
@@ -676,7 +685,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "106",
+							"id": "107",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
@@ -685,16 +694,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "136",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "X-Powered-By: MI",
-							"otherinfo": ""
-						},
-						{
-							"id": "132",
+							"id": "124",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -703,7 +703,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
+							"id": "131",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -712,8 +712,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "123",
+							"id": "117",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "X-Powered-By: MI",
+							"otherinfo": ""
+						},
+						{
+							"id": "123",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -727,7 +736,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework</p><p>https://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "167"
+					"sourceid": "81"
 				},
 				{
 					"pluginid": "10035",
@@ -740,7 +749,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "4",
+							"id": "7",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -749,16 +758,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "45",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "42",
+							"id": "9",
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "",
@@ -767,7 +767,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "49",
+							"id": "38",
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
@@ -776,7 +776,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "45",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
@@ -785,7 +785,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "69",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "36",
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -800,7 +809,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10035",
@@ -813,7 +822,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) headers were found, a response with multiple HSTS header entries is not compliant with the specification (RFC 6797) and only the first HSTS header will be processed others will be ignored by user agents or the HSTS policy may be incorrectly applied.</p><p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL).</p>",
 					"instances":[ 
 						{
-							"id": "71",
+							"id": "51",
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -822,7 +831,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
+							"id": "66",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -831,7 +840,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "67",
+							"id": "64",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -840,8 +849,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"id": "68",
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -849,7 +858,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
+							"id": "5",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -864,7 +873,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc6797#section-8.1</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "167"
+					"sourceid": "81"
 				},
 				{
 					"pluginid": "10096",
@@ -877,70 +886,79 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "139",
-							"uri": "https://www.interieur.gouv.fr/composer/Metapackage/README.txt",
+							"id": "134",
+							"uri": "https://www.interieur.gouv.fr/composer/Template/README.txt",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967280",
-							"otherinfo": "1542967280, which evaluates to: 2018-11-23 10:01:20."
+							"evidence": "1543179726",
+							"otherinfo": "1543179726, which evaluates to: 2018-11-25 21:02:06."
 						},
 						{
-							"id": "76",
-							"uri": "https://www.interieur.gouv.fr/core/*.css",
+							"id": "90",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967277",
-							"otherinfo": "1542967277, which evaluates to: 2018-11-23 10:01:17."
+							"evidence": "1543179722",
+							"otherinfo": "1543179722, which evaluates to: 2018-11-25 21:02:02."
 						},
 						{
-							"id": "74",
-							"uri": "https://www.interieur.gouv.fr/core/*.gif",
+							"id": "65",
+							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967276",
-							"otherinfo": "1542967276, which evaluates to: 2018-11-23 10:01:16."
+							"evidence": "1543179721",
+							"otherinfo": "1543179721, which evaluates to: 2018-11-25 21:02:01."
 						},
 						{
-							"id": "145",
+							"id": "137",
 							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/images/favicon.ico",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542961186",
-							"otherinfo": "1542961186, which evaluates to: 2018-11-23 08:19:46."
+							"evidence": "1543178968",
+							"otherinfo": "1543178968, which evaluates to: 2018-11-25 20:49:28."
 						},
 						{
-							"id": "140",
-							"uri": "https://www.interieur.gouv.fr/modules/README.txt",
+							"id": "130",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967281",
-							"otherinfo": "1542967281, which evaluates to: 2018-11-23 10:01:21."
+							"evidence": "1543179725",
+							"otherinfo": "1543179725, which evaluates to: 2018-11-25 21:02:05."
 						},
 						{
-							"id": "103",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
+							"id": "116",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967278",
-							"otherinfo": "1542967278, which evaluates to: 2018-11-23 10:01:18."
+							"evidence": "1543179724",
+							"otherinfo": "1543179724, which evaluates to: 2018-11-25 21:02:04."
 						},
 						{
-							"id": "129",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
+							"id": "135",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.svg",
 							"method": "GET",
 							"param": "X-Varnish",
 							"attack": "",
-							"evidence": "1542967279",
-							"otherinfo": "1542967279, which evaluates to: 2018-11-23 10:01:19."
+							"evidence": "1543179727",
+							"otherinfo": "1543179727, which evaluates to: 2018-11-25 21:02:07."
 						},
 						{
-							"id": "150",
+							"id": "145",
+							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/15d5563421a5eb528eec66ef8bb834c2.js",
+							"method": "GET",
+							"param": "X-Varnish",
+							"attack": "",
+							"evidence": "1542348419",
+							"otherinfo": "1542348419, which evaluates to: 2018-11-16 06:06:59."
+						},
+						{
+							"id": "141",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/7c90d87f9428a2056bc8cda2ebfdfd53.js",
 							"method": "GET",
 							"param": "X-Varnish",
@@ -949,16 +967,7 @@
 							"otherinfo": "1542509602, which evaluates to: 2018-11-18 02:53:22."
 						},
 						{
-							"id": "148",
-							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/stylesheets/a94caae8dfb23c1dad9404046c215181_screen,handheld,print.css",
-							"method": "GET",
-							"param": "X-Varnish",
-							"attack": "",
-							"evidence": "1542873658",
-							"otherinfo": "1542873658, which evaluates to: 2018-11-22 08:00:58."
-						},
-						{
-							"id": "143",
+							"id": "139",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/storage/images/media/mi/images/logos-pictos/rs-facebook-hover/989552-1-fre-FR/rs-facebook-hover_large.png",
 							"method": "GET",
 							"param": "X-Varnish",
@@ -967,7 +976,7 @@
 							"otherinfo": "1542348193, which evaluates to: 2018-11-16 06:03:13."
 						},
 						{
-							"id": "146",
+							"id": "143",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/storage/images/media/mi/images/logos-pictos/rs-instagram-hover/989558-1-fre-FR/rs-instagram-hover_large.png",
 							"method": "GET",
 							"param": "X-Varnish",
@@ -976,7 +985,7 @@
 							"otherinfo": "1542348191, which evaluates to: 2018-11-16 06:03:11."
 						},
 						{
-							"id": "151",
+							"id": "138",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/storage/images/media/mi/images/logos-pictos/rs-linkedin-hover/989564-1-fre-FR/rs-linkedin-hover_large.png",
 							"method": "GET",
 							"param": "X-Varnish",
@@ -987,11 +996,11 @@
 					],
 					"count": "12",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1542967280, which evaluates to: 2018-11-23 10:01:20.</p>",
+					"otherinfo": "<p>1543179726, which evaluates to: 2018-11-25 21:02:06.</p>",
 					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "188"
+					"sourceid": "199"
 				},
 				{
 					"pluginid": "10021",
@@ -1004,7 +1013,7 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"id": "22",
+							"id": "6",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1019,7 +1028,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "13"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10094",
@@ -1032,7 +1041,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "93",
+							"id": "60",
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -1041,7 +1050,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "85",
+							"id": "81",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -1050,7 +1059,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "107",
+							"id": "93",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -1059,7 +1068,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "86",
+							"id": "79",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -1068,7 +1077,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "111",
+							"id": "84",
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
@@ -1077,7 +1086,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "82",
+							"id": "109",
 							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
@@ -1086,7 +1095,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "120",
+							"id": "104",
 							"uri": "https://www.interieur.gouv.fr/core/*.svg",
 							"method": "GET",
 							"param": "",
@@ -1095,7 +1104,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "109",
+							"id": "108",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
@@ -1104,16 +1113,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "137",
-							"uri": "https://www.interieur.gouv.fr/profiles/*.gif",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "GWcuhUaZRPHbcBn0dopH5YG2n2X33TT90nHfsX799CA",
-							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
-						},
-						{
-							"id": "134",
+							"id": "127",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -1122,7 +1122,7 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "130",
+							"id": "132",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -1131,8 +1131,17 @@
 							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
 						},
 						{
-							"id": "126",
+							"id": "120",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "GWcuhUaZRPHbcBn0dopH5YG2n2X33TT90nHfsX799CA",
+							"otherinfo": "\\x0019g.\uFFFDF\uFFFDD\uFFFD\uFFFDp\\x0019\uFFFDv\uFFFDG\u5076\uFFFDe\uFFFD\uFFFD4\uFFFD\uFFFDq\u07F1~\uFFFD\uFFFD "
+						},
+						{
+							"id": "125",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1146,7 +1155,7 @@
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "167"
+					"sourceid": "81"
 				},
 				{
 					"pluginid": "10027",
@@ -1159,7 +1168,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "69",
+							"id": "48",
 							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
@@ -1168,7 +1177,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "68",
+							"id": "62",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -1177,7 +1186,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "100",
+							"id": "89",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -1186,7 +1195,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "65",
+							"id": "61",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -1195,7 +1204,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "99",
+							"id": "58",
 							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
@@ -1204,7 +1213,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//www.youtube.com/user/MinistereInterieur\" title=\"Retrouvez la cha\u00EEne YouTube Place Beauvau\" target=\"_blank\"></a></li>\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "64",
+							"id": "102",
 							"uri": "https://www.interieur.gouv.fr/core/*.png",
 							"method": "GET",
 							"param": "",
@@ -1213,7 +1222,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "118",
+							"id": "99",
 							"uri": "https://www.interieur.gouv.fr/core/*.svg",
 							"method": "GET",
 							"param": "",
@@ -1222,7 +1231,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "102",
+							"id": "103",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css",
 							"method": "GET",
 							"param": "",
@@ -1231,7 +1240,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "125",
+							"id": "121",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpeg",
 							"method": "GET",
 							"param": "",
@@ -1240,7 +1249,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//twitter.com/Interieur_Gouv\" target=\"_blank\"><img id=\"twitter-hover\" src=\"https://www.interieur.gouv.fr/var/miomcti/storage/ima\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "124",
+							"id": "128",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -1258,7 +1267,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//www.youtube.com/user/MinistereInterieur\" title=\"Retrouvez la cha\u00EEne YouTube Place Beauvau\" target=\"_blank\"></a></li>\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "133",
+							"id": "119",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.png",
 							"method": "GET",
 							"param": "",
@@ -1273,7 +1282,7 @@
 					"reference": "",
 					"cweid": "615",
 					"wascid": "13",
-					"sourceid": "167"
+					"sourceid": "81"
 				},
 				{
 					"pluginid": "10049",
@@ -1286,7 +1295,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "15",
+							"id": "11",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1295,7 +1304,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "43",
+							"id": "13",
 							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "",
@@ -1304,7 +1313,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "50",
+							"id": "41",
 							"uri": "https://www.interieur.gouv.fr/core/*.js$",
 							"method": "GET",
 							"param": "",
@@ -1313,7 +1322,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "55",
+							"id": "46",
 							"uri": "https://www.interieur.gouv.fr/profiles/*.css$",
 							"method": "GET",
 							"param": "",
@@ -1322,7 +1331,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "74",
+							"uri": "https://www.interieur.gouv.fr/profiles/*.js$",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "39",
 							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1331,7 +1349,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "5",
+					"count": "6",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
@@ -1350,7 +1368,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "17",
+							"id": "0",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "cache-control",
@@ -1365,7 +1383,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
 					"cweid": "525",
 					"wascid": "13",
-					"sourceid": "13"
+					"sourceid": "6"
 				},
 				{
 					"pluginid": "10050",
@@ -1378,67 +1396,49 @@
 					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "152",
+							"id": "144",
 							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/javascript/tarteaucitron/tarteaucitron.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 50",
+							"evidence": "Age: 439",
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "142",
-							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/stylesheets/miomcti_main_mobile.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 49",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "141",
-							"uri": "https://www.interieur.gouv.fr/extension/ow_miomcti_designs/design/miomcti_public/stylesheets/print.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 49",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "20",
+							"id": "4",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 49",
+							"evidence": "Age: 51",
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "149",
+							"id": "140",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/javascript/7c90d87f9428a2056bc8cda2ebfdfd53.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 50",
+							"evidence": "Age: 439",
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "147",
+							"id": "142",
 							"uri": "https://www.interieur.gouv.fr/var/miomcti/cache/public/stylesheets/a94caae8dfb23c1dad9404046c215181_screen,handheld,print.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Age: 475",
+							"evidence": "Age: 439",
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						}
 					],
-					"count": "6",
+					"count": "4",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "<p>The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.</p>",
 					"reference": "<p>https://tools.ietf.org/html/rfc7234</p><p>https://tools.ietf.org/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html</p>",
 					"cweid": "525",
 					"wascid": "-1",
-					"sourceid": "355"
+					"sourceid": "347"
 				},
 				{
 					"pluginid": "90005",
@@ -1451,7 +1451,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "38",
+							"id": "29",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1460,8 +1460,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
+							"id": "24",
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1469,17 +1469,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "27",
+							"id": "20",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Sec-Fetch-Dest",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "35",
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1487,13 +1478,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "29"
 				},
 				{
 					"pluginid": "90005",
@@ -1506,7 +1497,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "32",
+							"id": "28",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1515,8 +1506,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "10",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
+							"id": "23",
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1524,17 +1515,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "26",
+							"id": "19",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Sec-Fetch-Mode",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "34",
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1542,13 +1524,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "29"
 				},
 				{
 					"pluginid": "90005",
@@ -1561,7 +1543,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "30",
+							"id": "27",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1570,8 +1552,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
+							"id": "22",
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1579,17 +1561,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "25",
+							"id": "18",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Sec-Fetch-Site",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "29",
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1597,13 +1570,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "29"
 				},
 				{
 					"pluginid": "90005",
@@ -1616,7 +1589,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "39",
+							"id": "30",
 							"uri": "https://www.interieur.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1625,8 +1598,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "12",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
+							"id": "25",
+							"uri": "https://www.interieur.gouv.fr/core/*.css$",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -1634,17 +1607,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "28",
+							"id": "21",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "Sec-Fetch-User",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "37",
-							"uri": "https://www.interieur.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -1652,13 +1616,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "4",
+					"count": "3",
 					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "29"
 				},
 				{
 					"pluginid": "10049",
@@ -1671,25 +1635,16 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "48",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.css",
+							"id": "57",
+							"uri": "https://www.interieur.gouv.fr/core/*.css",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "max-age=7200",
+							"evidence": "max-age=600",
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
-							"uri": "https://www.interieur.gouv.fr/cdn-cgi/styles/cf.errors.ie.css",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "max-age=7200",
-							"otherinfo": ""
-						},
-						{
-							"id": "79",
+							"id": "73",
 							"uri": "https://www.interieur.gouv.fr/core/*.gif",
 							"method": "GET",
 							"param": "",
@@ -1698,7 +1653,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "71",
 							"uri": "https://www.interieur.gouv.fr/core/*.jpg",
 							"method": "GET",
 							"param": "",
@@ -1707,8 +1662,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "72",
-							"uri": "https://www.interieur.gouv.fr/core/*.png",
+							"id": "78",
+							"uri": "https://www.interieur.gouv.fr/core/*.js",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1716,7 +1671,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "23",
+							"id": "10",
 							"uri": "https://www.interieur.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1725,13 +1680,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "6",
+					"count": "5",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "31"
+					"sourceid": "81"
 				}
 			]
 		}
