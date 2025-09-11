@@ -212,7 +212,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on Tue, 9 Sept 2025 17:22:02
+		Generated on Thu, 11 Sept 2025 17:21:29
 	</h3>
 
 	<h3>
@@ -245,7 +245,7 @@ td {
 					<div>Medium</div>
 				</td>
 				<td align="center">
-					<div>5</div>
+					<div>6</div>
 				</td>
 			</tr>
 			<tr>
@@ -253,7 +253,7 @@ td {
 					<div>Low</div>
 				</td>
 				<td align="center">
-					<div>5</div>
+					<div>7</div>
 				</td>
 			</tr>
 			<tr>
@@ -296,6 +296,11 @@ td {
 					align="center">Number of Instances</th>
 			</tr>
 			<tr>
+				<td><a href="#10202">Absence of Anti-CSRF Tokens</a></td>
+				<td align="center" class="risk-2">Medium</td>
+				<td align="center">1</td>
+			</tr>
+			<tr>
 				<td><a href="#10055">CSP: Failure to Define Directive with No Fallback</a></td>
 				<td align="center" class="risk-2">Medium</td>
 				<td align="center">4</td>
@@ -316,7 +321,7 @@ td {
 				<td align="center">4</td>
 			</tr>
 			<tr>
-				<td><a href="#10099">Source Code Disclosure - SQL</a></td>
+				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
 				<td align="center" class="risk-2">Medium</td>
 				<td align="center">1</td>
 			</tr>
@@ -336,7 +341,17 @@ td {
 				<td align="center">10</td>
 			</tr>
 			<tr>
+				<td><a href="#10063">Permissions Policy Header Not Set</a></td>
+				<td align="center" class="risk-1">Low</td>
+				<td align="center">1</td>
+			</tr>
+			<tr>
 				<td><a href="#2">Private IP Disclosure</a></td>
+				<td align="center" class="risk-1">Low</td>
+				<td align="center">1</td>
+			</tr>
+			<tr>
+				<td><a href="#10035">Strict-Transport-Security Header Not Set</a></td>
 				<td align="center" class="risk-1">Low</td>
 				<td align="center">1</td>
 			</tr>
@@ -415,6 +430,153 @@ td {
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-2"><a
+						id="10202"></a>
+						<div>Medium</div></th>
+					<th class="risk-2">Absence of Anti-CSRF Tokens</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>No Anti-CSRF tokens were found in a HTML submission form.</div>
+							<br />
+						
+							<div>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</div>
+							<br />
+						
+							<div>CSRF attacks are effective in a number of situations, including:</div>
+							<br />
+						
+							<div>    * The victim has an active session on the target site.</div>
+							<br />
+						
+							<div>    * The victim is authenticated via HTTP auth on the target site.</div>
+							<br />
+						
+							<div>    * The victim is on the same local network as the target site.</div>
+							<br />
+						
+							<div>CSRF has primarily been used to perform an action against a target site using the victim&#39;s privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/contactez-nous?lang=fr">https://ants.gouv.fr/contactez-nous?lang=fr</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">&lt;form class=&quot;MuiBox-root css-13o7eu2&quot; action=&quot;/&quot; method=&quot;POST&quot;&gt;</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: &quot;ip&quot; &quot;subject&quot; ].</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Phase: Architecture and Design</div>
+							<br />
+						
+							<div>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</div>
+							<br />
+						
+							<div>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</div>
+							<br />
+						
+							<div>Phase: Implementation</div>
+							<br />
+						
+							<div>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</div>
+							<br />
+						
+							<div>Phase: Architecture and Design</div>
+							<br />
+						
+							<div>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</div>
+							<br />
+						
+							<div>Note that this can be bypassed using XSS.</div>
+							<br />
+						
+							<div>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</div>
+							<br />
+						
+							<div>Note that this can be bypassed using XSS.</div>
+							<br />
+						
+							<div>Use the ESAPI Session Management control.</div>
+							<br />
+						
+							<div>This control includes a component for CSRF.</div>
+							<br />
+						
+							<div>Do not use the GET method for any request that triggers a state change.</div>
+							<br />
+						
+							<div>Phase: Implementation</div>
+							<br />
+						
+							<div>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</a>
+							<br />
+						
+							<a href="https://cwe.mitre.org/data/definitions/352.html">https://cwe.mitre.org/data/definitions/352.html</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/352.html">352</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">9</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10202/">10202</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-2"><a
 						id="10055"></a>
 						<div>Medium</div></th>
 					<th class="risk-2">CSP: Failure to Define Directive with No Fallback</th>
@@ -484,7 +646,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-a968389a-1f0b-4c03-90d1-20066d84afff&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -546,7 +708,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-7101179d-2917-4c3f-8927-dfc257542650&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -642,7 +804,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-a968389a-1f0b-4c03-90d1-20066d84afff&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -706,7 +868,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-7101179d-2917-4c3f-8927-dfc257542650&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -962,7 +1124,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-a968389a-1f0b-4c03-90d1-20066d84afff&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1024,7 +1186,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-7101179d-2917-4c3f-8927-dfc257542650&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
+						<td width="80%">default-src &#39;self&#39;;style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src &#39;self&#39; https://*.ants.gouv.fr https://gva.et-gv.fr &#39;nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3&#39; https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src &#39;self&#39; https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src &#39;self&#39; https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src &#39;self&#39; https://fonts.gstatic.com data:;img-src &#39;self&#39; https: http: data:;media-src &#39;self&#39; https://captcha.liveidentity.com;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1113,14 +1275,14 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-2"><a
-						id="10099"></a>
+						id="10038"></a>
 						<div>Medium</div></th>
-					<th class="risk-2">Source Code Disclosure - SQL</th>
+					<th class="risk-2">Content Security Policy (CSP) Header Not Set</th>
 				</tr>
 				<tr>
 					<td width="20%">Description</td>
 					<td width="80%">
-							<div>Application Source Code was disclosed by the web server. - SQL</div>
+							<div>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</div>
 							
 						</td>
 				</tr>
@@ -1131,7 +1293,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/home/our-missions/digital-solutions/justif-adresse?lang=fr">https://ants.gouv.fr/home/our-missions/digital-solutions/justif-adresse?lang=fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/france-recovery-plan">https://ants.gouv.fr/home/france-recovery-plan</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1151,7 +1313,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">select one of the service providers specified in the request from a drop</td>
+						<td width="80%"></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1166,30 +1328,48 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 				<tr>
 					<td width="20%">Solution</td>
 					<td width="80%">
-							<div>Ensure that application Source Code is not available with alternative extensions, and ensure that source code is not present within other files or data deployed to the web server, or served by the web server.</div>
+							<div>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</div>
 							
 						</td>
 				</tr>
 				<tr>
 					<td width="20%">Reference</td>
 					<td width="80%">
-							<a href="https://www.wsj.com/articles/BL-CIOB-2999">https://www.wsj.com/articles/BL-CIOB-2999</a>
+							<a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</a>
+							<br />
+						
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</a>
+							<br />
+						
+							<a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a>
+							<br />
+						
+							<a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+							<br />
+						
+							<a href="https://web.dev/articles/csp">https://web.dev/articles/csp</a>
+							<br />
+						
+							<a href="https://caniuse.com/#feat=contentsecuritypolicy">https://caniuse.com/#feat=contentsecuritypolicy</a>
+							<br />
+						
+							<a href="https://content-security-policy.com/">https://content-security-policy.com/</a>
 							
 						</td>
 				</tr>
 				<tr>
 					<td width="20%">CWE Id</td>
 					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/540.html">540</a></td>
+						href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
 				</tr>
 				<tr>
 					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
+					<td width="80%">15</td>
 				</tr>
 				<tr>
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10099/">10099</a></td>
+						href="https://www.zaproxy.org/docs/alerts/10038/">10038</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>
@@ -1755,6 +1935,37 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">Cross-Origin-Resource-Policy</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/robots.txt">https://ants.gouv.fr/robots.txt</a></td>
 					</tr>
 					<tr>
@@ -1817,7 +2028,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite">https://ants.gouv.fr/toute-l-actualite</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1827,7 +2038,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Parameter</td>
-						<td width="80%">Cross-Origin-Resource-Policy</td>
+						<td width="80%">Cross-Origin-Embedder-Policy</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1848,7 +2059,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1910,37 +2121,6 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite">https://ants.gouv.fr/toute-l-actualite</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">Cross-Origin-Embedder-Policy</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
 					</tr>
 					<tr>
@@ -1972,7 +2152,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/sitemap.xml">https://ants.gouv.fr/sitemap.xml</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2003,7 +2183,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite">https://ants.gouv.fr/toute-l-actualite</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/sitemap.xml">https://ants.gouv.fr/sitemap.xml</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2071,6 +2251,102 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
 						href="https://www.zaproxy.org/docs/alerts/90004/">90004</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-1"><a
+						id="10063"></a>
+						<div>Low</div></th>
+					<th class="risk-1">Permissions Policy Header Not Set</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/france-recovery-plan">https://ants.gouv.fr/home/france-recovery-plan</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</a>
+							<br />
+						
+							<a href="https://developer.chrome.com/blog/feature-policy/">https://developer.chrome.com/blog/feature-policy/</a>
+							<br />
+						
+							<a href="https://scotthelme.co.uk/a-new-security-header-feature-policy/">https://scotthelme.co.uk/a-new-security-header-feature-policy/</a>
+							<br />
+						
+							<a href="https://w3c.github.io/webappsec-feature-policy/">https://w3c.github.io/webappsec-feature-policy/</a>
+							<br />
+						
+							<a href="https://www.smashingmagazine.com/2018/12/feature-policy/">https://www.smashingmagazine.com/2018/12/feature-policy/</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">15</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10063/">10063</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>
@@ -2163,6 +2439,102 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-1"><a
+						id="10035"></a>
+						<div>Low</div></th>
+					<th class="risk-1">Strict-Transport-Security Header Not Set</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/france-recovery-plan">https://ants.gouv.fr/home/france-recovery-plan</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</a>
+							<br />
+						
+							<a href="https://owasp.org/www-community/Security_Headers">https://owasp.org/www-community/Security_Headers</a>
+							<br />
+						
+							<a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</a>
+							<br />
+						
+							<a href="https://caniuse.com/stricttransportsecurity">https://caniuse.com/stricttransportsecurity</a>
+							<br />
+						
+							<a href="https://datatracker.ietf.org/doc/html/rfc6797">https://datatracker.ietf.org/doc/html/rfc6797</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/319.html">319</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">15</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10035/">10035</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-1"><a
 						id="10096"></a>
 						<div>Low</div></th>
 					<th class="risk-1">Timestamp Disclosure - Unix</th>
@@ -2201,12 +2573,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438230</td>
+						<td width="80%">1757611038</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438230, which evaluates to: 2025-09-09 17:17:10.</td>
+						<td width="80%">1757611038, which evaluates to: 2025-09-11 17:17:18.</td>
 					</tr>
 				
 					<tr>
@@ -2232,12 +2604,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438232</td>
+						<td width="80%">1757611039</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438232, which evaluates to: 2025-09-09 17:17:12.</td>
+						<td width="80%">1757611039, which evaluates to: 2025-09-11 17:17:19.</td>
 					</tr>
 				
 					<tr>
@@ -2263,18 +2635,18 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611040</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611040, which evaluates to: 2025-09-11 17:17:20.</td>
 					</tr>
 				
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect">https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/accessibility-partially-compliant">https://ants.gouv.fr/home/accessibility-partially-compliant</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2294,12 +2666,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611040</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611040, which evaluates to: 2025-09-11 17:17:20.</td>
 					</tr>
 				
 					<tr>
@@ -2325,12 +2697,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611041</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611041, which evaluates to: 2025-09-11 17:17:21.</td>
 					</tr>
 				
 					<tr>
@@ -2356,12 +2728,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611041</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611041, which evaluates to: 2025-09-11 17:17:21.</td>
 					</tr>
 				
 					<tr>
@@ -2387,12 +2759,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438232</td>
+						<td width="80%">1757611040</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438232, which evaluates to: 2025-09-09 17:17:12.</td>
+						<td width="80%">1757611040, which evaluates to: 2025-09-11 17:17:20.</td>
 					</tr>
 				
 					<tr>
@@ -2418,12 +2790,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611040</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611040, which evaluates to: 2025-09-11 17:17:20.</td>
 					</tr>
 				
 					<tr>
@@ -2449,12 +2821,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">1757438233</td>
+						<td width="80%">1757611040</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">1757438233, which evaluates to: 2025-09-09 17:17:13.</td>
+						<td width="80%">1757611040, which evaluates to: 2025-09-11 17:17:20.</td>
 					</tr>
 				
 				<tr>
@@ -2533,12 +2905,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ZThiNDQ2MGItZDh0ZS00YzY5LWEyY2MtMzQzNDIyMjdiMDAyJDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">MmY3ZWY2YzAtZDh0ZS00OWVjLTg3YjgtM2I3YjYwNDdiZWFjJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">e8b4460b-d8te-4c69-a2cc-34342227b002$13.83.217.54</td>
+						<td width="80%">2f7ef6c0-d8te-49ec-87b8-3b7b6047beac$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2564,12 +2936,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ZjBiZWQxM2UtZDh0ZS00YTQ2LWIzYWQtNDFhYTM0NjlmOGE5JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">NTQ2NWY2NTItZDh0ZS00Y2FjLWJhZjYtNzdkMTRkYWVmNGMwJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">f0bed13e-d8te-4a46-b3ad-41aa3469f8a9$13.83.217.54</td>
+						<td width="80%">5465f652-d8te-4cac-baf6-77d14daef4c0$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2595,12 +2967,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">NjU2ZmUyZTUtZDh0ZS00MjExLTgxZjItNjAwZGY5OGE4Njk4JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">NjBkMmYwZDYtZDh0ZS00MWQ5LWJhMTYtZWNjMDU3MDhhNjI5JDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">656fe2e5-d8te-4211-81f2-600df98a8698$13.83.217.54</td>
+						<td width="80%">60d2f0d6-d8te-41d9-ba16-ecc05708a629$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2626,12 +2998,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ODc2YzYyNmQtZDh0ZS00ZDE2LWFlMTItZmYxZDcwOTM4YmQwJDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">OWZhZDhjZWEtZDh0ZS00NTQyLTkyZWUtYmIxZTU4YzYxMDI1JDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">876c626d-d8te-4d16-ae12-ff1d70938bd0$13.83.217.54</td>
+						<td width="80%">9fad8cea-d8te-4542-92ee-bb1e58c61025$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2657,12 +3029,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">NjYxZDI5MTktZDh0ZS00YzYzLTk1NGQtNGYzYWZjNzRjMDFiJDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">OGQyN2U1ZDktZDh0ZS00OGUzLThhOWUtMGYxNDc5ZWUwNWNmJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">661d2919-d8te-4c63-954d-4f3afc74c01b$13.83.217.54</td>
+						<td width="80%">8d27e5d9-d8te-48e3-8a9e-0f1479ee05cf$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2688,12 +3060,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ZGZlZTdhYTMtZDh0ZS00M2RjLWI5MTktODEyMzU5NGY5YmVmJDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">N2U0ZjYyODQtZDh0ZS00ZTRhLTlkNGEtZDBmZWE5YTdjODAyJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">dfee7aa3-d8te-43dc-b919-8123594f9bef$13.83.217.54</td>
+						<td width="80%">7e4f6284-d8te-4e4a-9d4a-d0fea9a7c802$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2719,12 +3091,43 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ZmVkNWQ5MmUtZDh0ZS00ZTJjLWJhMTAtZWIwMDQ4NzI1MTQ3JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">ZmM5OTIwM2MtZDh0ZS00OGMxLWFjNzMtNmM2ZGZmNDYyMWM3JDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">fed5d92e-d8te-4e2c-ba10-eb0048725147$13.83.217.54</td>
+						<td width="80%">fc99203c-d8te-48c1-ac73-6c6dff4621c7$172.172.87.69</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences">https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">NjU2ODE0ZjEtZDh0ZS00MTAzLThjMTQtNzBlYTRhYjI3YmRjJDE3Mi4xNzIuODcuNjk=</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">656814f1-d8te-4103-8c14-70ea4ab27bdc$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2750,12 +3153,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">ZGRiOGMwYTctZDh0ZS00NjI3LWE1MWItY2YzZmM5YmMxOTI3JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">ZWE5MDA4NWQtZDh0ZS00ZGU1LWEyMTItNWU1NTc5OWExYjBkJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">ddb8c0a7-d8te-4627-a51b-cf3fc9bc1927$13.83.217.54</td>
+						<td width="80%">ea90085d-d8te-4de5-a212-5e55799a1b0d$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2781,12 +3184,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">NTdhNTNhNDgtZDh0ZS00NmRjLWJmOTYtZGRiZDg0YjA2YmI4JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">NTk1NDAzMjItZDh0ZS00OTE3LWJiMDQtYWM1ZjcyMTk4NGNkJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">57a53a48-d8te-46dc-bf96-ddbd84b06bb8$13.83.217.54</td>
+						<td width="80%">59540322-d8te-4917-bb04-ac5f721984cd$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2812,43 +3215,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">NThkNzliNmYtZDh0ZS00ZmM0LWEwYzktZTRmZDlhODQwMmE4JDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">Yzc4NGQ4NGYtZDh0ZS00MmIyLWE3ZDAtYjYxZjBjODI2MWY1JDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">58d79b6f-d8te-4fc4-a0c9-e4fd9a8402a8$13.83.217.54</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee">https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">ZTE3YTUyMGYtZDh0ZS00NmJkLWI4MjEtYjM5YzVkOTcxYTIyJDEzLjgzLjIxNy41NA==</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">e17a520f-d8te-46bd-b821-b39c5d971a22$13.83.217.54</td>
+						<td width="80%">c784d84f-d8te-42b2-a7d0-b61f0c8261f5$172.172.87.69</td>
 					</tr>
 				
 					<tr>
@@ -2874,12 +3246,12 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">OThhNGU5OTctZDh0ZS00M2Q4LTg4NTctMDFiNDFmYTU0NTMwJDEzLjgzLjIxNy41NA==</td>
+						<td width="80%">MDAwZTVhNWMtZDh0ZS00MTM4LTg3YjAtNWU1MmY1N2Y3MGMxJDE3Mi4xNzIuODcuNjk=</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">98a4e997-d8te-43d8-8857-01b41fa54530$13.83.217.54</td>
+						<td width="80%">000e5a5c-d8te-4138-87b0-5e52f57f70c1$172.172.87.69</td>
 					</tr>
 				
 				<tr>
@@ -3211,6 +3583,37 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences">https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">query</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">The following pattern was used: \bQUERY\b and was detected in likely comment: &quot;//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://&quot;, see evidence field for the suspicious comment/snippet.</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/rechercher">https://ants.gouv.fr/rechercher</a></td>
 					</tr>
 					<tr>
@@ -3274,37 +3677,6 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives">https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">query</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">The following pattern was used: \bQUERY\b and was detected in likely comment: &quot;//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://&quot;, see evidence field for the suspicious comment/snippet.</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee">https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3602,6 +3974,37 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences">https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">&lt;a class=&quot;MuiBox-root css-4g6ai3&quot; target=&quot;_self&quot; aria-label=&quot;Logo en-tête - ANTS&quot; href=&quot;/?lang=fr&quot;&gt;&lt;p class=&quot;fr-logo&quot;&gt;République&lt;br/&gt;Française&lt;/p&gt;&lt;/a&gt;</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">Links have been found with a target of &#39;_self&#39; - this is often used by modern frameworks to force a full page reload.</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/rechercher">https://ants.gouv.fr/rechercher</a></td>
 					</tr>
 					<tr>
@@ -3665,37 +4068,6 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives">https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">&lt;a class=&quot;MuiBox-root css-4g6ai3&quot; target=&quot;_self&quot; aria-label=&quot;Logo en-tête - ANTS&quot; href=&quot;/?lang=fr&quot;&gt;&lt;p class=&quot;fr-logo&quot;&gt;République&lt;br/&gt;Française&lt;/p&gt;&lt;/a&gt;</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">Links have been found with a target of &#39;_self&#39; - this is often used by modern frameworks to force a full page reload.</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee">https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4206,7 +4578,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4352,7 +4724,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4498,7 +4870,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4644,7 +5016,7 @@ script-src, style-src, img-src, connect-src, frame-src, font-src, media-src, obj
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr/home/about-us">https://ants.gouv.fr/home/about-us</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4920,38 +5292,6 @@ cookie:__uzmd</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/home/all-the-news/fraud-alert">https://ants.gouv.fr/home/all-the-news/fraud-alert</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">__uzmc</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">__uzmc</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%">cookie:__uzmc
-cookie:__uzmd</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc">https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc</a></td>
 					</tr>
 					<tr>
@@ -5114,7 +5454,38 @@ cookie:__uzmd</td>
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens">https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens</a></td>
+						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">__uzmb</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">__uzmb</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">cookie:__uzmb</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="https://ants.gouv.fr">https://ants.gouv.fr</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5139,8 +5510,7 @@ cookie:__uzmd</td>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
-						<td width="80%">cookie:__uzmc
-cookie:__uzmd</td>
+						<td width="80%">cookie:__uzmc</td>
 					</tr>
 				
 				<tr>

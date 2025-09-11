@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Tue, 9 Sept 2025 17:22:02",
-	"created": "2025-09-09T17:22:02.297411436Z",
+	"@generated": "Thu, 11 Sept 2025 17:21:29",
+	"created": "2025-09-11T17:21:29.585076871Z",
 	"site":[ 
 		{
 			"@name": "https://ants.gouv.fr",
@@ -10,6 +10,34 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"id": "385",
+							"uri": "https://ants.gouv.fr/contactez-nous?lang=fr",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"MuiBox-root css-13o7eu2\" action=\"/\" method=\"POST\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ]."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 1: \"ip\" \"subject\" ].</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "154"
+				},
 				{
 					"pluginid": "10055",
 					"alertRef": "10055-13",
@@ -21,7 +49,7 @@
 					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
 					"instances":[ 
 						{
-							"id": "40",
+							"id": "44",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -30,16 +58,16 @@
 							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "37",
+							"id": "41",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-a968389a-1f0b-4c03-90d1-20066d84afff' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "30",
+							"id": "29",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -48,12 +76,12 @@
 							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
 						},
 						{
-							"id": "27",
+							"id": "26",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-7101179d-2917-4c3f-8927-dfc257542650' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The directive(s): frame-ancestors is/are among the directives that do not fallback to default-src."
 						}
 					],
@@ -76,16 +104,16 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "38",
+							"id": "42",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-a968389a-1f0b-4c03-90d1-20066d84afff' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
-							"id": "41",
+							"id": "45",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -94,16 +122,16 @@
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nscript-src, style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src, worker-src"
 						},
 						{
-							"id": "28",
+							"id": "27",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-7101179d-2917-4c3f-8927-dfc257542650' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nimg-src"
 						},
 						{
-							"id": "31",
+							"id": "30",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -131,7 +159,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "42",
+							"id": "46",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -140,7 +168,7 @@
 							"otherinfo": "script-src includes unsafe-inline."
 						},
 						{
-							"id": "32",
+							"id": "31",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -168,16 +196,16 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "39",
+							"id": "43",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-a968389a-1f0b-4c03-90d1-20066d84afff' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-1bd7fdf5-ac2c-43af-8dab-97ce48a6f1ed' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "43",
+							"id": "47",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -186,16 +214,16 @@
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "29",
+							"id": "28",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
 							"attack": "",
-							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-7101179d-2917-4c3f-8927-dfc257542650' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
+							"evidence": "default-src 'self';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;script-src 'self' https://*.ants.gouv.fr https://gva.et-gv.fr 'nonce-f5a0444b-8e41-4252-a0c2-a50e5665bcd3' https://captcha.liveidentity.com https://cdn.woopic.com/ https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://genii-messages-03.tolk.ai https://genii-messages-04.tolk.ai https://genii-messages-05.tolk.ai https://genii-messages-06.tolk.ai;frame-src 'self' https://www.youtube.com/ https://www.dailymotion.com/ https://player.vimeo.com/;connect-src 'self' https://geo.api.gouv.fr https://*.ants.gouv.fr https://genii-api.tolk.ai https://genii-messages.tolk.ai wss://genii-messages.tolk.ai https://api.ipify.org https://captcha.liveidentity.com;font-src 'self' https://fonts.gstatic.com data:;img-src 'self' https: http: data:;media-src 'self' https://captcha.liveidentity.com;object-src 'none';base-uri 'self';form-action 'self'",
 							"otherinfo": "style-src includes unsafe-inline."
 						},
 						{
-							"id": "33",
+							"id": "32",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Content-Security-Policy",
@@ -213,32 +241,32 @@
 					"sourceid": "1"
 				},
 				{
-					"pluginid": "10099",
-					"alertRef": "10099",
-					"alert": "Source Code Disclosure - SQL",
-					"name": "Source Code Disclosure - SQL",
+					"pluginid": "10038",
+					"alertRef": "10038-1",
+					"alert": "Content Security Policy (CSP) Header Not Set",
+					"name": "Content Security Policy (CSP) Header Not Set",
 					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>Application Source Code was disclosed by the web server. - SQL</p>",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "382",
-							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/justif-adresse?lang=fr",
+							"id": "138",
+							"uri": "https://ants.gouv.fr/home/france-recovery-plan",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "select one of the service providers specified in the request from a drop",
+							"evidence": "",
 							"otherinfo": ""
 						}
 					],
 					"count": "1",
-					"solution": "<p>Ensure that application Source Code is not available with alternative extensions, and ensure that source code is not present within other files or data deployed to the web server, or served by the web server.</p>",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
 					"otherinfo": "",
-					"reference": "<p>https://www.wsj.com/articles/BL-CIOB-2999</p>",
-					"cweid": "540",
-					"wascid": "13",
-					"sourceid": "181"
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "121"
 				},
 				{
 					"pluginid": "10011",
@@ -251,7 +279,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "44",
+							"id": "48",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzma",
@@ -260,7 +288,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "45",
+							"id": "49",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzmb",
@@ -269,7 +297,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "47",
+							"id": "51",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzmc",
@@ -278,7 +306,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "48",
+							"id": "52",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzmd",
@@ -287,7 +315,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "46",
+							"id": "50",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzme",
@@ -296,7 +324,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "34",
+							"id": "33",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "__uzmc",
@@ -305,7 +333,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "35",
+							"id": "34",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "__uzmd",
@@ -393,7 +421,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "60"
+					"sourceid": "62"
 				},
 				{
 					"pluginid": "90004",
@@ -406,8 +434,17 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "62",
+							"id": "73",
 							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "76",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -424,44 +461,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "18",
+							"id": "14",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "73",
-							"uri": "https://ants.gouv.fr/toute-l-actualite",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "63",
-							"uri": "https://ants.gouv.fr",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "19",
-							"uri": "https://ants.gouv.fr/sitemap.xml",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
 							"id": "74",
-							"uri": "https://ants.gouv.fr/toute-l-actualite",
+							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -469,7 +479,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
+							"id": "77",
+							"uri": "https://ants.gouv.fr/home/about-us",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "15",
+							"uri": "https://ants.gouv.fr/sitemap.xml",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "75",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -478,8 +506,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "20",
-							"uri": "https://ants.gouv.fr/sitemap.xml",
+							"id": "78",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -487,8 +515,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
-							"uri": "https://ants.gouv.fr/toute-l-actualite",
+							"id": "16",
+							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -505,6 +533,34 @@
 					"sourceid": "1"
 				},
 				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"id": "140",
+							"uri": "https://ants.gouv.fr/home/france-recovery-plan",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "121"
+				},
+				{
 					"pluginid": "2",
 					"alertRef": "2",
 					"alert": "Private IP Disclosure",
@@ -515,7 +571,7 @@
 					"desc": "<p>A private IP (such as 10.x.x.x, 172.x.x.x, 192.168.x.x) or an Amazon EC2 private hostname (for example, ip-10-0-56-78) has been found in the HTTP response body. This information might be helpful for further attacks targeting internal systems.</p>",
 					"instances":[ 
 						{
-							"id": "120",
+							"id": "106",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
@@ -530,7 +586,35 @@
 					"reference": "<p>https://tools.ietf.org/html/rfc1918</p>",
 					"cweid": "497",
 					"wascid": "13",
-					"sourceid": "71"
+					"sourceid": "69"
+				},
+				{
+					"pluginid": "10035",
+					"alertRef": "10035-1",
+					"alert": "Strict-Transport-Security Header Not Set",
+					"name": "Strict-Transport-Security Header Not Set",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "Low (High)",
+					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
+					"instances":[ 
+						{
+							"id": "139",
+							"uri": "https://ants.gouv.fr/home/france-recovery-plan",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
+					"cweid": "319",
+					"wascid": "15",
+					"sourceid": "121"
 				},
 				{
 					"pluginid": "10096",
@@ -543,58 +627,58 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "55",
+							"id": "61",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438230",
-							"otherinfo": "1757438230, which evaluates to: 2025-09-09 17:17:10."
+							"evidence": "1757611038",
+							"otherinfo": "1757611038, which evaluates to: 2025-09-11 17:17:18."
 						},
 						{
-							"id": "71",
+							"id": "69",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438232",
-							"otherinfo": "1757438232, which evaluates to: 2025-09-09 17:17:12."
+							"evidence": "1757611039",
+							"otherinfo": "1757611039, which evaluates to: 2025-09-11 17:17:19."
 						},
 						{
-							"id": "107",
+							"id": "66",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611040",
+							"otherinfo": "1757611040, which evaluates to: 2025-09-11 17:17:20."
 						},
 						{
-							"id": "111",
-							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
+							"id": "114",
+							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611040",
+							"otherinfo": "1757611040, which evaluates to: 2025-09-11 17:17:20."
 						},
 						{
-							"id": "96",
+							"id": "104",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611041",
+							"otherinfo": "1757611041, which evaluates to: 2025-09-11 17:17:21."
 						},
 						{
-							"id": "58",
+							"id": "55",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611041",
+							"otherinfo": "1757611041, which evaluates to: 2025-09-11 17:17:21."
 						},
 						{
 							"id": "9",
@@ -602,31 +686,31 @@
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438232",
-							"otherinfo": "1757438232, which evaluates to: 2025-09-09 17:17:12."
+							"evidence": "1757611040",
+							"otherinfo": "1757611040, which evaluates to: 2025-09-11 17:17:20."
 						},
 						{
-							"id": "67",
+							"id": "103",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611040",
+							"otherinfo": "1757611040, which evaluates to: 2025-09-11 17:17:20."
 						},
 						{
-							"id": "102",
+							"id": "110",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "Set-Cookie",
 							"attack": "",
-							"evidence": "1757438233",
-							"otherinfo": "1757438233, which evaluates to: 2025-09-09 17:17:13."
+							"evidence": "1757611040",
+							"otherinfo": "1757611040, which evaluates to: 2025-09-11 17:17:20."
 						}
 					],
 					"count": "9",
 					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
-					"otherinfo": "<p>1757438230, which evaluates to: 2025-09-09 17:17:10.</p>",
+					"otherinfo": "<p>1757611038, which evaluates to: 2025-09-11 17:17:18.</p>",
 					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
 					"cweid": "497",
 					"wascid": "13",
@@ -643,49 +727,49 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "80",
+							"id": "87",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZThiNDQ2MGItZDh0ZS00YzY5LWEyY2MtMzQzNDIyMjdiMDAyJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "e8b4460b-d8te-4c69-a2cc-34342227b002$13.83.217.54"
+							"evidence": "MmY3ZWY2YzAtZDh0ZS00OWVjLTg3YjgtM2I3YjYwNDdiZWFjJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "2f7ef6c0-d8te-49ec-87b8-3b7b6047beac$172.172.87.69"
 						},
 						{
-							"id": "86",
+							"id": "88",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZjBiZWQxM2UtZDh0ZS00YTQ2LWIzYWQtNDFhYTM0NjlmOGE5JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "f0bed13e-d8te-4a46-b3ad-41aa3469f8a9$13.83.217.54"
+							"evidence": "NTQ2NWY2NTItZDh0ZS00Y2FjLWJhZjYtNzdkMTRkYWVmNGMwJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "5465f652-d8te-4cac-baf6-77d14daef4c0$172.172.87.69"
 						},
 						{
-							"id": "115",
+							"id": "82",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "NjU2ZmUyZTUtZDh0ZS00MjExLTgxZjItNjAwZGY5OGE4Njk4JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "656fe2e5-d8te-4211-81f2-600df98a8698$13.83.217.54"
+							"evidence": "NjBkMmYwZDYtZDh0ZS00MWQ5LWJhMTYtZWNjMDU3MDhhNjI5JDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "60d2f0d6-d8te-41d9-ba16-ecc05708a629$172.172.87.69"
 						},
 						{
-							"id": "134",
+							"id": "119",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ODc2YzYyNmQtZDh0ZS00ZDE2LWFlMTItZmYxZDcwOTM4YmQwJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "876c626d-d8te-4d16-ae12-ff1d70938bd0$13.83.217.54"
+							"evidence": "OWZhZDhjZWEtZDh0ZS00NTQyLTkyZWUtYmIxZTU4YzYxMDI1JDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "9fad8cea-d8te-4542-92ee-bb1e58c61025$172.172.87.69"
 						},
 						{
-							"id": "118",
+							"id": "134",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "NjYxZDI5MTktZDh0ZS00YzYzLTk1NGQtNGYzYWZjNzRjMDFiJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "661d2919-d8te-4c63-954d-4f3afc74c01b$13.83.217.54"
+							"evidence": "OGQyN2U1ZDktZDh0ZS00OGUzLThhOWUtMGYxNDc5ZWUwNWNmJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "8d27e5d9-d8te-48e3-8a9e-0f1479ee05cf$172.172.87.69"
 						},
 						{
 							"id": "136",
@@ -693,53 +777,53 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZGZlZTdhYTMtZDh0ZS00M2RjLWI5MTktODEyMzU5NGY5YmVmJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "dfee7aa3-d8te-43dc-b919-8123594f9bef$13.83.217.54"
+							"evidence": "N2U0ZjYyODQtZDh0ZS00ZTRhLTlkNGEtZDBmZWE5YTdjODAyJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "7e4f6284-d8te-4e4a-9d4a-d0fea9a7c802$172.172.87.69"
 						},
 						{
-							"id": "113",
+							"id": "117",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZmVkNWQ5MmUtZDh0ZS00ZTJjLWJhMTAtZWIwMDQ4NzI1MTQ3JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "fed5d92e-d8te-4e2c-ba10-eb0048725147$13.83.217.54"
+							"evidence": "ZmM5OTIwM2MtZDh0ZS00OGMxLWFjNzMtNmM2ZGZmNDYyMWM3JDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "fc99203c-d8te-48c1-ac73-6c6dff4621c7$172.172.87.69"
 						},
 						{
-							"id": "88",
+							"id": "137",
+							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "NjU2ODE0ZjEtZDh0ZS00MTAzLThjMTQtNzBlYTRhYjI3YmRjJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "656814f1-d8te-4103-8c14-70ea4ab27bdc$172.172.87.69"
+						},
+						{
+							"id": "89",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "ZGRiOGMwYTctZDh0ZS00NjI3LWE1MWItY2YzZmM5YmMxOTI3JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "ddb8c0a7-d8te-4627-a51b-cf3fc9bc1927$13.83.217.54"
+							"evidence": "ZWE5MDA4NWQtZDh0ZS00ZGU1LWEyMTItNWU1NTc5OWExYjBkJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "ea90085d-d8te-4de5-a212-5e55799a1b0d$172.172.87.69"
 						},
 						{
-							"id": "85",
+							"id": "116",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "NTdhNTNhNDgtZDh0ZS00NmRjLWJmOTYtZGRiZDg0YjA2YmI4JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "57a53a48-d8te-46dc-bf96-ddbd84b06bb8$13.83.217.54"
+							"evidence": "NTk1NDAzMjItZDh0ZS00OTE3LWJiMDQtYWM1ZjcyMTk4NGNkJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "59540322-d8te-4917-bb04-ac5f721984cd$172.172.87.69"
 						},
 						{
-							"id": "114",
+							"id": "118",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "NThkNzliNmYtZDh0ZS00ZmM0LWEwYzktZTRmZDlhODQwMmE4JDEzLjgzLjIxNy41NA==",
-							"otherinfo": "58d79b6f-d8te-4fc4-a0c9-e4fd9a8402a8$13.83.217.54"
-						},
-						{
-							"id": "137",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "ZTE3YTUyMGYtZDh0ZS00NmJkLWI4MjEtYjM5YzVkOTcxYTIyJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "e17a520f-d8te-46bd-b821-b39c5d971a22$13.83.217.54"
+							"evidence": "Yzc4NGQ4NGYtZDh0ZS00MmIyLWE3ZDAtYjYxZjBjODI2MWY1JDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "c784d84f-d8te-42b2-a7d0-b61f0c8261f5$172.172.87.69"
 						},
 						{
 							"id": "135",
@@ -747,13 +831,13 @@
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "OThhNGU5OTctZDh0ZS00M2Q4LTg4NTctMDFiNDFmYTU0NTMwJDEzLjgzLjIxNy41NA==",
-							"otherinfo": "98a4e997-d8te-43d8-8857-01b41fa54530$13.83.217.54"
+							"evidence": "MDAwZTVhNWMtZDh0ZS00MTM4LTg3YjAtNWU1MmY1N2Y3MGMxJDE3Mi4xNzIuODcuNjk=",
+							"otherinfo": "000e5a5c-d8te-4138-87b0-5e52f57f70c1$172.172.87.69"
 						}
 					],
 					"count": "12",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
-					"otherinfo": "<p>e8b4460b-d8te-4c69-a2cc-34342227b002$13.83.217.54</p>",
+					"otherinfo": "<p>2f7ef6c0-d8te-49ec-87b8-3b7b6047beac$172.172.87.69</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
@@ -798,7 +882,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "51",
+							"id": "59",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -807,7 +891,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "105",
+							"id": "63",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -816,7 +900,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "123",
+							"id": "112",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
@@ -825,7 +909,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "109",
+							"id": "124",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -843,8 +927,17 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "94",
+							"id": "101",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "132",
+							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -861,7 +954,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "65",
+							"id": "98",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -870,7 +963,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "100",
+							"id": "108",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -879,16 +972,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "132",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "query",
-							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//fonts.googleapis.com https://genii-script.tolk.ai https://genii-messages-01.tolk.ai https://genii-messages-02.tolk.ai https://\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "127",
+							"id": "126",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
@@ -916,7 +1000,7 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "52",
+							"id": "60",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -925,7 +1009,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "106",
+							"id": "64",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -934,7 +1018,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "124",
+							"id": "113",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
@@ -943,7 +1027,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "110",
+							"id": "125",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -961,8 +1045,17 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "95",
+							"id": "102",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "133",
+							"uri": "https://ants.gouv.fr/home/our-missions/documents-produced-by-the-ants/identity-documents/driving-and-boating-licences",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -979,7 +1072,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "66",
+							"id": "99",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -988,7 +1081,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "101",
+							"id": "109",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -997,16 +1090,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "133",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/la-duree-de-validite-des-pre-demandes-de-passeports-et-cartes-nationales-d-identite-est-allongee",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a class=\"MuiBox-root css-4g6ai3\" target=\"_self\" aria-label=\"Logo en-t\u00EAte - ANTS\" href=\"/?lang=fr\"><p class=\"fr-logo\">R\u00E9publique<br/>Fran\u00E7aise</p></a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "128",
+							"id": "127",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "",
@@ -1034,7 +1118,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "36",
+							"id": "40",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "cache-control",
@@ -1043,7 +1127,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
+							"id": "56",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "cache-control",
@@ -1052,7 +1136,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "119",
+							"id": "100",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "cache-control",
@@ -1061,7 +1145,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "104",
+							"id": "121",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "cache-control",
@@ -1070,7 +1154,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "125",
+							"id": "123",
 							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
 							"method": "GET",
 							"param": "cache-control",
@@ -1079,7 +1163,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
+							"id": "95",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "cache-control",
@@ -1106,7 +1190,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
+							"id": "94",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "cache-control",
@@ -1115,7 +1199,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "97",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "cache-control",
@@ -1124,7 +1208,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "121",
+							"id": "122",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
 							"method": "GET",
 							"param": "cache-control",
@@ -1152,8 +1236,8 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "83",
-							"uri": "https://ants.gouv.fr",
+							"id": "85",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1161,7 +1245,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "15",
+							"id": "19",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1185,7 +1269,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "60"
 				},
 				{
 					"pluginid": "90005",
@@ -1198,8 +1282,8 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "82",
-							"uri": "https://ants.gouv.fr",
+							"id": "84",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1207,7 +1291,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "14",
+							"id": "18",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1231,7 +1315,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "60"
 				},
 				{
 					"pluginid": "90005",
@@ -1244,8 +1328,8 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "81",
-							"uri": "https://ants.gouv.fr",
+							"id": "83",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1253,7 +1337,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "17",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1277,7 +1361,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "60"
 				},
 				{
 					"pluginid": "90005",
@@ -1290,8 +1374,8 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "84",
-							"uri": "https://ants.gouv.fr",
+							"id": "86",
+							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -1299,7 +1383,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "16",
+							"id": "20",
 							"uri": "https://ants.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1323,7 +1407,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "60"
 				},
 				{
 					"pluginid": "10112",
@@ -1336,7 +1420,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "35",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzma",
@@ -1345,7 +1429,7 @@
 							"otherinfo": "cookie:__uzma\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "93",
+							"id": "36",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1354,7 +1438,7 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "116",
+							"id": "96",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1363,7 +1447,7 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "99",
+							"id": "120",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1372,16 +1456,7 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "122",
-							"uri": "https://ants.gouv.fr/home/all-the-news/fraud-alert",
-							"method": "GET",
-							"param": "__uzmc",
-							"attack": "",
-							"evidence": "__uzmc",
-							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
-						},
-						{
-							"id": "87",
+							"id": "92",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1390,7 +1465,7 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "26",
+							"id": "25",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1408,7 +1483,7 @@
 							"otherinfo": "cookie:__uzma\ncookie:__uzmc\ncookie:__uzmb\ncookie:__uzmd"
 						},
 						{
-							"id": "49",
+							"id": "91",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1417,7 +1492,7 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "91",
+							"id": "93",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "__uzmc",
@@ -1426,13 +1501,22 @@
 							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
 						},
 						{
-							"id": "117",
-							"uri": "https://ants.gouv.fr/toute-l-actualite/maintien-des-dispositions-relatives-aux-titres-didentite-expires-pour-le-passage-des-examens",
+							"id": "39",
+							"uri": "https://ants.gouv.fr",
+							"method": "GET",
+							"param": "__uzmb",
+							"attack": "",
+							"evidence": "__uzmb",
+							"otherinfo": "cookie:__uzmb"
+						},
+						{
+							"id": "37",
+							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "__uzmc",
 							"attack": "",
 							"evidence": "__uzmc",
-							"otherinfo": "cookie:__uzmc\ncookie:__uzmd"
+							"otherinfo": "cookie:__uzmc"
 						}
 					],
 					"count": "11",
@@ -1445,7 +1529,7 @@
 				},
 				{
 					"pluginid": "10049",
-					"alertRef": "10049",
+					"alertRef": "10049-3",
 					"alert": "Storable and Cacheable Content",
 					"name": "Storable and Cacheable Content",
 					"riskcode": "0",
@@ -1454,7 +1538,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "60",
+							"id": "68",
 							"uri": "https://ants.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1463,7 +1547,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "108",
+							"id": "71",
 							"uri": "https://ants.gouv.fr/home/about-us",
 							"method": "GET",
 							"param": "",
@@ -1472,7 +1556,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "126",
+							"id": "115",
 							"uri": "https://ants.gouv.fr/home/accessibility-partially-compliant",
 							"method": "GET",
 							"param": "",
@@ -1481,7 +1565,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "112",
+							"id": "128",
 							"uri": "https://ants.gouv.fr/home/all-the-news/france-identite-becomes-an-identity-supplier-on-franceconnect",
 							"method": "GET",
 							"param": "",
@@ -1490,7 +1574,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "97",
+							"id": "107",
 							"uri": "https://ants.gouv.fr/home/our-missions/digital-solutions/2d-doc",
 							"method": "GET",
 							"param": "",
@@ -1499,7 +1583,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "61",
+							"id": "58",
 							"uri": "https://ants.gouv.fr/rechercher",
 							"method": "GET",
 							"param": "",
@@ -1517,7 +1601,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "17",
+							"id": "13",
 							"uri": "https://ants.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1526,7 +1610,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "68",
+							"id": "105",
 							"uri": "https://ants.gouv.fr/toute-l-actualite",
 							"method": "GET",
 							"param": "",
@@ -1535,7 +1619,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "103",
+							"id": "111",
 							"uri": "https://ants.gouv.fr/toute-l-actualite/centres-temporaires-d-accueil-cta-2023-bilan-et-perspectives",
 							"method": "GET",
 							"param": "",
@@ -1572,7 +1656,7 @@
 					"desc": "<p>This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.</p>",
 					"instances":[ 
 						{
-							"id": "157",
+							"id": "160",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1581,7 +1665,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-btn--tertiary fr-icon-account-circle-fill muibox-root css-16u6p3i"
 						},
 						{
-							"id": "156",
+							"id": "159",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1590,7 +1674,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn fr-icon-information-line muibox-root css-1u6gfcs"
 						},
 						{
-							"id": "378",
+							"id": "381",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1599,7 +1683,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link fr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "363",
+							"id": "366",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1608,7 +1692,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-link muibox-root css-4g6ai3"
 						},
 						{
-							"id": "346",
+							"id": "349",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1617,7 +1701,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc fr-link fr-link--md muibox-root css-cxkilz"
 						},
 						{
-							"id": "349",
+							"id": "352",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1626,7 +1710,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-link fr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "319",
+							"id": "322",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1635,7 +1719,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-link muibox-root css-4g6ai3"
 						},
 						{
-							"id": "292",
+							"id": "295",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1644,7 +1728,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-icon-arrow-up-fill fr-link--icon-left"
 						},
 						{
-							"id": "287",
+							"id": "290",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1653,7 +1737,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md fr-link--icon-right fr-icon-arrow-right-line muibox-root css-4g6ai3"
 						},
 						{
-							"id": "342",
+							"id": "345",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1662,7 +1746,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-13kvmyv"
 						},
 						{
-							"id": "358",
+							"id": "361",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1671,7 +1755,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-4g6ai3"
 						},
 						{
-							"id": "359",
+							"id": "362",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1680,7 +1764,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-6e42ug"
 						},
 						{
-							"id": "300",
+							"id": "303",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1689,7 +1773,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-j4cs1q"
 						},
 						{
-							"id": "259",
+							"id": "262",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1698,7 +1782,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link fr-link--md muibox-root css-yl8thv"
 						},
 						{
-							"id": "173",
+							"id": "176",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1707,7 +1791,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [a] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__link fr-nav__link__item fr-link fr-link--md muibox-root css-a9601i"
 						},
 						{
-							"id": "165",
+							"id": "168",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1716,7 +1800,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn"
 						},
 						{
-							"id": "168",
+							"id": "171",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1725,7 +1809,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--close fr-btn"
 						},
 						{
-							"id": "152",
+							"id": "155",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1734,7 +1818,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--menu fr-btn"
 						},
 						{
-							"id": "151",
+							"id": "154",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1743,7 +1827,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btn--search fr-btn"
 						},
 						{
-							"id": "160",
+							"id": "163",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1752,7 +1836,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-link--close fr-link"
 						},
 						{
-							"id": "175",
+							"id": "178",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1761,7 +1845,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [button] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__btn fr-nav__link muibox-root css-7h60dm"
 						},
 						{
-							"id": "224",
+							"id": "227",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1770,7 +1854,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card fr-enlarge-link"
 						},
 						{
-							"id": "225",
+							"id": "228",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1779,7 +1863,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__body"
 						},
 						{
-							"id": "226",
+							"id": "229",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1788,7 +1872,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__content"
 						},
 						{
-							"id": "228",
+							"id": "231",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1797,7 +1881,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__start"
 						},
 						{
-							"id": "296",
+							"id": "299",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1806,7 +1890,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12"
 						},
 						{
-							"id": "316",
+							"id": "319",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1815,7 +1899,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-col-12 fr-col-sm-6 fr-col-md-4"
 						},
 						{
-							"id": "143",
+							"id": "146",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1824,7 +1908,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container"
 						},
 						{
-							"id": "159",
+							"id": "162",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1833,7 +1917,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid"
 						},
 						{
-							"id": "161",
+							"id": "164",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1842,7 +1926,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-container fr-container-lg--fluid muibox-root css-1ezom6z"
 						},
 						{
-							"id": "293",
+							"id": "296",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1851,7 +1935,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow"
 						},
 						{
-							"id": "297",
+							"id": "300",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1860,7 +1944,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-follow__social"
 						},
 						{
-							"id": "340",
+							"id": "343",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1869,7 +1953,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__body"
 						},
 						{
-							"id": "356",
+							"id": "359",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1878,7 +1962,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom"
 						},
 						{
-							"id": "381",
+							"id": "384",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1887,7 +1971,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-copy"
 						},
 						{
-							"id": "341",
+							"id": "344",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1896,7 +1980,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__brand fr-enlarge-link"
 						},
 						{
-							"id": "344",
+							"id": "347",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1905,7 +1989,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content"
 						},
 						{
-							"id": "313",
+							"id": "316",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1914,7 +1998,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top"
 						},
 						{
-							"id": "295",
+							"id": "298",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1923,7 +2007,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row"
 						},
 						{
-							"id": "291",
+							"id": "294",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1932,7 +2016,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--right fr-pt-20v muibox-root css-1ju56tr"
 						},
 						{
-							"id": "315",
+							"id": "318",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1941,7 +2025,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-grid-row fr-grid-row--start fr-grid-row--gutters"
 						},
 						{
-							"id": "142",
+							"id": "145",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1950,7 +2034,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body muibox-root css-79elbk"
 						},
 						{
-							"id": "144",
+							"id": "147",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1959,7 +2043,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__body-row"
 						},
 						{
-							"id": "145",
+							"id": "148",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1968,7 +2052,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand fr-enlarge-link"
 						},
 						{
-							"id": "146",
+							"id": "149",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1977,7 +2061,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__brand-top"
 						},
 						{
-							"id": "147",
+							"id": "150",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1986,7 +2070,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo"
 						},
 						{
-							"id": "149",
+							"id": "152",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -1995,7 +2079,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__logo muibox-root css-old1by"
 						},
 						{
-							"id": "166",
+							"id": "169",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2004,7 +2088,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu fr-menu fr-modal muibox-root css-1bncnpf"
 						},
 						{
-							"id": "169",
+							"id": "172",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2013,7 +2097,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__menu-links muibox-root css-yldbz2"
 						},
 						{
-							"id": "150",
+							"id": "153",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2022,7 +2106,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__navbar"
 						},
 						{
-							"id": "158",
+							"id": "161",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2031,7 +2115,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__search fr-modal muibox-root css-1bncnpf"
 						},
 						{
-							"id": "153",
+							"id": "156",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2040,7 +2124,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools"
 						},
 						{
-							"id": "154",
+							"id": "157",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2049,7 +2133,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header__tools-links"
 						},
 						{
-							"id": "286",
+							"id": "289",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2058,7 +2142,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-links-group"
 						},
 						{
-							"id": "162",
+							"id": "165",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2067,7 +2151,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-search-bar muibox-root css-1fk9sxm"
 						},
 						{
-							"id": "285",
+							"id": "288",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2076,7 +2160,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--md"
 						},
 						{
-							"id": "185",
+							"id": "188",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2085,7 +2169,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile fr-enlarge-link muibox-root css-msi4iw"
 						},
 						{
-							"id": "209",
+							"id": "212",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2094,7 +2178,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile fr-tile--horizontal fr-enlarge-link muibox-root css-53xqfr"
 						},
 						{
-							"id": "186",
+							"id": "189",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2103,7 +2187,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__body"
 						},
 						{
-							"id": "187",
+							"id": "190",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2112,7 +2196,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__content"
 						},
 						{
-							"id": "189",
+							"id": "192",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2121,7 +2205,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [div] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__img"
 						},
 						{
-							"id": "312",
+							"id": "315",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2130,7 +2214,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [footer] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer"
 						},
 						{
-							"id": "298",
+							"id": "301",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2139,7 +2223,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h2] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-h5"
 						},
 						{
-							"id": "317",
+							"id": "320",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2148,7 +2232,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-cat"
 						},
 						{
-							"id": "357",
+							"id": "360",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2157,7 +2241,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h3] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--sm fr-text--regular fr-m-0"
 						},
 						{
-							"id": "227",
+							"id": "230",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2166,7 +2250,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h4] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-card__title"
 						},
 						{
-							"id": "188",
+							"id": "191",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2175,7 +2259,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [h6] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__title"
 						},
 						{
-							"id": "141",
+							"id": "144",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2184,7 +2268,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [header] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-header muibox-root css-1nvar7l"
 						},
 						{
-							"id": "138",
+							"id": "141",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2193,7 +2277,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [html] tag [lang] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr"
 						},
 						{
-							"id": "190",
+							"id": "193",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2202,7 +2286,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [img] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-responsive-img"
 						},
 						{
-							"id": "164",
+							"id": "167",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2211,7 +2295,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [input] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-input"
 						},
 						{
-							"id": "163",
+							"id": "166",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2220,7 +2304,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [label] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-label"
 						},
 						{
-							"id": "362",
+							"id": "365",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2229,7 +2313,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-item"
 						},
 						{
-							"id": "348",
+							"id": "351",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2238,7 +2322,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-item"
 						},
 						{
-							"id": "180",
+							"id": "183",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2247,7 +2331,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item"
 						},
 						{
-							"id": "172",
+							"id": "175",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2256,7 +2340,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item fr-nav__item--active"
 						},
 						{
-							"id": "174",
+							"id": "177",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2265,7 +2349,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [li] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav__item muibox-root css-79elbk"
 						},
 						{
-							"id": "170",
+							"id": "173",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2274,7 +2358,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [nav] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-nav"
 						},
 						{
-							"id": "345",
+							"id": "348",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2283,7 +2367,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-desc"
 						},
 						{
-							"id": "148",
+							"id": "151",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2292,7 +2376,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-logo"
 						},
 						{
-							"id": "302",
+							"id": "305",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2301,7 +2385,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-sr-only"
 						},
 						{
-							"id": "184",
+							"id": "187",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2310,7 +2394,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-text--xl"
 						},
 						{
-							"id": "213",
+							"id": "216",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2319,7 +2403,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [p] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-tile__desc"
 						},
 						{
-							"id": "139",
+							"id": "142",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2328,7 +2412,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-0"
 						},
 						{
-							"id": "140",
+							"id": "143",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2337,7 +2421,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-down-s-line muibox-root css-qb1bii"
 						},
 						{
-							"id": "260",
+							"id": "263",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2346,7 +2430,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-arrow-right-line muibox-root css-1oxkki0"
 						},
 						{
-							"id": "301",
+							"id": "304",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2355,7 +2439,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-twitter-x-fill muibox-root css-0"
 						},
 						{
-							"id": "310",
+							"id": "313",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2364,7 +2448,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [span] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-icon-vimeo-fill muibox-root css-0"
 						},
 						{
-							"id": "155",
+							"id": "158",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2373,7 +2457,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-btns-group"
 						},
 						{
-							"id": "361",
+							"id": "364",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2382,7 +2466,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__bottom-list"
 						},
 						{
-							"id": "347",
+							"id": "350",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2391,7 +2475,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__content-list"
 						},
 						{
-							"id": "318",
+							"id": "321",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2400,7 +2484,7 @@
 							"otherinfo": "User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:\n\nhttps://ants.gouv.fr/?lang=fr\n\nappears to include user input in:\na(n) [ul] tag [class] attribute\n\nThe user input found was:\nlang=fr\n\nThe user-controlled value was:\nfr-footer__top-list"
 						},
 						{
-							"id": "171",
+							"id": "174",
 							"uri": "https://ants.gouv.fr/?lang=fr",
 							"method": "GET",
 							"param": "lang",
@@ -2415,7 +2499,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html</p>",
 					"cweid": "20",
 					"wascid": "20",
-					"sourceid": "163"
+					"sourceid": "141"
 				}
 			]
 		}
