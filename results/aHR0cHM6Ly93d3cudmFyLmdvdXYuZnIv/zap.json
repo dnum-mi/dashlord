@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Thu, 11 Sept 2025 12:21:25",
-	"created": "2025-09-11T12:21:25.620166701Z",
+	"@generated": "Mon, 15 Sept 2025 12:42:29",
+	"created": "2025-09-15T12:42:29.104037699Z",
 	"site":[ 
 		{
 			"@name": "https://www.var.gouv.fr",
@@ -10,52 +10,6 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
-				{
-					"pluginid": "10202",
-					"alertRef": "10202",
-					"alert": "Absence of Anti-CSRF Tokens",
-					"name": "Absence of Anti-CSRF Tokens",
-					"riskcode": "2",
-					"confidence": "1",
-					"riskdesc": "Medium (Low)",
-					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
-					"instances":[ 
-						{
-							"id": "191",
-							"uri": "https://www.var.gouv.fr/contenu/conseiller/964",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/conseiller\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
-						},
-						{
-							"id": "186",
-							"uri": "https://www.var.gouv.fr/Nous-contacter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"Adressepostale-theme\" \"c24286009cfbb9b98cbccedac2d464bb\" \"Codepostal-theme\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_5286\" \"ContentObjectID\" \"dob-theme\" \"email-theme\" \"ezcoa-5298_captcha_theme\" \"nom-theme\" \"prenom-theme\" \"reglement-theme\" \"telephone-theme\" \"theme-0\" \"theme-1\" \"theme-2\" \"theme-3\" \"ViewMode\" \"Ville-theme\" \"votresujet-theme\" ]."
-						},
-						{
-							"id": "187",
-							"uri": "https://www.var.gouv.fr/Nous-contacter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 3: \"259703c537d10febe37e23f066fd8c9d\" \"Adressepostale-service\" \"Codepostal-service\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_5302\" \"ContentObjectID\" \"dob-service\" \"email-service\" \"ezcoa-5314_captcha_service\" \"nom-service\" \"prenom-service\" \"reglement-service\" \"service-0\" \"service-1\" \"service-2\" \"service-3\" \"telephone-service\" \"ViewMode\" \"Ville-service\" \"votresujet-service\" ]."
-						}
-					],
-					"count": "3",
-					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ].</p>",
-					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
-					"cweid": "352",
-					"wascid": "9",
-					"sourceid": "1442"
-				},
 				{
 					"pluginid": "10038",
 					"alertRef": "10038-1",
@@ -76,7 +30,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "115",
+							"id": "79",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -85,7 +39,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
+							"id": "124",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -94,7 +48,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "146",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "97",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -103,16 +66,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "79",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "136",
+							"id": "116",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -121,16 +75,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "134",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "63",
+							"id": "76",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -140,6 +85,15 @@
 						},
 						{
 							"id": "112",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "60",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -148,7 +102,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "17",
+							"id": "18",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -157,7 +111,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "18",
+							"id": "17",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -194,7 +148,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "73",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -203,7 +157,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "110",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -212,7 +166,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "155",
+							"id": "141",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -221,7 +175,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "74",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -230,44 +184,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "132",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "130",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "150",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "61",
-							"uri": "https://www.var.gouv.fr/Actualites",
+							"id": "142",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Assainissement",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -276,6 +194,51 @@
 						},
 						{
 							"id": "109",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "143",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "144",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "72",
+							"uri": "https://www.var.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "108",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "58",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -284,50 +247,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
 					"sourceid": "1"
-				},
-				{
-					"pluginid": "10003",
-					"alertRef": "10003",
-					"alert": "Vulnerable JS Library",
-					"name": "Vulnerable JS Library",
-					"riskcode": "2",
-					"confidence": "2",
-					"riskdesc": "Medium (Medium)",
-					"desc": "<p>The identified library appears to be vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "190",
-							"uri": "https://www.var.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727357606.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
-							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						},
-						{
-							"id": "176",
-							"uri": "https://www.var.gouv.fr/var/ide_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1727357606.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
-							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						}
-					],
-					"count": "2",
-					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
-					"otherinfo": "<p>The identified library jquery, version 3.4.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
-					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
-					"cweid": "1395",
-					"wascid": "-1",
-					"sourceid": "1444"
 				},
 				{
 					"pluginid": "10044",
@@ -340,34 +266,7 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "173",
-							"uri": "https://www.var.gouv.fr/accessibilite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 50 [https://www.var.gouv.fr/Pied-de-page/Accessibilite].\nPredicted response size: 350.\nResponse Body Length: 444."
-						},
-						{
-							"id": "171",
-							"uri": "https://www.var.gouv.fr/actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 34 [https://www.var.gouv.fr/Actualites].\nPredicted response size: 334.\nResponse Body Length: 380."
-						},
-						{
-							"id": "170",
-							"uri": "https://www.var.gouv.fr/cni",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 95 [https://www.var.gouv.fr/Demarches/CNI-Carte-nationale-d-identite/Carte-nationale-d-identite-CNI].\nPredicted response size: 395.\nResponse Body Length: 624."
-						},
-						{
-							"id": "165",
+							"id": "166",
 							"uri": "https://www.var.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -376,16 +275,7 @@
 							"otherinfo": "Location header URI length: 33 [https://www.var.gouv.fr/Demarches].\nPredicted response size: 333.\nResponse Body Length: 376."
 						},
 						{
-							"id": "175",
-							"uri": "https://www.var.gouv.fr/donnees-personnelles-et-cookies",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 97 [https://www.var.gouv.fr/Outils1/Donnees-personnelles/Politique-en-matiere-de-donnees-personnelles].\nPredicted response size: 397.\nResponse Body Length: 632."
-						},
-						{
-							"id": "166",
+							"id": "167",
 							"uri": "https://www.var.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -394,16 +284,7 @@
 							"otherinfo": "Location header URI length: 54 [https://www.var.gouv.fr/Outils/Horaires-et-coordonnees].\nPredicted response size: 354.\nResponse Body Length: 460."
 						},
 						{
-							"id": "183",
-							"uri": "https://www.var.gouv.fr/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 40 [https://www.var.gouv.fr/Mentions-legales].\nPredicted response size: 340.\nResponse Body Length: 404."
-						},
-						{
-							"id": "37",
+							"id": "164",
 							"uri": "https://www.var.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -412,49 +293,22 @@
 							"otherinfo": "Location header URI length: 38 [https://www.var.gouv.fr/Nous-contacter].\nPredicted response size: 338.\nResponse Body Length: 396."
 						},
 						{
-							"id": "167",
+							"id": "168",
 							"uri": "https://www.var.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": "Location header URI length: 54 [https://www.var.gouv.fr/Demarches/Passeport2/Passeport].\nPredicted response size: 354.\nResponse Body Length: 460."
-						},
-						{
-							"id": "168",
-							"uri": "https://www.var.gouv.fr/permis-conduire",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 100 [https://www.var.gouv.fr/Demarches/Conduire/Permis-de-conduire/Permis-de-conduire-commission-medicale].\nPredicted response size: 400.\nResponse Body Length: 644."
-						},
-						{
-							"id": "172",
-							"uri": "https://www.var.gouv.fr/rendez-vous",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 55 [https://www.var.gouv.fr/Prendre-un-rendez-vous-en-ligne].\nPredicted response size: 355.\nResponse Body Length: 464."
-						},
-						{
-							"id": "169",
-							"uri": "https://www.var.gouv.fr/siv",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 100 [https://www.var.gouv.fr/Demarches/Carte-Grise/Systeme-d-immatriculation-des-vehicules-ex-carte-grise].\nPredicted response size: 400.\nResponse Body Length: 644."
 						}
 					],
-					"count": "12",
+					"count": "4",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 50 [https://www.var.gouv.fr/Pied-de-page/Accessibilite].</p><p>Predicted response size: 350.</p><p>Response Body Length: 444.</p>",
+					"otherinfo": "<p>Location header URI length: 33 [https://www.var.gouv.fr/Demarches].</p><p>Predicted response size: 333.</p><p>Response Body Length: 376.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "1266"
+					"sourceid": "1087"
 				},
 				{
 					"pluginid": "10010",
@@ -541,80 +395,6 @@
 					"sourceid": "1"
 				},
 				{
-					"pluginid": "10110",
-					"alertRef": "10110",
-					"alert": "Dangerous JS Functions",
-					"name": "Dangerous JS Functions",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
-					"instances":[ 
-						{
-							"id": "180",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "eval(",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>See the references for security advice on the use of these functions.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://angular.io/guide/security</p>",
-					"cweid": "749",
-					"wascid": "-1",
-					"sourceid": "1301"
-				},
-				{
-					"pluginid": "110009",
-					"alertRef": "110009",
-					"alert": "Full Path Disclosure",
-					"name": "Full Path Disclosure",
-					"riskcode": "1",
-					"confidence": "1",
-					"riskdesc": "Low (Low)",
-					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
-					"instances":[ 
-						{
-							"id": "189",
-							"uri": "https://www.var.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "185",
-							"uri": "https://www.var.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						},
-						{
-							"id": "188",
-							"uri": "https://www.var.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.slug.replace(%22article%22,%22actualite%22)%20+",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/var/",
-							"otherinfo": ""
-						}
-					],
-					"count": "3",
-					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
-					"cweid": "209",
-					"wascid": "13",
-					"sourceid": "1426"
-				},
-				{
 					"pluginid": "90004",
 					"alertRef": "90004-1",
 					"alert": "Insufficient Site Isolation Against Spectre Vulnerability",
@@ -634,8 +414,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "86",
+							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -643,8 +423,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
-							"uri": "https://www.var.gouv.fr/Actualites",
+							"id": "68",
+							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -661,8 +441,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "97",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "87",
+							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -670,8 +450,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "72",
-							"uri": "https://www.var.gouv.fr/Actualites",
+							"id": "69",
+							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -688,8 +468,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "88",
+							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -697,8 +477,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
-							"uri": "https://www.var.gouv.fr/Actualites",
+							"id": "70",
+							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -734,7 +514,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "128",
+							"id": "95",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -743,8 +523,17 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "137",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "157",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -761,16 +550,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "95",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "148",
+							"id": "130",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -779,16 +559,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "146",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "70",
+							"id": "85",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -798,6 +569,15 @@
 						},
 						{
 							"id": "121",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "67",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -815,7 +595,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "25",
+							"id": "24",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -852,7 +632,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "124",
+							"id": "91",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -861,7 +641,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "102",
+							"id": "133",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -870,7 +650,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
+							"id": "151",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "100",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -879,16 +668,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "87",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "142",
+							"id": "126",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -897,16 +677,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "140",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "66",
+							"id": "81",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -916,6 +687,15 @@
 						},
 						{
 							"id": "117",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "63",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -924,7 +704,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
+							"id": "20",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -970,7 +750,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "125",
+							"id": "92",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -979,7 +759,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "103",
+							"id": "134",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -988,7 +768,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "159",
+							"id": "152",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "",
@@ -997,7 +777,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "92",
+							"id": "101",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -1006,16 +786,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "88",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734987600",
-							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
-						},
-						{
-							"id": "143",
+							"id": "127",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -1024,7 +795,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "141",
+							"id": "160",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
 							"method": "GET",
 							"param": "",
@@ -1042,7 +813,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "67",
+							"id": "82",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1052,6 +823,15 @@
 						},
 						{
 							"id": "118",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734987600",
+							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
+						},
+						{
+							"id": "64",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1088,7 +868,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "126",
+							"id": "93",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1097,7 +877,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "105",
+							"id": "135",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1106,7 +886,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "160",
+							"id": "155",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1115,7 +895,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "99",
+							"id": "102",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1124,16 +904,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "93",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "147",
+							"id": "128",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1142,7 +913,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "144",
+							"id": "161",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1151,7 +922,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "156",
+							"id": "158",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1160,7 +931,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "68",
+							"id": "83",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1170,6 +941,15 @@
 						},
 						{
 							"id": "119",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "65",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1197,7 +977,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "59",
+							"id": "52",
 							"uri": "https://www.var.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1206,7 +986,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "153",
+							"id": "106",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1215,7 +995,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "108",
+							"id": "140",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1224,7 +1004,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD+\uFFFD\u02E5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD>~\uFFFD\uFFFD\\x0015\\x001f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD"
 						},
 						{
-							"id": "164",
+							"id": "165",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "",
@@ -1233,7 +1013,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFDj\u0628\uFFFD\uFFFD(\uFFFDg\uFFFDq\uF722{(\uFFFDf\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDi\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD~\uFFFD\uFFFD\\x001e\uFFFD\u0628\uFFFD\uFFFDn\uFFFD\uFFFD\uFFFD\uFFFD'?\uFFFD;\uFFFD\uFFFD\uFFFD\uFFFDG\uFFFD%\uFFFDg\uFFFD\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFDi\uFFFD\uFFFD\u01FEr\uFFFD\uFFFDi\uFFFD\uFFFD*'\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFDj\u05EE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDz\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD"
 						},
 						{
-							"id": "129",
+							"id": "107",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -1242,16 +1022,16 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFD\uFFFD\u06FE\uFFFD\uFFFD\uFFFD\uFFFD\"\uFFFD\uF722{-\uFFFD\uFFFD-\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFD\uFFFD\uFFFD\u0681\u979E\u07DD\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD*\uFFFD\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFDr\u0628\uFFFD\uFFFDh\uFFFD\u979E"
 						},
 						{
-							"id": "131",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "163",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Assainissement",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/barometre-de-l-action-publique/209870-2-fre-FR/Barometre-de-l-action-publique",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD\uFFFD\uFFFDg\uFFFD\uFFFD\uFFFD{\uFFFD~i\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFDO|\uFFFDO\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDT\\x0005\uFFFD\uFFFD\uFFFDk{\uFFFD^\uFFFD_\uFFFDr\u0628\uFFFD\uFFFDnnX\uFFFD\uFFFD"
+							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/assainissement/8607-4-fre-FR/Assainissement",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD,j)\uFFFD\u01E6z{\uFFFD;\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDG\uFFFD,\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "161",
+							"id": "139",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -1261,15 +1041,6 @@
 						},
 						{
 							"id": "162",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "163",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
 							"method": "GET",
 							"param": "",
@@ -1278,22 +1049,31 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDn\uFFFD\u05EB\uFFFD+h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFD*'\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDn\uFFFD\u05EB\uFFFD+h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "74",
+							"id": "105",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
+							"evidence": "/Actualites/Cite-educative-a-La-Seyne-sur-Mer-2026",
+							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFDb\uFFFD\uFFFD?\n+^\uFFFD\uFFFDnq\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDI\uFFFD{\uFFFD.\uFFFD\uFFFD\\x001e\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "149",
+							"id": "138",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "php/var/ide_site/storage/images/actualites/reseaux-sociaux/263993-2-fre-FR/Reseaux-sociaux",
+							"otherinfo": "\uFFFD\\x001a\uFFFD\uFFFD\uFFFD\uFFFD\u05FF\uFFFD+^\uFFFD\uFFFDh\uFFFD\uFFFD\\x001e\uFFFD)\uFFFD\uFFFD\uFFFD?i\uFFFDnjX\uFFFDz\uFFFD\uFFFDz\u01DA\uFFFD\\x001f\uFFFD\uFFFD\u021A\uFFFD\\x001f\uFFFD\uFFFD}\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFDz\u01DA\uFFFD\\x001f\uFFFD\uFFFD\u021A\uFFFD"
+						},
+						{
+							"id": "71",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
+							"evidence": "php/var/ide_site/storage/images/actualites/salle-de-presse/211456-4-fre-FR/Salle-de-presse",
+							"otherinfo": "\uFFFD\\x001a\uFFFD\uFFFD\uFFFD\uFFFD\u05FF\uFFFD+^\uFFFD\uFFFDh\uFFFD\uFFFD\\x001e\uFFFD)\uFFFD\uFFFD\uFFFD?i\uFFFDnjX\uFFFDz\uFFFD\uFFFDjY^\uFFFD\u05FE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD^9\uFFFD\uFFFD>~\uFFFD\uFFFD\\x0015\\x001f\uFFFDjY^\uFFFD\u05FE\uFFFD\uFFFD\uFFFD\uFFFD"
 						}
 					],
 					"count": "11",
@@ -1303,116 +1083,6 @@
 					"cweid": "319",
 					"wascid": "13",
 					"sourceid": "1"
-				},
-				{
-					"pluginid": "10019",
-					"alertRef": "10019-1",
-					"alert": "Content-Type Header Missing",
-					"name": "Content-Type Header Missing",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The Content-Type header was either missing or empty.</p>",
-					"instances":[ 
-						{
-							"id": "174",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
-							"method": "GET",
-							"param": "content-type",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "<p>Ensure each page is setting the specific and appropriate content-type value for the content being delivered.</p>",
-					"otherinfo": "",
-					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
-					"cweid": "345",
-					"wascid": "12",
-					"sourceid": "1279"
-				},
-				{
-					"pluginid": "10027",
-					"alertRef": "10027",
-					"alert": "Information Disclosure - Suspicious Comments",
-					"name": "Information Disclosure - Suspicious Comments",
-					"riskcode": "0",
-					"confidence": "1",
-					"riskdesc": "Informational (Low)",
-					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
-					"instances":[ 
-						{
-							"id": "178",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "184",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "user",
-							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "181",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "query",
-							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "182",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "query",
-							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "179",
-							"uri": "https://www.var.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "from",
-							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "192",
-							"uri": "https://www.var.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727357606.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username",
-							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "177",
-							"uri": "https://www.var.gouv.fr/var/ide_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1727357606.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username",
-							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
-						}
-					],
-					"count": "7",
-					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
-					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet.</p>",
-					"reference": "",
-					"cweid": "615",
-					"wascid": "13",
-					"sourceid": "1298"
 				},
 				{
 					"pluginid": "10109",
@@ -1434,16 +1104,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "122",
+							"id": "89",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
+							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "90",
+							"id": "131",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1452,7 +1122,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "158",
+							"id": "149",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "",
@@ -1461,7 +1131,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "85",
+							"id": "98",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -1470,16 +1140,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "84",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "138",
+							"id": "122",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
@@ -1488,7 +1149,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "137",
+							"id": "159",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
 							"method": "GET",
 							"param": "",
@@ -1497,7 +1158,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "152",
+							"id": "153",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
 							"method": "GET",
 							"param": "",
@@ -1506,21 +1167,30 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "64",
+							"id": "77",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
+							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
 							"id": "113",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "61",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
+							"evidence": "<a id=\"4229ce1047de1b2f7029e14e3a963b97\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Salle-de-presse\">\n                                Salle de presse\n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						}
 					],
@@ -1552,7 +1222,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
+							"id": "94",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1561,7 +1231,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "106",
+							"id": "136",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1570,7 +1240,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
+							"id": "156",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "103",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -1579,8 +1258,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "94",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "129",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1588,16 +1267,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "145",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "69",
+							"id": "84",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1607,7 +1277,7 @@
 						},
 						{
 							"id": "120",
-							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1615,8 +1285,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "39",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "66",
+							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1652,7 +1322,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "114",
+							"id": "78",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1661,7 +1331,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "80",
+							"id": "123",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "cache-control",
@@ -1670,7 +1340,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "157",
+							"id": "145",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
 							"method": "GET",
 							"param": "cache-control",
@@ -1679,7 +1349,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
+							"id": "96",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "cache-control",
@@ -1688,8 +1358,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "148",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Assainissement",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1697,7 +1367,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
+							"id": "114",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "cache-control",
@@ -1706,16 +1376,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "151",
+							"id": "147",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Connaissance-du-territoire-varois",
 							"method": "GET",
 							"param": "cache-control",
@@ -1724,7 +1385,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
+							"id": "75",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1734,6 +1395,15 @@
 						},
 						{
 							"id": "111",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "59",
 							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "cache-control",
@@ -1770,7 +1440,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "123",
+							"id": "90",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1779,7 +1449,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "101",
+							"id": "132",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Agriculture",
 							"method": "GET",
 							"param": "",
@@ -1788,7 +1458,16 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "89",
+							"id": "150",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Alimentation-commerce-consommation-consommateur-et-reception-du-public",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "99",
 							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement",
 							"method": "GET",
 							"param": "",
@@ -1797,8 +1476,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "86",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Barometre-de-l-action-publique",
+							"id": "125",
+							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Biodiversite-et-Nature",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1806,16 +1485,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "139",
-							"uri": "https://www.var.gouv.fr/Actions-de-l-Etat/Collectivites-locales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "65",
+							"id": "80",
 							"uri": "https://www.var.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1824,8 +1494,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "116",
-							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
+							"id": "115",
+							"uri": "https://www.var.gouv.fr/Actualites/Reseaux-sociaux",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1833,8 +1503,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "38",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "62",
+							"uri": "https://www.var.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1851,7 +1521,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "20",
+							"id": "21",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1879,8 +1549,8 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "42",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "55",
+							"uri": "https://www.var.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1888,7 +1558,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "32",
+							"id": "33",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1897,7 +1567,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "31",
+							"id": "30",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1912,7 +1582,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "157"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1925,8 +1595,8 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "41",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "54",
+							"uri": "https://www.var.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1934,7 +1604,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "30",
+							"id": "32",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1943,7 +1613,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "29",
+							"id": "28",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1958,7 +1628,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "157"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -1971,8 +1641,8 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "40",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "53",
+							"uri": "https://www.var.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1980,7 +1650,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "28",
+							"id": "29",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2004,7 +1674,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "157"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "90005",
@@ -2017,8 +1687,8 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "43",
-							"uri": "https://www.var.gouv.fr/nous-contacter",
+							"id": "56",
+							"uri": "https://www.var.gouv.fr/",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -2035,7 +1705,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "31",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2050,7 +1720,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "157"
+					"sourceid": "1"
 				},
 				{
 					"pluginid": "10112",
@@ -2091,7 +1761,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "23",
+							"id": "25",
 							"uri": "https://www.var.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -2100,7 +1770,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "24",
+							"id": "23",
 							"uri": "https://www.var.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -2115,7 +1785,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "7"
 				}
 			]
 		}
