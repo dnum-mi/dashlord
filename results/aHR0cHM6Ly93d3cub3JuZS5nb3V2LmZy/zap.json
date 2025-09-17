@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Mon, 15 Sept 2025 10:27:56",
-	"created": "2025-09-15T10:27:56.148516852Z",
+	"@generated": "Wed, 17 Sept 2025 10:08:22",
+	"created": "2025-09-17T10:08:22.577270280Z",
 	"site":[ 
 		{
 			"@name": "https://www.orne.gouv.fr",
@@ -21,7 +21,7 @@
 					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
 					"instances":[ 
 						{
-							"id": "152",
+							"id": "155",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Securite-du-consommateur-et-alimentation",
 							"method": "GET",
 							"param": "",
@@ -36,7 +36,35 @@
 					"reference": "",
 					"cweid": "359",
 					"wascid": "13",
-					"sourceid": "572"
+					"sourceid": "456"
+				},
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"id": "164",
+							"uri": "https://www.orne.gouv.fr/lettreinformation/abonnement",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" name=\"subscribe\" method=\"post\" action=\"/lettreinformation/abonnement\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"1\" \"17327\" \"2\" \"BackUrlInput\" \"captcha\" \"e03307f9e656d45f6dbf38159f7a6bf0\" \"reglement\" \"Subscription_Email\" \"Subscription_FirstName\" \"Subscription_IdArray[]\" \"Subscription_LastName\" \"Subscription_OutputFormatArray_17327[]\" ]."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"1\" \"17327\" \"2\" \"BackUrlInput\" \"captcha\" \"e03307f9e656d45f6dbf38159f7a6bf0\" \"reglement\" \"Subscription_Email\" \"Subscription_FirstName\" \"Subscription_IdArray[]\" \"Subscription_LastName\" \"Subscription_OutputFormatArray_17327[]\" ].</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "909"
 				},
 				{
 					"pluginid": "10038",
@@ -58,16 +86,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "58",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "116",
+							"id": "64",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -76,8 +95,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "90",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
+							"id": "136",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -85,8 +104,26 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
+							"id": "97",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "101",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "62",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -103,7 +140,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "104",
+							"id": "99",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -112,16 +149,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "118",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "71",
+							"id": "125",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -131,7 +159,7 @@
 						},
 						{
 							"id": "1",
-							"uri": "https://www.orne.gouv.fr/sitemap.xml",
+							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -158,7 +186,7 @@
 					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
 					"instances":[ 
 						{
-							"id": "13",
+							"id": "7",
 							"uri": "https://www.orne.gouv.fr",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -167,16 +195,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "56",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "112",
+							"id": "60",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -185,16 +204,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "114",
+							"id": "133",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -203,7 +213,43 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "145",
+							"id": "94",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "95",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "146",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Droit-des-femmes-et-egalite",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "134",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Education",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "147",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Environnement.-transition-energetique-et-prevention-des-risques",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -212,7 +258,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "141",
+							"id": "59",
 							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -221,7 +267,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
+							"id": "83",
 							"uri": "https://www.orne.gouv.fr/Actualites/Breves",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -230,7 +276,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "102",
+							"id": "93",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -239,16 +285,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "113",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "69",
+							"id": "123",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -257,7 +294,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
@@ -276,7 +313,16 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "157",
+							"id": "163",
+							"uri": "https://www.orne.gouv.fr/accessibilite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 46 [https://www.orne.gouv.fr/Outils2/Accessibilite].\nPredicted response size: 346.\nResponse Body Length: 428."
+						},
+						{
+							"id": "160",
 							"uri": "https://www.orne.gouv.fr/actualites",
 							"method": "GET",
 							"param": "",
@@ -285,7 +331,7 @@
 							"otherinfo": "Location header URI length: 35 [https://www.orne.gouv.fr/Actualites].\nPredicted response size: 335.\nResponse Body Length: 384."
 						},
 						{
-							"id": "159",
+							"id": "158",
 							"uri": "https://www.orne.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -303,7 +349,7 @@
 							"otherinfo": "Location header URI length: 34 [https://www.orne.gouv.fr/Demarches].\nPredicted response size: 334.\nResponse Body Length: 380."
 						},
 						{
-							"id": "153",
+							"id": "159",
 							"uri": "https://www.orne.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -312,7 +358,16 @@
 							"otherinfo": "Location header URI length: 56 [https://www.orne.gouv.fr/Outils2/Horaires-et-coordonnees].\nPredicted response size: 356.\nResponse Body Length: 468."
 						},
 						{
-							"id": "158",
+							"id": "56",
+							"uri": "https://www.orne.gouv.fr/nous-contacter",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 39 [https://www.orne.gouv.fr/Nous-contacter].\nPredicted response size: 339.\nResponse Body Length: 400."
+						},
+						{
+							"id": "162",
 							"uri": "https://www.orne.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -321,7 +376,7 @@
 							"otherinfo": "Location header URI length: 71 [https://www.orne.gouv.fr/Demarches/Carte-d-identite-Passeport/Passeport].\nPredicted response size: 371.\nResponse Body Length: 528."
 						},
 						{
-							"id": "155",
+							"id": "157",
 							"uri": "https://www.orne.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -330,7 +385,7 @@
 							"otherinfo": "Location header URI length: 53 [https://www.orne.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 353.\nResponse Body Length: 456."
 						},
 						{
-							"id": "154",
+							"id": "161",
 							"uri": "https://www.orne.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -339,13 +394,13 @@
 							"otherinfo": "Location header URI length: 64 [https://www.orne.gouv.fr/Demarches/Immatriculation-des-vehicules].\nPredicted response size: 364.\nResponse Body Length: 500."
 						}
 					],
-					"count": "7",
+					"count": "9",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 35 [https://www.orne.gouv.fr/Actualites].</p><p>Predicted response size: 335.</p><p>Response Body Length: 384.</p>",
+					"otherinfo": "<p>Location header URI length: 46 [https://www.orne.gouv.fr/Outils2/Accessibilite].</p><p>Predicted response size: 346.</p><p>Response Body Length: 428.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "874"
+					"sourceid": "911"
 				},
 				{
 					"pluginid": "10010",
@@ -451,8 +506,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "65",
-							"uri": "https://www.orne.gouv.fr/",
+							"id": "80",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -460,8 +515,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
+							"id": "71",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -478,8 +533,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
-							"uri": "https://www.orne.gouv.fr/",
+							"id": "81",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -487,8 +542,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "79",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
+							"id": "72",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -505,8 +560,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "67",
-							"uri": "https://www.orne.gouv.fr/",
+							"id": "82",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -514,8 +569,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "80",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
+							"id": "73",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -551,16 +606,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "125",
+							"id": "79",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -569,16 +615,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "99",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "138",
+							"id": "142",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "",
@@ -587,7 +624,34 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "93",
+							"id": "119",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "113",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "70",
+							"uri": "https://www.orne.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "91",
 							"uri": "https://www.orne.gouv.fr/Actualites/Breves",
 							"method": "GET",
 							"param": "",
@@ -596,7 +660,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "116",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -605,16 +669,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "132",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "77",
+							"id": "131",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -623,7 +678,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "9",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -669,16 +724,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "121",
+							"id": "76",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -687,8 +733,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
+							"id": "139",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -696,8 +742,26 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
+							"id": "108",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "110",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "67",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -714,7 +778,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "106",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -723,16 +787,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "74",
+							"id": "128",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -741,7 +796,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "3",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -787,16 +842,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "62",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "122",
+							"id": "77",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -805,16 +851,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "97",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "136",
+							"id": "141",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -823,8 +860,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "148",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Environnement.-transition-energetique-et-prevention-des-risques",
+							"id": "117",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -832,7 +869,25 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "144",
+							"id": "111",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "143",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Education",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "68",
 							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -841,7 +896,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "91",
+							"id": "89",
 							"uri": "https://www.orne.gouv.fr/Actualites/Breves",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -850,7 +905,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "108",
+							"id": "114",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -859,7 +914,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "130",
+							"id": "151",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -868,7 +923,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "75",
+							"id": "129",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -905,25 +960,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u00BA[n\uFFFD\uF7B7\uFFFD\u06B6\uFFFD\uFFFD\uFFFD)\uFFFD\uFFFD\u01A7\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDb\uFFFD{>r\uFFFDm\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD>u\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFDw\uFFFD-\uFFFD>\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06FE=\uFFFDk\uFFFDj\"\uFFFD\uFFFD\u0262\uFFFD\uFFFDy\uFFFD>\\x0012\uFFFD\uFFFD\u79DD\uFFFD>v\uFFFDj\uFFFD\u2688\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "68",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/Culture-et-Patrimoine/Manifestations-culturelles-dans-l-Orne/Les-journees-du-Patrimoine/Journees-Europeennes-du-patrimoine-2025",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u00BA[n\uFFFD\uF7B7\uFFFD\u06B6\uFFFD\uFFFD\uFFFD)\uFFFD\uFFFD\u01A7\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDb\uFFFD{>r\uFFFDm\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD>u\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFDw\uFFFD-\uFFFD>\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06FE=\uFFFDk\uFFFDj\"\uFFFD\uFFFD\u0262\uFFFD\uFFFDy\uFFFD>\\x0012\uFFFD\uFFFD\u79DD\uFFFD>v\uFFFDj\uFFFD\u2688\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "101",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/Agriculture-et-foret/Episodes-de-grele-2025",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "140",
+							"id": "144",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "",
@@ -932,7 +969,34 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "151",
+							"id": "120",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/Actions-de-l-Etat/Agriculture-et-foret/Episodes-de-grele-2025",
+							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
+						},
+						{
+							"id": "122",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/Actions-de-l-Etat/Agriculture-et-foret/Episodes-de-grele-2025",
+							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
+						},
+						{
+							"id": "152",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Droit-des-femmes-et-egalite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/droit-des-femmes-et-egalite/8520-2-fre-FR/Droit-des-femmes-et-egalite",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD\uFFFD\u07DDz\u03DFzi\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001a\uFFFD+^\uFFFD\uFFFDv\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\u00EE\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD>z\u07DE\uFFFD\uFFFDb\uFFFD"
+						},
+						{
+							"id": "145",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Education",
 							"method": "GET",
 							"param": "",
@@ -941,16 +1005,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "150",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Entreprises.-emploi.-formation.-commerce",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "fr/var/ide_site/storage/images/0/6/8/8/8860-2-fre-FR/rubon2031",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD>\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFD\uFFFD\uFFFD\uFFFD}\uFFFD\uFFFD"
-						},
-						{
-							"id": "149",
+							"id": "154",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Environnement.-transition-energetique-et-prevention-des-risques",
 							"method": "GET",
 							"param": "",
@@ -959,7 +1014,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7B7\uFFFD\uFFFD\uFFFD\\x0012\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\u05FE\uFFFD\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "100",
+							"id": "92",
 							"uri": "https://www.orne.gouv.fr/Actualites/Breves",
 							"method": "GET",
 							"param": "",
@@ -968,7 +1023,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFDb\uFFFD\uFFFD?\\x0006\uFFFD\uFFFDz\uFFFD\uFFFDz\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\z\uFFFDb\uFFFDy\u0796W\uFFFDv\uF07A\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFD_\uFFFD\uFFFD\u05E0\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFD_\uFFFD\uFFFDh\uFFFD\uFFFD\uFFFDb\uFFFD~"
 						},
 						{
-							"id": "111",
+							"id": "121",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -977,7 +1032,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFDb\uFFFD\uFFFD?-\uFFFD>jW\uFFFD\uFFFD\uFFFD?\\x0006)Z\uFFFD\uFFFD^\uFFFD_\uFFFD\uFFFD+(u\uFA2D\uFFFD\\x001e\uFFFD\\x001f\uFFFD\uFFFD/\uFFFD\uFFFD\uFFFD.r\\x0017\uFFFD\uFFFD\u3ADD\uFFFD{\uFFFD\uFFFD;\uFFFD\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "139",
+							"id": "153",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
 							"method": "GET",
 							"param": "",
@@ -986,7 +1041,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFDb\uFFFD\uFFFD?-\uFFFD>j\uFFFD^\uFFFD\u03DA\uFFFD\uFFFD\uFFFD\uFFFDl\uFFFDP\\x0002\\x0013\uFFFD\\x0014_\uFFFDHI\\x0005\\x0004K\uFFFD\\x0006!$\uFFFD5/\uFFFD\uFFFDwb\uFFFD]\uFFFD\uFFFD\uFFFDhn\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFD\uFFFD.\uFFFDw\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\u0695\uFFFD{\uFFFDZ\uFFFD\uFFFD\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD"
 						},
 						{
-							"id": "81",
+							"id": "132",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -1023,34 +1078,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "59",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "119",
+							"id": "74",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "94",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "",
-							"attack": "",
 							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "133",
+							"id": "138",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "",
@@ -1059,8 +1096,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "147",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Environnement.-transition-energetique-et-prevention-des-risques",
+							"id": "103",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1068,12 +1105,30 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "143",
+							"id": "104",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "140",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Education",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "65",
 							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
+							"evidence": "<a id=\"2b90f4a1498dc6ad6d8af9901e1d3164\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Breves\">\n                                 Br\u00E8ves \n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
@@ -1086,7 +1141,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "105",
+							"id": "102",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -1095,7 +1150,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "124",
+							"id": "150",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
 							"method": "GET",
 							"param": "",
@@ -1104,7 +1159,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "72",
+							"id": "126",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -1141,16 +1196,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "123",
+							"id": "78",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1159,8 +1205,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
+							"id": "118",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1168,8 +1214,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "137",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
+							"id": "112",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1177,7 +1223,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "69",
+							"uri": "https://www.orne.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "90",
 							"uri": "https://www.orne.gouv.fr/Actualites/Breves",
 							"method": "GET",
 							"param": "",
@@ -1186,7 +1241,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "109",
+							"id": "115",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -1195,8 +1250,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "131",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
+							"id": "130",
+							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1204,8 +1259,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
+							"id": "58",
+							"uri": "https://www.orne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1241,16 +1296,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "115",
+							"id": "63",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1259,16 +1305,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "128",
+							"id": "135",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
 							"method": "GET",
 							"param": "cache-control",
@@ -1277,7 +1314,34 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "146",
+							"id": "96",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "100",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "137",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Education",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "148",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Environnement.-transition-energetique-et-prevention-des-risques",
 							"method": "GET",
 							"param": "cache-control",
@@ -1286,7 +1350,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "142",
+							"id": "61",
 							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1304,7 +1368,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "103",
+							"id": "98",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "cache-control",
@@ -1313,7 +1377,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "117",
+							"id": "149",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
 							"method": "GET",
 							"param": "cache-control",
@@ -1322,7 +1386,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "124",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "cache-control",
@@ -1331,7 +1395,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
 					"otherinfo": "",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
@@ -1359,16 +1423,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "60",
-							"uri": "https://www.orne.gouv.fr/",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "120",
+							"id": "75",
 							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1377,8 +1432,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "95",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Agriculture-et-foret",
+							"id": "107",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Collectivites-territoriales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1386,8 +1441,17 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "134",
-							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire",
+							"id": "109",
+							"uri": "https://www.orne.gouv.fr/Actions-de-l-Etat/Culture-et-Patrimoine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "66",
+							"uri": "https://www.orne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1404,7 +1468,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "106",
+							"id": "105",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-alertes",
 							"method": "GET",
 							"param": "",
@@ -1413,16 +1477,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "126",
-							"uri": "https://www.orne.gouv.fr/Actualites/Les-appels-a-projets",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "73",
+							"id": "127",
 							"uri": "https://www.orne.gouv.fr/Actualites/Les-consultations-publiques",
 							"method": "GET",
 							"param": "",
@@ -1431,8 +1486,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "3",
-							"uri": "https://www.orne.gouv.fr/robots.txt",
+							"id": "57",
+							"uri": "https://www.orne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1441,6 +1496,15 @@
 						},
 						{
 							"id": "2",
+							"uri": "https://www.orne.gouv.fr/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "4",
 							"uri": "https://www.orne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1477,7 +1541,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "10",
+							"id": "12",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1523,7 +1587,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "9",
+							"id": "11",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1569,7 +1633,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
+							"id": "10",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1615,7 +1679,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
+							"id": "13",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1652,7 +1716,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "12",
+							"id": "6",
 							"uri": "https://www.orne.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -1680,7 +1744,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "6",
+							"id": "8",
 							"uri": "https://www.orne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1704,7 +1768,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "7"
+					"sourceid": "6"
 				}
 			]
 		}
