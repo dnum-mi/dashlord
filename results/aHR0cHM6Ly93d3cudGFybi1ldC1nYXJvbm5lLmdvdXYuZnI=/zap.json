@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sat, 13 Sept 2025 12:33:01",
-	"created": "2025-09-13T12:33:01.706700506Z",
+	"@generated": "Wed, 17 Sept 2025 12:08:58",
+	"created": "2025-09-17T12:08:58.338961756Z",
 	"site":[ 
 		{
 			"@name": "https://www.tarn-et-garonne.gouv.fr",
@@ -10,6 +10,34 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10062",
+					"alertRef": "10062",
+					"alert": "PII Disclosure",
+					"name": "PII Disclosure",
+					"riskcode": "3",
+					"confidence": "3",
+					"riskdesc": "High (High)",
+					"desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
+					"instances":[ 
+						{
+							"id": "190",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement/Information-et-prevention-sur-les-risques-naturels-et-technologiques-majeurs",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "4980835494880",
+							"otherinfo": "Credit Card Type detected: Visa\nBank Identification Number: 498083\nBrand: VISA\nCategory: CLASSIC\nIssuer: SUMITOMO MITSUI CARD COMPANY, LTD."
+						}
+					],
+					"count": "1",
+					"solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
+					"otherinfo": "<p>Credit Card Type detected: Visa</p><p>Bank Identification Number: 498083</p><p>Brand: VISA</p><p>Category: CLASSIC</p><p>Issuer: SUMITOMO MITSUI CARD COMPANY, LTD.</p>",
+					"reference": "",
+					"cweid": "359",
+					"wascid": "13",
+					"sourceid": "1332"
+				},
 				{
 					"pluginid": "10202",
 					"alertRef": "10202",
@@ -21,31 +49,31 @@
 					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
 					"instances":[ 
 						{
-							"id": "193",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/contenu/conseiller/69",
+							"id": "172",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/lettreinformation/abonnement",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form class=\"\" action=\"/contenu/conseiller\" method=\"post\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
+							"evidence": "<form class=\"\" name=\"subscribe\" method=\"post\" action=\"/lettreinformation/abonnement\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"1\" \"2\" \"4960\" \"BackUrlInput\" \"captcha\" \"e03307f9e656d45f6dbf38159f7a6bf0\" \"reglement\" \"Subscription_Email\" \"Subscription_FirstName\" \"Subscription_IdArray[]\" \"Subscription_LastName\" \"Subscription_OutputFormatArray_4960[]\" ]."
 						},
 						{
-							"id": "175",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/index.php/lettreinformation/abonnement",
+							"id": "186",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Nous-contacter",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<form class=\"\" name=\"subscribe\" method=\"post\" action=\"/index.php/lettreinformation/abonnement\">",
-							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"1\" \"2\" \"4960\" \"BackUrlInput\" \"captcha\" \"e03307f9e656d45f6dbf38159f7a6bf0\" \"reglement\" \"Subscription_Email\" \"Subscription_FirstName\" \"Subscription_IdArray[]\" \"Subscription_LastName\" \"Subscription_OutputFormatArray_4960[]\" ]."
+							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"-0\" \"-1\" \"-2\" \"-3\" \"4e8d7f9ca19d3f1851b1ff927474dcd1\" \"Adressepostale-\" \"Codepostal-\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_10657\" \"ContentObjectID\" \"dob-\" \"email-\" \"ezcoa-10669_captcha_\" \"nom-\" \"prenom-\" \"reglement-\" \"telephone-\" \"ViewMode\" \"Ville-\" \"votresujet-\" ]."
 						}
 					],
 					"count": "2",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
-					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ].</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"1\" \"2\" \"4960\" \"BackUrlInput\" \"captcha\" \"e03307f9e656d45f6dbf38159f7a6bf0\" \"reglement\" \"Subscription_Email\" \"Subscription_FirstName\" \"Subscription_IdArray[]\" \"Subscription_LastName\" \"Subscription_OutputFormatArray_4960[]\" ].</p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1742"
+					"sourceid": "912"
 				},
 				{
 					"pluginid": "10038",
@@ -67,7 +95,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "54",
+							"id": "145",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -76,8 +104,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "67",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "61",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -85,8 +113,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "132",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "92",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -94,8 +122,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "96",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
+							"id": "91",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -103,7 +131,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "112",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -112,16 +140,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "121",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "143",
+							"id": "114",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -130,7 +149,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "85",
+							"id": "133",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "75",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -176,7 +204,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "52",
+							"id": "142",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -185,8 +213,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "65",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "59",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -194,8 +222,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "130",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "88",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -203,7 +231,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "156",
+							"id": "87",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -212,16 +240,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "94",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "108",
+							"id": "109",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -230,16 +249,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "119",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "141",
+							"id": "110",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -248,7 +258,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "150",
+							"id": "143",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -257,7 +267,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "131",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "156",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "73",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -285,25 +313,7 @@
 					"desc": "<p>The identified library appears to be vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "189",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/516ffbabfa818e9dc5472118e2b7151c_1727351967.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
-							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						},
-						{
-							"id": "191",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727351967.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
-							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
-						},
-						{
-							"id": "178",
+							"id": "181",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1727351967.js",
 							"method": "GET",
 							"param": "",
@@ -312,13 +322,13 @@
 							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
 						}
 					],
-					"count": "3",
+					"count": "1",
 					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
 					"otherinfo": "<p>The identified library jquery, version 3.4.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
 					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
 					"cweid": "1395",
 					"wascid": "-1",
-					"sourceid": "1642"
+					"sourceid": "997"
 				},
 				{
 					"pluginid": "10044",
@@ -331,6 +341,15 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
+							"id": "173",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/accessibilite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 56 [https://www.tarn-et-garonne.gouv.fr/Outils/Accessibilite].\nPredicted response size: 356.\nResponse Body Length: 469."
+						},
+						{
 							"id": "171",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/actualites",
 							"method": "GET",
@@ -340,13 +359,22 @@
 							"otherinfo": "Location header URI length: 46 [https://www.tarn-et-garonne.gouv.fr/Actualites].\nPredicted response size: 346.\nResponse Body Length: 429."
 						},
 						{
-							"id": "169",
+							"id": "170",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": "Location header URI length: 62 [https://www.tarn-et-garonne.gouv.fr/Demarches/Carte-d-identite].\nPredicted response size: 362.\nResponse Body Length: 493."
+						},
+						{
+							"id": "188",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/contenu/action?SearchText=ZAP",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 104 [https://www.tarn-et-garonne.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/981983582?SearchText=ZAP].\nPredicted response size: 404.\nResponse Body Length: 660."
 						},
 						{
 							"id": "166",
@@ -358,7 +386,16 @@
 							"otherinfo": "Location header URI length: 45 [https://www.tarn-et-garonne.gouv.fr/Demarches].\nPredicted response size: 345.\nResponse Body Length: 425."
 						},
 						{
-							"id": "170",
+							"id": "175",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/donnees-personnelles-et-cookies",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 78 [https://www.tarn-et-garonne.gouv.fr/Outils/Traitement-des-donnees-personnelles].\nPredicted response size: 378.\nResponse Body Length: 557."
+						},
+						{
+							"id": "165",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -367,43 +404,16 @@
 							"otherinfo": "Location header URI length: 66 [https://www.tarn-et-garonne.gouv.fr/Outils/Horaires-et-coordonnees].\nPredicted response size: 366.\nResponse Body Length: 509."
 						},
 						{
-							"id": "177",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/index.php/accessibilite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 66 [https://www.tarn-et-garonne.gouv.fr/index.php/Outils/Accessibilite].\nPredicted response size: 366.\nResponse Body Length: 509."
-						},
-						{
 							"id": "176",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/index.php/donnees-personnelles-et-cookies",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 88 [https://www.tarn-et-garonne.gouv.fr/index.php/Outils/Traitement-des-donnees-personnelles].\nPredicted response size: 388.\nResponse Body Length: 597."
+							"otherinfo": "Location header URI length: 52 [https://www.tarn-et-garonne.gouv.fr/Mentions-legales].\nPredicted response size: 352.\nResponse Body Length: 453."
 						},
 						{
-							"id": "173",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/index.php/mentions-legales",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 62 [https://www.tarn-et-garonne.gouv.fr/index.php/Mentions-legales].\nPredicted response size: 362.\nResponse Body Length: 493."
-						},
-						{
-							"id": "172",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/index.php/nous-contacter",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "Location header URI length: 60 [https://www.tarn-et-garonne.gouv.fr/index.php/Nous-contacter].\nPredicted response size: 360.\nResponse Body Length: 485."
-						},
-						{
-							"id": "105",
+							"id": "52",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -412,7 +422,7 @@
 							"otherinfo": "Location header URI length: 50 [https://www.tarn-et-garonne.gouv.fr/Nous-contacter].\nPredicted response size: 350.\nResponse Body Length: 445."
 						},
 						{
-							"id": "167",
+							"id": "169",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -430,7 +440,7 @@
 							"otherinfo": "Location header URI length: 64 [https://www.tarn-et-garonne.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 364.\nResponse Body Length: 501."
 						},
 						{
-							"id": "165",
+							"id": "167",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -441,11 +451,11 @@
 					],
 					"count": "12",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
-					"otherinfo": "<p>Location header URI length: 46 [https://www.tarn-et-garonne.gouv.fr/Actualites].</p><p>Predicted response size: 346.</p><p>Response Body Length: 429.</p>",
+					"otherinfo": "<p>Location header URI length: 56 [https://www.tarn-et-garonne.gouv.fr/Outils/Accessibilite].</p><p>Predicted response size: 356.</p><p>Response Body Length: 469.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "794"
+					"sourceid": "918"
 				},
 				{
 					"pluginid": "10010",
@@ -542,7 +552,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "184",
+							"id": "180",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -557,7 +567,7 @@
 					"reference": "<p>https://angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "1071"
+					"sourceid": "976"
 				},
 				{
 					"pluginid": "110009",
@@ -570,7 +580,7 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"id": "187",
+							"id": "189",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
 							"method": "GET",
 							"param": "",
@@ -579,7 +589,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "188",
+							"id": "187",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
 							"method": "GET",
 							"param": "",
@@ -603,7 +613,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "1130"
+					"sourceid": "1044"
 				},
 				{
 					"pluginid": "90004",
@@ -616,7 +626,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "20",
+							"id": "32",
 							"uri": "https://www.tarn-et-garonne.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -625,8 +635,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "69",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -634,8 +644,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "83",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
@@ -643,7 +653,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
+							"id": "33",
 							"uri": "https://www.tarn-et-garonne.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
@@ -652,8 +662,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "70",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -661,8 +671,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "76",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "84",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -670,7 +680,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "34",
 							"uri": "https://www.tarn-et-garonne.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -679,8 +689,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "71",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -688,8 +698,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "85",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -716,7 +726,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "19",
+							"id": "31",
 							"uri": "https://www.tarn-et-garonne.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -725,8 +735,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "68",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -734,8 +744,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "74",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "100",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -743,26 +753,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "139",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "103",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "117",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
+							"id": "106",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -771,7 +763,7 @@
 						},
 						{
 							"id": "128",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -779,7 +771,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "148",
+							"id": "125",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -788,7 +780,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
+							"id": "153",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "140",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "82",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -797,7 +807,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "26",
+							"id": "21",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -806,7 +816,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "24",
+							"id": "20",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -843,7 +853,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
+							"id": "149",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -852,8 +862,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "64",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -861,8 +871,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "95",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -870,8 +880,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "99",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
+							"id": "102",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -879,7 +889,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "113",
+							"id": "121",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -888,16 +898,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "124",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "145",
+							"id": "118",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -906,7 +907,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "88",
+							"id": "136",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "78",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -915,7 +925,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "4",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -924,7 +934,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "5",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -961,7 +971,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "58",
+							"id": "150",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -970,8 +980,8 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "71",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "65",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -979,8 +989,8 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "136",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "96",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -988,7 +998,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "159",
+							"id": "103",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
@@ -997,16 +1007,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "100",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734987600",
-							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
-						},
-						{
-							"id": "114",
+							"id": "122",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -1015,16 +1016,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "125",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734987600",
-							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
-						},
-						{
-							"id": "146",
+							"id": "119",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -1033,7 +1025,7 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "153",
+							"id": "151",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
 							"method": "GET",
 							"param": "",
@@ -1042,7 +1034,25 @@
 							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
 						},
 						{
-							"id": "89",
+							"id": "137",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734987600",
+							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
+						},
+						{
+							"id": "159",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734987600",
+							"otherinfo": "1734987600, which evaluates to: 2024-12-23 21:00:00."
+						},
+						{
+							"id": "79",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1079,7 +1089,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "59",
+							"id": "154",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1088,8 +1098,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "72",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "66",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1097,8 +1107,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "137",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "98",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1106,7 +1116,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "160",
+							"id": "104",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1115,16 +1125,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "101",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "115",
+							"id": "126",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1133,16 +1134,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "126",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "147",
+							"id": "123",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1151,7 +1143,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "154",
+							"id": "152",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1160,7 +1152,25 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "90",
+							"id": "138",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "160",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "80",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1188,16 +1198,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "78",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "140",
+							"id": "162",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "",
@@ -1206,7 +1207,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "163",
+							"id": "72",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
@@ -1215,7 +1216,16 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "161",
+							"id": "107",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/citoyennete-laicite-discriminations/75761-2-fre-FR/Citoyennete-Laicite-Discriminations",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\u022D\uFFFD'\uFFFD\uFFFD\uFFFD^\uFFFDV\uFFFDr+^\uFFFD\u062Cr\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFD_\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDT\n+h\uFFFD\uFFFD\uFFFDz\u05FE-\uFFFD\uFFFD\uFFFD\u05FE\\x000e+\\x001c\uFFFD)\uFFFD\uFFFD\uFFFDb\uFFFD{"
+						},
+						{
+							"id": "108",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
@@ -1224,16 +1234,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "104",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "118",
+							"id": "130",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -1243,15 +1244,6 @@
 						},
 						{
 							"id": "129",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "149",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -1269,7 +1261,25 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "162",
+							"id": "141",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/fonds-vert/199689-3-fre-FR/Fonds-Vert",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD'v\u03EFz\uFFFD\uFFFD\uFFFDz\uFFFD\u07F7\uFFFD\uFFFD\uFFFD\uFFFDT\\x0016\uFFFD\u0773\uFFFD^\uFFFD"
+						},
+						{
+							"id": "161",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "fr/var/ide_site/storage/images/actions-de-l-etat/france-2030/199699-2-fre-FR/France-2030",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFDu\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD\u069D\u01FE\uFFFDM\uFFFD\uFFFD_}\uFFFD\uFFFD~\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFDZ\u069D\u01FE\uFFFDM\uFFFD"
+						},
+						{
+							"id": "164",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Jeunesse-sport-et-vie-associative",
 							"method": "GET",
 							"param": "",
@@ -1278,8 +1288,8 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "164",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Sante",
+							"id": "163",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Protection-de-la-population",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1287,7 +1297,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "93",
+							"id": "86",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1302,7 +1312,7 @@
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "144"
+					"sourceid": "343"
 				},
 				{
 					"pluginid": "10019",
@@ -1330,7 +1340,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
 					"cweid": "345",
 					"wascid": "12",
-					"sourceid": "1018"
+					"sourceid": "935"
 				},
 				{
 					"pluginid": "10027",
@@ -1343,7 +1353,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "180",
+							"id": "178",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1352,7 +1362,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "181",
+							"id": "184",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1361,7 +1371,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "182",
+							"id": "177",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1370,7 +1380,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "186",
+							"id": "183",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1379,7 +1389,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "183",
+							"id": "179",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -1388,25 +1398,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "190",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/516ffbabfa818e9dc5472118e2b7151c_1727351967.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username",
-							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "192",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1727351967.js",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "username",
-							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
-						},
-						{
-							"id": "179",
+							"id": "182",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/var/ide_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1727351967.js",
 							"method": "GET",
 							"param": "",
@@ -1415,13 +1407,13 @@
 							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
 						}
 					],
-					"count": "8",
+					"count": "6",
 					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
 					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet.</p>",
 					"reference": "",
 					"cweid": "615",
 					"wascid": "13",
-					"sourceid": "1060"
+					"sourceid": "958"
 				},
 				{
 					"pluginid": "10109",
@@ -1443,7 +1435,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "55",
+							"id": "147",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1452,17 +1444,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "68",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"ca0d51d782939512b7501753d65df85a\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actions-de-l-Etat/Agriculture-et-developpement-rural\">\n                                Agriculture et d\u00E9veloppement rural\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "133",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "62",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1470,8 +1453,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "158",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
+							"id": "93",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1480,7 +1463,7 @@
 						},
 						{
 							"id": "97",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1488,7 +1471,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "111",
+							"id": "115",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -1497,16 +1480,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "122",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"ca0d51d782939512b7501753d65df85a\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-et-developpement-rural\">\n                                Agriculture et d\u00E9veloppement rural\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "144",
+							"id": "116",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
@@ -1515,7 +1489,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "152",
+							"id": "148",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
 							"method": "GET",
 							"param": "",
@@ -1524,7 +1498,25 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "86",
+							"id": "134",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"ca0d51d782939512b7501753d65df85a\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-et-developpement-rural\">\n                                Agriculture et d\u00E9veloppement rural\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "158",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"ca0d51d782939512b7501753d65df85a\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-et-developpement-rural\">\n                                Agriculture et d\u00E9veloppement rural\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "76",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1552,7 +1544,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "18",
+							"id": "30",
 							"uri": "https://www.tarn-et-garonne.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1561,8 +1553,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "67",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1570,8 +1562,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "99",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1579,26 +1571,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "138",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "102",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "116",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
+							"id": "105",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1607,7 +1581,7 @@
 						},
 						{
 							"id": "127",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1615,7 +1589,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
+							"id": "124",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "139",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "81",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1624,7 +1616,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "54",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1661,7 +1653,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "144",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1670,8 +1662,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "60",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1679,8 +1671,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "131",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "90",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1688,7 +1680,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "157",
+							"id": "89",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "cache-control",
@@ -1697,16 +1689,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "95",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "109",
+							"id": "111",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "cache-control",
@@ -1715,16 +1698,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "120",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "142",
+							"id": "113",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "cache-control",
@@ -1733,7 +1707,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "151",
+							"id": "146",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Environnement",
 							"method": "GET",
 							"param": "cache-control",
@@ -1742,7 +1716,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "84",
+							"id": "132",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "157",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/France-2030",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "74",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1779,8 +1771,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "56",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/",
+							"id": "63",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-logement-et-habitat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1788,8 +1780,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "69",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "94",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Citoyennete-Laicite-Discriminations",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1797,8 +1789,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "134",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "101",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1806,16 +1798,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "98",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-Egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "112",
+							"id": "120",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Economie-et-emploi",
 							"method": "GET",
 							"param": "",
@@ -1824,8 +1807,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "123",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Elections",
+							"id": "117",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Enquete-et-consultation-publique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1833,7 +1816,16 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "87",
+							"id": "135",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat/Fonds-Vert",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "77",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1842,7 +1834,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "106",
+							"id": "53",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1851,7 +1843,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "3",
+							"id": "2",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1860,7 +1852,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "2",
+							"id": "3",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1888,8 +1880,8 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "81",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "57",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
 							"attack": "",
@@ -1897,7 +1889,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "28",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1906,7 +1898,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "30",
+							"id": "25",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1921,7 +1913,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "144"
+					"sourceid": "141"
 				},
 				{
 					"pluginid": "90005",
@@ -1934,8 +1926,8 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "80",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "56",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
 							"attack": "",
@@ -1943,7 +1935,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "32",
+							"id": "27",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1952,7 +1944,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "29",
+							"id": "23",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1967,7 +1959,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "144"
+					"sourceid": "141"
 				},
 				{
 					"pluginid": "90005",
@@ -1980,8 +1972,8 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "79",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "55",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
 							"attack": "",
@@ -1989,7 +1981,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "27",
+							"id": "24",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1998,7 +1990,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "28",
+							"id": "22",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2013,7 +2005,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "144"
+					"sourceid": "141"
 				},
 				{
 					"pluginid": "90005",
@@ -2026,8 +2018,8 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "82",
-							"uri": "https://www.tarn-et-garonne.gouv.fr/Actions-de-l-Etat",
+							"id": "58",
+							"uri": "https://www.tarn-et-garonne.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
 							"attack": "",
@@ -2035,7 +2027,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "34",
+							"id": "29",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2044,7 +2036,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "31",
+							"id": "26",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2059,7 +2051,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "144"
+					"sourceid": "141"
 				},
 				{
 					"pluginid": "10112",
@@ -2100,7 +2092,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "19",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -2109,7 +2101,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "23",
+							"id": "18",
 							"uri": "https://www.tarn-et-garonne.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -2124,7 +2116,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "7"
+					"sourceid": "6"
 				}
 			]
 		}
