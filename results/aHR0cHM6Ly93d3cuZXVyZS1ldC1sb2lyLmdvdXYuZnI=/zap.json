@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Fri, 19 Sept 2025 06:34:41",
-	"created": "2025-09-19T06:34:41.173349275Z",
+	"@generated": "Sun, 21 Sept 2025 06:40:51",
+	"created": "2025-09-21T06:40:51.880721101Z",
 	"site":[ 
 		{
 			"@name": "https://www.eure-et-loir.gouv.fr",
@@ -21,7 +21,7 @@
 					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
 					"instances":[ 
 						{
-							"id": "197",
+							"id": "198",
 							"uri": "https://www.eure-et-loir.gouv.fr/contenu/conseiller/34165",
 							"method": "GET",
 							"param": "",
@@ -30,7 +30,16 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
 						},
 						{
-							"id": "198",
+							"id": "199",
+							"uri": "https://www.eure-et-loir.gouv.fr/contenu/conseiller/63",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" action=\"/contenu/conseiller\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
+						},
+						{
+							"id": "196",
 							"uri": "https://www.eure-et-loir.gouv.fr/Nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -39,13 +48,13 @@
 							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"-0\" \"-1\" \"-2\" \"-3\" \"4e8d7f9ca19d3f1851b1ff927474dcd1\" \"Adressepostale-\" \"Codepostal-\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_28292\" \"ContentObjectID\" \"dob-\" \"email-\" \"ezcoa-28304_captcha_\" \"nom-\" \"prenom-\" \"reglement-\" \"telephone-\" \"ViewMode\" \"Ville-\" \"votresujet-\" ]."
 						}
 					],
-					"count": "2",
+					"count": "3",
 					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
 					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ].</p>",
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1204"
+					"sourceid": "1221"
 				},
 				{
 					"pluginid": "10038",
@@ -58,7 +67,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "75",
+							"id": "72",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -67,7 +76,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "130",
+							"id": "105",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -76,8 +85,17 @@
 							"otherinfo": ""
 						},
 						{
+							"id": "133",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"id": "150",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -85,16 +103,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "119",
+							"id": "107",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -103,16 +112,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "73",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "111",
+							"id": "109",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -121,7 +121,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
+							"id": "135",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "64",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -130,7 +139,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "50",
+							"id": "53",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -139,7 +148,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "19",
+							"id": "20",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -148,7 +157,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "18",
+							"id": "21",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -176,7 +185,7 @@
 					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
 					"instances":[ 
 						{
-							"id": "71",
+							"id": "70",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -185,7 +194,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "128",
+							"id": "101",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -194,8 +203,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "158",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "130",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -204,6 +213,15 @@
 						},
 						{
 							"id": "148",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "154",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -212,8 +230,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "160",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -221,7 +239,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "117",
+							"id": "103",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -230,16 +248,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "109",
+							"id": "102",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -248,7 +257,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "155",
+							"id": "131",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -257,7 +266,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "59",
+							"id": "62",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -266,7 +275,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "48",
+							"id": "51",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -294,7 +303,7 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
 					"instances":[ 
 						{
-							"id": "176",
+							"id": "175",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Autres-demarches",
 							"method": "GET",
 							"param": "",
@@ -303,7 +312,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "165",
+							"id": "173",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
 							"method": "GET",
 							"param": "",
@@ -312,8 +321,26 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "168",
+							"id": "165",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Passeport",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script async defer src=\"https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "202",
+							"uri": "https://www.eure-et-loir.gouv.fr/index.php/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script async defer src=\"https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "200",
+							"uri": "https://www.eure-et-loir.gouv.fr/index.php/Demarches/Passeport",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -321,13 +348,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "5",
 					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "858"
+					"sourceid": "874"
 				},
 				{
 					"pluginid": "10003",
@@ -340,7 +367,7 @@
 					"desc": "<p>The identified library appears to be vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "194",
+							"id": "195",
 							"uri": "https://www.eure-et-loir.gouv.fr/var/ezwebin_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1726488907.js",
 							"method": "GET",
 							"param": "",
@@ -364,7 +391,7 @@
 					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
 					"cweid": "1395",
 					"wascid": "-1",
-					"sourceid": "1187"
+					"sourceid": "1173"
 				},
 				{
 					"pluginid": "10044",
@@ -377,7 +404,7 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "187",
+							"id": "178",
 							"uri": "https://www.eure-et-loir.gouv.fr/accessibilite",
 							"method": "GET",
 							"param": "",
@@ -386,7 +413,7 @@
 							"otherinfo": "Location header URI length: 53 [https://www.eure-et-loir.gouv.fr/Outils/Accessibilite].\nPredicted response size: 353.\nResponse Body Length: 456."
 						},
 						{
-							"id": "172",
+							"id": "171",
 							"uri": "https://www.eure-et-loir.gouv.fr/actualites",
 							"method": "GET",
 							"param": "",
@@ -395,7 +422,7 @@
 							"otherinfo": "Location header URI length: 43 [https://www.eure-et-loir.gouv.fr/Actualites].\nPredicted response size: 343.\nResponse Body Length: 416."
 						},
 						{
-							"id": "173",
+							"id": "169",
 							"uri": "https://www.eure-et-loir.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -404,16 +431,16 @@
 							"otherinfo": "Location header URI length: 69 [https://www.eure-et-loir.gouv.fr/Demarches/Carte-nationale-d-identite].\nPredicted response size: 369.\nResponse Body Length: 520."
 						},
 						{
-							"id": "192",
+							"id": "194",
 							"uri": "https://www.eure-et-loir.gouv.fr/contenu/action?SearchText=ZAP",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 102 [https://www.eure-et-loir.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/1343023915?SearchText=ZAP].\nPredicted response size: 402.\nResponse Body Length: 652."
+							"otherinfo": "Location header URI length: 101 [https://www.eure-et-loir.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/782955628?SearchText=ZAP].\nPredicted response size: 401.\nResponse Body Length: 648."
 						},
 						{
-							"id": "170",
+							"id": "167",
 							"uri": "https://www.eure-et-loir.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -431,7 +458,7 @@
 							"otherinfo": "Location header URI length: 88 [https://www.eure-et-loir.gouv.fr/Outils/Politique-de-protection-des-donnees-personnelles].\nPredicted response size: 388.\nResponse Body Length: 596."
 						},
 						{
-							"id": "167",
+							"id": "170",
 							"uri": "https://www.eure-et-loir.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -440,7 +467,7 @@
 							"otherinfo": "Location header URI length: 63 [https://www.eure-et-loir.gouv.fr/Outils/Horaires-et-coordonnees].\nPredicted response size: 363.\nResponse Body Length: 496."
 						},
 						{
-							"id": "179",
+							"id": "182",
 							"uri": "https://www.eure-et-loir.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -449,7 +476,7 @@
 							"otherinfo": "Location header URI length: 56 [https://www.eure-et-loir.gouv.fr/Outils/Mentions-legales].\nPredicted response size: 356.\nResponse Body Length: 468."
 						},
 						{
-							"id": "85",
+							"id": "37",
 							"uri": "https://www.eure-et-loir.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -458,7 +485,7 @@
 							"otherinfo": "Location header URI length: 47 [https://www.eure-et-loir.gouv.fr/Nous-contacter].\nPredicted response size: 347.\nResponse Body Length: 432."
 						},
 						{
-							"id": "175",
+							"id": "172",
 							"uri": "https://www.eure-et-loir.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -467,7 +494,7 @@
 							"otherinfo": "Location header URI length: 52 [https://www.eure-et-loir.gouv.fr/Demarches/Passeport].\nPredicted response size: 352.\nResponse Body Length: 452."
 						},
 						{
-							"id": "174",
+							"id": "177",
 							"uri": "https://www.eure-et-loir.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -476,7 +503,7 @@
 							"otherinfo": "Location header URI length: 61 [https://www.eure-et-loir.gouv.fr/Demarches/Permis-de-Conduire].\nPredicted response size: 361.\nResponse Body Length: 488."
 						},
 						{
-							"id": "169",
+							"id": "168",
 							"uri": "https://www.eure-et-loir.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -491,7 +518,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "1072"
+					"sourceid": "994"
 				},
 				{
 					"pluginid": "10010",
@@ -504,7 +531,7 @@
 					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
 					"instances":[ 
 						{
-							"id": "76",
+							"id": "73",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -532,7 +559,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "78",
+							"id": "75",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -560,7 +587,7 @@
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
 						{
-							"id": "77",
+							"id": "74",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -588,7 +615,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"id": "177",
+							"id": "176",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Autres-demarches",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget",
@@ -597,7 +624,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "166",
+							"id": "174",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget",
@@ -606,8 +633,26 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "171",
+							"id": "166",
 							"uri": "https://www.eure-et-loir.gouv.fr/Demarches/Passeport",
+							"method": "GET",
+							"param": "https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget",
+							"attack": "",
+							"evidence": "<script async defer src=\"https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "203",
+							"uri": "https://www.eure-et-loir.gouv.fr/index.php/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
+							"method": "GET",
+							"param": "https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget",
+							"attack": "",
+							"evidence": "<script async defer src=\"https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "201",
+							"uri": "https://www.eure-et-loir.gouv.fr/index.php/Demarches/Passeport",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=jz2etkr5xpal8shwgofudi1b3cnvm9yq&callback=initWidget",
 							"attack": "",
@@ -615,13 +660,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "3",
+					"count": "5",
 					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
 					"otherinfo": "",
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "858"
+					"sourceid": "874"
 				},
 				{
 					"pluginid": "10110",
@@ -634,7 +679,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "183",
+							"id": "185",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -649,7 +694,7 @@
 					"reference": "<p>https://v17.angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "1062"
+					"sourceid": "1052"
 				},
 				{
 					"pluginid": "110009",
@@ -671,7 +716,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "196",
+							"id": "192",
 							"uri": "https://www.eure-et-loir.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
 							"method": "GET",
 							"param": "",
@@ -689,7 +734,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "189",
+							"id": "190",
 							"uri": "https://www.eure-et-loir.gouv.fr/Prefet28",
 							"method": "GET",
 							"param": "",
@@ -704,7 +749,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "1131"
+					"sourceid": "1143"
 				},
 				{
 					"pluginid": "90004",
@@ -717,7 +762,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "29",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -726,70 +771,70 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "45",
+							"id": "48",
 							"uri": "https://www.eure-et-loir.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "41",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "27",
-							"uri": "https://www.eure-et-loir.gouv.fr",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "46",
-							"uri": "https://www.eure-et-loir.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "42",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "28",
-							"uri": "https://www.eure-et-loir.gouv.fr",
-							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "47",
-							"uri": "https://www.eure-et-loir.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
 							"id": "43",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "31",
+							"uri": "https://www.eure-et-loir.gouv.fr",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "49",
+							"uri": "https://www.eure-et-loir.gouv.fr/",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "44",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "33",
+							"uri": "https://www.eure-et-loir.gouv.fr",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "50",
+							"uri": "https://www.eure-et-loir.gouv.fr/",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "45",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -817,7 +862,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "28",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -826,7 +871,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "44",
+							"id": "47",
 							"uri": "https://www.eure-et-loir.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -835,7 +880,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "127",
+							"id": "96",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -844,8 +889,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "129",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -853,7 +898,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "108",
+							"id": "100",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -862,16 +907,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "97",
+							"id": "92",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -880,7 +916,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "58",
+							"id": "126",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "61",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -889,7 +934,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "40",
+							"id": "42",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -907,7 +952,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "16",
+							"id": "19",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -935,7 +980,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "91",
+							"id": "78",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -944,7 +989,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
+							"id": "112",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -953,8 +998,17 @@
 							"otherinfo": ""
 						},
 						{
+							"id": "139",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"id": "152",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -962,16 +1016,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "103",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "122",
+							"id": "119",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -980,16 +1025,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "81",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "114",
+							"id": "122",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -998,7 +1034,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "64",
+							"id": "143",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "67",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1007,7 +1052,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "53",
+							"id": "56",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1016,7 +1061,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "25",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1025,7 +1070,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "23",
+							"id": "24",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1053,7 +1098,7 @@
 					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
 					"instances":[ 
 						{
-							"id": "93",
+							"id": "79",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1062,7 +1107,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "134",
+							"id": "113",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1071,8 +1116,8 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "163",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "140",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1081,6 +1126,15 @@
 						},
 						{
 							"id": "153",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1672740540",
+							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
+						},
+						{
+							"id": "158",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
 							"method": "GET",
 							"param": "",
@@ -1089,8 +1143,8 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "104",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "163",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1098,7 +1152,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "123",
+							"id": "121",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -1107,16 +1161,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "82",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1672740540",
-							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
-						},
-						{
-							"id": "115",
+							"id": "123",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -1125,7 +1170,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "159",
+							"id": "144",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
 							"method": "GET",
 							"param": "",
@@ -1134,7 +1179,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "65",
+							"id": "68",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1143,7 +1188,7 @@
 							"otherinfo": "1672740540, which evaluates to: 2023-01-03 10:09:00."
 						},
 						{
-							"id": "54",
+							"id": "57",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1171,7 +1216,7 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"id": "94",
+							"id": "80",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1180,7 +1225,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "135",
+							"id": "115",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1189,7 +1234,16 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "164",
+							"id": "145",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "155",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1198,7 +1252,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "154",
+							"id": "159",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1207,8 +1261,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "105",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "164",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1225,16 +1279,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "83",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "116",
+							"id": "127",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1243,7 +1288,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "160",
+							"id": "146",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1252,7 +1297,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "66",
+							"id": "69",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1261,7 +1306,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "55",
+							"id": "58",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1289,7 +1334,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "9",
+							"id": "7",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1298,7 +1343,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
 						},
 						{
-							"id": "37",
+							"id": "40",
 							"uri": "https://www.eure-et-loir.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1307,7 +1352,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
 						},
 						{
-							"id": "125",
+							"id": "88",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1316,7 +1361,16 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
 						},
 						{
-							"id": "137",
+							"id": "128",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
+							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
+						},
+						{
+							"id": "141",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "",
@@ -1325,7 +1379,7 @@
 							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD+\uFFFD\u02E5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD~u\uFFFD\u0796\uFFFDizg\uFFFD\uFFFD\uFFFD\uEB69\uFFFD\uFFFD4\uFFFD\uFFFD}\uFFFD\uFFFD\uFFFD\uFFFDT\\x0002\n\uFFFDr\uFFFDm\uFFFD\uFFFD\uFFFDz\u07DDz\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDj"
 						},
 						{
-							"id": "126",
+							"id": "147",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
 							"method": "GET",
 							"param": "",
@@ -1334,16 +1388,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
 						},
 						{
-							"id": "87",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "php/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
-							"otherinfo": "\uFFFD\\x001a\\x0001\uFFFDb\uFFFD{>u\uFFFD\uFFFDKZ\uFFFD\uFFFD,\uFFFD+\\x001e\uFFFD\uFFFD^\uFFFDV\uFFFDF\uFFFD\u0696+^\uFFFD\u01AB\uFFFD\u3736\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "106",
+							"id": "98",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -1352,16 +1397,7 @@
 							"otherinfo": "\uFFFDV\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001c\uFFFD\u694A\u05EC\uFFFD\t\uFFFDy\uFFFD\uFFFDm"
 						},
 						{
-							"id": "67",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/layout/set/print/Actualites/Annee-2024",
-							"otherinfo": "\uFFFDV\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001c\uFFFD\u694A\u05EC\uFFFD\t\uFFFDy\uFFFD\uFFFDn"
-						},
-						{
-							"id": "95",
+							"id": "87",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -1370,7 +1406,16 @@
 							"otherinfo": "\uFFFDV\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\x001c\uFFFD\u694A\u05EC\uFFFD\t\uFFFDy\uFFFD\uFFFDn"
 						},
 						{
-							"id": "56",
+							"id": "118",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "php/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
+							"otherinfo": "\uFFFD\\x001a\\x0001\uFFFDb\uFFFD{>u\uFFFD\uFFFDKZ\uFFFD\uFFFD,\uFFFD+\\x001e\uFFFD\uFFFD^\uFFFDV\uFFFDF\uFFFD\u0696+^\uFFFD\u01AB\uFFFD\u3736\uFFFD\uFFFD{\uFFFD\uFFFD"
+						},
+						{
+							"id": "59",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1379,7 +1424,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\uFFFD\uFFFD\u022Cz\u03DD{\uFFFDZ\uFFFD\\x001b\uFFFDjX\uFFFD{\uFFFD\\x001a\uFFFD\u03CEr\uFFFD\\x001b\uFFFD\uFFFD\uFFFDm"
 						},
 						{
-							"id": "36",
+							"id": "39",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1394,7 +1439,7 @@
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10019",
@@ -1407,7 +1452,7 @@
 					"desc": "<p>The Content-Type header was either missing or empty.</p>",
 					"instances":[ 
 						{
-							"id": "178",
+							"id": "179",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
 							"method": "GET",
 							"param": "content-type",
@@ -1422,7 +1467,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
 					"cweid": "345",
 					"wascid": "12",
-					"sourceid": "1037"
+					"sourceid": "1016"
 				},
 				{
 					"pluginid": "10027",
@@ -1435,7 +1480,7 @@
 					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
 					"instances":[ 
 						{
-							"id": "186",
+							"id": "187",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1444,7 +1489,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "185",
+							"id": "186",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1453,7 +1498,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "188",
+							"id": "184",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1462,7 +1507,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "190",
+							"id": "189",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1471,7 +1516,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "184",
+							"id": "188",
 							"uri": "https://www.eure-et-loir.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -1480,7 +1525,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "195",
+							"id": "197",
 							"uri": "https://www.eure-et-loir.gouv.fr/var/ezwebin_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1726488907.js",
 							"method": "GET",
 							"param": "",
@@ -1489,7 +1534,7 @@
 							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "182",
+							"id": "183",
 							"uri": "https://www.eure-et-loir.gouv.fr/var/ezwebin_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1726488907.js",
 							"method": "GET",
 							"param": "",
@@ -1504,7 +1549,7 @@
 					"reference": "",
 					"cweid": "615",
 					"wascid": "13",
-					"sourceid": "1066"
+					"sourceid": "1056"
 				},
 				{
 					"pluginid": "10109",
@@ -1517,7 +1562,7 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "88",
+							"id": "76",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1526,7 +1571,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "131",
+							"id": "110",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1535,8 +1580,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "162",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "136",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1545,43 +1590,7 @@
 						},
 						{
 							"id": "151",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "101",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "120",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "79",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "112",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1590,7 +1599,7 @@
 						},
 						{
 							"id": "157",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1598,7 +1607,43 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "62",
+							"id": "162",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "114",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "116",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "137",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"5be27b5bd92870559706180fc7b0128e\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actualites/Discours-du-Prefet-d-Eure-et-Loir\">\n                                Discours du Pr\u00E9fet d'Eure-et-Loir\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "65",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1607,7 +1652,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "51",
+							"id": "54",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1635,7 +1680,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "24",
+							"id": "26",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1644,7 +1689,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "39",
+							"id": "46",
 							"uri": "https://www.eure-et-loir.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1653,8 +1698,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "95",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1662,7 +1707,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "99",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -1671,16 +1716,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "96",
+							"id": "90",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -1689,7 +1725,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
+							"id": "125",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "60",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1698,7 +1743,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "38",
+							"id": "41",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1707,7 +1752,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "84",
+							"id": "36",
 							"uri": "https://www.eure-et-loir.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1735,7 +1780,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "74",
+							"id": "71",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "cache-control",
@@ -1744,7 +1789,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
+							"id": "104",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1753,8 +1798,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "161",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
+							"id": "132",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1763,43 +1808,7 @@
 						},
 						{
 							"id": "149",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "99",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "118",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "72",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "110",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Agriculture-et-developpement-rural",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1808,6 +1817,42 @@
 						},
 						{
 							"id": "156",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-et-batiments",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "161",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Assises-de-la-Ruralite-Mars-Octobre-2022",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "106",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "108",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "134",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1816,7 +1861,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
+							"id": "63",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "cache-control",
@@ -1825,7 +1870,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "49",
+							"id": "52",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "cache-control",
@@ -1853,7 +1898,7 @@
 					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "90",
+							"id": "77",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1862,7 +1907,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "132",
+							"id": "111",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1871,8 +1916,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "102",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites",
+							"id": "138",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actions-de-l-Etat/Accueil-des-deplaces-ukrainiens",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1880,7 +1925,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "121",
+							"id": "117",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2023",
 							"method": "GET",
 							"param": "",
@@ -1889,16 +1934,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "80",
-							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2024",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "113",
+							"id": "120",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Annee-2025",
 							"method": "GET",
 							"param": "",
@@ -1907,7 +1943,16 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "63",
+							"id": "142",
+							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Archives-des-actualites",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "66",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/Discours-du-Prefet-d-Eure-et-Loir",
 							"method": "GET",
 							"param": "",
@@ -1916,7 +1961,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "52",
+							"id": "55",
 							"uri": "https://www.eure-et-loir.gouv.fr/Actualites/France-Relance",
 							"method": "GET",
 							"param": "",
@@ -1925,7 +1970,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "86",
+							"id": "38",
 							"uri": "https://www.eure-et-loir.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1934,7 +1979,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "21",
+							"id": "22",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1943,7 +1988,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "20",
+							"id": "23",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1971,7 +2016,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "12",
+							"id": "11",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1980,7 +2025,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "6",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1989,7 +2034,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "6",
+							"id": "9",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -2004,7 +2049,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -2017,7 +2062,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "11",
+							"id": "10",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -2026,7 +2071,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "2",
+							"id": "5",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -2035,7 +2080,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "3",
+							"id": "4",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -2050,7 +2095,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -2063,7 +2108,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "10",
+							"id": "8",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2072,7 +2117,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "0",
+							"id": "2",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -2087,7 +2132,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -2100,7 +2145,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "13",
+							"id": "12",
 							"uri": "https://www.eure-et-loir.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2109,7 +2154,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "14",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2118,7 +2163,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "13",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2133,35 +2178,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
-				},
-				{
-					"pluginid": "10112",
-					"alertRef": "10112",
-					"alert": "Session Management Response Identified",
-					"name": "Session Management Response Identified",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
-					"instances":[ 
-						{
-							"id": "8",
-							"uri": "https://www.eure-et-loir.gouv.fr",
-							"method": "GET",
-							"param": "eZSESSID",
-							"attack": "",
-							"evidence": "eZSESSID",
-							"otherinfo": "cookie:eZSESSID"
-						}
-					],
-					"count": "1",
-					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
-					"otherinfo": "<p>cookie:eZSESSID</p>",
-					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/</p>",
-					"cweid": "-1",
-					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -2174,7 +2191,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "14",
+							"id": "16",
 							"uri": "https://www.eure-et-loir.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -2183,7 +2200,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "15",
+							"id": "18",
 							"uri": "https://www.eure-et-loir.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
