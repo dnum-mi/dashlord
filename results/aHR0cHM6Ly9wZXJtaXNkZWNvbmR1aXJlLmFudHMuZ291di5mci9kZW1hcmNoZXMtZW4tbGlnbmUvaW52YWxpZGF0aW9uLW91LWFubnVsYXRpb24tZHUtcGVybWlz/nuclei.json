@@ -1,3 +1,345 @@
 [
-  []
+  [
+    {
+      "template": "dns/dns-saas-service-detection.yaml",
+      "template-url": "https://templates.nuclei.sh/public/dns-saas-service-detection",
+      "template-id": "dns-saas-service-detection",
+      "template-path": "/home/runner/nuclei-templates/dns/dns-saas-service-detection.yaml",
+      "info": {
+        "name": "DNS SaaS Service Detection",
+        "author": [
+          "noah @thesubtlety",
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "service"
+        ],
+        "description": "A CNAME DNS record was discovered",
+        "reference": [
+          "https://ns1.com/resources/cname",
+          "https://www.theregister.com/2021/02/24/dns_cname_tracking/",
+          "https://www.ionos.com/digitalguide/hosting/technical-matters/cname-record/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "dns",
+      "host": "permisdeconduire.ants.gouv.fr.",
+      "matched-at": "permisdeconduire.ants.gouv.fr",
+      "extracted-results": [
+        "47977430723a43d599eddc4a3efc3613.v1.radwarecloud.net."
+      ],
+      "request": ";; opcode: QUERY, status: NOERROR, id: 10872\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;permisdeconduire.ants.gouv.fr.\tIN\t CNAME\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 10872\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;permisdeconduire.ants.gouv.fr.\tIN\t CNAME\n\n;; ANSWER SECTION:\npermisdeconduire.ants.gouv.fr.\t300\tIN\tCNAME\t47977430723a43d599eddc4a3efc3613.v1.radwarecloud.net.\n",
+      "timestamp": "2025-10-01T02:56:13.712871123Z",
+      "matcher-status": true
+    },
+    {
+      "template": "dns/caa-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/caa-fingerprint",
+      "template-id": "caa-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/caa-fingerprint.yaml",
+      "info": {
+        "name": "CAA Record",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "caa"
+        ],
+        "description": "A CAA record was discovered. A CAA record is used to specify which certificate authorities (CAs) are allowed to issue certificates for a domain.",
+        "reference": [
+          "https://support.dnsimple.com/articles/caa-record/#whats-a-caa-record"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "permisdeconduire.ants.gouv.fr.",
+      "matched-at": "permisdeconduire.ants.gouv.fr",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 50764\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;permisdeconduire.ants.gouv.fr.\tIN\t CAA\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 50764\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 1232\n\n;; QUESTION SECTION:\n;permisdeconduire.ants.gouv.fr.\tIN\t CAA\n\n;; ANSWER SECTION:\npermisdeconduire.ants.gouv.fr.\t300\tIN\tCNAME\t47977430723a43d599eddc4a3efc3613.v1.radwarecloud.net.\n\n;; AUTHORITY SECTION:\nradwarecloud.net.\t900\tIN\tSOA\tns-534.awsdns-02.net. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400\n",
+      "timestamp": "2025-10-01T02:56:13.811144411Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "template-url": "https://templates.nuclei.sh/public/missing-cookie-samesite-strict",
+      "template-id": "missing-cookie-samesite-strict",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "info": {
+        "name": "Missing Cookie SameSite Strict",
+        "author": [
+          "lucky0x0d",
+          "pulsesecurity.co.nz"
+        ],
+        "tags": [
+          "misconfig",
+          "samesite",
+          "cookie"
+        ],
+        "description": "Identified cookies that lacked the samesite=strict attribute, which prevented enforcement of restrictions on cross-domain cookie transmission.\n",
+        "reference": [
+          "https://pulsesecurity.co.nz/articles/samesite-lax-csrf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-693"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "type": "http",
+      "host": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+      "matched-at": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+      "extracted-results": [
+        "__uzma=419c703b-5ed6-4580-a88e-60a96b3c3ba9; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax __uzmb=1759287421; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax __uzme=6335; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax __uzmc=761611014682; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax __uzmd=1759287421; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax __uzmf=7f9000419c703b-5ed6-4580-a88e-60a96b3c3ba91-17592874216440-001bedcca6bb29aceba10; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax uzmx=7f9000cb22ece2-ccbb-4a93-b733-8cde052bfc5c1-17592874216440-42b4366d5b928f4110; Domain=.ants-2.gouv.fr; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax"
+      ],
+      "request": "GET /demarches-en-ligne/invalidation-ou-annulation-du-permis HTTP/1.1\r\nHost: permisdeconduire.ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 302 Moved Temporarily\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nAccess-Control-Allow-Credentials: true\r\nAccess-Control-Allow-Origin: *\r\nCache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nContent-Type: text/html\r\nDate: Wed, 01 Oct 2025 02:57:01 GMT\r\nLocation: https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=f7c895f4-3666-4ae1-b75f-77539a888729&ssb=93652285066&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Finvalidation-ou-annulation-du-permis&ssi=c0b51aaa-c34f-401a-8fca-7e587b11e176&ssk=support@shieldsquare.com&ssm=33028161426943629103607651146237&ssn=9fbe65c43e90ff8d5a0787cb242e24ccd4bc419c703b-5ed6-4580-aa2d89&sso=4935788e-60a96b3c3ba9c64edf0c1054c7b34b8b752634a9f2f9156a&ssp=28791882961759258213175920678729176&ssq=47829098742128964569987421812490435630002&ssr=MTM1LjIzMi4yMDAuMzY=&sst=Nuclei - Open-source project (github.com/projectdiscovery/nuclei)&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDA0MTljNzAzYi01ZWQ2LTQ1ODAtYTg4ZS02MGE5NmIzYzNiYTkxLTE3NTkyODc0MjE2NDQwLTAwMWJlZGNjYTZiYjI5YWNlYmExMCIsInV6bXgiOiI3ZjkwMDBjYjIyZWNlMi1jY2JiLTRhOTMtYjczMy04Y2RlMDUyYmZjNWMxLTE3NTkyODc0MjE2NDQwLTQyYjQzNjZkNWI5MjhmNDExMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==\r\nServer: rdwr\r\nSet-Cookie: __uzma=419c703b-5ed6-4580-a88e-60a96b3c3ba9; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmb=1759287421; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzme=6335; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmc=761611014682; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmd=1759287421; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmf=7f9000419c703b-5ed6-4580-a88e-60a96b3c3ba91-17592874216440-001bedcca6bb29aceba10; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: uzmx=7f9000cb22ece2-ccbb-4a93-b733-8cde052bfc5c1-17592874216440-42b4366d5b928f4110; Domain=.ants-2.gouv.fr; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:01 GMT; Max-Age=15724800; SameSite=Lax\r\n\r\n<html>\r\n<head><title>302 Found</title><script>var __uzdbm_1 = \"419c703b-5ed6-4580-a88e-60a96b3c3ba9\";var __uzdbm_2 = \"YzBiNTFhYWEtYzM0Zi00MDFhLThmY2EtN2U1ODdiMTFlMTc2JDEzNS4yMzIuMjAwLjM2\";var __uzdbm_3 = \"7f9000419c703b-5ed6-4580-a88e-60a96b3c3ba91-17592874216440-001bedcca6bb29aceba10\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000cb22ece2-ccbb-4a93-b733-8cde052bfc5c1-17592874216440-42b4366d5b928f4110\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script> <script>   (function (w, d, e, u, c, g, a, b) {     w[\"SSJSConnectorObj\"] = w[\"SSJSConnectorObj\"] || {       ss_cid: c,       domain_info: \"auto\",     };     w[g] = function (i, j) {       w[\"SSJSConnectorObj\"][i] = j;     };     a = d.createElement(e);     a.async = true;     if (       navigator.userAgent.indexOf('MSIE') !== -1 ||       navigator.appVersion.indexOf('Trident/') > -1     ) {       u = u.replace(\"/advanced/\", \"/advanced/ie/\");     }     a.src = u;     b = d.getElementsByTagName(e)[0];     b.parentNode.insertBefore(a, b);   })(     window, document, \"script\", \"https://permisdeconduire.ants-2.gouv.fr/18f5227b-e27b-445a-a53f-f845fbe69b40/stormcaster.js\", \"c34h\", \"ssConf\"   );   ssConf(\"c1\", \"https://permisdeconduire.ants-2.gouv.fr\");   ssConf(\"c3\", \"c99a4269-161c-4242-a3f0-28d44fa6ce24\");   ssConf(\"au\", \"permisdeconduire.ants-2.gouv.fr\");   ssConf(\"cu\", \"validate.perfdrive.com, ssc\"); </script></head>\r\n<body>\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>rdwr</center>\r\n</body>\r\n</html>\r\n",
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:57:01.734815748Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/internal-ip-disclosure.yaml",
+      "template-url": "https://templates.nuclei.sh/public/internal-ip-disclosure",
+      "template-id": "internal-ip-disclosure",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/internal-ip-disclosure.yaml",
+      "info": {
+        "name": "Internal IP Disclosure",
+        "author": [
+          "willd96"
+        ],
+        "tags": [
+          "misconfig",
+          "disclosure"
+        ],
+        "reference": [
+          "https://support.kemptechnologies.com/hc/en-us/articles/203522429-how-to-mitigate-against-internal-ip-address-domain-name-disclosure-in-real-server-redirect"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 2
+        }
+      },
+      "type": "http",
+      "host": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+      "matched-at": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis/",
+      "extracted-results": [
+        "103156525941"
+      ],
+      "request": "GET /demarches-en-ligne/invalidation-ou-annulation-du-permis/ HTTP/1.0\r\nAccept: */*\r\n\r\n",
+      "response": "HTTP/1.1 302 Moved Temporarily\r\nAccess-Control-Allow-Credentials: true\r\nAccess-Control-Allow-Origin: *\r\nConnection: close\r\nContent-Type: text/html\r\nDate: Wed, 01 Oct 2025 02:57:34 GMT\r\nLocation: https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=1113c708-252f-4d69-9c6d-438271010cdc&ssb=88191263626&ssc=https%3A%2F%2Fpermisdeconduire.ants-2.gouv.fr%2Fdemarches-en-ligne%2Finvalidation-ou-annulation-du-permis%2F&ssi=71391001-c34f-4de1-b5be-f88c16dc4c83&ssk=support@shieldsquare.com&ssm=18837185245881730103156525941658&ssn=2e5167eba088411e706aa4542e9625c3e4ac7264e703-98b2-4d17-944c81&sso=4eeb4e3c-f1b52ad0d7a3da694cd9b2f1828b9fb9c54143b2264ab472&ssp=56624034351759297251175921605858287&ssq=00942948745487650783187454323729904606946&ssr=MTM1LjIzMi4yMDAuMzY=&sst=&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2Y5MDAwNzI2NmQzM2YtZjhlMy00NDk1LTk2ODMtYTYyMTAxMGNhZjU0MS0xNzU5Mjg3NDU0OTI4MC1iY2M3YWY3ZTkzYzIxZDlmMTAiLCJfX3V6bWYiOiI3ZjkwMDA3MjY0ZTcwMy05OGIyLTRkMTctOWUzYy1mMWI1MmFkMGQ3YTMxLTE3NTkyODc0NTQ5MjgwLTAwMTJmMjVkYjVhNWJiMTliMzQxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==\r\nServer: rdwr\r\nSet-Cookie: __uzma=7264e703-98b2-4d17-9e3c-f1b52ad0d7a3; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmb=1759287454; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzme=1567; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmc=922621011949; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmd=1759287454; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmf=7f90007264e703-98b2-4d17-9e3c-f1b52ad0d7a31-17592874549280-0012f25db5a5bb19b3410; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: uzmx=7f90007266d33f-f8e3-4495-9683-a621010caf541-17592874549280-bcc7af7e93c21d9f10; Domain=.ants-2.gouv.fr; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:34 GMT; Max-Age=15724800; SameSite=Lax\r\ncache-control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\n\r\n<html>\r\n<head><title>302 Found</title><script>var __uzdbm_1 = \"7264e703-98b2-4d17-9e3c-f1b52ad0d7a3\";var __uzdbm_2 = \"NzEzOTEwMDEtYzM0Zi00ZGUxLWI1YmUtZjg4YzE2ZGM0YzgzJDEzNS4yMzIuMjAwLjM2\";var __uzdbm_3 = \"7f90007264e703-98b2-4d17-9e3c-f1b52ad0d7a31-17592874549280-0012f25db5a5bb19b3410\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f90007266d33f-f8e3-4495-9683-a621010caf541-17592874549280-bcc7af7e93c21d9f10\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script> <script>   (function (w, d, e, u, c, g, a, b) {     w[\"SSJSConnectorObj\"] = w[\"SSJSConnectorObj\"] || {       ss_cid: c,       domain_info: \"auto\",     };     w[g] = function (i, j) {       w[\"SSJSConnectorObj\"][i] = j;     };     a = d.createElement(e);     a.async = true;     if (       navigator.userAgent.indexOf('MSIE') !== -1 ||       navigator.appVersion.indexOf('Trident/') > -1     ) {       u = u.replace(\"/advanced/\", \"/advanced/ie/\");     }     a.src = u;     b = d.getElementsByTagName(e)[0];     b.parentNode.insertBefore(a, b);   })(     window, document, \"script\", \"https://permisdeconduire.ants-2.gouv.fr/18f5227b-e27b-445a-a53f-f845fbe69b40/stormcaster.js\", \"c34h\", \"ssConf\"   );   ssConf(\"c1\", \"https://permisdeconduire.ants-2.gouv.fr\");   ssConf(\"c3\", \"c99a4269-161c-4242-a3f0-28d44fa6ce24\");   ssConf(\"au\", \"permisdeconduire.ants-2.gouv.fr\");   ssConf(\"cu\", \"validate.perfdrive.com, ssc\"); </script></head>\r\n<body>\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>rdwr</center>\r\n</body>\r\n</html>\r\n",
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:57:34.978834953Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/vulnerabilities/generic/cors-misconfig.yaml",
+      "template-url": "https://templates.nuclei.sh/public/cors-misconfig",
+      "template-id": "cors-misconfig",
+      "template-path": "/home/runner/nuclei-templates/http/vulnerabilities/generic/cors-misconfig.yaml",
+      "info": {
+        "name": "CORS Misconfiguration",
+        "author": [
+          "nadino",
+          "g4l1t0",
+          "convisoappsec",
+          "pdteam",
+          "breno_css",
+          "nodauf",
+          "amirmsafari"
+        ],
+        "tags": [
+          "cors",
+          "generic",
+          "misconfig"
+        ],
+        "reference": [
+          "https://portswigger.net/web-security/cors",
+          "https://portswigger.net/web-security/ssrf/url-validation-bypass-cheat-sheet",
+          "https://www.corben.io/advanced-cors-techniques/",
+          "https://www.geekboy.ninja/blog/exploiting-misconfigured-cors-cross-origin-resource-sharing/"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 29
+        }
+      },
+      "matcher-name": "arbitrary-origin",
+      "type": "http",
+      "host": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+      "matched-at": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+      "request": "GET /demarches-en-ligne/invalidation-ou-annulation-du-permis HTTP/1.1\r\nHost: permisdeconduire.ants.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nOrigin: https://a5tthants.gouv.fr\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 302 Moved Temporarily\r\nConnection: close\r\nTransfer-Encoding: chunked\r\nAccess-Control-Allow-Credentials: true\r\nAccess-Control-Allow-Origin: https://a5tthants.gouv.fr\r\nCache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nContent-Type: text/html\r\nDate: Wed, 01 Oct 2025 02:57:51 GMT\r\nLocation: https://validate.perfdrive.com/fce6a8af6ab8c20daa7ce69bdbf066c5/?ssa=56b4cd5c-550c-41ea-8e92-7755bf4cd355&ssb=76946226042&ssc=https%3A%2F%2Fpermisdeconduire.ants.gouv.fr%2Fdemarches-en-ligne%2Finvalidation-ou-annulation-du-permis&ssi=bae409ef-c34f-4e42-8f7a-aa388f8299dc&ssk=support@shieldsquare.com&ssm=60897444449503003107443385408966&ssn=a1103bb01237357ddd830ffd22f9fbef29b8d4fc6b43-fa51-400a-a7ef32&sso=2aaedee1-a15e2f96c82b4f769e7d2238c0016498205022639b1877ed&ssp=25948591791759218030175928983947884&ssq=89145508747162724929187471464539460885809&ssr=MTM1LjIzMi4yMDAuMzY=&sst=Nuclei - Open-source project (github.com/projectdiscovery/nuclei)&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBkNGZjNmI0My1mYTUxLTQwMGEtYWVlMS1hMTVlMmY5NmM4MmIxLTE3NTkyODc0NzE1NzEwLTAwMWIxN2YwOGY1ZWEyYjU5MjUxMCIsInV6bXgiOiI3ZjkwMDBhYzE4ZjA2Mi1kMDYyLTRiZGUtYWIwOS0xOTU2ZmMyZTZmMDAxLTE3NTkyODc0NzE1NzEwLWY1YjlkMjE4ZDc5ZjlmMzYxMCIsInJkIjoiYW50cy0yLmdvdXYuZnIifQ==\r\nServer: rdwr\r\nSet-Cookie: __uzma=d4fc6b43-fa51-400a-aee1-a15e2f96c82b; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmb=1759287471; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzme=6275; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmc=127911057653; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmd=1759287471; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: __uzmf=7f9000d4fc6b43-fa51-400a-aee1-a15e2f96c82b1-17592874715710-001b17f08f5ea2b592510; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\nSet-Cookie: uzmx=7f9000ac18f062-d062-4bde-ab09-1956fc2e6f001-17592874715710-f5b9d218d79f9f3610; Domain=.ants-2.gouv.fr; HttpOnly; path=/; Expires=Wed, 01-Apr-26 02:57:51 GMT; Max-Age=15724800; SameSite=Lax\r\n\r\n<html>\r\n<head><title>302 Found</title><script>var __uzdbm_1 = \"d4fc6b43-fa51-400a-aee1-a15e2f96c82b\";var __uzdbm_2 = \"YmFlNDA5ZWYtYzM0Zi00ZTQyLThmN2EtYWEzODhmODI5OWRjJDEzNS4yMzIuMjAwLjM2\";var __uzdbm_3 = \"7f9000d4fc6b43-fa51-400a-aee1-a15e2f96c82b1-17592874715710-001b17f08f5ea2b592510\";var __uzdbm_4 = \"false\";var __uzdbm_5 = \"uzmx\";var __uzdbm_6 = \"7f9000ac18f062-d062-4bde-ab09-1956fc2e6f001-17592874715710-f5b9d218d79f9f3610\";var __uzdbm_7 = \"ants-2.gouv.fr\";</script> <script>   (function (w, d, e, u, c, g, a, b) {     w[\"SSJSConnectorObj\"] = w[\"SSJSConnectorObj\"] || {       ss_cid: c,       domain_info: \"auto\",     };     w[g] = function (i, j) {       w[\"SSJSConnectorObj\"][i] = j;     };     a = d.createElement(e);     a.async = true;     if (       navigator.userAgent.indexOf('MSIE') !== -1 ||       navigator.appVersion.indexOf('Trident/') > -1     ) {       u = u.replace(\"/advanced/\", \"/advanced/ie/\");     }     a.src = u;     b = d.getElementsByTagName(e)[0];     b.parentNode.insertBefore(a, b);   })(     window, document, \"script\", \"https://permisdeconduire.ants-2.gouv.fr/18f5227b-e27b-445a-a53f-f845fbe69b40/stormcaster.js\", \"c34h\", \"ssConf\"   );   ssConf(\"c1\", \"https://permisdeconduire.ants-2.gouv.fr\");   ssConf(\"c3\", \"c99a4269-161c-4242-a3f0-28d44fa6ce24\");   ssConf(\"au\", \"permisdeconduire.ants-2.gouv.fr\");   ssConf(\"cu\", \"validate.perfdrive.com, ssc\"); </script></head>\r\n<body>\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>rdwr</center>\r\n</body>\r\n</html>\r\n",
+      "meta": {
+        "cors_origin": "https://a5tthants.gouv.fr"
+      },
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:57:51.62136578Z",
+      "curl-command": "curl -X 'GET' -d '' -H 'Host: permisdeconduire.ants.gouv.fr' -H 'Origin: https://a5tthants.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "permisdeconduire.ants.gouv.fr",
+      "matched-at": "permisdeconduire.ants.gouv.fr:443",
+      "extracted-results": [
+        "DHIMYOTIS"
+      ],
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:59:26.264585373Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "permisdeconduire.ants.gouv.fr",
+      "matched-at": "permisdeconduire.ants.gouv.fr:443",
+      "extracted-results": [
+        "www.passeport.ants.gouv.fr",
+        "mairie.ants.gouv.fr",
+        "www.pha.ants.gouv.fr",
+        "img.ants.gouv.fr",
+        "passeport.ants.gouv.fr",
+        "idp.ants.gouv.fr",
+        "pha.ants.gouv.fr",
+        "autoecole.ants.gouv.fr",
+        "immatriculation.ants.gouv.fr",
+        "www.ants.gouv.fr",
+        "permisdeconduire.ants.gouv.fr",
+        "www.permisdeconduire.ants.gouv.fr",
+        "cni-passeport.ants.gouv.fr",
+        "www.mairie.ants.gouv.fr",
+        "osm.ants.gouv.fr",
+        "www.immatriculation.ants.gouv.fr",
+        "www.autoecole.ants.gouv.fr",
+        "ants.gouv.fr",
+        "bo.ants.gouv.fr",
+        "www.cni-passeport.ants.gouv.fr"
+      ],
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:59:26.264773366Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "permisdeconduire.ants.gouv.fr",
+      "matched-at": "permisdeconduire.ants.gouv.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:59:26.578843165Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "permisdeconduire.ants.gouv.fr",
+      "matched-at": "permisdeconduire.ants.gouv.fr:443",
+      "extracted-results": [
+        "tls13"
+      ],
+      "ip": "66.22.33.163",
+      "timestamp": "2025-10-01T02:59:27.61615321Z",
+      "matcher-status": true
+    }
+  ]
 ]
