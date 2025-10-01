@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Mon, 29 Sept 2025 17:06:20",
-	"created": "2025-09-29T17:06:20.437131177Z",
+	"@generated": "Wed, 1 Oct 2025 16:35:47",
+	"created": "2025-10-01T16:35:47.954589470Z",
 	"site":[ 
 		{
 			"@name": "https://www.pays-de-la-loire.gouv.fr",
@@ -21,7 +21,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "21",
+							"id": "16",
 							"uri": "https://www.pays-de-la-loire.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -77,7 +77,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "19",
+							"id": "21",
 							"uri": "https://www.pays-de-la-loire.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -86,7 +86,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "22",
+							"id": "20",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -95,7 +95,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "17",
+							"id": "22",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -110,7 +110,7 @@
 					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>https://caniuse.com/stricttransportsecurity</p><p>https://datatracker.ietf.org/doc/html/rfc6797</p>",
 					"cweid": "319",
 					"wascid": "15",
-					"sourceid": "6"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -142,7 +142,7 @@
 				},
 				{
 					"pluginid": "10050",
-					"alertRef": "10050-1",
+					"alertRef": "10050-2",
 					"alert": "Retrieved from Cache",
 					"name": "Retrieved from Cache",
 					"riskcode": "0",
@@ -151,25 +151,25 @@
 					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "18",
+							"id": "17",
 							"uri": "https://www.pays-de-la-loire.gouv.fr",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Hit",
-							"otherinfo": ""
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "20",
+							"id": "19",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "Hit",
-							"otherinfo": ""
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "16",
+							"id": "18",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -180,11 +180,11 @@
 					],
 					"count": "3",
 					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
-					"otherinfo": "",
+					"otherinfo": "<p>The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use.</p>",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.rfc-editor.org/rfc/rfc9110.html</p>",
 					"cweid": "525",
 					"wascid": "-1",
-					"sourceid": "6"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -206,7 +206,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "13",
+							"id": "14",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -230,7 +230,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -243,7 +243,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "6",
+							"id": "4",
 							"uri": "https://www.pays-de-la-loire.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -252,7 +252,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "6",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -261,7 +261,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "5",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -276,7 +276,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -289,15 +289,6 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "0",
-							"uri": "https://www.pays-de-la-loire.gouv.fr",
-							"method": "GET",
-							"param": "Sec-Fetch-Site",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
 							"id": "1",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
@@ -307,13 +298,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "2",
+					"count": "1",
 					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "7"
 				},
 				{
 					"pluginid": "90005",
@@ -344,7 +335,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "11",
+							"id": "10",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -359,7 +350,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "6"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -372,7 +363,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "25",
 							"uri": "https://www.pays-de-la-loire.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -381,7 +372,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "24",
+							"id": "23",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -390,7 +381,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "23",
+							"id": "26",
 							"uri": "https://www.pays-de-la-loire.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -405,7 +396,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "6"
+					"sourceid": "8"
 				}
 			]
 		}
