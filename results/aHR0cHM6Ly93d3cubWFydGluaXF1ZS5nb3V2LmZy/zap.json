@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Sun, 5 Oct 2025 13:30:54",
-	"created": "2025-10-05T13:30:54.858817795Z",
+	"@generated": "Tue, 7 Oct 2025 13:51:49",
+	"created": "2025-10-07T13:51:49.885810554Z",
 	"site":[ 
 		{
 			"@name": "https://www.martinique.gouv.fr",
@@ -10,6 +10,43 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"id": "191",
+							"uri": "https://www.martinique.gouv.fr/Nous-contacter",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"Adressepostale-theme\" \"c24286009cfbb9b98cbccedac2d464bb\" \"Codepostal-theme\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_47962\" \"ContentObjectID\" \"dob-theme\" \"email-theme\" \"ezcoa-47974_captcha_theme\" \"nom-theme\" \"prenom-theme\" \"reglement-theme\" \"telephone-theme\" \"theme-0\" \"theme-1\" \"theme-2\" \"theme-3\" \"ViewMode\" \"Ville-theme\" \"votresujet-theme\" ]."
+						},
+						{
+							"id": "192",
+							"uri": "https://www.martinique.gouv.fr/Nous-contacter",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" action=\"/contenu/action\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 3: \"259703c537d10febe37e23f066fd8c9d\" \"Adressepostale-service\" \"Codepostal-service\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_47978\" \"ContentObjectID\" \"dob-service\" \"email-service\" \"ezcoa-47990_captcha_service\" \"nom-service\" \"prenom-service\" \"reglement-service\" \"service-0\" \"service-1\" \"service-2\" \"service-3\" \"telephone-service\" \"ViewMode\" \"Ville-service\" \"votresujet-service\" ]."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"Adressepostale-theme\" \"c24286009cfbb9b98cbccedac2d464bb\" \"Codepostal-theme\" \"ContentNodeID\" \"ContentObjectAttribute_ezselect_selected_array_47962\" \"ContentObjectID\" \"dob-theme\" \"email-theme\" \"ezcoa-47974_captcha_theme\" \"nom-theme\" \"prenom-theme\" \"reglement-theme\" \"telephone-theme\" \"theme-0\" \"theme-1\" \"theme-2\" \"theme-3\" \"ViewMode\" \"Ville-theme\" \"votresujet-theme\" ].</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1206"
+				},
 				{
 					"pluginid": "10038",
 					"alertRef": "10038-1",
@@ -21,7 +58,7 @@
 					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
 					"instances":[ 
 						{
-							"id": "23",
+							"id": "9",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -30,7 +67,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
+							"id": "67",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -39,8 +76,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "68",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -48,7 +85,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "89",
+							"id": "126",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "",
@@ -57,16 +94,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "87",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "117",
+							"id": "97",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
@@ -75,8 +103,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "119",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "93",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -84,7 +112,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "140",
+							"id": "124",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "",
@@ -93,7 +121,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "105",
+							"id": "130",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "129",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "95",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -102,16 +148,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "8",
-							"uri": "https://www.martinique.gouv.fr/robots.txt",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "9",
+							"id": "3",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -139,7 +176,7 @@
 					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
 					"instances":[ 
 						{
-							"id": "15",
+							"id": "1",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -148,7 +185,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "59",
+							"id": "63",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -157,7 +194,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "57",
+							"id": "153",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -166,7 +203,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
+							"id": "64",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -175,7 +212,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "85",
+							"id": "119",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -184,7 +221,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "83",
+							"id": "154",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -193,7 +230,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "113",
+							"id": "90",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -202,8 +239,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "115",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "89",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -211,7 +248,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "136",
+							"id": "120",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -220,8 +257,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "149",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/France-2030",
+							"id": "121",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -229,7 +266,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "103",
+							"id": "122",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "91",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -238,13 +284,13 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "11",
+					"count": "12",
 					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
 					"otherinfo": "",
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options</p>",
 					"cweid": "1021",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90003",
@@ -266,7 +312,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "155",
+							"id": "161",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-associations",
 							"method": "GET",
 							"param": "",
@@ -275,7 +321,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "158",
+							"id": "164",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-particuliers",
 							"method": "GET",
 							"param": "",
@@ -284,7 +330,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "159",
+							"id": "168",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-professionnels",
 							"method": "GET",
 							"param": "",
@@ -293,7 +339,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "161",
+							"id": "167",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Passeport",
 							"method": "GET",
 							"param": "",
@@ -308,7 +354,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "911"
+					"sourceid": "851"
 				},
 				{
 					"pluginid": "10003",
@@ -321,7 +367,7 @@
 					"desc": "<p>The identified library appears to be vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "176",
+							"id": "185",
 							"uri": "https://www.martinique.gouv.fr/var/ezwebin_site/cache/public/javascript/aeb2b56083301d3288ff5f2a547a5dfd_1726667590.js",
 							"method": "GET",
 							"param": "",
@@ -336,7 +382,7 @@
 					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
 					"cweid": "1395",
 					"wascid": "-1",
-					"sourceid": "1103"
+					"sourceid": "1128"
 				},
 				{
 					"pluginid": "10044",
@@ -349,7 +395,7 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "171",
+							"id": "179",
 							"uri": "https://www.martinique.gouv.fr/accessibilite",
 							"method": "GET",
 							"param": "",
@@ -358,7 +404,7 @@
 							"otherinfo": "Location header URI length: 51 [https://www.martinique.gouv.fr/Outils/Accessibilite].\nPredicted response size: 351.\nResponse Body Length: 448."
 						},
 						{
-							"id": "169",
+							"id": "175",
 							"uri": "https://www.martinique.gouv.fr/actualites",
 							"method": "GET",
 							"param": "",
@@ -367,7 +413,7 @@
 							"otherinfo": "Location header URI length: 41 [https://www.martinique.gouv.fr/Actualites].\nPredicted response size: 341.\nResponse Body Length: 408."
 						},
 						{
-							"id": "167",
+							"id": "172",
 							"uri": "https://www.martinique.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -376,16 +422,16 @@
 							"otherinfo": "Location header URI length: 67 [https://www.martinique.gouv.fr/Demarches/Carte-Nationale-d-Identite].\nPredicted response size: 367.\nResponse Body Length: 512."
 						},
 						{
-							"id": "186",
+							"id": "190",
 							"uri": "https://www.martinique.gouv.fr/contenu/action?SearchText=ZAP",
 							"method": "GET",
 							"param": "",
 							"attack": "",
 							"evidence": "",
-							"otherinfo": "Location header URI length: 100 [https://www.martinique.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/1024446253?SearchText=ZAP].\nPredicted response size: 400.\nResponse Body Length: 644."
+							"otherinfo": "Location header URI length: 99 [https://www.martinique.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/215646221?SearchText=ZAP].\nPredicted response size: 399.\nResponse Body Length: 640."
 						},
 						{
-							"id": "164",
+							"id": "171",
 							"uri": "https://www.martinique.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -394,7 +440,7 @@
 							"otherinfo": "Location header URI length: 40 [https://www.martinique.gouv.fr/Demarches].\nPredicted response size: 340.\nResponse Body Length: 404."
 						},
 						{
-							"id": "173",
+							"id": "177",
 							"uri": "https://www.martinique.gouv.fr/donnees-personnelles-et-cookies",
 							"method": "GET",
 							"param": "",
@@ -403,7 +449,7 @@
 							"otherinfo": "Location header URI length: 91 [https://www.martinique.gouv.fr/Outils/Politique-generale-en-matiere-de-donnees-personnelles].\nPredicted response size: 391.\nResponse Body Length: 608."
 						},
 						{
-							"id": "170",
+							"id": "169",
 							"uri": "https://www.martinique.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -412,7 +458,7 @@
 							"otherinfo": "Location header URI length: 104 [https://www.martinique.gouv.fr/Services-de-l-Etat/Prefecture-et-sous-prefectures/Horaires-et-coordonnees].\nPredicted response size: 404.\nResponse Body Length: 660."
 						},
 						{
-							"id": "179",
+							"id": "178",
 							"uri": "https://www.martinique.gouv.fr/mentions-legales",
 							"method": "GET",
 							"param": "",
@@ -421,7 +467,7 @@
 							"otherinfo": "Location header URI length: 47 [https://www.martinique.gouv.fr/Mentions-legales].\nPredicted response size: 347.\nResponse Body Length: 432."
 						},
 						{
-							"id": "134",
+							"id": "60",
 							"uri": "https://www.martinique.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -430,7 +476,7 @@
 							"otherinfo": "Location header URI length: 45 [https://www.martinique.gouv.fr/Nous-contacter].\nPredicted response size: 345.\nResponse Body Length: 424."
 						},
 						{
-							"id": "168",
+							"id": "173",
 							"uri": "https://www.martinique.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -439,7 +485,7 @@
 							"otherinfo": "Location header URI length: 50 [https://www.martinique.gouv.fr/Demarches/Passeport].\nPredicted response size: 350.\nResponse Body Length: 444."
 						},
 						{
-							"id": "166",
+							"id": "170",
 							"uri": "https://www.martinique.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -448,7 +494,7 @@
 							"otherinfo": "Location header URI length: 59 [https://www.martinique.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 359.\nResponse Body Length: 480."
 						},
 						{
-							"id": "165",
+							"id": "174",
 							"uri": "https://www.martinique.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -463,7 +509,7 @@
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "1087"
+					"sourceid": "1120"
 				},
 				{
 					"pluginid": "10010",
@@ -476,7 +522,7 @@
 					"desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
 					"instances":[ 
 						{
-							"id": "24",
+							"id": "11",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -504,7 +550,7 @@
 					"desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "17",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -519,7 +565,7 @@
 					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
 					"cweid": "614",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10054",
@@ -532,7 +578,7 @@
 					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "14",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -560,7 +606,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"id": "162",
+							"id": "160",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Carte-Nationale-d-Identite",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=oykt26vpjfn0cw7i1rxalh3em549g8qd&callback=initWidget",
@@ -569,7 +615,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "154",
+							"id": "159",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-associations",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=oykt26vpjfn0cw7i1rxalh3em549g8qd&callback=initWidget",
@@ -578,7 +624,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "156",
+							"id": "162",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-particuliers",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=oykt26vpjfn0cw7i1rxalh3em549g8qd&callback=initWidget",
@@ -587,7 +633,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "157",
+							"id": "166",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Demarches-pour-les-professionnels",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=oykt26vpjfn0cw7i1rxalh3em549g8qd&callback=initWidget",
@@ -596,7 +642,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "160",
+							"id": "165",
 							"uri": "https://www.martinique.gouv.fr/Demarches/Passeport",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=oykt26vpjfn0cw7i1rxalh3em549g8qd&callback=initWidget",
@@ -611,7 +657,7 @@
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "911"
+					"sourceid": "851"
 				},
 				{
 					"pluginid": "10110",
@@ -624,7 +670,7 @@
 					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
 					"instances":[ 
 						{
-							"id": "177",
+							"id": "186",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -639,7 +685,7 @@
 					"reference": "<p>https://v17.angular.io/guide/security</p>",
 					"cweid": "749",
 					"wascid": "-1",
-					"sourceid": "1113"
+					"sourceid": "1130"
 				},
 				{
 					"pluginid": "110009",
@@ -652,7 +698,7 @@
 					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
 					"instances":[ 
 						{
-							"id": "184",
+							"id": "193",
 							"uri": "https://www.martinique.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
 							"method": "GET",
 							"param": "",
@@ -661,7 +707,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "185",
+							"id": "189",
 							"uri": "https://www.martinique.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
 							"method": "GET",
 							"param": "",
@@ -670,7 +716,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "187",
+							"id": "194",
 							"uri": "https://www.martinique.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.slug.replace(%22article%22,%22actualite%22)%20+",
 							"method": "GET",
 							"param": "",
@@ -679,7 +725,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "182",
+							"id": "187",
 							"uri": "https://www.martinique.gouv.fr/rss/feed/my_feed",
 							"method": "GET",
 							"param": "",
@@ -694,7 +740,7 @@
 					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
 					"cweid": "209",
 					"wascid": "13",
-					"sourceid": "1200"
+					"sourceid": "1300"
 				},
 				{
 					"pluginid": "90004",
@@ -707,37 +753,10 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "33",
+							"id": "41",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "79",
-							"uri": "https://www.martinique.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "70",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "34",
-							"uri": "https://www.martinique.gouv.fr",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
@@ -746,25 +765,25 @@
 							"id": "80",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
+							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "86",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
+							"param": "Cross-Origin-Resource-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "35",
+							"id": "42",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
-							"param": "Cross-Origin-Opener-Policy",
+							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
@@ -773,14 +792,41 @@
 							"id": "81",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "87",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "43",
+							"uri": "https://www.martinique.gouv.fr",
+							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
-							"id": "72",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "82",
+							"uri": "https://www.martinique.gouv.fr/",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "88",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -794,7 +840,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy</p>",
 					"cweid": "693",
 					"wascid": "14",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10063",
@@ -807,7 +853,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "32",
+							"id": "40",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -816,7 +862,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "79",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -825,8 +871,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "69",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "85",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -834,7 +880,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "101",
+							"id": "151",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "",
@@ -843,16 +889,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "98",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "131",
+							"id": "118",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
@@ -861,8 +898,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "130",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "111",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -870,7 +907,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "146",
+							"id": "137",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "",
@@ -879,7 +916,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "111",
+							"id": "149",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "115",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -888,7 +934,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "21",
+							"id": "58",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -897,7 +943,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "37",
+							"id": "59",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -912,7 +958,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10035",
@@ -925,7 +971,7 @@
 					"desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
 					"instances":[ 
 						{
-							"id": "29",
+							"id": "21",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -934,7 +980,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "75",
+							"id": "72",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -943,44 +989,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "95",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "92",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "123",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "125",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "74",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -989,6 +999,33 @@
 						},
 						{
 							"id": "143",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "106",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "102",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "133",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "",
@@ -997,7 +1034,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "108",
+							"id": "142",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "104",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1006,7 +1052,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "19",
+							"id": "6",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1015,7 +1061,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "18",
+							"id": "7",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1043,7 +1089,7 @@
 					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
 					"instances":[ 
 						{
-							"id": "30",
+							"id": "24",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1052,7 +1098,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "76",
+							"id": "75",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1061,7 +1107,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "67",
+							"id": "157",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1070,7 +1116,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "147",
+							"id": "76",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1079,7 +1125,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "99",
+							"id": "145",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1088,16 +1134,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "96",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "126",
+							"id": "112",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1106,8 +1143,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "128",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "107",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1115,7 +1152,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "145",
+							"id": "134",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1124,8 +1161,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "153",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Europe",
+							"id": "148",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1133,7 +1170,16 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "109",
+							"id": "144",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "108",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1148,7 +1194,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
 					"cweid": "693",
 					"wascid": "15",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10094",
@@ -1161,7 +1207,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "10",
+							"id": "29",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1170,7 +1216,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "58",
+							"id": "77",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1179,7 +1225,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "56",
+							"id": "158",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1188,7 +1234,7 @@
 							"otherinfo": "\uFFFD\\x001a>\uFFFD\uFFFD\u01AD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD}\uFFFD,\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u979E\u05DE\uFFFD"
 						},
 						{
-							"id": "132",
+							"id": "83",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
@@ -1197,7 +1243,7 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "84",
+							"id": "150",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "",
@@ -1206,26 +1252,17 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "82",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "/Actions-de-l-Etat/France-2030",
-							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
-						},
-						{
-							"id": "112",
+							"id": "116",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/var/ezwebin_site/storage/images/actions-de-l-etat/citoyennete/75306-1-fre-FR/Citoyennete",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\u022D\uFFFD'\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFDw\u04EF\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDT\n+h\uFFFD\uFFFD\uFFFDz\uFFFD"
+							"evidence": "php/var/ezwebin_site/storage/images/actions-de-l-etat/citoyennete/75306-1-fre-FR/Citoyennete",
+							"otherinfo": "\uFFFD\\x001a\uFFFD\uFFFD\uFFFD{<\\x001en)\uFFFD\uFFFD+^\uFFFD\uFFFDh\uFFFD\uFFFD\\x001e\uFFFD)\uFFFD\uFFFD\uFFFD?i\uFFFDb\uFFFD{>u\uFFFD\uFFFD\uFFFDZ\uFFFD\uFFFD\"\uFFFD\uFFFD\uFFFD\uFFFDw\uFFFD{\uFFFD\uFFFD\uFFFDN\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFD(\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFD^"
 						},
 						{
-							"id": "114",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "109",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1242,8 +1279,8 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "150",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Environnement-sante-publique",
+							"id": "152",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1251,16 +1288,16 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						},
 						{
-							"id": "148",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/France-2030",
+							"id": "146",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/Actions-de-l-Etat/France-2030",
-							"otherinfo": "~\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~\\x0012\u05AD\uFFFDZ\u069D\u01FE\uFFFDM\uFFFD"
+							"evidence": "fr/var/ezwebin_site/storage/images/actions-de-l-etat/elections/67075-2-fre-FR/Elections",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD^r\u0628\uFFFD\uFFFD\uFFFD\uFFFDN\uFFFD\uFFFDo\uFFFD\uFFFD\uFFFDG\uFFFD%y\uFFFDb\uFFFD{"
 						},
 						{
-							"id": "102",
+							"id": "113",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1269,13 +1306,13 @@
 							"otherinfo": "\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD"
 						}
 					],
-					"count": "12",
+					"count": "11",
 					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
 					"otherinfo": "<p>\uFFFD\\x0007-\uFFFD\uFFFD\uFFFD\uFFFD\u05FE\uFFFD\uFFFD-j\uFFFD\u016D\uFFFD\uFFFD{\uFFFD\uFFFD</p>",
 					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
 					"cweid": "319",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10019",
@@ -1288,7 +1325,7 @@
 					"desc": "<p>The Content-Type header was either missing or empty.</p>",
 					"instances":[ 
 						{
-							"id": "172",
+							"id": "176",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
 							"method": "GET",
 							"param": "content-type",
@@ -1303,7 +1340,7 @@
 					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
 					"cweid": "345",
 					"wascid": "12",
-					"sourceid": "1102"
+					"sourceid": "1097"
 				},
 				{
 					"pluginid": "10027",
@@ -1325,7 +1362,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "181",
+							"id": "184",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1334,7 +1371,7 @@
 							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "178",
+							"id": "183",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
 							"method": "GET",
 							"param": "",
@@ -1343,7 +1380,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "183",
+							"id": "188",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
 							"method": "GET",
 							"param": "",
@@ -1352,7 +1389,7 @@
 							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "175",
+							"id": "181",
 							"uri": "https://www.martinique.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
 							"method": "GET",
 							"param": "",
@@ -1361,7 +1398,7 @@
 							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
 						},
 						{
-							"id": "174",
+							"id": "182",
 							"uri": "https://www.martinique.gouv.fr/var/ezwebin_site/cache/public/javascript/aeb2b56083301d3288ff5f2a547a5dfd_1726667590.js",
 							"method": "GET",
 							"param": "",
@@ -1376,7 +1413,7 @@
 					"reference": "",
 					"cweid": "615",
 					"wascid": "13",
-					"sourceid": "1129"
+					"sourceid": "1123"
 				},
 				{
 					"pluginid": "10109",
@@ -1389,7 +1426,7 @@
 					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
 					"instances":[ 
 						{
-							"id": "27",
+							"id": "18",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1398,7 +1435,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "73",
+							"id": "69",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1407,7 +1444,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "64",
+							"id": "156",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1416,7 +1453,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "144",
+							"id": "70",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
@@ -1425,7 +1462,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "93",
+							"id": "139",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "",
@@ -1434,26 +1471,17 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "90",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"e387cdcc24113077c6e859ee710733b1\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural\">\n                                Agriculture, alimentation, for\u00EAt et d\u00E9veloppement rural\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "120",
+							"id": "100",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "<a id=\"e387cdcc24113077c6e859ee710733b1\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural\">\n                                Agriculture, alimentation, for\u00EAt et d\u00E9veloppement rural\n                            </a>",
+							"evidence": "<a id=\"e387cdcc24113077c6e859ee710733b1\" class=\"fr-nav__link\" target=\"_self\" href=\"/index.php/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural\">\n                                Agriculture, alimentation, for\u00EAt et d\u00E9veloppement rural\n                            </a>",
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "121",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "98",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1461,7 +1489,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "142",
+							"id": "131",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "",
@@ -1470,8 +1498,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "152",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/France-2030",
+							"id": "141",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1479,7 +1507,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "106",
+							"id": "138",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"e387cdcc24113077c6e859ee710733b1\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural\">\n                                Agriculture, alimentation, for\u00EAt et d\u00E9veloppement rural\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "99",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1494,7 +1531,7 @@
 					"reference": "",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -1507,7 +1544,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "31",
+							"id": "38",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1516,7 +1553,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "78",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1525,8 +1562,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "68",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "84",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1534,25 +1571,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "97",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "private",
-							"otherinfo": ""
-						},
-						{
-							"id": "127",
+							"id": "117",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
@@ -1561,8 +1580,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "110",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1570,7 +1589,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
+							"id": "136",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "147",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "114",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1579,7 +1616,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "138",
+							"id": "62",
 							"uri": "https://www.martinique.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1594,7 +1631,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10015",
@@ -1607,7 +1644,7 @@
 					"desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
 					"instances":[ 
 						{
-							"id": "22",
+							"id": "8",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "cache-control",
@@ -1616,7 +1653,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
+							"id": "65",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1625,7 +1662,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
+							"id": "155",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1634,7 +1671,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "141",
+							"id": "66",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "cache-control",
@@ -1643,7 +1680,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "88",
+							"id": "125",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
 							"method": "GET",
 							"param": "cache-control",
@@ -1652,16 +1689,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "116",
+							"id": "96",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "cache-control",
@@ -1670,8 +1698,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "118",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "92",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1679,7 +1707,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "139",
+							"id": "123",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
 							"method": "GET",
 							"param": "cache-control",
@@ -1688,8 +1716,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "151",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/France-2030",
+							"id": "128",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Culture-jeunesse-cohesion-sociale-education-Defenseur-des-droits",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1697,7 +1725,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "104",
+							"id": "127",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
+							"id": "94",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1725,7 +1762,7 @@
 					"desc": "<p>The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "28",
+							"id": "20",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1734,7 +1771,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "74",
+							"id": "71",
 							"uri": "https://www.martinique.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1743,8 +1780,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "65",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat",
+							"id": "73",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Agriculture-alimentation-foret-et-developpement-rural",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1752,25 +1789,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "94",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-construction-et-habitat-transport-et-deplacements",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "91",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Assises-des-Outre-mer",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "Age: 0",
-							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
-						},
-						{
-							"id": "122",
+							"id": "105",
 							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Citoyennete",
 							"method": "GET",
 							"param": "",
@@ -1779,8 +1798,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "124",
-							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Consommation-et-commerce",
+							"id": "101",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Contrat-de-convergence-et-de-transformation-de-la-Martinique",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1788,7 +1807,25 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "107",
+							"id": "132",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Cooperation-internationale",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "140",
+							"uri": "https://www.martinique.gouv.fr/Actions-de-l-Etat/Elections",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Age: 0",
+							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
+						},
+						{
+							"id": "103",
 							"uri": "https://www.martinique.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1797,7 +1834,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "137",
+							"id": "61",
 							"uri": "https://www.martinique.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1806,7 +1843,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "16",
+							"id": "4",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1815,7 +1852,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "17",
+							"id": "5",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1843,7 +1880,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "13",
+							"id": "33",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1852,7 +1889,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "5",
+							"id": "54",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1861,7 +1898,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "3",
+							"id": "50",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1876,7 +1913,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Dest</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -1889,7 +1926,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "12",
+							"id": "32",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1898,7 +1935,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "4",
+							"id": "53",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1907,7 +1944,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "2",
+							"id": "49",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1922,7 +1959,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Mode</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -1935,7 +1972,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "11",
+							"id": "30",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1944,7 +1981,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "0",
+							"id": "52",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1953,7 +1990,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "1",
+							"id": "48",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1968,7 +2005,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-Site</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "90005",
@@ -1981,7 +2018,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "14",
+							"id": "35",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1990,7 +2027,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "6",
+							"id": "55",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1999,7 +2036,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "7",
+							"id": "51",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -2014,7 +2051,7 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-Fetch-User</p>",
 					"cweid": "352",
 					"wascid": "9",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10112",
@@ -2027,7 +2064,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "54",
+							"id": "26",
 							"uri": "https://www.martinique.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -2042,7 +2079,7 @@
 					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/</p>",
 					"cweid": "-1",
 					"wascid": "-1",
-					"sourceid": "1"
+					"sourceid": "8"
 				},
 				{
 					"pluginid": "10049",
@@ -2055,7 +2092,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "20",
+							"id": "56",
 							"uri": "https://www.martinique.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -2064,7 +2101,7 @@
 							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
 						},
 						{
-							"id": "36",
+							"id": "57",
 							"uri": "https://www.martinique.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
