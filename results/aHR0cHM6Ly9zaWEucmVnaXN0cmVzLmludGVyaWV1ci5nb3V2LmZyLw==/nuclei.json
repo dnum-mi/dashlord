@@ -1,3 +1,536 @@
 [
-  []
+  [
+    {
+      "template": "dns/caa-fingerprint.yaml",
+      "template-url": "https://templates.nuclei.sh/public/caa-fingerprint",
+      "template-id": "caa-fingerprint",
+      "template-path": "/home/runner/nuclei-templates/dns/caa-fingerprint.yaml",
+      "info": {
+        "name": "CAA Record",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "dns",
+          "caa"
+        ],
+        "description": "A CAA record was discovered. A CAA record is used to specify which certificate authorities (CAs) are allowed to issue certificates for a domain.",
+        "reference": [
+          "https://support.dnsimple.com/articles/caa-record/#whats-a-caa-record"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "type": "dns",
+      "host": "sia.registres.interieur.gouv.fr.",
+      "matched-at": "sia.registres.interieur.gouv.fr",
+      "request": ";; opcode: QUERY, status: NOERROR, id: 62572\n;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 4096\n\n;; QUESTION SECTION:\n;sia.registres.interieur.gouv.fr.\tIN\t CAA\n",
+      "response": ";; opcode: QUERY, status: NOERROR, id: 62572\n;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version 0; flags:; udp: 512\n\n;; QUESTION SECTION:\n;sia.registres.interieur.gouv.fr.\tIN\t CAA\n\n;; AUTHORITY SECTION:\ninterieur.gouv.fr.\t300\tIN\tSOA\tns1.safebrands.fr. tech.brandshelter.com. 2025100608 10800 3600 604800 300\n",
+      "timestamp": "2025-10-07T01:53:46.394886614Z",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/tech-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tech-detect",
+      "template-id": "tech-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/tech-detect.yaml",
+      "info": {
+        "name": "Wappalyzer Technology Detection",
+        "author": [
+          "hakluke",
+          "righettod"
+        ],
+        "tags": [
+          "tech"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "semantic-ui",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=pqPNRdJDbhjaOSYXwPgno0GRBZE&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=2mO_VwYEBzQC1MsJtr3chc5u80ZLDQ6DMtSuBwgyTsA",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:54:45 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"574868498\"\r\nSet-Cookie: AUTH_SESSION_ID=NWQ0MmNkMDMtNmY5Mi00YjdjLWE4YjgtZjQyOGUyODk4M2M1LjBiVUd2WWx6a3FsLTRwNUJRNk8ySy1NVVhmX2VmQl92TmxRSHJWVnFGUHZxMXFLWk1iYWliWUlnSGt5QlFDQndsckgzeFhZa2lJSjMzS2RTODFTeFF3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=YHtXafonHx43u6w1cWlz779Bk1Fu87ji6rFCCFcPpA0; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..hCXHdsAa7T2Ce_ht6Rqdww.pzCszs45OYxH5tQPPrAxBdMvKamJOuHUJoOiB10ll6YUOBPHlJRHjUmz_glEzviFxYTZ10b0EJd061V_nklILxZmHPm78YcgRh4ToxVG474-gUl8ruEevJet4iuSDPQlfYOaVNFM-eAWRBPfAEXZsQxCFpE_N-0GfCMj7xZj_DVBQBmUU58KjjQIiWLelEXruwijaYjhs9eh2fg_J8Wh9lGkmkhiwQXIPyK-PHeyihS4YUjlkSTB6kb110fypv01n2edmB794OQfVZFYGY4MOCTs2bvKFG2VyZBdb0nf_KPLiCsHbqgsrNiUdi6iqLQr_HNl1a9W70YnvjRGzgSrVwVJW5Be8mrYvEiMG1UKsi3_sedC3kmgATGu9V8o2v7m6ZJjQp8yZVBXaHCNNQC7XnbH-7D81XgEJoPPM89U1PEtrnuhbvAQAxgdFprUVNVU0baH2_RsIPtys-KpYL7dF6xldI6ATZfNIHRle7nsUXIQNfpqAOLS2QVwKHWfMBmJeuP8KL0c5tCbjPQFdBf1xlLqOrSCw6BqdbIv0-SNve0g62hiJX4UmWYFbeLfMUUqOUzlREhHFlbLZr0zlv3oz8zHJ-kMFvxPxRyLXX6UbtHBh61AYABQRL18ml40-FbFbekC6kAPpPk95NwTDVcyBEdfTWEqlP18Kj8oFcJZ19hmaFW6mdNThX8cCODf5qReStZlePu4aK8xju994zJdNvIvCyEmQWm5VvhRFIWkLk7F2e9drs9ssjwVssLxxzXW2LYPkum5tiNJH3n6H2X97Z6iEq9PmXuzBN4gxf1QRqSy5IlZrcmKTmLl8FxXzGJmjuwHM5eiU9VPRa7SeUmcUeGqEmYpWmLWQ3_Mj6KuQAWKSbVECixL60E4CDUjTKQKFoyNWZg6k-m4YfYenlf0brgLpgVtgIM9a95STlf5EcV0Xg2aOyS0aVQ7hRSPVufsuv1AOyCK4x6wVfsh6rBBwewJgYxhxbUrnt9Sbk9Lu6xXb_12iketEiUs5TogHCTTxIbADor5zHoJY6rN8VX9NGvE7h1GT41B5OiHUbO2ydw.rjg-raJZivF7o5MQb_trYQ; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_6_sn_B9D0E90CBC07190565C526DC73B1BB9B_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1evTOgwSDfn9; Expires=Tue, 07-Oct-2025 03:54:45 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_428280675|rpid=574868498|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=oAfjYlTykLYZ4ldddBJlj3SxHTPGwu2kctmzgYqckoc&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=xYAwZWmvDuU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJwcVBOUmRKRGJoamFPU1lYd1Bnbm8wR1JCWkUifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=xYAwZWmvDuU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJwcVBOUmRKRGJoamFPU1lYd1Bnbm8wR1JCWkUifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:54:45.7142394Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "template-url": "https://templates.nuclei.sh/public/missing-cookie-samesite-strict",
+      "template-id": "missing-cookie-samesite-strict",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "info": {
+        "name": "Missing Cookie SameSite Strict",
+        "author": [
+          "lucky0x0d",
+          "pulsesecurity.co.nz"
+        ],
+        "tags": [
+          "misconfig",
+          "samesite",
+          "cookie"
+        ],
+        "description": "Identified cookies that lacked the samesite=strict attribute, which prevented enforcement of restrictions on cross-domain cookie transmission.\n",
+        "reference": [
+          "https://pulsesecurity.co.nz/articles/samesite-lax-csrf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-693"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/livre-de-police",
+      "extracted-results": [
+        "mod_auth_openidc_state_pqPNRdJDbhjaOSYXwPgno0GRBZE=JFeaf94OBO7rOvzf.sWmfvmmdsNw6RpqnrcX7rvCam5arofJbKL8jHP3vig0uU7_HtkzGrt9eImW46cyAFXsqFvxy9ANfj6QBe0txVluTbsBQXnpLKkSYzW-0WG2Axb34FS3uk1YK1PMVN9mMqc07uGlI5VQZbi37kVRoxz6jsQBm_WmAh01qaO-JffWc3iiLO1eo21W0a0JfLLz6_GYB82xabbdC0XvPNNRXrJkedMKXoKX1xxrF8-LLJN_scZ7LdpzJ_iMut5fe_jP8It1P_sl8KZ0-tQyNE6yK3QcySTRG5GqWZiecuxQvUTh85xBbs4vfeF1hmHTC2fQnDywNljVro8x8bVp_OG92fBj_m7hk0D8Dq9BsqnhmJVLcMQFP_Ao1sxF5b1zJlOJjiEA5rAXy_2Z93iEF9aPlu6MteFvhuKJrj22aG1wWHJmoHjjBKtBYHwobg3dB_4dHMYyiWafMgee5G0CaMLGKSWBQj00K._QGmB8H5mHbbxMBArsVUtg; Path=/; Secure; HttpOnly; SameSite=Lax dtCookie=v_4_srv_7_sn_382D7F3F67D697740FB5CFE0BB37A065_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:54:44 GMT; Path=/"
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Length: 537\r\nCache-Control: no-cache, no-store, max-age=0\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Tue, 07 Oct 2025 01:54:45 GMT\r\nLocation: https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=pqPNRdJDbhjaOSYXwPgno0GRBZE&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=2mO_VwYEBzQC1MsJtr3chc5u80ZLDQ6DMtSuBwgyTsA\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"860182461\"\r\nSet-Cookie: mod_auth_openidc_state_pqPNRdJDbhjaOSYXwPgno0GRBZE=JFeaf94OBO7rOvzf.sWmfvmmdsNw6RpqnrcX7rvCam5arofJbKL8jHP3vig0uU7_HtkzGrt9eImW46cyAFXsqFvxy9ANfj6QBe0txVluTbsBQXnpLKkSYzW-0WG2Axb34FS3uk1YK1PMVN9mMqc07uGlI5VQZbi37kVRoxz6jsQBm_WmAh01qaO-JffWc3iiLO1eo21W0a0JfLLz6_GYB82xabbdC0XvPNNRXrJkedMKXoKX1xxrF8-LLJN_scZ7LdpzJ_iMut5fe_jP8It1P_sl8KZ0-tQyNE6yK3QcySTRG5GqWZiecuxQvUTh85xBbs4vfeF1hmHTC2fQnDywNljVro8x8bVp_OG92fBj_m7hk0D8Dq9BsqnhmJVLcMQFP_Ao1sxF5b1zJlOJjiEA5rAXy_2Z93iEF9aPlu6MteFvhuKJrj22aG1wWHJmoHjjBKtBYHwobg3dB_4dHMYyiWafMgee5G0CaMLGKSWBQj00K._QGmB8H5mHbbxMBArsVUtg; Path=/; Secure; HttpOnly; SameSite=Lax\r\nSet-Cookie: dtCookie=v_4_srv_7_sn_382D7F3F67D697740FB5CFE0BB37A065_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:54:44 GMT; Path=/\r\n\r\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:54:46.330373991Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "template-url": "https://templates.nuclei.sh/public/missing-cookie-samesite-strict",
+      "template-id": "missing-cookie-samesite-strict",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/missing-cookie-samesite-strict.yaml",
+      "info": {
+        "name": "Missing Cookie SameSite Strict",
+        "author": [
+          "lucky0x0d",
+          "pulsesecurity.co.nz"
+        ],
+        "tags": [
+          "misconfig",
+          "samesite",
+          "cookie"
+        ],
+        "description": "Identified cookies that lacked the samesite=strict attribute, which prevented enforcement of restrictions on cross-domain cookie transmission.\n",
+        "reference": [
+          "https://pulsesecurity.co.nz/articles/samesite-lax-csrf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1,
+          "verified": true
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-693"
+          ],
+          "cvss-metrics": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+        }
+      },
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/",
+      "extracted-results": [
+        "dtCookie=v_4_srv_7_sn_93BF410741D8E0AB9D81A5B353034A84_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:54:44 GMT; Path=/"
+      ],
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 302 Found\r\nConnection: close\r\nContent-Length: 239\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Tue, 07 Oct 2025 01:54:44 GMT\r\nLocation: https://sia.registres.interieur.gouv.fr/livre-de-police\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"229032531\"\r\nSet-Cookie: dtCookie=v_4_srv_7_sn_93BF410741D8E0AB9D81A5B353034A84_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:54:44 GMT; Path=/\r\n\r\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:54:46.86383095Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-opener-policy",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.274364842Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-resource-policy",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.27441746Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "permissions-policy",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.274435303Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "x-permitted-cross-domain-policies",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.274448568Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "clear-site-data",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.274462203Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/misconfiguration/http-missing-security-headers.yaml",
+      "template-url": "https://templates.nuclei.sh/public/http-missing-security-headers",
+      "template-id": "http-missing-security-headers",
+      "template-path": "/home/runner/nuclei-templates/http/misconfiguration/http-missing-security-headers.yaml",
+      "info": {
+        "name": "HTTP Missing Security Headers",
+        "author": [
+          "socketz",
+          "geeknik",
+          "g4l1t0",
+          "convisoappsec",
+          "kurohost",
+          "dawid-czarnecki",
+          "forgedhallpass",
+          "jub0bs",
+          "userdehghani"
+        ],
+        "tags": [
+          "misconfig",
+          "headers",
+          "generic"
+        ],
+        "description": "This template searches for missing HTTP security headers. The impact of these missing headers can vary.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "matcher-name": "cross-origin-embedder-policy",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/realms/siarmes/protocol/openid-connect/auth?response_type=code&scope=openid%20email&client_id=siarmes-oidc-client-app&state=q3BsTyHV9E0zqPANF2Q17Mz7cbw&redirect_uri=https%3A%2F%2Fsia.registres.interieur.gouv.fr%2Flivre-de-police%2Fredirect_uri&nonce=CMjYk5bUzbFVy8rEPKAjmo7kOL-M-5FBvb2EHCQ8r6A",
+      "request": "GET / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+      "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nCache-Control: no-store, must-revalidate, max-age=0\r\nContent-Language: fr\r\nContent-Security-Policy: frame-src 'self'; frame-ancestors 'self'; object-src 'none';\r\nContent-Type: text/html;charset=utf-8\r\nDate: Tue, 07 Oct 2025 01:55:04 GMT\r\nExpect-Ct: max-age=86400, enforce\r\nReferrer-Policy: no-referrer\r\nServer-Timing: dtSInfo;desc=\"0\", dtRpid;desc=\"-1107735593\"\r\nSet-Cookie: AUTH_SESSION_ID=ODhmNTMwYjQtZjdmYy00NmY2LTkzZWEtMDBhOGM1M2Y3M2I0LlRQeDh3RGlxc1FFeHhXWXNpaUlRdHZqLTkxNDE4NUNoTnZBd1BIUldXM010QjNfVlRqZDd0eVVIcElqdFFyVFpLd2FPOFFRNkEwQ3kyX1NEMy1paFp3.70511003d662-64093; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: KC_AUTH_SESSION_HASH=\"At/1GqvbtVKVkns3PQunPbGylNuulALdpcousS8+KQ4\"; Version=1; Path=/realms/siarmes/; Max-Age=60; Secure; SameSite=Strict\r\nSet-Cookie: KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..TWzHX6LrvaCjTi6X9r7-OQ.x0r-2LoiEP0PouE-XK-t1pYn-mTcb59NvQABsx2WFKkVcRVVomMeuq8wyRISwPfjiUbsajOMJg1j3SH9_iRaoCD4CHqbHO5ICOto9poynBZ6l1RwHkP8Dciph2-X2g2JNPXesWBZcnDVGYha25qt8cUPHB71D9h-i7SH_wC_jBQOK4uHloqKr891VD9fcPFK0Muo1lY_zDOtAmPOlG-KuPmMNmjPpieGZEH9tBymT3XNb7gR7fhuFIXLAtPwcxLSbLgW9ZAcB834xUdGJYNLZqKb-fe9R2yB95v3LSWsxy2R_8aJxmevFvPIFIEeCA-IUy55qY5v22hAVZJcoI1cJvl55hCWS5DmBR2oji5aoNwRof4mnP6HDoscYINdz1rkavzzxdzomhG2noTFGJfiprNaereUfcN-_i7pBgBIyxizKHaTQaPUUSOIBGg-mpc8T_zBP1twcY6LnUp0LfaZ9U9Hoe44Yn1uDYJtgGURGzN1BxYg54Zju8xsL6oXwvMhD8A_Ow9_GMSUMChkcIgUWtwPA8n-9AEhiJIhBVOBqYzt-yUqZVcFGS2vKhrVlKLb9F7SVg7KTqUCcElxrcYJ5gU8KKNiRJdG3YzqgleVjkrNKFac9bATMFtZgv8-wqBIIb3BsHGRKTEAbQxfSA9GsGRSBSvShSCw4Vq48zpgpHNjy9qJyYZL2Iou672VnVkILNI_18Ev2uU1Hc_EhfxlNocSHyKTQe3qEV25i_zufoGfsl6IxkQdhidxFueTJ91sJJfZYmaXZmUWwihxj4RKF4h5v20vJo3uXjWyUyPwFYLOvujjNvGadFFFxcGhUwRGVWKgzX1LZXrAFo0vCPa9s1pCtXgwiTCajzgR1Idpu8p703V0THHDwW5ginv0aoEAAR7JADH48DJwNeR_A4StGinkcBHsj1fmalk28P9tuNIWPkc1uqCg0sXM3YQplZQUDiFJzunTPuRQwZWbCjsN3msq1qBKBR89zjqbsQGbwio4d_XcCAXljDd1xW_BqdmyxBUPJy9PGCaGcyY_EHN9ubfwTL8VFaf3xjtcK0pD7LE.5lPlKoona47p9dIv7F7LDw; Version=1; Path=/realms/siarmes/; Secure; HttpOnly; SameSite=None\r\nSet-Cookie: dtCookie=v_4_srv_8_sn_CCF13E2EA9BAD7C2A8FE4F05D73CA7F5_perc_100000_ol_0_mul_1_app-3A2a2d0d101610a228_1; Path=/; Domain=.interieur.gouv.fr\r\nSet-Cookie: YOMe1h3tgHKNQxhV6V7n5g__=v1WPTOgwSDwUY; Expires=Tue, 07-Oct-2025 03:55:04 GMT; Path=/\r\nStrict-Transport-Security: max-age=63072000; includeSubDomains; preload\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nX-Frame-Options: sameorigin\r\nX-Oneagent-Js-Injection: true\r\nX-Robots-Tag: none\r\nX-Ruxit-Js-Agent: true\r\nX-Xss-Protection: 1; mode=block\r\n\r\n<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n    <title>Page d'authentification</title>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n\n    <script type=\"text/javascript\" src=\"/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\" data-dtconfig=\"rid=RID_-8218864|rpid=-1107735593|domain=interieur.gouv.fr|reportUrl=/rb_ccdccb15-e00a-499f-9fda-f7f6a0a8cc59|app=2a2d0d101610a228|cuc=s5l1un83|mel=100000|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1751491507805|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10303241106123517.js\"></script><link rel=\"shortcut icon\" href=\"welcome-content/favicon.ico\" type=\"image/x-icon\">\n\n        <title>Se connecter à Keycloak</title>\n    <link rel=\"icon\" href=\"/resources/oix3f/login/livre-police/img/favicon.ico\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/semantic.min.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/css/login.css\" rel=\"stylesheet\" />\n            <link href=\"/resources/oix3f/login/livre-police/semantic/font.css\" rel=\"stylesheet\" />\n</head>\n\n<body>\n<div class=\"sia-LoginPage\">\n    <div class=\"sia-PageContainer\">\n<header class=\"sia-LoginHeader\" role=\"banner\">\n    <div class=\"sia-LoginHeader-logo-lp\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_minint.png\" alt=\"Logo du ministère de l'intérieur\"\n            class=\"sia-LoginHeader-logo-mi\">\n        <img src=\"/resources/oix3f/login/livre-police/img/logo_SIA.png\" alt=\"Logo du SIA\"\n            class=\"sia-LoginHeader-logo-sia\">\n        </div>\n</header>\n        <main id=\"main\" class=\"main\" role=\"main\">\n            <div class=\"ui container sia-Main\">\n                <div class=\"sia-Title\">\n                    <h2 class=\"sia-Title-label\">PAGE DE CONNEXION</h2>\n                </div>\n                <div class=\"ui segment\">\n                    <div class=\"sia-Body\">\n                        <div id=\"login-container\">\n                            <div class=\"ui grid centered\">\n                                <div class=\"six wide computer eight wide tablet sixteen wide mobile left aligned column\">\n                                    <p class=\"login-warning-message\">Les champs marqués d'un <span\n                                            class=\"symbol-required\">*</span> sont obligatoires</p>\n                                        <div class=\"ui form\">\n                                            <form onsubmit=\"login.disabled = true; return true;\" action=\"https://sia.registres.interieur.gouv.fr/realms/siarmes/login-actions/authenticate?session_code=KZ4Fj_Ob65ucdZqH4aAlWNdkopRBmgRsa7sodqHPMD4&amp;execution=36f432a8-56f6-40b0-8c49-6eb9da84baa3&amp;client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\" method=\"post\">\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"username\">Identifiant</label>\n                                                    <div class=\"ui left icon input\">\n                                                            <input id=\"username\" placeholder=\"Identifiant\" name=\"username\" value=\"\"  type=\"text\" autofocus autocomplete=\"off\" />\n                                                        <i class=\"user icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/login-oublie\">\n                                                        <i class=\"external alternate icon\"></i>Identifiant oublié ?</a>\n                                                    </p>\n                                                </div>\n                                                <div class=\"required field\">\n                                                    <label class=\"sia-Loginlabel\" for=\"password\">Mot de passe</label>\n                                                    <div class=\"ui left icon input\">\n                                                        <input id=\"password\" name=\"password\" type=\"password\"\n                                                               placeholder=\"Mot de passe\" autocomplete=\"off\">\n                                                        <i class=\"lock icon\"></i>\n                                                    </div>\n                                                    <p class=\"sia-ChampOublie\">\n                                                        <a class=\"sia-Loginlink\" href=\"/realms/siarmes/login-actions/reset-credentials?client_id=siarmes-oidc-client-app&amp;tab_id=uNqKonGx5vU&amp;client_data=eyJydSI6Imh0dHBzOi8vc2lhLnJlZ2lzdHJlcy5pbnRlcmlldXIuZ291di5mci9saXZyZS1kZS1wb2xpY2UvcmVkaXJlY3RfdXJpIiwicnQiOiJjb2RlIiwic3QiOiJxM0JzVHlIVjlFMHpxUEFORjJRMTdNejdjYncifQ\">\n                                                            <i class=\"external alternate icon\"></i>Mot de passe oublié ?\n                                                        </a>\n                                                    </p>\n                                                </div>\n                                                <input class=\"ui submit fluid button sia-ConnexionButton\" name=\"login\" id=\"kc-login\" type=\"submit\" value=\"Se connecter\"/>\n                                            </form>\n                                        </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div id=\"signin-container\" class=\"ui container sia-Signin\">\n                        <div id=\"mygrid\" class=\"ui one column very relaxed stackable grid\">\n                            <div class=\"column\">\n                                <p class=\"sia-SigninButton\">\n                                    <a class=\"sia-Loginlink\" href=\"https://sia.registres.interieur.gouv.fr/compte/creation\"><i class=\"external alternate icon\"></i>Création\n                                        de compte</a>\n                                </p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </main>\n    </div>\n<footer class=\"ui mini menu stackable inverted sia-Footer\">\n    <ul class=\"borderless right menu\">\n        <li  class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/e-accessibilite\">Accessibilité: partiellement conforme</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/nous-contacter\">Nous contacter</a>\n        </li>\n        <li class=\"sia-Footer-item\">\n            <a class=\"sia-Footer-link\" href=\"https://sia.registres.interieur.gouv.fr/mentions-legales\">Mentions légales</a>\n        </li>\n    </ul>\n</footer></div>\n</body>\n</html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:04.274477973Z",
+      "curl-command": "curl -X 'GET' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "http/technologies/waf-detect.yaml",
+      "template-url": "https://templates.nuclei.sh/public/waf-detect",
+      "template-id": "waf-detect",
+      "template-path": "/home/runner/nuclei-templates/http/technologies/waf-detect.yaml",
+      "info": {
+        "name": "WAF Detection",
+        "author": [
+          "dwisiswant0",
+          "lu4nx"
+        ],
+        "tags": [
+          "waf",
+          "tech",
+          "misc"
+        ],
+        "description": "A web application firewall was detected.",
+        "reference": [
+          "https://github.com/ekultek/whatwaf"
+        ],
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        },
+        "classification": {
+          "cve-id": null,
+          "cwe-id": [
+            "cwe-200"
+          ]
+        }
+      },
+      "matcher-name": "apachegeneric",
+      "type": "http",
+      "host": "https://sia.registres.interieur.gouv.fr/",
+      "matched-at": "https://sia.registres.interieur.gouv.fr/",
+      "request": "POST / HTTP/1.1\r\nHost: sia.registres.interieur.gouv.fr\r\nUser-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)\r\nConnection: close\r\nContent-Length: 27\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept-Encoding: gzip\r\n\r\n_=<script>alert(1)</script>",
+      "response": "HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 199\r\nContent-Type: text/html; charset=iso-8859-1\r\nDate: Tue, 07 Oct 2025 01:55:44 GMT\r\n\r\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n</body></html>\n",
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:55:44.654413907Z",
+      "curl-command": "curl -X 'POST' -d '_=<script>alert(1)</script>' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Host: sia.registres.interieur.gouv.fr' -H 'User-Agent: Nuclei - Open-source project (github.com/projectdiscovery/nuclei)' 'https://sia.registres.interieur.gouv.fr/'",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/detect-ssl-issuer.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-issuer",
+      "template-id": "ssl-issuer",
+      "template-path": "/home/runner/nuclei-templates/ssl/detect-ssl-issuer.yaml",
+      "info": {
+        "name": "Detect SSL Certificate Issuer",
+        "author": [
+          "lingtren"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the issuer's organization from the target's certificate. Issuers are entities which sign and distribute certificates.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "sia.registres.interieur.gouv.fr",
+      "matched-at": "sia.registres.interieur.gouv.fr:443",
+      "extracted-results": [
+        "DHIMYOTIS"
+      ],
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:58:57.612806269Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/ssl-dns-names.yaml",
+      "template-url": "https://templates.nuclei.sh/public/ssl-dns-names",
+      "template-id": "ssl-dns-names",
+      "template-path": "/home/runner/nuclei-templates/ssl/ssl-dns-names.yaml",
+      "info": {
+        "name": "SSL DNS Names",
+        "author": [
+          "pdteam"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "Extract the Subject Alternative Name (SAN) from the target's certificate. SAN facilitates the usage of additional hostnames with the same certificate.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 1
+        }
+      },
+      "type": "ssl",
+      "host": "sia.registres.interieur.gouv.fr",
+      "matched-at": "sia.registres.interieur.gouv.fr:443",
+      "extracted-results": [
+        "sia.registres.interieur.gouv.fr"
+      ],
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:58:57.612955487Z",
+      "matcher-status": true
+    },
+    {
+      "template": "ssl/tls-version.yaml",
+      "template-url": "https://templates.nuclei.sh/public/tls-version",
+      "template-id": "tls-version",
+      "template-path": "/home/runner/nuclei-templates/ssl/tls-version.yaml",
+      "info": {
+        "name": "TLS Version - Detect",
+        "author": [
+          "pdteam",
+          "pussycat0x"
+        ],
+        "tags": [
+          "ssl",
+          "tls"
+        ],
+        "description": "TLS version detection is a security process used to determine the version of the Transport Layer Security (TLS) protocol used by a computer or server.\nIt is important to detect the TLS version in order to ensure secure communication between two computers or servers.\n",
+        "severity": "info",
+        "metadata": {
+          "max-request": 4
+        }
+      },
+      "type": "ssl",
+      "host": "sia.registres.interieur.gouv.fr",
+      "matched-at": "sia.registres.interieur.gouv.fr:443",
+      "extracted-results": [
+        "tls12"
+      ],
+      "ip": "143.196.253.156",
+      "timestamp": "2025-10-07T01:58:57.843579693Z",
+      "matcher-status": true
+    }
+  ]
 ]
