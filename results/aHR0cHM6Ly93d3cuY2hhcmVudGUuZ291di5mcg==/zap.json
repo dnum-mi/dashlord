@@ -1,8 +1,8 @@
 {
 	"@programName": "ZAP",
 	"@version": "2.16.1",
-	"@generated": "Thu, 9 Oct 2025 05:18:03",
-	"created": "2025-10-09T05:18:03.615345990Z",
+	"@generated": "Sat, 11 Oct 2025 05:25:43",
+	"created": "2025-10-11T05:25:43.920960782Z",
 	"site":[ 
 		{
 			"@name": "https://www.charente.gouv.fr",
@@ -10,6 +10,43 @@
 			"@port": "443",
 			"@ssl": "true",
 			"alerts": [ 
+				{
+					"pluginid": "10202",
+					"alertRef": "10202",
+					"alert": "Absence of Anti-CSRF Tokens",
+					"name": "Absence of Anti-CSRF Tokens",
+					"riskcode": "2",
+					"confidence": "1",
+					"riskdesc": "Medium (Low)",
+					"desc": "<p>No Anti-CSRF tokens were found in a HTML submission form.</p><p>A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.</p><p></p><p>CSRF attacks are effective in a number of situations, including:</p><p>    * The victim has an active session on the target site.</p><p>    * The victim is authenticated via HTTP auth on the target site.</p><p>    * The victim is on the same local network as the target site.</p><p></p><p>CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</p>",
+					"instances":[ 
+						{
+							"id": "208",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques/DUP-ICPE-IOTA",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form method=\"post\" name=Liste-des-communes class=\"fr-mb-3w\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"\" ]."
+						},
+						{
+							"id": "205",
+							"uri": "https://www.charente.gouv.fr/contenu/conseiller/69",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<form class=\"\" action=\"/contenu/conseiller\" method=\"post\">",
+							"otherinfo": "No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"captcha\" \"name\" \"NodeID\" \"receiversemail\" \"SendButton\" \"youremail\" ]."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p><p>For example, use anti-CSRF packages such as the OWASP CSRFGuard.</p><p></p><p>Phase: Implementation</p><p>Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.</p><p></p><p>Phase: Architecture and Design</p><p>Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.</p><p>Note that this can be bypassed using XSS.</p><p></p><p>Use the ESAPI Session Management control.</p><p>This control includes a component for CSRF.</p><p></p><p>Do not use the GET method for any request that triggers a state change.</p><p></p><p>Phase: Implementation</p><p>Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</p>",
+					"otherinfo": "<p>No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret, __csrf_magic, CSRF, _token, _csrf_token, _csrfToken] was found in the following HTML form: [Form 2: \"\" ].</p>",
+					"reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html</p><p>https://cwe.mitre.org/data/definitions/352.html</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1691"
+				},
 				{
 					"pluginid": "10038",
 					"alertRef": "10038-1",
@@ -30,7 +67,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "63",
+							"id": "60",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -39,8 +76,26 @@
 							"otherinfo": ""
 						},
 						{
+							"id": "138",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "81",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
 							"id": "104",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -48,8 +103,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "95",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "106",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -57,25 +112,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "139",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "140",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "97",
+							"id": "78",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -84,7 +121,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "79",
+							"id": "136",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -93,7 +130,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "126",
+							"id": "108",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -139,7 +176,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "61",
+							"id": "58",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -148,7 +185,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "153",
+							"id": "133",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -157,8 +194,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "92",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "73",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -166,8 +203,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "91",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "100",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -175,8 +212,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "136",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "102",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "x-frame-options",
 							"attack": "",
@@ -184,7 +221,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "135",
+							"id": "154",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "153",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -193,16 +239,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "159",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
-							"method": "GET",
-							"param": "x-frame-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "93",
+							"id": "72",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -211,7 +248,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "77",
+							"id": "134",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -220,7 +257,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "124",
+							"id": "101",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "x-frame-options",
@@ -248,7 +285,7 @@
 					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
 					"instances":[ 
 						{
-							"id": "172",
+							"id": "174",
 							"uri": "https://www.charente.gouv.fr/Demarches/Associations",
 							"method": "GET",
 							"param": "",
@@ -257,7 +294,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "166",
+							"id": "175",
 							"uri": "https://www.charente.gouv.fr/Demarches/Carte-nationale-d-identite",
 							"method": "GET",
 							"param": "",
@@ -266,7 +303,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "177",
+							"id": "179",
 							"uri": "https://www.charente.gouv.fr/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
 							"method": "GET",
 							"param": "",
@@ -275,7 +312,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "184",
+							"id": "185",
 							"uri": "https://www.charente.gouv.fr/Demarches/Declaration-de-manifestation-revendicative",
 							"method": "GET",
 							"param": "",
@@ -284,7 +321,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "174",
+							"id": "167",
 							"uri": "https://www.charente.gouv.fr/Demarches/Immatriculation-cartes-grises",
 							"method": "GET",
 							"param": "",
@@ -293,7 +330,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "178",
+							"id": "177",
 							"uri": "https://www.charente.gouv.fr/Demarches/Manifestations-sportives",
 							"method": "GET",
 							"param": "",
@@ -302,7 +339,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "168",
+							"id": "169",
 							"uri": "https://www.charente.gouv.fr/Demarches/Passeports",
 							"method": "GET",
 							"param": "",
@@ -311,7 +348,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "173",
+							"id": "172",
 							"uri": "https://www.charente.gouv.fr/Demarches/Permis-de-conduire",
 							"method": "GET",
 							"param": "",
@@ -326,7 +363,44 @@
 					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</p>",
 					"cweid": "345",
 					"wascid": "15",
-					"sourceid": "686"
+					"sourceid": "744"
+				},
+				{
+					"pluginid": "10003",
+					"alertRef": "10003",
+					"alert": "Vulnerable JS Library",
+					"name": "Vulnerable JS Library",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>The identified library appears to be vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "207",
+							"uri": "https://www.charente.gouv.fr/var/ezwebin_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1726821799.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
+							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
+						},
+						{
+							"id": "192",
+							"uri": "https://www.charente.gouv.fr/var/ezwebin_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1726821799.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "f=\"3.4.1\",k=function(e,t){return new k.fn.init(e,t)},p=/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g;function d(e){var t=!!e&&\"length\"in e&&e.length,n=w(e);return!m(e)&&!x(e)&&(\"array\"===n||0===t||\"number\"==typeof t&&0<t&&t-1 in e)}k.fn=k.prototype={jquery:f,",
+							"otherinfo": "The identified library jquery, version 3.4.1 is vulnerable.\nCVE-2020-11023\nCVE-2020-11022\nhttps://blog.jquery.com/2020/04/10/jquery-3-5-0-released/\n"
+						}
+					],
+					"count": "2",
+					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
+					"otherinfo": "<p>The identified library jquery, version 3.4.1 is vulnerable.</p><p>CVE-2020-11023</p><p>CVE-2020-11022</p><p>https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/</p><p></p>",
+					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
+					"cweid": "1395",
+					"wascid": "-1",
+					"sourceid": "1271"
 				},
 				{
 					"pluginid": "10044",
@@ -339,7 +413,7 @@
 					"desc": "<p>The server has responded with a redirect that seems to provide a large response. This may indicate that although the server sent a redirect it also responded with body content (which may include sensitive details, PII, etc.).</p>",
 					"instances":[ 
 						{
-							"id": "182",
+							"id": "186",
 							"uri": "https://www.charente.gouv.fr/actualites",
 							"method": "GET",
 							"param": "",
@@ -348,7 +422,7 @@
 							"otherinfo": "Location header URI length: 39 [https://www.charente.gouv.fr/Actualites].\nPredicted response size: 339.\nResponse Body Length: 400."
 						},
 						{
-							"id": "180",
+							"id": "187",
 							"uri": "https://www.charente.gouv.fr/cni",
 							"method": "GET",
 							"param": "",
@@ -357,7 +431,16 @@
 							"otherinfo": "Location header URI length: 65 [https://www.charente.gouv.fr/Demarches/Carte-nationale-d-identite].\nPredicted response size: 365.\nResponse Body Length: 504."
 						},
 						{
-							"id": "185",
+							"id": "203",
+							"uri": "https://www.charente.gouv.fr/contenu/action?SearchText=ZAP",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 97 [https://www.charente.gouv.fr/contenu/recherche/(searchtext)/ZAP/(change)/450845705?SearchText=ZAP].\nPredicted response size: 397.\nResponse Body Length: 632."
+						},
+						{
+							"id": "178",
 							"uri": "https://www.charente.gouv.fr/demarches",
 							"method": "GET",
 							"param": "",
@@ -366,7 +449,7 @@
 							"otherinfo": "Location header URI length: 38 [https://www.charente.gouv.fr/Demarches].\nPredicted response size: 338.\nResponse Body Length: 396."
 						},
 						{
-							"id": "179",
+							"id": "181",
 							"uri": "https://www.charente.gouv.fr/horaires",
 							"method": "GET",
 							"param": "",
@@ -375,7 +458,34 @@
 							"otherinfo": "Location header URI length: 59 [https://www.charente.gouv.fr/Outils/Horaires-et-coordonnees].\nPredicted response size: 359.\nResponse Body Length: 480."
 						},
 						{
-							"id": "58",
+							"id": "189",
+							"uri": "https://www.charente.gouv.fr/index.php/accessibilite",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 59 [https://www.charente.gouv.fr/index.php/Outils/Accessibilite].\nPredicted response size: 359.\nResponse Body Length: 480."
+						},
+						{
+							"id": "199",
+							"uri": "https://www.charente.gouv.fr/index.php/mentions-legales",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 55 [https://www.charente.gouv.fr/index.php/Mentions-legales].\nPredicted response size: 355.\nResponse Body Length: 464."
+						},
+						{
+							"id": "188",
+							"uri": "https://www.charente.gouv.fr/index.php/nous-contacter",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "Location header URI length: 53 [https://www.charente.gouv.fr/index.php/Nous-contacter].\nPredicted response size: 353.\nResponse Body Length: 456."
+						},
+						{
+							"id": "74",
 							"uri": "https://www.charente.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -384,7 +494,7 @@
 							"otherinfo": "Location header URI length: 43 [https://www.charente.gouv.fr/Nous-contacter].\nPredicted response size: 343.\nResponse Body Length: 416."
 						},
 						{
-							"id": "186",
+							"id": "182",
 							"uri": "https://www.charente.gouv.fr/passeport",
 							"method": "GET",
 							"param": "",
@@ -393,7 +503,7 @@
 							"otherinfo": "Location header URI length: 49 [https://www.charente.gouv.fr/Demarches/Passeports].\nPredicted response size: 349.\nResponse Body Length: 440."
 						},
 						{
-							"id": "187",
+							"id": "184",
 							"uri": "https://www.charente.gouv.fr/permis-conduire",
 							"method": "GET",
 							"param": "",
@@ -402,7 +512,7 @@
 							"otherinfo": "Location header URI length: 57 [https://www.charente.gouv.fr/Demarches/Permis-de-conduire].\nPredicted response size: 357.\nResponse Body Length: 472."
 						},
 						{
-							"id": "181",
+							"id": "180",
 							"uri": "https://www.charente.gouv.fr/siv",
 							"method": "GET",
 							"param": "",
@@ -411,13 +521,13 @@
 							"otherinfo": "Location header URI length: 68 [https://www.charente.gouv.fr/Demarches/Immatriculation-cartes-grises].\nPredicted response size: 368.\nResponse Body Length: 516."
 						}
 					],
-					"count": "8",
+					"count": "12",
 					"solution": "<p>Ensure that no sensitive information is leaked via redirect responses. Redirect responses should have almost no content.</p>",
 					"otherinfo": "<p>Location header URI length: 39 [https://www.charente.gouv.fr/Actualites].</p><p>Predicted response size: 339.</p><p>Response Body Length: 400.</p>",
 					"reference": "",
 					"cweid": "201",
 					"wascid": "13",
-					"sourceid": "791"
+					"sourceid": "857"
 				},
 				{
 					"pluginid": "10010",
@@ -514,7 +624,7 @@
 					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
 					"instances":[ 
 						{
-							"id": "169",
+							"id": "170",
 							"uri": "https://www.charente.gouv.fr/Demarches/Associations",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -523,7 +633,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "165",
+							"id": "171",
 							"uri": "https://www.charente.gouv.fr/Demarches/Carte-nationale-d-identite",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -532,7 +642,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "175",
+							"id": "176",
 							"uri": "https://www.charente.gouv.fr/Demarches/Certificat-de-situation-administrative-non-gage-et-non-opposition",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -550,7 +660,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "170",
+							"id": "165",
 							"uri": "https://www.charente.gouv.fr/Demarches/Immatriculation-cartes-grises",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -559,7 +669,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "176",
+							"id": "173",
 							"uri": "https://www.charente.gouv.fr/Demarches/Manifestations-sportives",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -568,7 +678,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "167",
+							"id": "166",
 							"uri": "https://www.charente.gouv.fr/Demarches/Passeports",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -577,7 +687,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "171",
+							"id": "168",
 							"uri": "https://www.charente.gouv.fr/Demarches/Permis-de-conduire",
 							"method": "GET",
 							"param": "https://snow.artifica.fr/api/js/guide?key=8vkbn10agdtzs42urylxhw9m5f7jpo3i&callback=initWidget",
@@ -592,7 +702,90 @@
 					"reference": "",
 					"cweid": "829",
 					"wascid": "15",
-					"sourceid": "686"
+					"sourceid": "744"
+				},
+				{
+					"pluginid": "10110",
+					"alertRef": "10110",
+					"alert": "Dangerous JS Functions",
+					"name": "Dangerous JS Functions",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "196",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "eval(",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>See the references for security advice on the use of these functions.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://v17.angular.io/guide/security</p>",
+					"cweid": "749",
+					"wascid": "-1",
+					"sourceid": "1049"
+				},
+				{
+					"pluginid": "110009",
+					"alertRef": "110009",
+					"alert": "Full Path Disclosure",
+					"name": "Full Path Disclosure",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
+					"instances":[ 
+						{
+							"id": "201",
+							"uri": "https://www.charente.gouv.fr/'%20+%20url_toutes_actualites%20+%20'",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "202",
+							"uri": "https://www.charente.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.media.url%20+",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "204",
+							"uri": "https://www.charente.gouv.fr/+%20url_gouvernement%20+%20data%5Bi%5D.slug.replace(%22article%22,%22actualite%22)%20+",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						},
+						{
+							"id": "197",
+							"uri": "https://www.charente.gouv.fr/index.php/donnees-personnelles-et-cookies",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/var/",
+							"otherinfo": ""
+						}
+					],
+					"count": "4",
+					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
+					"cweid": "209",
+					"wascid": "13",
+					"sourceid": "1143"
 				},
 				{
 					"pluginid": "90004",
@@ -605,7 +798,7 @@
 					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
 					"instances":[ 
 						{
-							"id": "31",
+							"id": "37",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
@@ -614,44 +807,26 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "72",
+							"id": "69",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "88",
-							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
-							"method": "GET",
-							"param": "Cross-Origin-Resource-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "32",
-							"uri": "https://www.charente.gouv.fr",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "73",
-							"uri": "https://www.charente.gouv.fr/",
-							"method": "GET",
-							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
 							"evidence": "",
 							"otherinfo": ""
 						},
 						{
 							"id": "89",
-							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
+							"uri": "https://www.charente.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "38",
+							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Embedder-Policy",
 							"attack": "",
@@ -659,7 +834,25 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "33",
+							"id": "70",
+							"uri": "https://www.charente.gouv.fr/",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "90",
+							"uri": "https://www.charente.gouv.fr/Actualites",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "39",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -668,7 +861,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "74",
+							"id": "71",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
@@ -677,8 +870,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "90",
-							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
+							"id": "91",
+							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "Cross-Origin-Opener-Policy",
 							"attack": "",
@@ -705,7 +898,7 @@
 					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
 					"instances":[ 
 						{
-							"id": "30",
+							"id": "36",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -714,7 +907,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "71",
+							"id": "68",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -723,35 +916,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "123",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "119",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
-							"id": "150",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": ""
-						},
-						{
 							"id": "152",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -759,7 +925,34 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "107",
+							"id": "99",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "124",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "129",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "88",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -768,7 +961,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "87",
+							"id": "147",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -777,7 +970,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "134",
+							"id": "132",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -786,7 +979,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "39",
+							"id": "28",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -832,7 +1025,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "66",
+							"id": "63",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -841,8 +1034,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "117",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "148",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -850,8 +1043,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "110",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "94",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -859,8 +1052,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "145",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "112",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -868,8 +1061,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "143",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
+							"id": "115",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -877,7 +1070,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "100",
+							"id": "83",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -886,7 +1079,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "82",
+							"id": "141",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -895,7 +1088,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "129",
+							"id": "122",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -950,7 +1143,7 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "67",
+							"id": "64",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -959,7 +1152,7 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "156",
+							"id": "149",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -968,8 +1161,8 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "118",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "95",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -977,8 +1170,8 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "111",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "113",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -986,8 +1179,8 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "146",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "116",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -995,7 +1188,16 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "144",
+							"id": "160",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1734994740",
+							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
+						},
+						{
+							"id": "159",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "",
@@ -1004,16 +1206,7 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "162",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "1734994740",
-							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
-						},
-						{
-							"id": "101",
+							"id": "84",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1022,7 +1215,7 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "83",
+							"id": "142",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -1031,7 +1224,7 @@
 							"otherinfo": "1734994740, which evaluates to: 2024-12-23 22:59:00."
 						},
 						{
-							"id": "130",
+							"id": "123",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1068,7 +1261,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "68",
+							"id": "65",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1077,7 +1270,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "157",
+							"id": "150",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1086,8 +1279,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "120",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "96",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1095,8 +1288,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "113",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "118",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1104,8 +1297,8 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "147",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "125",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "x-content-type-options",
 							"attack": "",
@@ -1113,7 +1306,16 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "148",
+							"id": "161",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "162",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1122,16 +1324,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "163",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
-							"method": "GET",
-							"param": "x-content-type-options",
-							"attack": "",
-							"evidence": "",
-							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-						},
-						{
-							"id": "102",
+							"id": "85",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1140,7 +1333,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "84",
+							"id": "143",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1149,7 +1342,7 @@
 							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
 						},
 						{
-							"id": "131",
+							"id": "126",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "x-content-type-options",
@@ -1177,7 +1370,7 @@
 					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
 					"instances":[ 
 						{
-							"id": "24",
+							"id": "30",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1186,7 +1379,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
 						},
 						{
-							"id": "69",
+							"id": "66",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1195,7 +1388,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
 						},
 						{
-							"id": "158",
+							"id": "151",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1204,35 +1397,35 @@
 							"otherinfo": "\uFFFD\\x001a>\uFFFD\uFFFD\u01AD\uFFFD\uFFFD\uFFFD\uFFFD\\x0017\uFFFD\uFFFD\uFFFD\uFFFD\u05EC\uFFFD\uFFFD-z\u03DAvh\uFFFD\uFFFD\uFFFDkj\u061F\uFFFD"
 						},
 						{
-							"id": "121",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "97",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/amenagement-du-territoire-batiment-durable-accessibilite/1711-24-fre-FR/Amenagement-du-territoire-batiment-durable-accessibilite",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?jg\uFFFDj\\x0007\uFFFDz{~v\uFFFDz\uFFFD\u2D88\uFFFD{\uFFFD\u06B6)\uFFFD\uFFFD\u07DD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDq\u01EC\uFFFD&\uFFFD+^\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDT\\x0002g\uFFFDj\\x0007\uFFFDz{~v\uFFFDz\uFFFD\u2D88\uFFFD{\uFFFD\u06B6)\uFFFD\uFFFD\u07DD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDq\u01EC\uFFFD&\uFFFD+^"
+							"evidence": "fr/var/ezwebin_site/storage/images/actions-de-l-etat/agriculture-foret-et-espaces-naturels/1710-252-fre-FR/Agriculture-foret-et-espaces-naturels",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDr\u0628\uFFFD\u03DD{\uFFFD~z\u05AD\uFFFD\uFFFD+\uFFFD\u02E5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD+z\u07DE\uFFFD\u7B25\uFFFD\\x001e\uFFFD\uFFFD\u06B6\uFFFD\u0796\uFFFD\uFFFD\uFFFD]>\u06DD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD[n\uFFFD\uF7E2\uFFFD\uFFFD\uFFFD\uFFFD~z\uFFFDZq\uFFFD>\uFFFD\uFFFDn\uFFFD\uFFFDl"
 						},
 						{
-							"id": "114",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "119",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/animaux/43403-3-fre-FR/Animaux",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?jx\uFFFDj\uFFFD\uFFFD~4\uFFFD\uFFFD\uFFFD~\uFFFD\uFFFD\\x0015\\x001f\uFFFD\uFFFD)\uFFFD\uFFFD"
+							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/alimentation-consommation-et-commerce/43457-4-fre-FR/Alimentation-consommation-et-commerce",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?jX\uFFFDz{Z\uFFFD*'\uFFFD\uFFFD'\uFFFD\uFFFD\uFFFDj\u0628\uFFFD\uFFFD\uFFFD\uFFFD&\uFFFD\uFFFD\uFFFD{\uFFFD7\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD{\uFFFDQ\uFFFD\tb\uFFFD\uFFFD\uFFFDj\u0628\uFFFD\uFFFD(\uFFFD\uFFFD&\uFFFD\uFFFDb\uFFFD\uFFFD\uFFFD\uFFFD(\uFFFDg\uFFFDq"
 						},
 						{
-							"id": "149",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "127",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "/Publications/Recueil-des-actes-administratifs2",
-							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
+							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/citoyennete-election/43412-5-fre-FR/Citoyennete-Election",
+							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?r+h\uFFFD\uFFFD\uFFFDz\u05FEzW\uFFFD\uFFFD*'\uFFFD\uFFFD\uFFFD\uFFFDo\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDT\n+h\uFFFD\uFFFD\uFFFDz\u05FE\\x0012W\uFFFD\uFFFD*'"
 						},
 						{
-							"id": "151",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
+							"id": "163",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1241,15 +1434,15 @@
 						},
 						{
 							"id": "164",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "",
 							"attack": "",
-							"evidence": "fr/var/ezwebin_site/storage/images/politiques-publiques/environnement-chasse-eau-risques/1715-10-fre-FR/Environnement-Chasse-Eau-Risques",
-							"otherinfo": "~\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\\x0007\uFFFD\uFFFD\uFFFD\u05FF\uFFFD\uFFFD+j\\x0007\uFFFD\uFFFDf\uFFFDz\uFFFD\uFFFDX\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDnnX\uFFFD\uFFFD\uFFFD?z{\u2B89\uFFFDzg\uFFFD\uFFFD\uFFFD!j\uFFFD\\x001e\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFDt\uFFFD\uFFFD\uFFFD\uFFFDT\\x0012{\u2B89\uFFFDzg\uFFFD\uFFFD\uFFFDj\uFFFD\\x001e\uFFFDF\uFFFD\uFFFD\\x0018\uFFFD\uFFFD\uFFFD"
+							"evidence": "/Publications/Recueil-des-actes-administratifs2",
+							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
 						},
 						{
-							"id": "105",
+							"id": "86",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1258,7 +1451,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
 						},
 						{
-							"id": "85",
+							"id": "144",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -1267,7 +1460,7 @@
 							"otherinfo": "\uFFFD\uFFFD\uFFFD\uFFFD'\\x001a\uFFFD*'\uFFFD\uFFFD^r\u7897\uFFFD^\uFFFD\u6735\uFFFD>i\u0662\uFFFD+-\uFFFD\uFFFDb~\uFFFD"
 						},
 						{
-							"id": "132",
+							"id": "130",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1283,6 +1476,116 @@
 					"cweid": "319",
 					"wascid": "13",
 					"sourceid": "1"
+				},
+				{
+					"pluginid": "10019",
+					"alertRef": "10019-1",
+					"alert": "Content-Type Header Missing",
+					"name": "Content-Type Header Missing",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The Content-Type header was either missing or empty.</p>",
+					"instances":[ 
+						{
+							"id": "190",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/ide_dsfr_design/images/favicon/manifest.webmanifest",
+							"method": "GET",
+							"param": "content-type",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"solution": "<p>Ensure each page is setting the specific and appropriate content-type value for the content being delivered.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p>",
+					"cweid": "345",
+					"wascid": "12",
+					"sourceid": "1020"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
+					"instances":[ 
+						{
+							"id": "194",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.module.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "198",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/analytics/analytics.nomodule.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "user",
+							"otherinfo": "The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//\"+this._domain+\"/\"+n+\".js?2\";var i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)},u.pro\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "193",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.module.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 ${this._width} ${this._height}' width='${this._width}px' height='${this._height}px'>${this._\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "200",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/ide_dsfr_design/javascript/dsfr.nomodule.min.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//www.w3.org/2000/svg' viewbox='0 0 \"+this._width+\" \"+this._height+\"' width='\"+this._width+\"px' height='\"+this._height+\"px'>\"+th\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "195",
+							"uri": "https://www.charente.gouv.fr/extension/ide/design/standard/javascript/tarteaucitron/tarteaucitron-202106.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "from",
+							"otherinfo": "The following pattern was used: \\bFROM\\b and was detected in likely comment: \"//var mainChildren = Array.from(main.children);\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "206",
+							"uri": "https://www.charente.gouv.fr/var/ezwebin_site/cache/public/javascript/6a24daa984f43dff0ef2fd42afe28d44_1726821799.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "username",
+							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "191",
+							"uri": "https://www.charente.gouv.fr/var/ezwebin_site/cache/public/javascript/a1372bdf52fb00c5ca83e41f02aec05b_1726821799.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "username",
+							"otherinfo": "The following pattern was used: \\bUSERNAME\\b and was detected in likely comment: \"//,It={},Wt={},$t=\"*/\".concat(\"*\"),Ft=E.createElement(\"a\");function Bt(o){return function(e,t){\"string\"!=typeof e&&(t=e,e=\"*\");v\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "7",
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bUSER\\b and was detected in likely comment: \"//${this._domain}/${s}.js?2`;const i=document.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(this._script,i)}error(\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "615",
+					"wascid": "13",
+					"sourceid": "1047"
 				},
 				{
 					"pluginid": "10109",
@@ -1304,7 +1607,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "64",
+							"id": "61",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1313,7 +1616,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "155",
+							"id": "146",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "",
@@ -1322,8 +1625,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "112",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "92",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1331,8 +1634,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "108",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "109",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1340,8 +1643,8 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "142",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "110",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1349,7 +1652,16 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "141",
+							"id": "158",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<a id=\"2b57db3dad0491d94a36b5b9314429f7\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente\">\n                                Chartes des r\u00E9seaux sociaux de l'\u00C9tat et de Charente\n                            </a>",
+							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
+						},
+						{
+							"id": "157",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "",
@@ -1358,16 +1670,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "161",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "<a id=\"2b57db3dad0491d94a36b5b9314429f7\" class=\"fr-nav__link\" target=\"_self\" href=\"/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente\">\n                                Chartes des r\u00E9seaux sociaux de l'\u00C9tat et de Charente\n                            </a>",
-							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
-						},
-						{
-							"id": "98",
+							"id": "79",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1376,7 +1679,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "80",
+							"id": "139",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -1385,7 +1688,7 @@
 							"otherinfo": "Links have been found with a target of '_self' - this is often used by modern frameworks to force a full page reload."
 						},
 						{
-							"id": "127",
+							"id": "117",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1413,7 +1716,7 @@
 					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
 					"instances":[ 
 						{
-							"id": "29",
+							"id": "35",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "",
@@ -1422,7 +1725,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "70",
+							"id": "67",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1431,8 +1734,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "122",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "98",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1440,8 +1743,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "115",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "120",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1449,7 +1752,16 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "106",
+							"id": "128",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "private",
+							"otherinfo": ""
+						},
+						{
+							"id": "87",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1458,7 +1770,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "86",
+							"id": "145",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -1467,7 +1779,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "133",
+							"id": "131",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1476,7 +1788,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "60",
+							"id": "76",
 							"uri": "https://www.charente.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1485,7 +1797,7 @@
 							"otherinfo": ""
 						}
 					],
-					"count": "8",
+					"count": "9",
 					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
 					"otherinfo": "",
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
@@ -1513,7 +1825,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "62",
+							"id": "59",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "cache-control",
@@ -1522,7 +1834,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "154",
+							"id": "137",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat",
 							"method": "GET",
 							"param": "cache-control",
@@ -1531,8 +1843,17 @@
 							"otherinfo": ""
 						},
 						{
+							"id": "80",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
+							"method": "GET",
+							"param": "cache-control",
+							"attack": "",
+							"evidence": "must-revalidate, no-cache, private",
+							"otherinfo": ""
+						},
+						{
 							"id": "103",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1540,8 +1861,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "94",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "105",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1549,8 +1870,8 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "137",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Demarche-qualite",
+							"id": "156",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Culture",
 							"method": "GET",
 							"param": "cache-control",
 							"attack": "",
@@ -1558,7 +1879,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "138",
+							"id": "155",
 							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Droits-des-femmes-et-egalite-entre-les-femmes-et-les-hommes",
 							"method": "GET",
 							"param": "cache-control",
@@ -1567,16 +1888,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "160",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Environnement-Chasse-Eau-Risques",
-							"method": "GET",
-							"param": "cache-control",
-							"attack": "",
-							"evidence": "must-revalidate, no-cache, private",
-							"otherinfo": ""
-						},
-						{
-							"id": "96",
+							"id": "77",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "cache-control",
@@ -1585,7 +1897,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "78",
+							"id": "135",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "cache-control",
@@ -1594,7 +1906,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "125",
+							"id": "107",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "cache-control",
@@ -1631,7 +1943,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "65",
+							"id": "62",
 							"uri": "https://www.charente.gouv.fr/",
 							"method": "GET",
 							"param": "",
@@ -1640,8 +1952,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "75",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Aides-pour-les-particuliers",
+							"id": "93",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Agriculture-foret-et-espaces-naturels",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1649,8 +1961,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "116",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Amenagement-du-territoire-batiment-durable-accessibilite",
+							"id": "111",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Alimentation-consommation-et-commerce",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1658,8 +1970,8 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "109",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Animaux",
+							"id": "114",
+							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Citoyennete-Election",
 							"method": "GET",
 							"param": "",
 							"attack": "",
@@ -1667,7 +1979,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "99",
+							"id": "82",
 							"uri": "https://www.charente.gouv.fr/Actualites",
 							"method": "GET",
 							"param": "",
@@ -1676,7 +1988,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "81",
+							"id": "140",
 							"uri": "https://www.charente.gouv.fr/Actualites/Chartes-des-reseaux-sociaux-de-l-Etat-et-de-Charente",
 							"method": "GET",
 							"param": "",
@@ -1685,7 +1997,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "128",
+							"id": "121",
 							"uri": "https://www.charente.gouv.fr/Actualites/Salle-de-presse",
 							"method": "GET",
 							"param": "",
@@ -1694,7 +2006,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "59",
+							"id": "75",
 							"uri": "https://www.charente.gouv.fr/nous-contacter",
 							"method": "GET",
 							"param": "",
@@ -1703,7 +2015,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "3",
+							"id": "4",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1712,7 +2024,7 @@
 							"otherinfo": "The presence of the 'Age' header indicates that a HTTP/1.1 compliant caching server is in use."
 						},
 						{
-							"id": "4",
+							"id": "3",
 							"uri": "https://www.charente.gouv.fr/sitemap.xml",
 							"method": "GET",
 							"param": "",
@@ -1740,7 +2052,7 @@
 					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
 					"instances":[ 
 						{
-							"id": "27",
+							"id": "33",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1749,7 +2061,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "36",
+							"id": "25",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Dest",
@@ -1786,7 +2098,7 @@
 					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
 					"instances":[ 
 						{
-							"id": "26",
+							"id": "32",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1795,7 +2107,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "35",
+							"id": "24",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Mode",
@@ -1832,7 +2144,7 @@
 					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
 					"instances":[ 
 						{
-							"id": "25",
+							"id": "31",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1841,7 +2153,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "34",
+							"id": "23",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-Site",
@@ -1878,7 +2190,7 @@
 					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
 					"instances":[ 
 						{
-							"id": "28",
+							"id": "34",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1887,7 +2199,7 @@
 							"otherinfo": ""
 						},
 						{
-							"id": "37",
+							"id": "26",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "Sec-Fetch-User",
@@ -1924,7 +2236,7 @@
 					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
 					"instances":[ 
 						{
-							"id": "23",
+							"id": "29",
 							"uri": "https://www.charente.gouv.fr",
 							"method": "GET",
 							"param": "eZSESSID",
@@ -1952,7 +2264,7 @@
 					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
 					"instances":[ 
 						{
-							"id": "38",
+							"id": "27",
 							"uri": "https://www.charente.gouv.fr/robots.txt",
 							"method": "GET",
 							"param": "",
@@ -1976,35 +2288,7 @@
 					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
 					"cweid": "524",
 					"wascid": "13",
-					"sourceid": "7"
-				},
-				{
-					"pluginid": "10049",
-					"alertRef": "10049-2",
-					"alert": "Storable but Non-Cacheable Content",
-					"name": "Storable but Non-Cacheable Content",
-					"riskcode": "0",
-					"confidence": "2",
-					"riskdesc": "Informational (Medium)",
-					"desc": "<p>The response contents are storable by caching components such as proxy servers, but will not be retrieved directly from the cache, without validating the request upstream, in response to similar requests from other users.</p>",
-					"instances":[ 
-						{
-							"id": "76",
-							"uri": "https://www.charente.gouv.fr/Actions-de-l-Etat/Aides-pour-les-particuliers",
-							"method": "GET",
-							"param": "",
-							"attack": "",
-							"evidence": "no-cache",
-							"otherinfo": ""
-						}
-					],
-					"count": "1",
-					"solution": "",
-					"otherinfo": "",
-					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
-					"cweid": "524",
-					"wascid": "13",
-					"sourceid": "149"
+					"sourceid": "6"
 				}
 			]
 		}
