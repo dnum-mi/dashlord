@@ -1,38 +1,110 @@
 {
   "scan": {
     "algorithmVersion": 4,
-    "grade": "D",
+    "grade": "B",
     "error": null,
-    "score": 30,
+    "score": 75,
     "statusCode": 200,
-    "testsFailed": 4,
-    "testsPassed": 6,
+    "testsFailed": 2,
+    "testsPassed": 8,
     "testsQuantity": 10,
     "responseHeaders": {
-      "content-type": "text/html",
-      "server": "BigIP",
+      "date": "Thu, 27 Nov 2025 00:48:25 GMT",
+      "content-type": "text/html;charset=UTF-8",
       "connection": "close",
-      "content-length": "70945"
+      "vary": "Accept-Encoding",
+      "cache-control": "max-age=0, s-maxage=28800, public",
+      "expires": "Wed, 26 Nov 2025 23:41:14 GMT",
+      "x-content-type-options": "nosniff",
+      "x-xss-protection": "1; mode=block",
+      "x-frame-options": "SAMEORIGIN",
+      "content-language": "fr",
+      "age": "4030",
+      "set-cookie": [
+        "SP_SESSION=OWVkNzhjYTItMjdlNC00Y2NkLWJmYmYtNmJlOGNlOWVjNTRj; Domain=service-public.gouv.fr; Path=/; Secure; HttpOnly; SameSite=Lax",
+        "TS01ad993f=012a7f58e05febf7ecda2e887cb1789bdc79a066f36215b6f7fa515a3bbfaf79bd76de3e87344462d8ca39c62d644bb888274eddf1; Path=/; Secure; HttpOnly",
+        "TS015ce0c6=012a7f58e0b9e91b050a05e5f08b6e9945ba846b4c6215b6f7fa515a3bbfaf79bd76de3e875a495ec8afab423316eda661b6dd5cc1743354df4b0faf2e3bbe85738e112b9e; path=/; domain=service-public.gouv.fr; HttpOnly; Secure"
+      ],
+      "access-control-allow-origin": "https://lannuaire.service-public.gouv.fr",
+      "access-control-allow-headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization,  x-csrf-token",
+      "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=()",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "cross-origin-embedder-policy": "unsafe-none",
+      "content-security-policy": "frame-ancestors 'self' https://www.service-public.fr https://entreprendre.service-public.fr",
+      "transfer-encoding": "chunked"
     }
   },
   "tests": {
     "content-security-policy": {
       "expectation": "csp-implemented-with-no-unsafe",
       "pass": false,
-      "result": "csp-not-implemented",
-      "scoreModifier": -25,
-      "data": null,
-      "http": false,
+      "result": "csp-implemented-with-unsafe-inline",
+      "scoreModifier": -20,
+      "data": {
+        "frame-ancestors": [
+          "'self'",
+          "https://entreprendre.service-public.fr",
+          "https://www.service-public.fr"
+        ]
+      },
+      "http": true,
       "meta": false,
-      "policy": null,
-      "numPolicies": 0
+      "policy": {
+        "antiClickjacking": true,
+        "defaultNone": false,
+        "insecureBaseUri": true,
+        "insecureFormAction": true,
+        "insecureSchemeActive": false,
+        "insecureSchemePassive": false,
+        "strictDynamic": false,
+        "unsafeEval": false,
+        "unsafeInline": true,
+        "unsafeInlineStyle": true,
+        "unsafeObjects": true
+      },
+      "numPolicies": 1
     },
     "cookies": {
       "expectation": "cookies-secure-with-httponly-sessions",
       "pass": true,
-      "result": "cookies-not-found",
+      "result": "cookies-secure-with-httponly-sessions",
       "scoreModifier": 0,
-      "data": null,
+      "data": {
+        "TS012e9d3d": {
+          "domain": "www.service-public.fr",
+          "httponly": true,
+          "path": "/",
+          "port": null,
+          "secure": true
+        },
+        "SP_SESSION": {
+          "domain": "service-public.gouv.fr",
+          "httponly": true,
+          "path": "/",
+          "port": null,
+          "samesite": "lax",
+          "secure": true
+        },
+        "TS01ad993f": {
+          "domain": "www.service-public.gouv.fr",
+          "httponly": true,
+          "path": "/",
+          "port": null,
+          "secure": true
+        },
+        "TS015ce0c6": {
+          "domain": "service-public.gouv.fr",
+          "httponly": true,
+          "path": "/",
+          "port": null,
+          "secure": true
+        }
+      },
       "sameSite": false
     },
     "cross-origin-resource-sharing": {
@@ -55,51 +127,92 @@
     "referrer-policy": {
       "expectation": "referrer-policy-private",
       "pass": true,
-      "result": "referrer-policy-not-implemented",
-      "scoreModifier": 0,
-      "data": null,
-      "http": false,
+      "result": "referrer-policy-private",
+      "scoreModifier": 5,
+      "data": "strict-origin-when-cross-origin",
+      "http": true,
       "meta": false
     },
     "strict-transport-security": {
       "expectation": "hsts-implemented-max-age-at-least-six-months",
-      "pass": false,
-      "result": "hsts-not-implemented",
-      "scoreModifier": -20,
-      "data": null,
-      "includeSubDomains": false,
-      "maxAge": null,
-      "preload": false,
+      "pass": true,
+      "result": "hsts-implemented-max-age-at-least-six-months",
+      "scoreModifier": 0,
+      "data": "max-age=63072000; includeSubDomains; preload",
+      "includeSubDomains": true,
+      "maxAge": 63072000,
+      "preload": true,
       "preloaded": false
     },
     "subresource-integrity": {
       "expectation": "sri-implemented-and-external-scripts-loaded-securely",
-      "pass": true,
-      "result": "sri-not-implemented-but-no-scripts-loaded",
-      "scoreModifier": 0,
-      "data": {}
+      "pass": false,
+      "result": "sri-not-implemented-but-external-scripts-loaded-securely",
+      "scoreModifier": -5,
+      "data": {
+        "https://try.abtasty.com/f2a27ecc441fb1662a47bee9ea97d2ea.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/js/readspeaker/webReader.js?pids=wr&notools=1": {
+          "crossorigin": "anonymous",
+          "integrity": "sha384-lzKF3q93rwr6Dkx85dTWD73+IApvfO/ZfAeThrWcxQW6VdVUlHXEEv3kVyK04oYp"
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/dsfr-1.14/dist/dsfr.module.min.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/dsfr-1.14/dist/dsfr.nomodule.min.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/dsfr-1.14/dist/analytics/analytics.module.min.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/dsfr-1.14/dist/analytics/analytics.nomodule.min.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/js/require.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/js/common.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/dsfr-1.14/js/configRgpdPart.js": {
+          "crossorigin": null,
+          "integrity": null
+        },
+        "https://www.service-public.gouv.fr/resources/v-a3f59d6198/assets/js/coperia.js": {
+          "crossorigin": null,
+          "integrity": null
+        }
+      }
     },
     "x-content-type-options": {
       "expectation": "x-content-type-options-nosniff",
-      "pass": false,
-      "result": "x-content-type-options-not-implemented",
-      "scoreModifier": -5,
-      "data": null
+      "pass": true,
+      "result": "x-content-type-options-nosniff",
+      "scoreModifier": 0,
+      "data": "nosniff"
     },
     "x-frame-options": {
       "expectation": "x-frame-options-sameorigin-or-deny",
-      "pass": false,
-      "result": "x-frame-options-not-implemented",
-      "scoreModifier": -20,
-      "data": null
+      "pass": true,
+      "result": "x-frame-options-implemented-via-csp",
+      "scoreModifier": 5,
+      "data": "SAMEORIGIN"
     },
     "cross-origin-resource-policy": {
       "expectation": "corp-implemented-with-same-site",
       "pass": true,
-      "result": "corp-not-implemented",
+      "result": "corp-implemented-with-cross-origin",
       "scoreModifier": 0,
-      "data": null,
-      "http": false,
+      "data": "cross-origin",
+      "http": true,
       "meta": false
     }
   }
