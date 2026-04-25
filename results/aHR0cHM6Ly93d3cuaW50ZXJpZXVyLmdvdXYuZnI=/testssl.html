@@ -23,7 +23,7 @@
 
 <span style="font-weight:bold;">Testing all IP addresses (port 443): </span>172.66.149.1 104.20.35.184
 -----------------------------------------------------
-<span style="color:white;background-color:black;"> Start 2026-04-23 02:14:46        --&gt;&gt; 172.66.149.1:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
+<span style="color:white;background-color:black;"> Start 2026-04-25 02:04:40        --&gt;&gt; 172.66.149.1:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
 
  Further IP addresses:   104.20.35.184 2606:4700:10::6814:23b8
                          2606:4700:10::ac42:9501 
@@ -123,7 +123,7 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 <span style="font-weight:bold;"> Trust (hostname)             </span><span style="color:#008817;">Ok via SAN and CN</span> (SNI mandatory)
 <span style="font-weight:bold;"> Chain of trust</span>               <span style="color:#008817;">Ok   </span><span style="color:#cd00cd;"></span>
 <span style="font-weight:bold;"> EV cert</span> (experimental)       no 
-<span style="font-weight:bold;"> Certificate Validity (UTC)   </span><span style="color:#c05600;">expires &lt; 60 days (34)</span> (2026-02-27 00:00 --&gt; 2026-05-27 23:59)
+<span style="font-weight:bold;"> Certificate Validity (UTC)   </span><span style="color:#c05600;">expires &lt; 60 days (32)</span> (2026-02-27 00:00 --&gt; 2026-05-27 23:59)
 <span style="font-weight:bold;"> ETS/&quot;eTLS&quot;</span>, visibility info  not present
 <span style="font-weight:bold;"> Certificate Revocation List  </span>http://crl.dhimyotis.com/servicesca.crl
                               http://crl.certigna.fr/servicesca.crl
@@ -142,20 +142,40 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 
 <span style="text-decoration:underline;font-weight:bold;"> Testing HTTP header response @ &quot;/&quot; </span>
 
-<span style="font-weight:bold;"> HTTP Status Code           </span>  200 OK
-<span style="font-weight:bold;"> HTTP clock skew              </span>+441 sec from localtime
-<span style="font-weight:bold;"> HTTP Age</span> (RFC 7234)          441
-<span style="font-weight:bold;"> Strict Transport Security    </span><span style="color:#c05600;">misconfiguration: </span><i>Strict-Transport-Security</i><span style="color:#c05600;"> 3x</span> -- checking first one only
-                              <span style="color:#008817;">730 days</span>=63072000 s<span style="color:#008817;">, includeSubDomains</span>
+<span style="font-weight:bold;"> HTTP Status Code           </span>  403 Forbidden
+<span style="font-weight:bold;"> HTTP clock skew              </span>0 sec from localtime
+<span style="font-weight:bold;"> Strict Transport Security    </span><span style="color:#a86437;">not offered</span>
 <span style="font-weight:bold;"> Public Key Pinning           </span>--
 <span style="font-weight:bold;"> Server banner                </span>cloudflare&apos;
 <span style="font-weight:bold;"> Application banner           </span>--
-<span style="font-weight:bold;"> Cookie(s)                    </span>(none issued at &quot;/&quot;)
+<span style="font-weight:bold;"> Cookie(s)                    </span>(none issued at &quot;/&quot;) -- HTTP status 403 signals you maybe missed the web application
 <span style="font-weight:bold;"> Security headers             </span><span style="color:#008817;">X-Frame-Options</span>: SAMEORIGIN
                               <span style="color:#008817;">X-Content-Type-Options</span>: nosniff
-                              <span style="color:#c05600;">misconfiguration: </span><i>Content-Security-Policy</i><span style="color:#c05600;"> 3x</span> -- checking first one only
-                              <span style="color:#008817;">Content-Security-Policy</span>: frame-ancestors &apos;self&apos;;
-                              Cache-Control: public, max-age=600
+                              <span style="color:#008817;">Content-Security-Policy</span>: default-src &apos;none&apos;;
+                                script-src &apos;nonce-GUQYivNNmnWBrxsma6RyhI&apos;
+                                &apos;unsafe-eval&apos;
+                                https://challenges.cloudflare.com;
+                                script-src-attr &apos;none&apos;; style-src
+                                &apos;unsafe-inline&apos;; img-src &apos;self&apos;
+                                https://challenges.cloudflare.com; connect-src
+                                &apos;self&apos; https://challenges.cloudflare.com;
+                                frame-src &apos;self&apos;
+                                https://challenges.cloudflare.com blob:;
+                                child-src &apos;self&apos;
+                                https://challenges.cloudflare.com blob:;
+                                worker-src blob:; form-action http: https:;
+                                base-uri &apos;self&apos;
+                              <span style="color:#008817;">Permissions-Policy</span>:
+                                accelerometer=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=(self)
+                              Cross-Origin-Opener-Policy: same-origin
+                              Cross-Origin-Resource-Policy: same-origin
+                              Cross-Origin-Embedder-Policy: require-corp
+                              Permissions-Policy:
+                                accelerometer=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=(self)
+                              Referrer-Policy: same-origin
+                              Cache-Control: private, max-age=0, no-store,
+                                no-cache, must-revalidate, post-check=0,
+                                pre-check=0
 <span style="font-weight:bold;"> Reverse Proxy banner         </span>--
 
 
@@ -235,10 +255,10 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 <span style="font-weight:bold;"> Final Score                  </span>84
 <span style="font-weight:bold;"> Overall Grade                </span><span style="color:#008817;font-weight:bold;">A+</span>
 
-<span style="color:white;background-color:black;"> Done 2026-04-23 02:15:56 [  72s] --&gt;&gt; 172.66.149.1:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
+<span style="color:white;background-color:black;"> Done 2026-04-25 02:06:10 [  92s] --&gt;&gt; 172.66.149.1:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
 
 -----------------------------------------------------
-<span style="color:white;background-color:black;"> Start 2026-04-23 02:15:56        --&gt;&gt; 104.20.35.184:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
+<span style="color:white;background-color:black;"> Start 2026-04-25 02:06:10        --&gt;&gt; 104.20.35.184:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
 
  Further IP addresses:   172.66.149.1 2606:4700:10::6814:23b8
                          2606:4700:10::ac42:9501 
@@ -338,7 +358,7 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 <span style="font-weight:bold;"> Trust (hostname)             </span><span style="color:#008817;">Ok via SAN and CN</span> (SNI mandatory)
 <span style="font-weight:bold;"> Chain of trust</span>               <span style="color:#008817;">Ok   </span><span style="color:#cd00cd;"></span>
 <span style="font-weight:bold;"> EV cert</span> (experimental)       no 
-<span style="font-weight:bold;"> Certificate Validity (UTC)   </span><span style="color:#c05600;">expires &lt; 60 days (34)</span> (2026-02-27 00:00 --&gt; 2026-05-27 23:59)
+<span style="font-weight:bold;"> Certificate Validity (UTC)   </span><span style="color:#c05600;">expires &lt; 60 days (32)</span> (2026-02-27 00:00 --&gt; 2026-05-27 23:59)
 <span style="font-weight:bold;"> ETS/&quot;eTLS&quot;</span>, visibility info  not present
 <span style="font-weight:bold;"> Certificate Revocation List  </span>http://crl.dhimyotis.com/servicesca.crl
                               http://crl.certigna.fr/servicesca.crl
@@ -367,7 +387,7 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 <span style="font-weight:bold;"> Security headers             </span><span style="color:#008817;">X-Frame-Options</span>: SAMEORIGIN
                               <span style="color:#008817;">X-Content-Type-Options</span>: nosniff
                               <span style="color:#008817;">Content-Security-Policy</span>: default-src &apos;none&apos;;
-                                script-src &apos;nonce-n0jc2NbwFSmu4hBpheWj7u&apos;
+                                script-src &apos;nonce-86oicH6zfIOGmuQEZs1vQX&apos;
                                 &apos;unsafe-eval&apos;
                                 https://challenges.cloudflare.com;
                                 script-src-attr &apos;none&apos;; style-src
@@ -378,8 +398,8 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
                                 https://challenges.cloudflare.com blob:;
                                 child-src &apos;self&apos;
                                 https://challenges.cloudflare.com blob:;
-                                worker-src blob:; form-action &apos;self&apos;; base-uri
-                                &apos;self&apos;
+                                worker-src blob:; form-action http: https:;
+                                base-uri &apos;self&apos;
                               <span style="color:#008817;">Permissions-Policy</span>:
                                 accelerometer=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=(self)
                               Cross-Origin-Opener-Policy: same-origin
@@ -470,7 +490,7 @@ Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Ciphe
 <span style="font-weight:bold;"> Final Score                  </span>84
 <span style="font-weight:bold;"> Overall Grade                </span><span style="color:#008817;font-weight:bold;">A+</span>
 
-<span style="color:white;background-color:black;"> Done 2026-04-23 02:17:04 [ 140s] --&gt;&gt; 104.20.35.184:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
+<span style="color:white;background-color:black;"> Done 2026-04-25 02:07:42 [ 184s] --&gt;&gt; 104.20.35.184:443 (www.interieur.gouv.fr) &lt;&lt;--</span>
 
 -----------------------------------------------------
 <span style="font-weight:bold;">Done testing now all IP addresses (on port 443): </span>172.66.149.1 104.20.35.184
