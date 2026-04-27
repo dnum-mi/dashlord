@@ -353,7 +353,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "56 >= 30 days"
+              "finding"      : "52 >= 30 days"
           }
 ,         {
               "id"           : "cert_notBefore <hostCert#1>",
@@ -605,7 +605,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "56 >= 30 days"
+              "finding"      : "52 >= 30 days"
           }
 ,         {
               "id"           : "cert_notBefore <hostCert#2>",
@@ -752,7 +752,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "403 Forbidden ('/')"
+              "finding"      : "302 Found ('/')"
           }
 ,         {
               "id"           : "HTTP_clock_skew",
@@ -766,7 +766,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "1776928593"
+              "finding"      : "1777273450"
           }
 ,         {
               "id"           : "ipv4_in_header",
@@ -774,14 +774,28 @@
               "port"         : "443",
               "severity"     : "MEDIUM",
               "cwe"          : "CWE-212",
-              "finding"      : "set-cookie: __cf_bm=xx2vGWdpI.Ic.dygsxS0W5Ip_jnymVAISIby4ZubvAY-1776928593.8088202-1.0.1.1-nl0hyZnnCWzw2HM0gurxlVZJYH5rarpdJrpwEsZa97DsxzlXB85ps69E9qZUwgaaQ9Ur0Nr6dGJk_na7zc99XxM91v06JAkeckkMC3NLKJGQOlvnC30aVpXgopnv5ptR; HttpOnly; Secure; Path=/; Domain=permisdeconduire.gouv.fr; Expires=Thu, 23 Apr 2026 07:46:33 GMT (check if it's your IP address or e.g. a cluster IP)"
+              "finding"      : "set-cookie: __cf_bm=QH4CAzdXia.fCVVW9vxU060kSN6D6_tYfFEOMQB.mJc-1777273450.0196042-1.0.1.1-sXhpoMzOWooyUBjbq_p8QPU7l6ypElpaRA.DviK.3AlOsBRVzcsc99NjBmrcznzMXq5DqiClDkUHhre92jkEa2tQNCGXssL7I_etYRyMw85XJchXDV5s3oT340dMWE6C; HttpOnly; Secure; Path=/; Domain=permisdeconduire.gouv.fr; Expires=Mon, 27 Apr 2026 07:34:10 GMT (check if it's your IP address or e.g. a cluster IP)"
           }
 ,         {
-              "id"           : "HSTS",
+              "id"           : "HSTS_time",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
-              "severity"     : "LOW",
-              "finding"      : "not offered"
+              "severity"     : "OK",
+              "finding"      : "365 days (=31536000 seconds) > 15552000 seconds"
+          }
+,         {
+              "id"           : "HSTS_subdomains",
+              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "only for this domain"
+          }
+,         {
+              "id"           : "HSTS_preload",
+              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
+              "port"         : "443",
+              "severity"     : "INFO",
+              "finding"      : "domain is NOT marked for preloading"
           }
 ,         {
               "id"           : "HPKP",
@@ -809,21 +823,21 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "1 at '/' (maybe missed the application)"
+              "finding"      : "2 at '/' (30x detected, better try target URL of 30x)"
           }
 ,         {
               "id"           : "cookie_secure",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "All (1) at '/' marked as secure"
+              "finding"      : "All (2) at '/' marked as secure"
           }
 ,         {
               "id"           : "cookie_httponly",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "All (1) at '/' marked as HttpOnly (maybe missed the application)"
+              "finding"      : "All (2) at '/' marked as HttpOnly (30x detected, better try target URL of 30x)"
           }
 ,         {
               "id"           : "X-Frame-Options",
@@ -840,46 +854,25 @@
               "finding"      : "nosniff"
           }
 ,         {
-              "id"           : "Permissions-Policy",
+              "id"           : "Content-Security-Policy",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "accelerometer=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=(self)"
+              "finding"      : "default-src 'none'; script-src 'unsafe-eval' 'unsafe-inline' 'self' cdn.tagcommander.com cdn.trustcommander.net mmtro.com cdn.mmtro.com analytics.candidat.permisdeconduire.gouv.fr; connect-src 'self' privacy.trustcommander.net privacy.commander1.com cdn.plyr.io faro-collector-prod-eu-west-2.grafana.net; img-src 'self' data: privacy.trustcommander.net privacy.commander1.com logs4.xiti.com mmtro.com vod.api.video; media-src 'self' vod.api.video cdn.plyr.io; style-src 'unsafe-inline' 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src cdn.trustcommander.net; frame-ancestors 'self' cdn.tagcommander.com moncompte.permisdeconduire.gouv.fr; manifest-src 'self';"
           }
 ,         {
-              "id"           : "Cross-Origin-Opener-Policy",
+              "id"           : "X-XSS-Protection",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "same-origin"
+              "finding"      : "1; mode=block"
           }
 ,         {
-              "id"           : "Cross-Origin-Resource-Policy",
+              "id"           : "Cache-Control",
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "same-origin"
-          }
-,         {
-              "id"           : "Cross-Origin-Embedder-Policy",
-              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
-              "port"         : "443",
-              "severity"     : "INFO",
-              "finding"      : "require-corp"
-          }
-,         {
-              "id"           : "Permissions-Policy",
-              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
-              "port"         : "443",
-              "severity"     : "INFO",
-              "finding"      : "accelerometer=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=(self)"
-          }
-,         {
-              "id"           : "Referrer-Policy",
-              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.7.65",
-              "port"         : "443",
-              "severity"     : "INFO",
-              "finding"      : "same-origin"
+              "finding"      : "no-cache, no-store, max-age=0"
           }
 ,         {
               "id"           : "banner_reverseproxy",
@@ -1735,7 +1728,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.6.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "56 >= 30 days"
+              "finding"      : "52 >= 30 days"
           }
 ,         {
               "id"           : "cert_notBefore <hostCert#1>",
@@ -1987,7 +1980,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.6.65",
               "port"         : "443",
               "severity"     : "OK",
-              "finding"      : "56 >= 30 days"
+              "finding"      : "52 >= 30 days"
           }
 ,         {
               "id"           : "cert_notBefore <hostCert#2>",
@@ -2148,7 +2141,7 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.6.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "1776928652"
+              "finding"      : "1777273508"
           }
 ,         {
               "id"           : "ipv4_in_header",
@@ -2156,7 +2149,7 @@
               "port"         : "443",
               "severity"     : "MEDIUM",
               "cwe"          : "CWE-212",
-              "finding"      : "set-cookie: __cf_bm=uC_BjWNPa5BAMEFzZ4uTgUh8XF0cooEGHrOSuXoARQY-1776928652.0864906-1.0.1.1-gIRsB.XhjDeQSC9CEmWiArWwJgekNMX6Fg85QVjG7Nbf1o6qNEjer7P9xGWoHrkXHdXJvDN2gr2M1miZV968KWNcVzvzl5STMj6DdMDBpbZ1vamdr807edKxgOw9SSCr; HttpOnly; Secure; Path=/; Domain=permisdeconduire.gouv.fr; Expires=Thu, 23 Apr 2026 07:47:32 GMT (check if it's your IP address or e.g. a cluster IP)"
+              "finding"      : "set-cookie: __cf_bm=OFtzXravnpOks06WiQveIlTRcff90WHanxtSGbcbgFA-1777273508.808554-1.0.1.1-vWXh3z.f9X8SYN6HxWN3Bmbmta1NJt3ZNy0aSS2YfZvo5KDgFMI4fWJx6rq2PDQSiqJftirj600Eobpl6icWayFt6P5dMgUNWqtAhWjWR7ev8bnzjmAkdbAfWg8S9qKR; HttpOnly; Secure; Path=/; Domain=permisdeconduire.gouv.fr; Expires=Mon, 27 Apr 2026 07:35:08 GMT (check if it's your IP address or e.g. a cluster IP)"
           }
 ,         {
               "id"           : "HSTS",
@@ -2220,6 +2213,13 @@
               "port"         : "443",
               "severity"     : "OK",
               "finding"      : "nosniff"
+          }
+,         {
+              "id"           : "Content-Security-Policy",
+              "ip"           : "pro.permisdeconduire.gouv.fr/104.18.6.65",
+              "port"         : "443",
+              "severity"     : "OK",
+              "finding"      : "default-src 'none'; script-src 'nonce-2oNtV31AD17oh3PbO0PBWK' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'"
           }
 ,         {
               "id"           : "Permissions-Policy",
@@ -2768,6 +2768,6 @@
               "ip"           : "pro.permisdeconduire.gouv.fr/104.18.6.65",
               "port"         : "443",
               "severity"     : "INFO",
-              "finding"      : "118"
+              "finding"      : "119"
           }
 ]
